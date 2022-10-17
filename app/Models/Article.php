@@ -1,11 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'body',
@@ -15,11 +18,11 @@ class Article extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User')->members();
+        return $this->belongsTo(User::class);
     }
 
     public function editor()
     {
-    	return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }
