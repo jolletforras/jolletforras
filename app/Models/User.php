@@ -86,7 +86,7 @@ class User extends Authenticatable
 
     public function news()
     {
-        return $this->hasMany('App\News');
+        return $this->hasMany(News::class);
     }
 
     public function getTagListAttribute()

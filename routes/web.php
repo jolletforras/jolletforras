@@ -40,3 +40,10 @@ Route::get('/iras/{id}/{title}/modosit', 'ArticlesController@edit');
 Route::post('/iras/{id}/{title}/modosit', 'ArticlesController@update');
 
 
+Route::get('/hirek', 'NewsController@index');
+Route::get('/hir/uj', 'NewsController@create');
+Route::post('/hir/uj', 'NewsController@store');
+Route::get('/hir/{id}/modosit', 'NewsController@edit');
+Route::post('/hir/{id}/modosit', 'NewsController@update');
+
+
