@@ -47,3 +47,10 @@ Route::get('/hir/{id}/modosit', 'NewsController@edit');
 Route::post('/hir/{id}/modosit', 'NewsController@update');
 
 
+Route::get('/esemenyek', 'EventsController@index');
+Route::get('/esemeny/{id}/{title}', 'EventsController@show');
+Route::get('/esemeny/uj', 'EventsController@create');
+Route::post('esemeny/uj', 'EventsController@store');
+Route::get('/esemeny/{id}/{title}/modosit', 'EventsController@edit');
+Route::resource('esemeny', 'EventsController', ['only' => ['update']]);
+
