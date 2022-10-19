@@ -136,7 +136,7 @@ class EventsController extends Controller
         $event->update([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'slug' => str_slug($request->get('title')),
+            'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility'),
             'group_id' => $request->get('group_id'),
             'updated_at' => date("Y-m-d H:i:s", strtotime('now'))

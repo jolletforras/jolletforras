@@ -52,5 +52,5 @@ Route::get('/esemeny/{id}/{title}', 'EventsController@show');
 Route::get('/esemeny/uj', 'EventsController@create');
 Route::post('esemeny/uj', 'EventsController@store');
 Route::get('/esemeny/{id}/{title}/modosit', 'EventsController@edit');
-Route::resource('esemeny', 'EventsController', ['only' => ['update']]);
+Route::post('/esemeny/{id}/{title}/modosit', 'EventsController@update');
 
