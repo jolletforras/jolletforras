@@ -54,3 +54,13 @@ Route::post('esemeny/uj', 'EventsController@store');
 Route::get('/esemeny/{id}/{title}/modosit', 'EventsController@edit');
 Route::post('/esemeny/{id}/{title}/modosit', 'EventsController@update');
 
+
+Route::get('/kezdemenyezesek', 'ProjectsController@index');
+Route::get('/kezdemenyezes/{id}/{title}', 'ProjectsController@show');
+Route::get('/kezdemenyezes/uj', 'ProjectsController@create');
+Route::post('kezdemenyezes/uj', 'ProjectsController@store');
+Route::get('/kezdemenyezes/{id}/{title}/modosit', ['as' => 'project.edit', 'uses' => 'ProjectsController@edit']);
+//Route::resource('kezdemenyezes', 'ProjectsController', ['only' => ['update']]);
+Route::post('/kezdemenyezes/{id}/{title}/modosit', 'EventsController@update');
+Route::get('kezdemenyezes/{id}/{title}/torol', 'ProjectsController@delete');
+Route::get('/kezdemenyezes/ertes/{id}/{tag}', 'SkillsController@projects_show');

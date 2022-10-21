@@ -10,7 +10,7 @@
 		</div>
 
 		<div class="form-group">
-			Láthatóság:
+			<label for="visibility">Láthatóság:</label>
 			<select name="visibility">
 				@foreach($visibility as $key => $val)
 					<option value="{{ $key }}"  @if(isset($event) && $key == $event->visibility) selected @endif>{{ $val }}</option>
