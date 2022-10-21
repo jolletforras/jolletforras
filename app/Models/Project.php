@@ -11,7 +11,7 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'body', 'looking_for', 'slug'
+        'title', 'body', 'looking_for', 'slug', 'counter'
     ];
 
     protected $dates=['updated_at', 'deleted_at'];
@@ -33,7 +33,7 @@ class Project extends Model
 
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function getUpdatedAtAttribute($date)

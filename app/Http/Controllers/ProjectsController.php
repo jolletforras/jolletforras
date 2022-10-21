@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
 {
@@ -71,13 +72,14 @@ class ProjectsController extends Controller
 	 */
 	public function store(ProjectRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
+	    $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
 
 		$project = Auth::user()->projects()->create([
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
-				'slug' => slugify($request->get('title'))
+				'slug' => Str::slug($request->get('title')),
+                'counter' => 0
 		]);
 
 		$project->members()->attach($request->input('member_list'));

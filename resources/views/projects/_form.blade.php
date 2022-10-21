@@ -1,6 +1,6 @@
 		<div class="form-group">
 			<label for="title">Megnevezés*:</label>
-			<input class="form-control" required="required" name="title" type="text" value="@if(isset($project)) {{$project->title}} @endif" id="title">
+			<input class="form-control" required="required" name="title" type="text" value="@if(isset($project)) {{old('title',$project->title)}} @else {{old('title')}} @endif" id="title">
 		</div>
 	
 		<div class="form-group">
@@ -24,9 +24,9 @@
 
 		<div class="form-group">
 			<label for="tag_list">Címkék ezekre a képességekre*:</label>
-			<select id="tag_list" name="tags" class="form-control" multiple>
+			<select id="tag_list" name="tag_list[]" class="form-control" multiple>
 				@foreach($tags as $key => $val)
-					<option value="{{ $key }}"  @if(isset($project) && $key == $project->tags) selected @endif>{{ $val }}</option>
+					<option value="{{ $key }}">{{ $val }}</option>
 				@endforeach
 			</select>
 		</div>
