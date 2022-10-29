@@ -104,10 +104,12 @@ class ProjectsController extends Controller
 		}
 
 		$members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
+        $selected_members = $project->members->pluck('id')->toArray();
 
 		$tags = ProjectSkill::get()->pluck('name', 'id');
+        $selected_tags = $project->tags->pluck('id')->toArray();
 
-		return view('projects.edit', compact('project', 'members', 'tags'));
+		return view('projects.edit', compact('project', 'members', 'selected_members', 'tags', 'selected_tags'));
 	}
 	
 	/**
@@ -126,7 +128,7 @@ class ProjectsController extends Controller
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
-				'slug' => slugify($request->get('title'))
+				'slug' => Str::slug($request->get('title'))
 		]);
 
 		$project->members()->sync($request->input('member_list'));
@@ -152,6 +154,6 @@ class ProjectsController extends Controller
 
 		$project->delete();
 
-		return redirect('projektek')->with('message', 'A kezdeményezést sikeresen törölted!');
+		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen törölted!');
 	}
 }

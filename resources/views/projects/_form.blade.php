@@ -9,10 +9,10 @@
 		</div>
 
 		<div class="form-group">
-			<label for="members">Kik a tagjai a kezdeményezésnek a portálról?</label>
-			<select id="member_list" name="members" class="form-control" multiple>
+			<label for="member_list">Kik a tagjai a kezdeményezésnek a portálról?</label>
+			<select id="member_list" name="member_list[]" class="form-control" multiple>
 				@foreach($members as $key => $val)
-					<option value="{{ $key }}"  @if(isset($project) && $key == $project->members) selected @endif>{{ $val }}</option>
+					<option value="{{ $key }}" @if(isset($selected_members) && in_array($key,$selected_members)) selected @endif>{{ $val }}</option>
 				@endforeach
 			</select>
 		</div>
@@ -26,7 +26,7 @@
 			<label for="tag_list">Címkék ezekre a képességekre*:</label>
 			<select id="tag_list" name="tag_list[]" class="form-control" multiple>
 				@foreach($tags as $key => $val)
-					<option value="{{ $key }}">{{ $val }}</option>
+					<option value="{{ $key }}" @if(isset($selected_members) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
 				@endforeach
 			</select>
 		</div>
