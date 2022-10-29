@@ -48,7 +48,7 @@ class ProjectsController extends Controller
 		$project = Project::findOrFail($id);
 
         $comments = Comment::where('commentable_type', 'App\Project')->where('commentable_id', $id)->get();
-	
+
 		return view('projects.show', compact('project','comments'));
 	}
 	
@@ -120,7 +120,7 @@ class ProjectsController extends Controller
 	 */
 	public function update($id, ProjectRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\ProjectSkill');
+		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
 		
 		$project = Project::findOrFail($id);
 
