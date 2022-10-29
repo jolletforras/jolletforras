@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
 
 class Comment extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'deleted'
     ];
@@ -19,7 +22,7 @@ class Comment extends Model
 
     public function commenter()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function getUpdatedAtAttribute($date)
