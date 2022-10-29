@@ -47,7 +47,7 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
-        $comments = Comment::where('commentable_type', 'App\Project')->where('commentable_id', $id)->get();
+        $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
 
 		return view('projects.show', compact('project','comments'));
 	}

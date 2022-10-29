@@ -63,3 +63,7 @@ Route::get('/kezdemenyezes/{id}/{title}/modosit', 'ProjectsController@edit');
 Route::post('/kezdemenyezes/{id}/{title}/modosit', 'ProjectsController@update');
 Route::get('/kezdemenyezes/{id}/{title}/torol', 'ProjectsController@delete');
 Route::get('/kezdemenyezes/ertes/{id}/{tag}', 'SkillsController@projects_show');
+
+Route::post('/comment', 'CommentsController@comment');
+Route::post('/comment_delete', 'CommentsController@comment_delete');
+Route::post('/ask_comment_notice', 'CommentsController@ask_comment_notice');

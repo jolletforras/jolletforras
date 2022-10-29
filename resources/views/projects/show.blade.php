@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<textarea class="form-control" rows="4" name="comment" placeholder="Ide írva szólhatsz hozzá"></textarea>
+		<textarea class="form-control" rows="4" id="comment" name="comment" placeholder="Ide írva szólhatsz hozzá"></textarea>
 	</div>
 	<div class="form-group">
 		<button type="button" onclick="save()">Mentés</button>
