@@ -64,6 +64,14 @@ Route::post('/kezdemenyezes/{id}/{title}/modosit', 'ProjectsController@update');
 Route::get('/kezdemenyezes/{id}/{title}/torol', 'ProjectsController@delete');
 Route::get('/kezdemenyezes/ertes/{id}/{tag}', 'SkillsController@projects_show');
 
+Route::get('/forum', 'ForumsController@index');
+Route::get('/forum/{id}/{title}', 'ForumsController@show');
+Route::get('/forum/uj', 'ForumsController@create');
+Route::post('forum/uj', 'ForumsController@store');
+Route::get('/forum/{id}/{title}/modosit', 'ForumsController@edit');
+Route::post('/forum/{id}/{title}/modosit', 'ForumsController@update');
+Route::get('/forum/cimke/{id}/{tag}', 'ForumTagsController@show');
+
 Route::post('/comment', 'CommentsController@comment');
 Route::post('/comment_delete', 'CommentsController@comment_delete');
 Route::post('/ask_comment_notice', 'CommentsController@ask_comment_notice');

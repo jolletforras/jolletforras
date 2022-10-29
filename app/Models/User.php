@@ -46,7 +46,7 @@ class User extends Authenticatable
     //A user can start many panel discussions (forums).
     public function forums()
     {
-        return $this->hasMany('App\Forum');
+        return $this->hasMany(Forum::class);
     }
 
     public function ideas()
@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function events()
