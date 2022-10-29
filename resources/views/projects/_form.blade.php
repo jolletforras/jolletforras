@@ -26,7 +26,7 @@
 			<label for="tag_list">Címkék ezekre a képességekre*:</label>
 			<select id="tag_list" name="tag_list[]" class="form-control" multiple>
 				@foreach($tags as $key => $val)
-					<option value="{{ $key }}" @if(isset($selected_members) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
+					<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
 				@endforeach
 			</select>
 		</div>
