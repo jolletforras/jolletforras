@@ -11,7 +11,10 @@
 		@endpush
 		<div class="row">
 			<div class="col-sm-2">
-				{!! Form::select('map_type', ['tarsak'=>'társak','csoportok'=>'csoportok'], $map_type, ['id' =>'map_type','class'=>'form-control']) !!}
+				<select id="map_type" class="form-control" name="map_type">
+					<option value="tarsak" @if($map_type=="tarsak") selected="selected" @endif>társak</option>
+					<option value="csoportok" @if($map_type=="csoportok") selected="selected" @endif>csoportok</option>
+				</select>
 			</div>
 		</div>
 		<div id="map" style="width: 100%; height: 88vh;"></div>

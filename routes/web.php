@@ -28,8 +28,8 @@ Route::get('/kozossegimegallapodas', 'HomeController@socialagreement');
 Route::get('/tudnivalok', 'HomeController@aboutsite');
 Route::get('/adatkezeles', 'HomeController@datahandling');
 
-//Route::get('/terkep/tarsak', 'MapController@members');
-//Route::get('/terkep/csoportok', 'MapController@groups');
+Route::get('/terkep/tarsak', 'MapController@members');
+Route::get('/terkep/csoportok', 'MapController@groups');
 
 
 Route::get('/irasok', 'ArticlesController@index');
