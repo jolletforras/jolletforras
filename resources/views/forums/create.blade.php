@@ -18,10 +18,7 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<form method="POST" action="{{url('forum')}}/uj" accept-charset="UTF-8">
-
-				@csrf
 				@include('forums._form', ['submitButtonText'=>'Mentés'])
-
 			</form>
 		</div>
 	<div>

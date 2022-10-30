@@ -1,13 +1,15 @@
-		<input name="group_id" type="hidden" value="0">
+        @csrf
+
+        <input name="group_id" type="hidden" value="0">
 
 		<div class="form-group">
 			<label for="title">Cím:</label>
-			<input class="form-control" required="required" name="title" type="text" value="@if(isset($project)) {{$project->title}} @endif" id="title">
+			<input class="form-control" required="required" name="title" type="text" value="@if(isset($forum)) {{$forum->title}} @endif" id="title">
 		</div>
 
 		<div class="form-group">
 			<label for="body">Szöveg:</label>
-			<textarea class="form-control" required="required" rows="20" name="body" cols="50">@if(isset($project)) {{$project->body}} @endif</textarea>
+			<textarea class="form-control" required="required" rows="20" name="body" cols="50">@if(isset($forum)) {{$forum->body}} @endif</textarea>
 		</div>
 
 

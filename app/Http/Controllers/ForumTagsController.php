@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\ForumTag;
+use App\Models\ForumTag;
 
 class ForumTagsController extends Controller
 {
@@ -15,9 +15,9 @@ class ForumTagsController extends Controller
 
 		$forums=$tag->forums()->latest('updated_at')->get();
 
-		$tags = [''=>''] + ForumTag::lists('name', 'id')->all();
+		$tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
 
-		$tags_slug = ForumTag::lists('slug', 'id')->all();
+		$tags_slug = ForumTag::pluck('slug', 'id')->all();
 
 		return view('forums.index', compact('forums', 'tags', 'tags_slug'));
 	}

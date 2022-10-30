@@ -58,7 +58,7 @@ class ForumsController extends Controller
             return redirect('forum')->with('message', 'Nem létező fórum téma!');
         }
 
-        $comments = Comment::where('commentable_type', 'App\Forum')->where('commentable_id', $id)->get();
+        $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $id)->get();
 
 		return view('forums.show', compact('forum','comments'));
 	}
@@ -120,9 +120,10 @@ class ForumsController extends Controller
 			return redirect('/');
 		}
 	
-		$tags = ForumTag::lists('name', 'id');
+		$tags = ForumTag::pluck('name', 'id');
+        $selected_tags = $forum->tags->pluck('id')->toArray();
 		
-		return view('forums.edit', compact('forum', 'tags'));
+		return view('forums.edit', compact('forum', 'tags', 'selected_tags'));
 	}
 	
 	/**
@@ -140,7 +141,7 @@ class ForumsController extends Controller
 		$forum->update([
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
-				'slug' => str_slug($request->get('title'))
+				'slug' => Str::slug($request->get('title'))
 		]);
 	
 		$forum->tags()->sync($tag_list);
