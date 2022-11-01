@@ -38,8 +38,8 @@ Route::get('/profil/{id}/{name?}', ['as' => 'profile.show', 'uses' => 'ProfilesC
 Route::get('/profilom/modosit', 'ProfilesController@edit');
 Route::post('/profil/{id}/modosit', 'ProfilesController@update');
 
-Route::get('/profilom/feltolt_profilkep', ['as' => 'profil.uploadimage', 'uses' => 'ProfilesController@uploadimage']);
-Route::post('/profilom/feltolt_profilkep', ['as' => 'profil.saveimage', 'uses' => 'ProfilesController@saveimage']);
+Route::get('/profilom/feltolt_profilkep', 'ProfilesController@uploadimage');
+Route::post('/profilom/feltolt_profilkep', 'ProfilesController@saveimage');
 
 Route::get('/profilom/jelszocsere', 'ProfilesController@changepassword');
 Route::post('/profilom/jelszocsere', ['as' => 'profil.savepassword', 'uses' => 'ProfilesController@savepassword']);
