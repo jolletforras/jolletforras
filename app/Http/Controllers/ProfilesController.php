@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Mail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 class ProfilesController extends Controller
@@ -174,8 +175,9 @@ class ProfilesController extends Controller
 		$user=Auth::user();
 		
 		$tags = UserSkill::pluck('name', 'id');
+        $selected_tags = $user->tags->pluck('id')->toArray();
 		
-		return view('profiles.edit', compact('user', 'tags'));
+		return view('profiles.edit', compact('user', 'tags', 'selected_tags'));
 	}
 	
 
@@ -191,7 +193,7 @@ class ProfilesController extends Controller
 		$coordinates=$this->getCoordinates($zip_code);
 
 
-		$tag_list=$this->getTagList((array)$request->input('tag_list'), 'App\UserSkill');
+		$tag_list=$this->getTagList((array)$request->input('tag_list'), 'App\Models\UserSkill');
 		
 		$user = User::findOrFail($id);
 		 
@@ -221,7 +223,7 @@ class ProfilesController extends Controller
 			'introduction' =>$introduction,
             'intention' => $intention,
 			'interest' => $interest,
-			'slug' => str_slug($name),
+			'slug' => Str::slug($name),
             'public' => $request->has('public') ? 1 : 0
 		];
 

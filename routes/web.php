@@ -35,8 +35,8 @@ Route::get('/tarsak', 'ProfilesController@index');
 Route::post('/user/filter', 'ProfilesController@filter');
 Route::get('/profil/{id}/{name?}', ['as' => 'profile.show', 'uses' => 'ProfilesController@show']);
 
-Route::get('/profilom/modosit', ['as' => 'profil.edit', 'uses' => 'ProfilesController@edit']);
-Route::resource('profil', 'ProfilesController', ['only' => ['update']]);
+Route::get('/profilom/modosit', 'ProfilesController@edit');
+Route::post('/profil/{id}/modosit', 'ProfilesController@update');
 
 Route::get('/profilom/feltolt_profilkep', ['as' => 'profil.uploadimage', 'uses' => 'ProfilesController@uploadimage']);
 Route::post('/profilom/feltolt_profilkep', ['as' => 'profil.saveimage', 'uses' => 'ProfilesController@saveimage']);
