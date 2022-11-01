@@ -5,7 +5,7 @@
 		<h2>
 			{{ $group->name }}
 			@if($group->city!='')
-				- <i style="font-weight: normal; font-size: 16px;">{{$group->location()}}</i>
+				- <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
 			@endif
 		</h2>
 		<p>{!! nl2br($group->description) !!}</p>

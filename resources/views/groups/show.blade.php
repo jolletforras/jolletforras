@@ -24,7 +24,7 @@
 		@include('groups._tags')
 		@include('groups._admins')
 		@if($group->city!='')
-			<p><b>Hely</b>: {{$group->location()}}</p>
+			<p><b>Hely</b>: {{$group->get_location()}}</p>
 		@endif
 		<p><i>Létrehozva: {{ $group->created_at }}, módosítva:  {{ $group->updated_at }}</i></p>
 		@if ($is_admin)

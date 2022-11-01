@@ -7,7 +7,7 @@
                 <h3>
                     <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">{{ $group->name }}</a>
                     @if($group->city!='')
-                        - <i style="font-weight: normal; font-size: 16px;">{{$group->location()}}</i>
+                        - <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
                     @endif
                 </h3>
                 @if ($group->isAdmin())

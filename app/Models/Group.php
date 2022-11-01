@@ -90,7 +90,7 @@ class Group extends Model
         return Auth::check() && $this->admins->contains('id', Auth::user()->id);;
     }
 
-    public function location() {
+    public function get_location() {
         $location = "";
 
         if($this->city=="Budapest") {
