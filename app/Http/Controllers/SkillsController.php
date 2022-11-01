@@ -21,9 +21,9 @@ class SkillsController extends Controller
 
 		$city=$district=NULL;
 
-		$tags = [''=>''] + UserSkill::lists('name', 'id')->all();
+		$tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
 
-		$tags_slug = UserSkill::lists('slug', 'id')->all();
+		$tags_slug = UserSkill::pluck('slug', 'id')->all();
 
 		$tag_id=$id;
 
@@ -51,7 +51,7 @@ class SkillsController extends Controller
 
 		$users=$query->get();
 
-		$tags = [''=>''] + UserSkill::lists('name', 'id')->all();
+		$tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
 
 		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'tags', 'city', 'district'))->render();
 
@@ -69,9 +69,9 @@ class SkillsController extends Controller
 
 		$ideas=$tag->ideas()->latest('updated_at')->get();
 
-		$tags = [''=>''] + IdeaSkill::lists('name', 'id')->all();
+		$tags = [''=>''] + IdeaSkill::pluck('name', 'id')->all();
 
-		$tags_slug = IdeaSkill::lists('slug', 'id')->all();
+		$tags_slug = IdeaSkill::pluck('slug', 'id')->all();
 
 		return view('ideas.index', compact('ideas', 'tags', 'tags_slug'));
 	}
@@ -93,9 +93,9 @@ class SkillsController extends Controller
 
         $groups=$tag->groups()->latest('updated_at')->get();
 
-        $tags = [''=>''] + GroupTheme::lists('name', 'id')->all();
+        $tags = [''=>''] + GroupTheme::pluck('name', 'id')->all();
 
-        $tags_slug = GroupTheme::lists('slug', 'id')->all();
+        $tags_slug = GroupTheme::pluck('slug', 'id')->all();
 
         return view('groups.index', compact('groups', 'tags', 'tags_slug'));
     }

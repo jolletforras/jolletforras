@@ -31,6 +31,36 @@ Route::get('/adatkezeles', 'HomeController@datahandling');
 Route::get('/terkep/tarsak', 'MapController@members');
 Route::get('/terkep/csoportok', 'MapController@groups');
 
+Route::get('/tarsak', 'ProfilesController@index');
+Route::post('/user/filter', 'ProfilesController@filter');
+Route::get('/profil/{id}/{name?}', ['as' => 'profile.show', 'uses' => 'ProfilesController@show']);
+
+Route::get('/profilom/modosit', ['as' => 'profil.edit', 'uses' => 'ProfilesController@edit']);
+Route::resource('profil', 'ProfilesController', ['only' => ['update']]);
+
+Route::get('/profilom/feltolt_profilkep', ['as' => 'profil.uploadimage', 'uses' => 'ProfilesController@uploadimage']);
+Route::post('/profilom/feltolt_profilkep', ['as' => 'profil.saveimage', 'uses' => 'ProfilesController@saveimage']);
+
+Route::get('/profilom/jelszocsere', 'ProfilesController@changepassword');
+Route::post('/profilom/jelszocsere', ['as' => 'profil.savepassword', 'uses' => 'ProfilesController@savepassword']);
+
+Route::get('/profilom/beallitasok',
+    ['as' => 'profil.editsettings', 'uses' =>'ProfilesController@editsettings']);
+Route::post('/profilom/beallitasok',
+    ['as' => 'profil.updatesettings', 'uses' => 'ProfilesController@updatesettings']);
+Route::get('profilom/deaktival', 'ProfilesController@delete');
+
+Route::get('jovahagyra_var', 'ProfilesController@waitingforapprove');
+Route::get('jovahagy/{id}', 'ProfilesController@approve');
+Route::get('elutasit/{id}', 'ProfilesController@decline');
+
+Route::get('/tagok/ertes/{id}/{tag}', 'SkillsController@profiles_show');
+Route::post('/skill/filter', 'SkillsController@profiles_filter');
+
+Route::get('meghivo', 'InviteController@create');
+Route::post('meghivo', 'InviteController@store');
+Route::get('meghivo/aktival/{code}', 'InviteController@activate');
+
 
 Route::get('/irasok', 'ArticlesController@index');
 Route::get('/iras/{id}/{title}', 'ArticlesController@show');

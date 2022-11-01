@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function ideas()
     {
-        return $this->hasMany('App\Idea');
+        return $this->hasMany(Idea::class);
     }
 
     public function projects()
@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function tags()
     {
-        return $this->belongsToMany('App\UserSkill')->withTimestamps();
+        return $this->belongsToMany(UserSkill::class)->withTimestamps();
     }
 
     public function comments()
