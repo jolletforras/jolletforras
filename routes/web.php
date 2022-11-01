@@ -42,7 +42,7 @@ Route::get('/profilom/feltolt_profilkep', 'ProfilesController@uploadimage');
 Route::post('/profilom/feltolt_profilkep', 'ProfilesController@saveimage');
 
 Route::get('/profilom/jelszocsere', 'ProfilesController@changepassword');
-Route::post('/profilom/jelszocsere', ['as' => 'profil.savepassword', 'uses' => 'ProfilesController@savepassword']);
+Route::post('/profilom/jelszocsere', 'ProfilesController@savepassword');
 
 Route::get('/profilom/beallitasok',
     ['as' => 'profil.editsettings', 'uses' =>'ProfilesController@editsettings']);
