@@ -6,7 +6,7 @@
 		<div class="row">
 			@if (Auth::check())
 			<div class="col-sm-3">
-				<a href="{{url('meghivo')}}" type="submit" class="btn btn-default">Meghívó küldése</a>
+				<a href="{{url('meghivo')}}/uj" type="submit" class="btn btn-default">Meghívó küldése</a>
 			</div>
 			<div class="col-sm-3" style="padding-top:3px;">
 				<select id="tag" name="tag" class="form-control">

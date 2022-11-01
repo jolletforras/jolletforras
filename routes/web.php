@@ -57,8 +57,8 @@ Route::get('elutasit/{id}', 'ProfilesController@decline');
 Route::get('/tagok/ertes/{id}/{tag}', 'SkillsController@profiles_show');
 Route::post('/skill/filter', 'SkillsController@profiles_filter');
 
-Route::get('meghivo', 'InviteController@create');
-Route::post('meghivo', 'InviteController@store');
+Route::get('/meghivo/uj', 'InviteController@create');
+Route::post('/meghivo/uj', 'InviteController@store');
 Route::get('meghivo/aktival/{code}', 'InviteController@activate');
 
 
