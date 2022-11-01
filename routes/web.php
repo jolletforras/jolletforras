@@ -44,10 +44,8 @@ Route::post('/profilom/feltolt_profilkep', 'ProfilesController@saveimage');
 Route::get('/profilom/jelszocsere', 'ProfilesController@changepassword');
 Route::post('/profilom/jelszocsere', 'ProfilesController@savepassword');
 
-Route::get('/profilom/beallitasok',
-    ['as' => 'profil.editsettings', 'uses' =>'ProfilesController@editsettings']);
-Route::post('/profilom/beallitasok',
-    ['as' => 'profil.updatesettings', 'uses' => 'ProfilesController@updatesettings']);
+Route::get('/profilom/beallitasok', 'ProfilesController@editsettings');
+Route::post('/profilom/beallitasok', 'ProfilesController@updatesettings');
 Route::get('profilom/deaktival', 'ProfilesController@delete');
 
 Route::get('jovahagyra_var', 'ProfilesController@waitingforapprove');

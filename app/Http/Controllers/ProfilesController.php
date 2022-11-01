@@ -402,9 +402,13 @@ class ProfilesController extends Controller
 	public function editSettings()
 	{
 		$user=Auth::user();
-		if ($user->status==3 || $user->status==4)
-			$deactivate = $user->status==3 ? false : true;
-			return view('profiles.settings', compact('user', 'deactivate'));
+		if ($user->status==3 || $user->status==4) {
+            $deactivate = $user->status==3 ? false : true;
+            return view('profiles.settings', compact('user', 'deactivate'));
+        }
+        else {
+            return redirect('/profil/'.$user->id.'/'.$user->slug);
+        }
 	}
 
 	/**
@@ -463,15 +467,15 @@ class ProfilesController extends Controller
                 }
             }
 
-			$deactivate_prev = $user->status==3 ? false : true;
-			$deactivate = empty($request->get('deactivate')) ? false : true;
+			$deactivate_prev = $user->status==4 ? 1 : 0;
+			$deactivate = empty($request->get('deactivate')) ? 0 : 1;
+            //dd($deactivate_prev.'|'.$deactivate);
 			if($deactivate!=$deactivate_prev) {
 				if ($deactivate) {
 					$user->status = 4;
 					$user->deleted_at = Carbon::now();
                     $message_r[] = 'Sikeresen deaktiváltad magad. Amennyiben újból szeretnéd használni az oldalt, vedd ki a pipát a deaktiválásnál.';
 					$user->save();
-					return redirect('/profilom/beallitasok')->with('message', $message);
 				} else {
 					$user->status = 3;
 					$user->deleted_at = NULL;
