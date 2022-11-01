@@ -16,7 +16,7 @@ class Group extends Model
 
     protected $fillable = [
         'name', 'description', 'agreement', 'slug', 'public', 'webpage_name', 'webpage_url', 'location',
-        'city', 'zip_code', 'lat', 'lng'
+        'city', 'zip_code', 'lat', 'lng', 'counter'
     ];
 
     protected $dates=['updated_at', 'deleted_at'];

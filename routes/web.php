@@ -62,16 +62,18 @@ Route::get('meghivo/aktival/{code}', 'InviteController@activate');
 
 Route::get('/csoportok', 'GroupsController@index');
 Route::get('/csoport/{id}/{name}', 'GroupsController@show');
+Route::get('/csoport/uj', 'GroupsController@create');
+Route::post('/csoport/uj', 'GroupsController@store');
+
+Route::post('/csoport/{id}/{name}/csatlakozas', 'GroupsController@join');
+Route::get('/csoport/{id}/{name}/kilepes', 'GroupsController@leave');
+
 Route::get('/csoport/{id}/{name}/beszelgetesek', 'GroupsController@conversations');
 Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
 Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
-Route::post('/csoport/{id}/{name}/csatlakozas', 'GroupsController@join');
-Route::get('/csoport/{id}/{name}/kilepes', 'GroupsController@leave');
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'GroupsController@theme');
 Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupsController@themecreate');
-//Route::get('/csoport/{group_id}/{group_slug}/tema/uj', ['as' => 'groupthemes.new', 'uses' => 'GroupsController@themecreate']);
-Route::get('/csoport/uj', 'GroupsController@create');
-Route::post('csoport', 'GroupsController@store');
+
 Route::get('/csoport/{id}/{name}/modosit', ['as' => 'group.edit', 'uses' => 'GroupsController@edit']);
 Route::resource('csoport', 'GroupsController', ['only' => ['update']]);
 Route::get('/csoport/cimke/{id}/{tag}', 'GroupTagsController@show');

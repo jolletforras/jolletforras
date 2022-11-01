@@ -249,6 +249,7 @@ class GroupsController extends Controller
             'city' => $request->get('city'),
             'slug' => Str::slug($request->get('name')),
             'public' => $request->has('public') ? 1 : 0,
+            'counter' => 0,
             'create_at' => date("Y-m-d H:i:s", strtotime('now'))
         ]);
 
