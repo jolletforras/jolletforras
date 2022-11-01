@@ -64,22 +64,22 @@ class Group extends Model
 
     public function getMemberListAttribute()
     {
-        return $this->members->lists('id')->all();
+        return $this->members->pluck('id')->all();
     }
 
     public function getAdminListAttribute()
     {
-        return $this->admins->lists('id')->all();
+        return $this->admins->pluck('id')->all();
     }
 
     public function getNoadminListAttribute()
     {
-        return $this->noadmins->lists('id')->all();
+        return $this->noadmins->pluck('id')->all();
     }
 
     public function getTagListAttribute()
     {
-        return $this->tags->lists('id')->all();
+        return $this->tags->pluck('id')->all();
     }
 
     public function isMember() {
