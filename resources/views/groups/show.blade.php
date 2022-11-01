@@ -28,21 +28,28 @@
 		@endif
 		<p><i>Létrehozva: {{ $group->created_at }}, módosítva:  {{ $group->updated_at }}</i></p>
 		@if ($is_admin)
-		{!! Form::model($group, ['method' => 'put', 'route' => ['csoport.update', $group->id]]) !!}
-		{!! Form::label('admin_list','Csoport kezelők felvétele, módosítása') !!}
+		<label for="admin_list">Csoport kezelők felvétele, módosítása</label>
 		<div class="row">
 			<div class="form-group col-sm-4">
-				{!! Form::select('admin_list[]', $members, null, ['id' =>'admin_list','class'=>'form-control', 'multiple']) !!}
+				<select id="admin_list" name="admin_list[]" class="form-control" multiple>
+					@foreach($members as $key => $val)
+						<option value="{{ $key }}" @if(isset($admins) && in_array($key,$admins)) selected @endif>{{ $val }}</option>
+					@endforeach
+				</select>
 			</div>
 			<div class="form-group col-sm-1">
 				<button type="button" class="btn btn-default" onclick="saveAdmin()">Ment</button>
 			</div>
 		</div>
-		{!! Form::close() !!}
-		{!! Form::label('noadmin_list','Csoporttag kiléptetés') !!}
+		<label for="remove_member">Csoporttag kiléptetés</label>
 		<div class="row">
 			<div class="form-group col-sm-4">
-				{!! Form::select('noadmin_list[]',  $noadmins, null, ['id' =>'noadmin_list','class'=>'form-control', 'multiple']) !!}
+				<select id="remove_member" name="remove_member" class="form-control">
+					<option value=""></option>
+					@foreach($noadmins as $key => $val)
+						<option value="{{ $key }}">{{ $val }}</option>
+					@endforeach
+				</select>
 			</div>
 			<div class="form-group col-sm-1">
 				<button type="button" class="btn btn-default" onclick="removeMember()">Kiléptet</button>
@@ -50,10 +57,15 @@
 		</div>
 		@endif
 		@if ($is_member)
-		{!! Form::label('nogroupmember_list','Meghívás a csoportba') !!}
+		<label for="invited_user">Meghívás a csoportba</label>
 		<div class="row">
 			<div class="form-group col-sm-4">
-			{!! Form::select('nogroupmember',  ['0'=>'. . .']+$nogroupmembers->toArray(), null, ['id' =>'nogroupmember','class'=>'form-control']) !!}
+				<select id="invited_user" name="invited_user" class="form-control">
+					<option value=""></option>
+					@foreach($nogroupmembers as $key => $val)
+						<option value="{{ $key }}">{{ $val }}</option>
+					@endforeach
+				</select>
 			</div>
 			<div class="form-group col-sm-1">
 				<button type="button" class="btn btn-default" onclick="invite()">Meghív</button>
@@ -72,8 +84,10 @@
 			<b>Csoport megállapodás:</b><br>
 			{!! nl2br($group->agreement) !!}
 		</p>
+
+
 		<form class="form-horizontal" role="form" method="POST" action="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/csatlakozas">
-			{!! csrf_field() !!}
+			@csrf
 
 			<p><input type="checkbox" name="accept" required style="width:18px;height:18px;"><span style="padding-left: 10px;">Elolvastam és elfogadom a csoport megállapodását.</span></p>
 			<p><button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-user"></i>Csatlakozás</button></p>
@@ -89,7 +103,7 @@
 			admin: true
 		});
 
-		$('#noadmin_list').select2({
+		$('#remove_member').select2({
 			placeholder: 'Írd be a nevet',
 			"language": {
 				"noResults": function(){
@@ -98,7 +112,7 @@
 			}
 		});
 
-		$('#nogroupmember').select2({
+		$('#invited_user').select2({
 			placeholder: 'Írd be a nevet',
 			"language": {
 				"noResults": function(){
@@ -138,7 +152,7 @@
 				url: '{{url('csoport')}}/{{$group->id}}/removemember',
 				data: {
 					_token: CSRF_TOKEN,
-					noadmin_list: $('#noadmin_list').val()
+					remove_member: $('#remove_member').val()
 				},
 				success: function(data) {
 					if(data['status']=='success') {
@@ -153,17 +167,17 @@
 
 		function invite(){
 
-			if( $('#nogroupmember').val()!=0) {
+			if( $('#invited_user').val()!=0) {
 				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-				var name = $( "#nogroupmember option:selected" ).text();
+				var name = $( "#invited_user option:selected" ).text();
 
 				$.ajax({
 					type: "POST",
 					url: '{{url('csoport')}}/{{$group->id}}/invite',
 					data: {
 						_token: CSRF_TOKEN,
-						nogroupmember: $('#nogroupmember').val()
+						invited_user: $('#invited_user').val()
 					},
 					success: function(data) {
 						if(data['status']=='success') {

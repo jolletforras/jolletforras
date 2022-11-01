@@ -80,7 +80,7 @@ class GroupsController extends Controller
             $members = $group->members()->orderBy('name', 'ASC')->pluck('name', 'user_id');
             //dd($members);
 
-            $admins = $group->admins()->orderBy('name', 'ASC')->pluck('name', 'user_id');
+            $admins = $group->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
             $noadmins = $group->noadmins()->orderBy('name', 'ASC')->pluck('name', 'user_id');
 
             $nogroupmembers = User::members()->whereNotIn('id', $group->member_list)->orderBy('name', 'ASC')->pluck('name', 'id');
@@ -340,7 +340,7 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($id);
 
-        $group->members()->detach($request->input('noadmin_list'));
+        $group->members()->detach($request->input('remove_member'));
 
         $response = array(
             'status' => 'success',
@@ -352,7 +352,7 @@ class GroupsController extends Controller
     public function invite($id, Request $request)
     {
 
-        $user_id = $request->input('nogroupmember');
+        $user_id = $request->input('invited_user');
 
         $response = array(
             'status' => 'success',
