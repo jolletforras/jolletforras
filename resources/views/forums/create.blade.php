@@ -21,5 +21,5 @@
 				@include('forums._form', ['submitButtonText'=>'Mentés'])
 			</form>
 		</div>
-	<div>
+	</div>
 @stop
