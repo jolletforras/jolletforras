@@ -35,11 +35,11 @@ Route::get('/tarsak', 'ProfilesController@index');
 Route::post('/user/filter', 'ProfilesController@filter');
 Route::get('/profil/{id}/{name?}', ['as' => 'profile.show', 'uses' => 'ProfilesController@show']);
 
-Route::get('/profilom/modosit', 'ProfilesController@edit');
-Route::post('/profil/{id}/modosit', 'ProfilesController@update');
+Route::get('/profilom/modosit', ['as' => 'profil.edit', 'uses' => 'ProfilesController@edit']);
+Route::post('/profil/{id}/modosit', ['as' => 'profil.update', 'uses' => 'ProfilesController@update']);
 
-Route::get('/profilom/feltolt_profilkep', 'ProfilesController@uploadimage');
-Route::post('/profilom/feltolt_profilkep', 'ProfilesController@saveimage');
+Route::get('/profilom/feltolt_profilkep', ['as' => 'profil.uploadimage', 'uses' => 'ProfilesController@uploadimage']);
+Route::post('/profilom/feltolt_profilkep', ['as' => 'profil.saveimage', 'uses' => 'ProfilesController@saveimage']);
 
 Route::get('/profilom/jelszocsere', 'ProfilesController@changepassword');
 Route::post('/profilom/jelszocsere', 'ProfilesController@savepassword');
