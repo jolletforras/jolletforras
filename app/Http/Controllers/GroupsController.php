@@ -93,6 +93,128 @@ class GroupsController extends Controller
     }
 
     /**
+     * Create a group
+     *
+     * @return Response
+     */
+    public function create() {
+        $tags = GroupTag::pluck('name', 'id');
+
+        $members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
+
+        return view('groups.create', compact('members','tags'));
+    }
+
+    /**
+     * Store a specific group
+     *
+     * @return Response
+     */
+    public function store(GroupRequest $request)
+    {
+        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\GroupTag');
+
+        //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
+        $description = htmlspecialchars($request->get('description'));
+        //$description = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $description);
+
+        $agreement = htmlspecialchars($request->get('agreement'));
+        //$agreement = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $agreement);
+
+        $zip_code=$request->get('zip_code');
+        $coordinates=$this->getCoordinates($zip_code);
+
+        $group = Auth::user()->groups()->create([
+            'name' => $request->get('name'),
+            'description' => $description,
+            'agreement' => $agreement,
+            'webpage_name' => $request->get('webpage_name'),
+            'webpage_url' => addhttp($request->get('webpage_url')),
+            'location' => $request->get('location'),
+            'zip_code' => $zip_code,
+            'lat' => $coordinates['lat'],
+            'lng' => $coordinates['lng'],
+            'city' => $request->get('city'),
+            'slug' => Str::slug($request->get('name')),
+            'public' => $request->has('public') ? 1 : 0,
+            'counter' => 0,
+            'create_at' => date("Y-m-d H:i:s", strtotime('now'))
+        ]);
+
+        $group->tags()->attach($tag_list);
+
+        $group->members()->attach(Auth::user()->id, ['admin'=>1]);
+
+        return redirect('csoport/'.$group->id.'/'.$group->slug)->with('message', 'A csoportot sikeresen felvetted!');
+    }
+
+    /**
+     * Edit a specific group
+     *
+     * @param  integer $id The group ID
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $group = Group::findOrFail($id);
+
+        if(!in_array(Auth::user()->id,$group->admin_list)) {
+            return redirect('/');
+        }
+
+        $members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
+
+        $tags = GroupTag::pluck('name', 'id');
+        $selected_tags = $group->tags->pluck('id')->toArray();
+
+        return view('groups.edit', compact('group', 'members', 'tags', 'selected_tags'));
+    }
+
+    /**
+     * Update a specific group
+     *
+     * @param  integer $id The group ID
+     * @return Response
+     */
+    public function update($id, GroupRequest $request)
+    {
+        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\GroupTag');
+
+        $group = Group::findOrFail($id);
+
+        //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
+        $description = htmlspecialchars($request->get('description'));
+        //$description = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $description);
+
+        $agreement = htmlspecialchars($request->get('agreement'));
+        //$agreement = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $agreement);
+
+        $zip_code=$request->get('zip_code');
+        $coordinates=$this->getCoordinates($zip_code);
+
+        $group->update([
+            'name' => $request->get('name'),
+            'description' => $description,
+            'agreement' => $agreement,
+            'webpage_name' => $request->get('webpage_name'),
+            'webpage_url' => addhttp($request->get('webpage_url')),
+            'location' => $request->get('location'),
+            'zip_code' => $zip_code,
+            'lat' => $coordinates['lat'],
+            'lng' => $coordinates['lng'],
+            'city' => $request->get('city'),
+            'slug' => Str::slug($request->get('name')),
+            'public' => $request->has('public') ? 1 : 0,
+            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+        ]);
+
+        $group->tags()->sync($tag_list);
+
+        return redirect('csoport/'.$id.'/'.$group->slug)->with('message', 'A csoport leírását sikeresen módosítottad!');
+    }
+
+
+    /**
      * User join to a group
      *
      * @param  integer $id The group ID
@@ -166,7 +288,7 @@ class GroupsController extends Controller
 
         $forum = Forum::findOrFail($forum_id);
 
-        $comments = Comment::where('commentable_type', 'App\Forum')->where('commentable_id', $forum_id)->get();
+        $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $forum_id)->get();
 
         //new=0 hozzászolás értesítés
         $notice = DB::table('forum_user')->where('forum_id',$forum_id)->where('user_id',Auth::user()->id)->where('new',0)->where('ask_notice',1)->first();
@@ -200,128 +322,6 @@ class GroupsController extends Controller
         $visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
 
         return view('events.create', compact('visibility','group'));
-    }
-
-
-
-    /**
-     * Create a group
-     *
-     * @return Response
-     */
-    public function create() {
-        $tags = GroupTag::pluck('name', 'id');
-
-        $members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
-
-        return view('groups.create', compact('members','tags'));
-    }
-
-    /**
-     * Store a specific group
-     *
-     * @return Response
-     */
-    public function store(GroupRequest $request)
-    {
-        $tag_list=$this->getTagList($request->input('tag_list'), 'App\GroupTag');
-
-        //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-        $description = htmlspecialchars($request->get('description'));
-        //$description = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $description);
-
-        $agreement = htmlspecialchars($request->get('agreement'));
-        //$agreement = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $agreement);
-
-        $zip_code=$request->get('zip_code');
-        $coordinates=$this->getCoordinates($zip_code);
-
-        $group = Auth::user()->groups()->create([
-            'name' => $request->get('name'),
-            'description' => $description,
-            'agreement' => $agreement,
-            'webpage_name' => $request->get('webpage_name'),
-            'webpage_url' => addhttp($request->get('webpage_url')),
-            'location' => $request->get('location'),
-            'zip_code' => $zip_code,
-            'lat' => $coordinates['lat'],
-            'lng' => $coordinates['lng'],
-            'city' => $request->get('city'),
-            'slug' => Str::slug($request->get('name')),
-            'public' => $request->has('public') ? 1 : 0,
-            'counter' => 0,
-            'create_at' => date("Y-m-d H:i:s", strtotime('now'))
-        ]);
-
-        $group->tags()->attach($tag_list);
-
-        $group->members()->attach(Auth::user()->id, ['admin'=>1]);
-
-        return redirect('csoport/'.$group->id.'/'.$group->slug)->with('message', 'A csoportot sikeresen felvetted!');
-    }
-
-    /**
-     * Edit a specific group
-     *
-     * @param  integer $id The group ID
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $group = Group::findOrFail($id);
-
-        if(!in_array(Auth::user()->id,$group->admin_list)) {
-            return redirect('/');
-        }
-
-        $members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
-
-        $tags = GroupTag::pluck('name', 'id');
-
-        return view('groups.edit', compact('group', 'members', 'tags'));
-    }
-
-    /**
-     * Update a specific group
-     *
-     * @param  integer $id The group ID
-     * @return Response
-     */
-    public function update($id, GroupRequest $request)
-    {
-        $tag_list=$this->getTagList($request->input('tag_list'), 'App\GroupTag');
-
-        $group = Group::findOrFail($id);
-
-        //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-        $description = htmlspecialchars($request->get('description'));
-        //$description = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $description);
-
-        $agreement = htmlspecialchars($request->get('agreement'));
-        //$agreement = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $agreement);
-
-        $zip_code=$request->get('zip_code');
-        $coordinates=$this->getCoordinates($zip_code);
-
-        $group->update([
-            'name' => $request->get('name'),
-            'description' => $description,
-            'agreement' => $agreement,
-            'webpage_name' => $request->get('webpage_name'),
-            'webpage_url' => addhttp($request->get('webpage_url')),
-            'location' => $request->get('location'),
-            'zip_code' => $zip_code,
-            'lat' => $coordinates['lat'],
-            'lng' => $coordinates['lng'],
-            'city' => $request->get('city'),
-            'slug' => Str::slug($request->get('name')),
-            'public' => $request->has('public') ? 1 : 0,
-            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
-        ]);
-
-        $group->tags()->sync($tag_list);
-
-        return redirect('csoport/'.$id.'/'.$group->slug)->with('message', 'A csoport leírását sikeresen módosítottad!');
     }
 
     public function saveAdmin($id, Request $request)

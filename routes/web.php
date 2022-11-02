@@ -61,27 +61,27 @@ Route::get('meghivo/aktival/{code}', 'InviteController@activate');
 
 
 Route::get('/csoportok', 'GroupsController@index');
+Route::get('/csoport/cimke/{id}/{tag}', 'GroupTagsController@show');
+Route::post('/group/filter', 'GroupsController@filter');
 Route::get('/csoport/{id}/{name}', 'GroupsController@show');
 Route::get('/csoport/uj', 'GroupsController@create');
 Route::post('/csoport/uj', 'GroupsController@store');
+Route::get('/csoport/{id}/{name}/modosit', 'GroupsController@edit');
+Route::post('/csoport/{id}/{name}/modosit', 'GroupsController@update');
+
 
 Route::post('/csoport/{id}/{name}/csatlakozas', 'GroupsController@join');
 Route::get('/csoport/{id}/{name}/kilepes', 'GroupsController@leave');
-
-Route::get('/csoport/{id}/{name}/beszelgetesek', 'GroupsController@conversations');
-Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
-Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
-Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'GroupsController@theme');
-Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupsController@themecreate');
-
-Route::get('/csoport/{id}/{name}/modosit', ['as' => 'group.edit', 'uses' => 'GroupsController@edit']);
-Route::resource('csoport', 'GroupsController', ['only' => ['update']]);
-Route::get('/csoport/cimke/{id}/{tag}', 'GroupTagsController@show');
 Route::post('/csoport/{id}/saveadmin', 'GroupsController@saveAdmin');
 Route::post('/csoport/{id}/removemember', 'GroupsController@removeMember');
 Route::post('/csoport/{id}/invite', 'GroupsController@invite');
-Route::post('/group/filter', 'GroupsController@filter');
 
+Route::get('/csoport/{id}/{name}/beszelgetesek', 'GroupsController@conversations');
+Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'GroupsController@theme');
+Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupsController@themecreate');
+
+Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
+Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
 
 
 Route::get('/irasok', 'ArticlesController@index');

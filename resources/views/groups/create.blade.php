@@ -22,7 +22,6 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<form method="POST" action="{{url('csoport')}}/uj" accept-charset="UTF-8">
-				@csrf
 				@include('groups._form')
 				<div class="form-group">
 					<input class="btn btn-primary" type="submit" value="Mentés">

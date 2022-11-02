@@ -1,30 +1,32 @@
+		@csrf
+
 		<div class="form-group">
 			<label for="name">Neve*:</label>
-			<input class="form-control" required="required" name="name" type="text" value="@if(isset($group)) {{old('name',$group->name)}} @else {{old('name')}} @endif" id="name">
+			<input class="form-control" required="required" name="name" type="text" value="@if(isset($group)){{old('name',$group->name)}}@else{{old('name')}}@endif" id="name">
 		</div>
 	
 		<div class="form-group">
 			<label for="description">A csoport bemutatása, célja*:</label>
-			<textarea name="description" class="form-control" required="required" rows="4">@if(isset($group)) {{$group->description}} @endif</textarea>
+			<textarea name="description" class="form-control" required="required" rows="4">@if(isset($group)){{old('description',$group->description)}}@else{{old('description')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="agreement">Csoport megállapodás*:</label>
-			<textarea name="agreement" class="form-control" required="required" rows="4">@if(isset($group)) {{$group->agreement}} @endif</textarea>
+			<textarea name="agreement" class="form-control" required="required" rows="4">@if(isset($group)){{old('agreement',$group->agreement)}}@else{{old('agreement')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="webpage_name">Weboldalad neve:</label>
 			<a href="#webpage_name_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 			<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a portálon regisztráltaknak, írd ide. Ha több oldalad is van, azt az egyet írd ide, amit leginkább ide kapcsolódónak gondolsz.</div>
-			<input class="form-control" name="webpage_name" type="text" value="@if(isset($group)) {{$group->webpage_name}}  @endif" id="webpage_name">
+			<input class="form-control" name="webpage_name" type="text" value="@if(isset($group)){{old('webpage_name',$group->webpage_name)}}@else{{old('webpage_name')}}@endif" id="webpage_name">
 		</div>
 
 		<div class="form-group">
 			<label for="webpage_url">Weboldalad linkje:</label>
 			<a href="#webpage_url_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 			<div id="webpage_url_info" class="collapse info">A böngésződ szerkesztőlécéből másold be a hivatkozást.</div>
-			<input class="form-control" name="webpage_url" type="text" value="@if(isset($group)) {{$group->webpage_url}}  @endif" id="webpage_url">
+			<input class="form-control" name="webpage_url" type="text" value="@if(isset($group)){{old('webpage_url',$group->webpage_url)}}@else{{old('webpage_url')}}@endif" id="webpage_url">
 		</div>
 
 		<div class="form-group">
@@ -50,14 +52,14 @@
 				<b>Település*</b>
 				<a href="#location_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 				<div id="location_info" class="collapse info">Nagy város esetén csak a kerületet ad meg, ha csak arra kerületre vonatkozik a csoport</div>
-				<input class="form-control" name="location" type="text" value="@if(isset($group)) {{$group->location}} @endif">
+				<input class="form-control" name="location" type="text" value="@if(isset($group)){{old('location',$group->location)}}@else{{old('location')}}@endif">
 			</div>
 
 			<div class="form-group">
 				<b>Irányítószám*</b>
 				<a href="#zip_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 				<div id="zip_info" class="collapse info">A csoportnak a térképre való elhelyezés miatt szükséges</div>
-				<input class="form-control" maxlength="4" name="zip_code" type="text" value="@if(isset($group)) {{$group->zip_code}} @endif">
+				<input class="form-control" maxlength="4" name="zip_code" type="text" value="@if(isset($group)){{old('zip_code',$group->zip_code)}}@else{{old('zip_code')}}@endif">
 			</div>
 
 			<div class="form-group">
