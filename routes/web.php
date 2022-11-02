@@ -15,7 +15,7 @@ use App\Http\Controllers\HomeController;
 */
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profil/{id}/{name}/aktival/{code}', ['as' => 'activate', 'uses' => 'Auth\RegisterController@activate']);
 
 Route::get('/jelszo/ideiglenes', 'Auth\ForgotPasswordController@newpassword');
 Route::post('/jelszo/email', 'Auth\ForgotPasswordController@sendpassword');
