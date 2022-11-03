@@ -42,6 +42,9 @@
 						<b>Ez ami lelkesít, amivel a következő hónapokban foglalkozni szeretnék:</b><br>
 						{!! nl2br($user->interest) !!}<br>
 					@endif
+					@if (Auth::check())
+						@include('profiles.partials.groups')
+					@endif
                 </div>
             </div>
 			<hr/>

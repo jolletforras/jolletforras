@@ -59,9 +59,16 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    //ezeket hozta létre
     public function groups()
     {
         return $this->hasMany(Group::class);
+    }
+
+    //ezen csoportok tagjai
+    public function member_of_groups()
+    {
+        return $this->belongsToMany(Group::class);
     }
 
     public function tags()
