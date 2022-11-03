@@ -55,6 +55,7 @@ class CommentsController extends Controller
                 $data['name']=$request->get('name');
                 $data['email']=$email;
                 $data['commentable_url'] = $commentable_url;
+                $data['commenter_id']=$commenter->id;
                 $data['commenter_name']=$commenter->name;
                 $data['comment']=$comment;
 
