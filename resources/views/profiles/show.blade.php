@@ -80,6 +80,7 @@
 					success: function(data) {
 						if(data['status']=='success') {
 							$("#message-alert").show().delay(3000).hide("slow");
+							$("#message").val("");
 						}
 					},
 					error: function(error){
