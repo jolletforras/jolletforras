@@ -25,30 +25,13 @@
 	    </div>
     </div>
 
-	<div class="form-group">
-		@if(!$comments->isEmpty())<b>Hozzászólások:</b><br/>@endif
-		<hr>
-		<div class="comments">
-		@foreach ($comments as $comment)
-			<b><a href="{{url('profil')}}/{{$comment->commenter->id}}/{{$comment->commenter->slug}}">{{ $comment->commenter->name }}</a></b>, <b>{{ $comment->updated_at }}</b> <br/>
-			{!! nl2br($comment->body) !!}<br/>
-			<hr>
-		@endforeach
-		</div>
-	</div>
-	<div class="form-group">
-		<textarea class="form-control" rows="4" id="comment" name="comment" placeholder="Ide írva szólhatsz hozzá"></textarea>
-	</div>
-	<div class="form-group">
-		<button type="button" onclick="save()">Mentés</button>
-	</div>
-	@include('partials.comment_script', [
-        'commentable_type'	=>'GroupTheme',
-        'commentable_url'	=>'csoport/'.$group->id.'/'.$group->slug.'/tema/'.$forum->id.'/'.$forum->slug,
-        'commentable_id'	=>$forum->id,
-        'name'				=>$forum->user->name,
-        'email'				=>$forum->user->email
-    ] )
+	@include('comments._show', [
+	'comments' => $comments,
+	'commentable_type'	=>'GroupTheme',
+	'commentable_url'	=>'csoport/'.$group->id.'/'.$group->slug.'/tema/'.$forum->id.'/'.$forum->slug,
+	'commentable'	=>$forum
+	] )
+
 	<script type="text/javascript">
 		function check(){
 			var ask_notice = 0;
