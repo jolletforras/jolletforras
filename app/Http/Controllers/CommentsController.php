@@ -42,7 +42,7 @@ class CommentsController extends Controller
             ++$commentable->counter;
             $commentable->save();
 
-            $commentable_types = ['GroupTheme'=>'csoport téma','Forum'=>'fórum', 'Project'=>'kezdeményezés'];
+            $commentable_types = ['GroupTheme'=>'csoport téma','Forum'=>'fórum', 'Project'=>'kezdeményezés', 'Event'=>'esemény'];
 
             $commenter=User::findOrFail($commenter_id);
 

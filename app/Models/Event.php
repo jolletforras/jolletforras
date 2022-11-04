@@ -14,17 +14,17 @@ class Event extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->members();
-    }
-
-    public function editor()
-    {
         return $this->belongsTo(User::class);
     }
 
     public function group()
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function getCreatedAtAttribute($date)

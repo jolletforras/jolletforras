@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Event;
 use App\Models\Group;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -53,7 +54,9 @@ class EventsController extends Controller
             $has_access = $group->isAdmin();
         }
 
-        return view('events.show', compact('event','has_access'));
+        $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->get();
+
+        return view('events.show', compact('event','has_access', 'comments'));
     }
 
 
