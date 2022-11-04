@@ -52,7 +52,7 @@
 	<div class="message-box">
 		<div class="alert alert-info" style="display: none;" id="message-alert">A üzeneted sikeresen elküldted!</div>
 		<div class="form-group">
-			<textarea class="form-control" rows="4" id="message" name="message" placeholder="Ide írva üzenhetsz neki"></textarea>
+			<textarea class="form-control" rows="4" id="message" name="message" placeholder="Ide írva üzenetet küldhetsz neki"></textarea>
 		</div>
 		<div class="form-group">
 			<button type="button" onclick="send()">Küldés</button>
