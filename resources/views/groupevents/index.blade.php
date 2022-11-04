@@ -12,22 +12,21 @@
 			</div>
 		</div>
 		@include('events._create_events_info')
-		<table class="table">
-			<tbody>
-			@foreach ($events as $event)
-				<tr>
-					<td>
-						<h3><a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->title }}</a></h3>
-						@if ($event->isEditor() || $group->isAdmin())
-							<a href="{{url('esemeny')}}/{{$event->id}}/{{$event->slug}}/modosit" class="btn btn-default">módosít</a>
-						@endif
-						<article>
-							<div class="body">{!! $event->body !!}</div>
-						</article>
-					</td>
-				</tr>
-			@endforeach
-			</tbody>
-		</table>
+		<hr style="margin-top:2px;">
+		@for ($i = 0; $i < $num=$events->count(); $i++)
+			<?php $event = $events[$i]; ?>
+		<h3><a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->title }}</a></h3>
+			@if ($event->isEditor() || $group->isAdmin())
+		<a href="{{url('esemeny')}}/{{$event->id}}/{{$event->slug}}/modosit" class="btn btn-default">módosít</a>
+			@endif
+		<article>
+			<div class="body">{!! $event->body !!}</div>
+		</article>
+		<a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
+			@if( $event->counter>0)
+		<a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->counter }} hozzászolás</a>
+			@endif
+			@if($i!=$num-1)<hr>@endif
+		@endfor
 	</div>
 @endsection
