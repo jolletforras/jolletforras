@@ -23,15 +23,25 @@ class MessageController extends Controller
 
         $data['sender_id']=Auth::user()->id;
         $data['sender_name']=Auth::user()->name;
+        $data['sender_email']=Auth::user()->email;
         $data['sender_message']=$message;
+
+        $data['receiver_id']=$receiver_id;
         $data['name']=$receiver->name;
         $data['email']=$receiver->email;
 
-        Mail::send('profiles.email', $data, function($message) use ($data)
+        Mail::send('profiles.emails.receiver', $data, function($message) use ($data)
         {
             $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
             $message->subject($data['sender_name']." írt neked");
             $message->to($data['email']);
+        });
+
+        Mail::send('profiles.emails.sender', $data, function($message) use ($data)
+        {
+            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->subject($data['name']." üzenetet kapott tőled");
+            $message->to($data['sender_email']);
         });
 
         $response = array('status' => 'success');
