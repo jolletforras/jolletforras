@@ -6,12 +6,12 @@
 			<h2>{{ $forum->title }}</h2>
 		</div>
         <div class="panel-body">
-        	<p><b>{{ $forum->user->name }}, {{ $forum->updated_at }}</b></p>	
-			{!! $forum->body !!}
-			@include('forums.tags')
 			@if (Auth::user()->id==$forum->user->id)
-			<a href="{{url('forum')}}/{{$forum->id}}/{{$forum->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+				<a href="{{url('forum')}}/{{$forum->id}}/{{$forum->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 			@endif
+			{!! $forum->body !!}
+			@include('partials.tags',['url'=>'forum','obj'=>$forum])
+			@include('partials.author', ['author'=>'','obj'=>$forum])
 	    </div>
     </div>
 	@include('comments._show', [
