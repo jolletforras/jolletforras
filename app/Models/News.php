@@ -30,7 +30,7 @@ class News extends Model
     public function getUpdatedAtAttribute($date)
     {
         //return (new Carbon($date))->format('Y-m-d');
-        return Carbon::parse($date)->format('Y-m-d H:i');
+        return Carbon::parse($date)->format('Y-m-d');
     }
 
     public function getCreatedAtAttribute($date)

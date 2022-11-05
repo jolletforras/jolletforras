@@ -37,9 +37,8 @@
 	  <tr>
       	<td>
 			<h3><a href="{{ url('hir',$news->id) }}/{{$news->slug}}">{{ $news->title }}</a></h3>
-			<a href="{{ url('profil',$news->user->id) }}/{{$news->user->slug}}">{{ $news->user->name }}</a>,	{{ $news->created_at }}
 			@if (Auth::check() && (Auth::user()->id==$news->user->id || Auth::user()->admin))
-				<a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit">módosít</a>
+				<a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" class="btn btn-default">módosít</a>
 			@endif
 			<article>
 				<div class="body">{!!$news->body !!}</div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -24,5 +25,15 @@ class Article extends Model
     public function editor()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d');
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d');
     }
 }
