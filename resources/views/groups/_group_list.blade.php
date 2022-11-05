@@ -21,7 +21,7 @@
                     {!! nl2br($group->description) !!}
                 @endif
                 @if (Auth::check())
-                    @include('groups._tags')
+                    @include('partials.tags',['url'=>'csoport','obj'=>$group])
                 @endif
                 @if($i!=$num-1)<hr>@endif
             @endif
