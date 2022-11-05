@@ -37,7 +37,7 @@
 					@endif
 				</p>
 				{!! $forum->body !!}
-				@include('forums.tags')
+				@include('partials.tags',['url'=>'forum','obj'=>$forum])
 				<a href="{{ url('forum',$forum->id) }}/{{$forum->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
 				@if( $forum->counter>0)
 					&nbsp;&nbsp;<a href="{{ url('forum',$forum->id) }}/{{$forum->slug}}">{{ $forum->counter }} hozzászolás</a>
@@ -49,21 +49,5 @@
 @endsection
 
 @section('footer')
-	<script>
-		var tags = {
-		@foreach ($tags_slug as $id => $slug)
-		{{$id}}:"{{$slug}}",
-		@endforeach
-		};
-
-		$('#tag').select2({
-			placeholder: 'Keresés címke szerint',
-			tags: false
-		});
-
-		$("#tag").change(function () {
-			var id= $("#tag").val();
-			location.href="{{ url('forum')}}/cimke/"+id+"/"+tags[id];
-		});
-	</script>
+	@include('partials.search_tag_script',['url'=>'forum'])
 @endsection

@@ -82,24 +82,8 @@
 @endsection
 
 @section('footer')
+	@include('partials.search_tag_script',['url'=>'csoport'])
 	<script>
-		var tags = {
-			@foreach ($tags_slug as $id => $slug)
-				{{$id}}:"{{$slug}}",
-			@endforeach
-		};
-
-		$('#tag').select2({
-			placeholder: 'Keresés címke szerint',
-			tags: false
-		});
-
-		$("#tag").change(function () {
-			var id= $("#tag").val();
-
-			location.href="{{ url('csoport')}}/cimke/"+id+"/"+tags[id];
-		});
-
 		function CityFilter() {
 			select_city=document.getElementById("city");
 			var x = select_city.selectedIndex;
