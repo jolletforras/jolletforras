@@ -87,8 +87,7 @@ class EventsController extends Controller
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility'),
-            'group_id' => $request->get('group_id'),
-            'created_at' => date("Y-m-d H:i:s", strtotime('now'))
+            'group_id' => $request->get('group_id')
         ]);
 
         if($event->group_id==0) {
@@ -141,8 +140,7 @@ class EventsController extends Controller
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility'),
-            'group_id' => $request->get('group_id'),
-            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+            'group_id' => $request->get('group_id')
         ]);
 
         if($event->group_id==0) {
