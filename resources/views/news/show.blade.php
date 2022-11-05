@@ -7,9 +7,10 @@
 		</div>
         <div class="panel-body">
 			@if (Auth::check() && Auth::user()->id==$news->user->id)
-				<a href="{{url('iras')}}/{{$news->id}}/{{$news->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+				<a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 			@endif
 			{!! $news->body !!}
+			@include('partials.tags',['url'=>'hir','obj'=>$news])
 			@include('partials.author', ['author'=>'','obj'=>$news])
 	    </div>
     </div>
