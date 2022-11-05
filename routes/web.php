@@ -98,6 +98,8 @@ Route::get('/hir/uj', 'NewsController@create');
 Route::post('/hir/uj', 'NewsController@store');
 Route::get('/hir/{id}/{title}/modosit', 'NewsController@edit');
 Route::post('/hir/{id}/{title}/modosit', 'NewsController@update');
+Route::get('/hir/cimke/{id}/{tag}', 'TagsController@news_show');
+
 
 
 Route::get('/esemenyek', 'EventsController@index');

@@ -16,25 +16,11 @@
 			</div>
 		</div>
 	</div>
+    @include('errors.list')
 	<div class="panel panel-default">
         <div class="panel-body">
 			<form method="POST" action="{{url('hir')}}/uj" accept-charset="UTF-8">
-
-				@csrf
-
-				<div class="form-group">
-					<label for="title">Cím:</label>
-					<input class="form-control" required="required" name="title" type="text" value="" id="title">
-				</div>
-
-				<div class="form-group">
-					<textarea class="form-control" required="required" rows="20" name="body" cols="50"></textarea>
-				</div>
-
-				<div class="form-group">
-					<input class="btn btn-primary" type="submit" value="Mentés">
-				</div>
-
+                @include('news._form', ['submitButtonText'=>'Mentés'])
 			</form>
        </div>
 	</div>	

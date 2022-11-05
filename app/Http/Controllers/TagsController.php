@@ -15,7 +15,7 @@ class TagsController extends Controller
     public function forum_show($id) {
 		$tag = ForumTag::findOrFail($id);
 
-		$forums=$tag->forums()->latest('updated_at')->get();
+		$forums=$tag->forums()->latest('created_at')->get();
 
 		$tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
 
@@ -27,7 +27,7 @@ class TagsController extends Controller
     public function group_show($id) {
         $tag = GroupTag::findOrFail($id);
 
-        $groups=$tag->groups()->latest('updated_at')->get();
+        $groups=$tag->groups()->latest('created_at')->get();
 
         $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
 
@@ -39,16 +39,14 @@ class TagsController extends Controller
     }
 
     public function news_show($id) {
-        $tag = GroupTag::findOrFail($id);
+        $tag = NewsTag::findOrFail($id);
 
-        $groups=$tag->groups()->latest('updated_at')->get();
+        $newss=$tag->news()->latest('created_at')->get();
 
-        $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
+        $tags = [''=>''] + NewsTag::pluck('name', 'id')->all();
 
-        $city=NULL;
+         $tags_slug = NewsTag::pluck('slug', 'id')->all();
 
-        $tags_slug = GroupTag::pluck('slug', 'id')->all();
-
-        return view('groups.index', compact('groups', 'tags', 'tags_slug', 'city'));
+        return view('news.index', compact('newss', 'tags', 'tags_slug'));
     }
 }

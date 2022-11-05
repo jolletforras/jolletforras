@@ -27,6 +27,11 @@ class News extends Model
     	return $this->belongsTo(User::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(NewsTag::class)->withTimestamps();
+    }
+
     public function getUpdatedAtAttribute($date)
     {
         //return (new Carbon($date))->format('Y-m-d');
