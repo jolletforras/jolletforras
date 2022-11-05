@@ -93,10 +93,11 @@ Route::post('/iras/{id}/{title}/modosit', 'ArticlesController@update');
 
 
 Route::get('/hirek', 'NewsController@index');
+Route::get('/hir/{id}/{title}', 'NewsController@show');
 Route::get('/hir/uj', 'NewsController@create');
 Route::post('/hir/uj', 'NewsController@store');
-Route::get('/hir/{id}/modosit', 'NewsController@edit');
-Route::post('/hir/{id}/modosit', 'NewsController@update');
+Route::get('/hir/{id}/{title}/modosit', 'NewsController@edit');
+Route::post('/hir/{id}/{title}/modosit', 'NewsController@update');
 
 
 Route::get('/esemenyek', 'EventsController@index');

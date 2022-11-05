@@ -6,8 +6,13 @@
 	<h2>Írás szerkesztése</h2>
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form method="POST" action="{{url('hir')}}/{{$news->id}}/modosit" accept-charset="UTF-8">
+			<form method="POST" action="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" accept-charset="UTF-8">
 				@csrf
+
+				<div class="form-group">
+					<label for="title">Cím:</label>
+					<input class="form-control" required="required" name="title" type="text" value="{{$news->title}}" id="title">
+				</div>
 
 				<div class="form-group">
 					<textarea class="form-control" required="required" rows="20" name="body" cols="50">{{$news->body}}</textarea>

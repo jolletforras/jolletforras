@@ -33,15 +33,16 @@
 	</div>
     <table class="table">
     <tbody>
-	@foreach ($news as $nws)
+	@foreach ($newss as $news)
 	  <tr>
       	<td>
-			<a href="{{ url('profil',$nws->user->id) }}/{{$nws->user->slug}}">{{ $nws->user->name }}</a>,	{{ $nws->updated_at }}
-			@if (Auth::check() && (Auth::user()->id==$nws->user->id || Auth::user()->admin))
-				<a href="{{url('hir')}}/{{$nws->id}}/modosit">módosít</a>
+			<h3><a href="{{ url('hir',$news->id) }}/{{$news->slug}}">{{ $news->title }}</a></h3>
+			<a href="{{ url('profil',$news->user->id) }}/{{$news->user->slug}}">{{ $news->user->name }}</a>,	{{ $news->created_at }}
+			@if (Auth::check() && (Auth::user()->id==$news->user->id || Auth::user()->admin))
+				<a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit">módosít</a>
 			@endif
 			<article>
-				<div class="body">{!!$nws->body !!}</div>
+				<div class="body">{!!$news->body !!}</div>
 			</article>
 		</td>
       </tr>

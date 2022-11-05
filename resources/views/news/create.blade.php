@@ -23,6 +23,11 @@
 				@csrf
 
 				<div class="form-group">
+					<label for="title">Cím:</label>
+					<input class="form-control" required="required" name="title" type="text" value="" id="title">
+				</div>
+
+				<div class="form-group">
 					<textarea class="form-control" required="required" rows="20" name="body" cols="50"></textarea>
 				</div>
 
