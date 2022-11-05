@@ -8,19 +8,33 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
 	public function __construct() {
-		$this->middleware('auth', ['except'=>['index']]);
+		$this->middleware('auth', ['except'=>['index','show']]);
 	}
 
 	public function index(Request $request)
 	{
-		$news = News::latest()->get();
+		$newss = News::latest()->get();
 
-		return view('news.index', compact('news'));
+		return view('news.index', compact('newss'));
 	}
+
+    /**
+     * Displays a specific article
+     *
+     * @param  integer $id The article ID
+     * @return Response
+     */
+    public function show($id)
+    {
+        $news = News::findOrFail($id);
+
+        return view('news.show', compact('news'));
+    }
 	
 	
 	public function create(Request $request) 
@@ -30,7 +44,13 @@ class NewsController extends Controller
 	
 	public function store(Request $request)
 	{
-		Auth::user()->news()->create($request->all());
+		//Auth::user()->news()->create($request->all());
+
+        $news = Auth::user()->news()->create([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'slug' => Str::slug($request->get('title'))
+        ]);
 
 		return redirect('hirek');
 	}
@@ -60,9 +80,15 @@ class NewsController extends Controller
 	 */
 	public function update($id, Request $request)
 	{
-        $nws = News::findOrFail($id);
+        $news = News::findOrFail($id);
 
-        $nws->update($request->all());
+        //$nws->update($request->all());
+
+        $news->update([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'slug' => Str::slug($request->get('title'))
+        ]);
 
 		return redirect('hirek');
 	}
