@@ -61,7 +61,7 @@ Route::get('meghivo/aktival/{code}', 'InviteController@activate');
 
 
 Route::get('/csoportok', 'GroupsController@index');
-Route::get('/csoport/cimke/{id}/{tag}', 'GroupTagsController@show');
+Route::get('/csoport/cimke/{id}/{tag}', 'TagsController@group_show');
 Route::post('/group/filter', 'GroupsController@filter');
 Route::get('/csoport/{id}/{name}', 'GroupsController@show');
 Route::get('/csoport/uj', 'GroupsController@create');
@@ -123,7 +123,7 @@ Route::get('/forum/uj', 'ForumsController@create');
 Route::post('forum/uj', 'ForumsController@store');
 Route::get('/forum/{id}/{title}/modosit', 'ForumsController@edit');
 Route::post('/forum/{id}/{title}/modosit', 'ForumsController@update');
-Route::get('/forum/cimke/{id}/{tag}', 'ForumTagsController@show');
+Route::get('/forum/cimke/{id}/{tag}', 'TagsController@forum_show');
 
 Route::post('/comment', 'CommentsController@comment');
 Route::post('/comment_delete', 'CommentsController@comment_delete');
