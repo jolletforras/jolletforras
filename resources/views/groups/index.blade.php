@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Csoportok a Társadalmi Jóllét Portálon. Nyilvánosan elérhető bemutatkozások. Csatlakozz csoporthoz vagy hozd létre itt közösséged online csoportját! Várunk!')
+@section('url', 'https://tarsadalmijollet.hu/csoportok')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/csoportok" />
+@endsection
 
 @section('content')
 	<div class="row">

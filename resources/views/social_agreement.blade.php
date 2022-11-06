@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Közösségi megállapodás a Társadalmi Jóllét Portálhoz csatlakozók számára. Úgy vagyunk itt, amilyen társadalmat szeretnénk életre hívni.Téged is hívunk, várunk!')
+@section('url', 'https://tarsadalmijollet.hu/kozossegimegallapodas')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/kozossegimegallapodas" />
+@endsection
 
 @section('content')
    		<div class="inner_box">

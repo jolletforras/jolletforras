@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.')
+@section('url', 'https://tarsadalmijollet.hu/')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/" />
+@endsection
 
 @section('content')
         <h2><img src="images/tarsadalmijollet.jpg" alt="Társadalmi Jóllét" width="100%"></h2>

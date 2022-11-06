@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('robots')<meta name="robots" content="noindex,nofollow"/>
+@stop
 
 @section('content')
 <div class="container">
@@ -65,14 +67,16 @@
 </div>
 @endsection
 
-<script type="text/javascript">
-    function change(){
-        $('.toggle-password').toggleClass("fa-eye fa-eye-slash");
-        var input = $($('.toggle-password').attr("toggle"));
-        if (input.attr("type") == "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
+@section('footer')
+    <script>
+        function change(){
+            $('.toggle-password').toggleClass("fa-eye fa-eye-slash");
+            var input = $($('.toggle-password').attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
         }
-    }
-</script>
+    </script>
+@endsection

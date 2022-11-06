@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Társak a Társadalmi Jóllét Portálon. Nyilvános bemutatkozások. A további bemutatkozásokat belépés vagy regisztráció után éred el. Csatlakozz hozzánk, várunk!')
+@section('url', 'https://tarsadalmijollet.hu/tarsak')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/tarsak" />
+@endsection
 
 @section('content')
 

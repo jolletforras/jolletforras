@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Események a Társadalmi Jóllét Portálon. Programok, fórumok, lehetőségek, amelyek a társadalmi jóllét megvalósítását segítik. Nézz szét, regisztrálj, kapcsolódj!')
+@section('url', 'https://tarsadalmijollet.hu/esemenyek')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/esemenyek" />
+@endsection
 
 @section('content')
 	<div class="row">

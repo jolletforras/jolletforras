@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Hírek a Társadalmi Jóllét Portálon. Építő közösségek híreit, információit olvashatod. Csatlakozz hozzánk és adj hírt Te is a saját közösségedről! Várunk!')
+@section('url', 'https://tarsadalmijollet.hu/hirek')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/hirek" />
+@endsection
 
 @section('content')
 	<div class="panel panel-default">
