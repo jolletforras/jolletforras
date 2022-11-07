@@ -11,7 +11,7 @@
 
 	<meta property="og:locale" content="hu_HU" />
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="Társadalmi Jóllét Portál">
+	<meta property="og:title" content="@yield('title','Társadalmi Jóllét Portál')">
 	<meta property="og:description" content="@yield('description','A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
 	<meta property="og:url" content="@yield('url','https://tarsadalmijollet.hu/')">
 	<meta property="og:site_name" content="Társadalmi Jóllét Portál">
