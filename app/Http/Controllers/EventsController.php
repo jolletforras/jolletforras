@@ -84,6 +84,7 @@ class EventsController extends Controller
 
         $event = Auth::user()->events()->create([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility'),
@@ -137,6 +138,7 @@ class EventsController extends Controller
 
         $event->update([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility'),
