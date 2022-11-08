@@ -259,6 +259,11 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($id);
 
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isMember()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }
+
         $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->latest('updated_at')->get();
 
         $tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
@@ -274,6 +279,11 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($id);
 
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isMember()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }
+
         $events = Event::latest()->where('group_id', $group->id)->get();
 
         $page = 'event';
@@ -285,6 +295,11 @@ class GroupsController extends Controller
     public function theme($group_id,$group_slug,$forum_id,$forum_slug)
     {
         $group = Group::findOrFail($group_id);
+
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isMember()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }
 
         $forum = Forum::findOrFail($forum_id);
 
