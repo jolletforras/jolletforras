@@ -83,7 +83,7 @@ class GroupsController extends Controller
             $admins = $group->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
             $noadmins = $group->noadmins()->orderBy('name', 'ASC')->pluck('name', 'user_id');
 
-            $nogroupmembers = User::members()->whereNotIn('id', $group->member_list)->orderBy('name', 'ASC')->pluck('name', 'id');
+            $nogroupmembers = $group->no_group_members_list;
 
             return view('groups.show', compact('group', 'page', 'members', 'nogroupmembers', 'admins', 'noadmins', 'is_member', 'is_admin'));
         }
