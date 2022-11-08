@@ -84,6 +84,11 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
+    public function newsletters()
+    {
+        return $this->hasMany(Newsletter::class);
+    }
+
     public function news()
     {
         return $this->hasMany(News::class);

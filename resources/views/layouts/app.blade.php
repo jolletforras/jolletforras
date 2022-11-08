@@ -72,6 +72,7 @@
 								<ul>
 									<li><a href="{{ url('kozossegimegallapodas') }}">Közösségi megállapodás</a></li>
 									<li><a href="{{ url('tudnivalok') }}">Tudnivalók</a></li>
+									<li><a href="{{ url('hirlevelek') }}">Hírlevelek</a></li>
 								</ul>
 							</li>
 							<li class="width-narrow"><a href="{{ url('kozossegimegallapodas') }}">Közösségi megállapodás</a></li>

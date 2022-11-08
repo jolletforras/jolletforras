@@ -64,3 +64,11 @@ Route::get('/kezdemenyezes/{id}/{title}/modosit', ['as' => 'project.edit', 'uses
 Route::post('/kezdemenyezes/{id}/{title}/modosit', 'EventsController@update');
 Route::get('kezdemenyezes/{id}/{title}/torol', 'ProjectsController@delete');
 Route::get('/kezdemenyezes/ertes/{id}/{tag}', 'SkillsController@projects_show');
+
+
+Route::get('/hirlevelek', 'NewslettersController@index');
+Route::get('/hirlevel/{id}/{title}', 'NewslettersController@show');
+Route::get('/hirlevel/uj', 'NewslettersController@create');
+Route::post('/hirlevel/uj', 'NewslettersController@store');
+Route::get('/hirlevel/{id}/{title}/modosit', 'NewslettersController@edit');
+Route::post('/hirlevel/{id}/{title}/modosit', 'NewslettersController@update');
