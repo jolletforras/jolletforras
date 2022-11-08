@@ -19,7 +19,7 @@
 			</form>
 
 		</div>
-	<div>
+	</div>
 @stop
 
 @section('footer')

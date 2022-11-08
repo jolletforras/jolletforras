@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -64,10 +66,67 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+       /* return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+       */
+        $data['activation_code']  = Str::random(10);
+
+        $data['slug']=Str::slug($data['name']);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'activation_code' => $data['activation_code'],
+            'slug'	=> $data['slug']
+        ]);
+
+        $data['id']= $user->id;
+
+        //send verification mail to user
+        //--------------------------------------------------------------------------------------------------------------
+        Mail::send('auth.emails.welcome', $data, function($message) use ($data)
+        {
+            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->subject("email cím megerősítése");
+            $message->to($data['email']);
+        });
+
+        return $user;
+    }
+
+    /**
+     * Activate a new user .
+     *
+     * @param  integer $id, string  $code
+     * @return Response
+     */
+    public function activate($id, $name, $code)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->activation_code==$code) {
+
+            if($user->incompleteProfile()) {
+                $user->status=1;
+            }
+            else {
+                $user->status = 3;
+            }
+            $user->save();
+
+            $message="Sikeresen megerősítetted az email címed! Most már be tudsz jelentkezni.";
+            return redirect('login')->with('message', $message);
+        }
+        else {
+            $message="Az email cím megerősítése nem sikerült!";
+        }
+
+        return redirect('login')->with('message', $message);
+
+        //return view('auth.activated', compact('$message'));
     }
 }

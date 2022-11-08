@@ -246,7 +246,7 @@ h3 {
 
 .inner_box {
 	border-radius: 5px;
-	border: 1px solid #c0c0c0;	
+	border: 1px solid #e7e7e7;
 	padding: 10px;
 	//color: #454545;
 	//background : #f3f3f3;
@@ -437,10 +437,6 @@ h3 {
 		margin-left: 0%;
 		margin-right: 0%;
 		width: 100%;
-	}
-
-	.main {
-		padding: 10px 0px;
 	}
 
 	.inner_box {

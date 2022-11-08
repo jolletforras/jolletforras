@@ -2,7 +2,6 @@
 
     function save(){
         var comment = $("#comment").val();
-        //alert(comment);
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         //console.log(response);
         $.ajax({

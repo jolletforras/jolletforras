@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Kapcsolat, elérhetőség a Társadalmi Jóllét Portál működtetőihez. A közösségi fejlesztésről szóló információkat találod itt. Kérdezz tőlünk, csatlakozz hozzánk!')
+@section('url', 'https://tarsadalmijollet.hu/kapcsolat')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/kapcsolat" />
+@endsection
 
 @section('content')
    		<div class="inner_box">

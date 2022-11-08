@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
 {
@@ -46,8 +47,8 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
-        $comments = Comment::where('commentable_type', 'App\Project')->where('commentable_id', $id)->get();
-	
+        $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
+
 		return view('projects.show', compact('project','comments'));
 	}
 	
@@ -71,13 +72,14 @@ class ProjectsController extends Controller
 	 */
 	public function store(ProjectRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
+	    $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
 
 		$project = Auth::user()->projects()->create([
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
-				'slug' => slugify($request->get('title'))
+				'slug' => Str::slug($request->get('title')),
+                'counter' => 0
 		]);
 
 		$project->members()->attach($request->input('member_list'));
@@ -102,10 +104,12 @@ class ProjectsController extends Controller
 		}
 
 		$members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
+        $selected_members = $project->members->pluck('id')->toArray();
 
 		$tags = ProjectSkill::get()->pluck('name', 'id');
+        $selected_tags = $project->tags->pluck('id')->toArray();
 
-		return view('projects.edit', compact('project', 'members', 'tags'));
+		return view('projects.edit', compact('project', 'members', 'selected_members', 'tags', 'selected_tags'));
 	}
 	
 	/**
@@ -116,7 +120,7 @@ class ProjectsController extends Controller
 	 */
 	public function update($id, ProjectRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\ProjectSkill');
+		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
 		
 		$project = Project::findOrFail($id);
 
@@ -124,7 +128,7 @@ class ProjectsController extends Controller
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
-				'slug' => slugify($request->get('title'))
+				'slug' => Str::slug($request->get('title'))
 		]);
 
 		$project->members()->sync($request->input('member_list'));
@@ -150,6 +154,6 @@ class ProjectsController extends Controller
 
 		$project->delete();
 
-		return redirect('projektek')->with('message', 'A kezdeményezést sikeresen törölted!');
+		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen törölted!');
 	}
 }

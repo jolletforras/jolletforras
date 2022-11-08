@@ -6,9 +6,9 @@
 			<h2>Kezdeményezések</h2>
 		</div>
 		<div class="col-sm-3" style="padding-top:4px;">
-			<select id="tag" name="tags" class="form-control" multiple>
+			<select id="tag" name="tag" class="form-control">
 				@foreach($tags as $key => $val)
-					<option value="{{ $key }}"  @if(isset($project) && $key == $project->tags) selected @endif>{{ $val }}</option>
+					<option value="{{ $key }}">{{ $val }}</option>
 				@endforeach
 			</select>
 		</div>

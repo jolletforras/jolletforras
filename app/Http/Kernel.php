@@ -37,6 +37,10 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\RedirectIfIncompleteProfile::class,
+            \App\Http\Middleware\RedirectIfNotActivated::class,
+            \App\Http\Middleware\RedirectIfNotApproved::class,
+            \App\Http\Middleware\RedirectIfDeactivated::class,
         ],
 
         'api' => [

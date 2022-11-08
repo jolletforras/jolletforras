@@ -16,28 +16,10 @@
 			@endif
 	    </div>
     </div>
-	<div class="form-group">
-		@if(!$comments->isEmpty())<b>Hozzászólások:</b><br/>@endif
-		<hr>
-		<div class="comments">
-			@foreach ($comments as $comment)
-				<b>{{ $comment->commenter->name }}</b>, <b>{{ $comment->updated_at }}</b> <br/>
-				{{ $comment->body }}<br/>
-				<hr>
-			@endforeach
-		</div>
-	</div>
-	<div class="form-group">
-		<textarea class="form-control" rows="4" name="comment" placeholder="Ide írva szólhatsz hozzá"></textarea>
-	</div>
-	<div class="form-group">
-		<button type="button" onclick="save()">Mentés</button>
-	</div>
-	@include('partials.comment_script', [
-        'commentable_type'	=>'Project',
-        'commentable_url'	=>'kezdemenyezes/'.$project->id.'/'.$project->slug,
-        'commentable_id'	=>$project->id,
-        'name'				=>$project->user->name,
-        'email'				=>$project->user->email
-    ] )
+	@include('comments._show', [
+	'comments' => $comments,
+	'commentable_type'	=>'Project',
+	'commentable_url'	=>'kezdemenyezes/'.$project->id.'/'.$project->slug,
+	'commentable'		=>$project
+	] )
 @endsection

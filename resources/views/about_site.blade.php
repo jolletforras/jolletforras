@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Tudnivalók a Társadalmi Jóllét Portál működésével kapcsolatban, az átláthatóság és fenntarthatóság jegyében. Olvasd el és ha tetszik, csatlakozz hozzánk!')
+@section('url', 'https://tarsadalmijollet.hu/tudnivalok')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/tudnivalok" />
+@endsection
 
 @section('content')
 	<div class="inner_box" style="font-size: 18px">

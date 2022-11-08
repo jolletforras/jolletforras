@@ -46,12 +46,12 @@ class User extends Authenticatable
     //A user can start many panel discussions (forums).
     public function forums()
     {
-        return $this->hasMany('App\Forum');
+        return $this->hasMany(Forum::class);
     }
 
     public function ideas()
     {
-        return $this->hasMany('App\Idea');
+        return $this->hasMany(Idea::class);
     }
 
     public function projects()
@@ -59,19 +59,26 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    //ezeket hozta létre
     public function groups()
     {
         return $this->hasMany(Group::class);
     }
 
+    //ezen csoportok tagjai
+    public function member_of_groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
     public function tags()
     {
-        return $this->belongsToMany('App\UserSkill')->withTimestamps();
+        return $this->belongsToMany(UserSkill::class)->withTimestamps();
     }
 
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function events()

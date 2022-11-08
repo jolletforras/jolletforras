@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	@yield('robots','')
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Ludescher Ottó" />
-	<meta name="description" content="A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.">
+	<meta name="description" content="@yield('description','A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
+	@yield('canonical','')
 
+	<meta property="og:locale" content="hu_HU" />
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="Társadalmi Jóllét Portál">
-	<meta property="og:description" content="A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.">
-	<meta property="og:url" content="https://tarsadalmijollet.hu/">
+	<meta property="og:title" content="@yield('title','Társadalmi Jóllét Portál')">
+	<meta property="og:description" content="@yield('description','A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
+	<meta property="og:url" content="@yield('url','https://tarsadalmijollet.hu/')">
 	<meta property="og:site_name" content="Társadalmi Jóllét Portál">
 
     <link rel="shortcut icon" href="{{ url('/') }}/favicon.png">
@@ -24,7 +27,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
- 	<link href="{{ url('/') }}/css/app.css?ver=1.20" rel="stylesheet">
+ 	<link href="{{ url('/') }}/css/app.css?ver=1.21" rel="stylesheet">
 	@stack('styles')
 
 	<!-- Google tag (gtag.js) -->

@@ -9,15 +9,10 @@ use Auth;
 class Event extends Model
 {
     protected $fillable = [
-        'title','body','type','slug','visibility','group_id','created_at','updated_at'
+        'title','meta_description','body','type','slug','visibility','group_id','created_at','updated_at'
     ];
 
     public function user()
-    {
-        return $this->belongsTo(User::class)->members();
-    }
-
-    public function editor()
     {
         return $this->belongsTo(User::class);
     }
@@ -27,6 +22,11 @@ class Event extends Model
         return $this->belongsTo(Group::class);
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     public function getCreatedAtAttribute($date)
     {
         return Carbon::parse($date)->format('Y-m-d');
@@ -34,10 +34,14 @@ class Event extends Model
 
     public function getUpdatedAtAttribute($date)
     {
-        return Carbon::parse($date)->format('Y-m-d H:i');
+        return Carbon::parse($date)->format('Y-m-d');
     }
 
     public function isEditor() {
         return Auth::check() && $this->user_id == Auth::user()->id;
+    }
+
+    public function isGroupEvent() {
+        return $this->group_id != 0;
     }
 }

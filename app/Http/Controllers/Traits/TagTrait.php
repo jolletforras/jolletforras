@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Traits;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 trait TagTrait {
 
@@ -17,7 +18,7 @@ trait TagTrait {
 				$tag = $tag_class::create([
 						'name' =>$tag_list[$i],
 						'user_id' => Auth::user()->id,
-						'slug' => slugify($tag_list[$i])
+						'slug' => Str::slug($tag_list[$i])
 				]);
 				//echo $tag_list[$i];
 				$tag_list[$i]=(string)$tag->id;

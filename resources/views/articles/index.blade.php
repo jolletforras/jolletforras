@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Írások a Társadalmi Jóllét Portálon. Milyen legyen az új világunk? Olvasd el a Portál tagjainak írásait, csatlakozz hozzánk és írj Te is saját cikket! Várunk!')
+@section('url', 'https://tarsadalmijollet.hu/irasok')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/irasok" />
+@endsection
 
 @section('content')
 	<div class="row">
@@ -30,9 +34,8 @@
 	  <tr>
       	<td>
 			<h3><a href="{{ url('iras',$article->id) }}/{{$article->slug}}">{{ $article->title }}</a></h3>
-			<a href="{{ url('profil',$article->user->id) }}/{{$article->user->slug}}">{{ $article->user->name }}</a>,	{{ $article->updated_at }}
 			@if (Auth::check() && Auth::user()->id==$article->user->id)
-				<a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit">módosít</a>
+				<a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" class="btn btn-default">módosít</a>
 			@endif
 			<article>
 				<div class="body">{!! $article->body !!}</div>

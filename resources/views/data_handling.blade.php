@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('description', 'Adatkezelés. Így kezeljük a Társadalmi Jóllét Portálra regisztrált társak és közösségek adatait, hogy biztonságos és fenntartható teret nyújthassunk számukra.')
+@section('url', 'https://tarsadalmijollet.hu/adatkezeles')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/adatkezeles" />
 
 @section('content')
    		<div class="inner_box" style="font-size: 18px">
