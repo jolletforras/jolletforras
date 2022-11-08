@@ -82,6 +82,11 @@ class Group extends Model
         return $this->tags->pluck('id')->all();
     }
 
+    public function getNoGroupMembersListAttribute()
+    {
+        return User::members()->whereNotIn('id', $this->member_list)->orderBy('name', 'ASC')->pluck('name', 'id');
+    }
+
     public function isMember() {
         return $this->members->contains('id', Auth::user()->id);
     }
