@@ -83,7 +83,6 @@ Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupsController@themecr
 Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
 Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
 
-
 Route::get('/irasok', 'ArticlesController@index');
 Route::get('/iras/{id}/{title}', 'ArticlesController@show');
 Route::get('/iras/uj', 'ArticlesController@create');
@@ -108,7 +107,7 @@ Route::get('/esemeny/uj', 'EventsController@create');
 Route::post('esemeny/uj', 'EventsController@store');
 Route::get('/esemeny/{id}/{title}/modosit', 'EventsController@edit');
 Route::post('/esemeny/{id}/{title}/modosit', 'EventsController@update');
-
+Route::post('/esemeny/{id}/invite', 'EventsController@invite');
 
 Route::get('/kezdemenyezesek', 'ProjectsController@index');
 Route::get('/kezdemenyezes/{id}/{title}', 'ProjectsController@show');

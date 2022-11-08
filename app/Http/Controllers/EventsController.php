@@ -8,8 +8,10 @@ use App\Http\Requests;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Mail;
 
 class EventsController extends Controller
 {
@@ -159,4 +161,53 @@ class EventsController extends Controller
             return redirect('csoport/'.$event->group_id.'/'.$group->slug.'/esemenyek')->with('message', 'A csoport eseményt sikeresen módosítottad!');
         }
 	}
+
+    /**
+     * Invite a no group member to a group public event
+     *
+     * @return Response
+     */
+    public function invite($id, Request $request)
+    {
+
+        $user_id = $request->input('invited_user');
+
+        $response = array(
+            'status' => 'success',
+            'msg' => $user_id
+        );
+
+        if($user_id!=0) {
+            $event = Event::findOrFail($id);
+
+            $group = $event->group;
+
+            $invitantUser=Auth::user();
+
+            $invitedUser = User::findOrFail($user_id);
+
+            $data['invitant_id']=$invitantUser->id;
+            $data['invitant_name']=$invitantUser->name;
+
+            $data['event_id']=$event->id;
+            $data['event_name']=$event->title;
+            $data['event_slug']=$event->slug;
+
+            $data['group_id']=$group->id;
+            $data['group_name']=$group->name;
+            $data['group_slug']=$group->slug;
+            $data['invited_name']=$invitedUser->name;
+            $data['email']=$invitedUser->email;
+
+            Mail::send('events.invite_email', $data, function($message) use ($data)
+            {
+                $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+                $message->subject("Meghívás a(z) ".$data['group_name']." - ".$data['event_name']." eseményre");
+                $message->to($data['email']);
+            });
+
+        }
+
+        return \Response::json($response);
+    }
 }
