@@ -40,4 +40,8 @@ class Event extends Model
     public function isEditor() {
         return Auth::check() && $this->user_id == Auth::user()->id;
     }
+
+    public function isGroupEvent() {
+        return $this->group_id != 0;
+    }
 }
