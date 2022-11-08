@@ -45,13 +45,18 @@ class EventsController extends Controller
             return redirect('/');
         }
 
-        if($event->group_id==0) {
-            $has_access = $event->isEditor();
-        }
-        else {
+        if($event->isGroupEvent()) {
             $group = Group::findOrFail($event->group_id);
 
+            //ha a láthatóság "csoport" és nem csoport tag akkor a csoport főoldalára irányít
+            if($event->visibility == 'group' && !$group->isMember()) {
+                return  redirect('csoport/'.$group->id.'/'.$group->slug);
+            }
+
             $has_access = $group->isAdmin();
+        }
+        else {
+            $has_access = $event->isEditor();
         }
 
         $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->get();
