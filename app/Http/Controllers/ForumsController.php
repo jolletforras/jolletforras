@@ -18,6 +18,7 @@ use DB;
 use Mail;
 use Illuminate\Support\Str;
 
+
 class ForumsController extends Controller
 {
 	use TagTrait;
@@ -98,9 +99,13 @@ class ForumsController extends Controller
         else {
             $group = Group::findOrFail($forum->group_id);
 
-            //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id és a new = 1 lesz.
+            //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id és a comment_id = 0 lesz.
             $member_list = $this->getGroupMemberListWithGroupThemeNotice($group);
-            $forum->members()->attach($member_list, ['new'=>1]);
+            foreach($member_list as $user_id) {
+                if($user_id!=Auth::user()->id) {
+                    DB::table('notices')->insert(['notifiable_id' => $forum->id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0]);
+                }
+            }
 
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen felvetted!');
         }

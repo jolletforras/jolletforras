@@ -18,8 +18,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         //$schedule->command('send-email-new-group-theme')->cron('* * * * *');
-        //$schedule->command('send-email-new-group-theme')->everyMinute()->withoutOverlapping();
-        $schedule->command('send-email-new-group-theme')->everyFiveMinutes()->withoutOverlapping();
+        //$schedule->command('send-notice-emails')->everyMinute()->withoutOverlapping();
+        $schedule->command('send-notice-emails')->everyFiveMinutes()->withoutOverlapping();
     }
 
     /**

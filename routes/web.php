@@ -69,6 +69,8 @@ Route::post('/csoport/uj', 'GroupsController@store');
 Route::get('/csoport/{id}/{name}/modosit', 'GroupsController@edit');
 Route::post('/csoport/{id}/{name}/modosit', 'GroupsController@update');
 
+//Route::get('/cron_teszt', 'GroupsController@cron_test');
+
 
 Route::post('/csoport/{id}/{name}/csatlakozas', 'GroupsController@join');
 Route::get('/csoport/{id}/{name}/kilepes', 'GroupsController@leave');

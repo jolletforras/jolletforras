@@ -68,18 +68,20 @@ class CommentsController extends Controller
             }
 
             if($c_type=="GroupTheme") {
+                //adott forum_id-nál minden usernek beállítódik a legutolsó comment_id
+                DB::table('notices')->where('notifiable_id',$commentable_id)->where('type','Forum')->update(['comment_id'=>$c->id]);
 
-                //amennyiben kért értesítést arra az esetre ha hozzászólnak általam hozzászólt témához
+                //adott forum_id-nál minden  email_sent=0, csak nekem nem, mert én vettem fel a hozzászólást
+                DB::table('notices')->where('notifiable_id',$commentable_id)->where('user_id','<>',Auth::user()->id)->where('type','Forum')->update(['email_sent' => 0]);
+
+                //amennyiben kérek értesítést arra az esetre ha hozzászólnak általam hozzászólt témához (most még nem kapok)
                 if($commenter->theme_comment_notice) {
-                    $notice = DB::table('notices')->where('notifiable_id',$commentable_id)->where('user_id',$commenter->id)->where('type','forum')->first();
+                    $notice = DB::table('notices')->where('notifiable_id',$commentable_id)->where('user_id',$commenter->id)->where('type','Forum')->first();
                     //ha nincs fenn, akkor felveszi, de én levelet most nem kapok
-                    if($notice->isEmpty()) {
-                        DB::table('notices')->insert(['notifiable_id' => $commentable_id,'user_id' => $commenter->id,'type' => 'forum','email_sent' => 1]);
+                    if(is_null($notice)) {
+                        DB::table('notices')->insert(['notifiable_id' => $commentable_id,'user_id' => $commenter->id,'type' => 'Forum','comment_id'=>$c->id,'email_sent' => 1]);
                     }
                 }
-
-                //adott forum_id-nál minden  email_sent=0 lesz és beállítódik a legutolsó comment_id
-                DB::table('notices')->where('notifiable_id',$commentable_id)->where('type','forum')->update(['comment_id'=>$c->id,'email_sent' => 0]);
             }
 
             //dd($request->all());
@@ -105,20 +107,20 @@ class CommentsController extends Controller
         $user_id = Auth::user()->id;
         $ask_notice = $request->get('ask_notice');
 
-        $notice = DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',$user_id)->where('type', 'forum')->first();
+        $notice = DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',$user_id)->where('type', 'Forum')->first();
 
 
         //ha értesítést kér adott témánál
         if($ask_notice==1) {
             if($notice) {               //fel van e véve a kommentelő a forum_id-val a  notices-ban
-                DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',$user_id)->where('type', 'forum')->update(['ask_notice' => $ask_notice]);
+                DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',$user_id)->where('type', 'Forum')->update(['ask_notice' => $ask_notice]);
             }
             else {                      //ha nincs fenn, akkor felveszi
-                DB::table('notices')->insert(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'forum','email_sent' =>1,'ask_notice' => $ask_notice]);
+                DB::table('notices')->insert(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'forum','comment_id'=>-1,'email_sent' =>1,'ask_notice' => $ask_notice]);
             }
         }
         else { //ha nem kér, akkor törli az értesítés (akkor se kapok ha korábban hozzászóltam, csak ha újból és arra értesítést kérek)
-            DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',$user_id)->where('type', 'forum')->delete();
+            DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',$user_id)->where('type', 'Forum')->delete();
         }
 
         $response = array('status' => 'success');

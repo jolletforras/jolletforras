@@ -11,14 +11,14 @@ use App\Models\Forum;
 use App\Models\Group;
 use Illuminate\Support\Facades\DB;
 
-class SendEmailNewGroupTheme extends Command
+class SendNoticeEmails extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'send-email-new-group-theme';
+    protected $signature = 'send-notice-emails';
 
     /**
      * The console command description.
@@ -40,12 +40,14 @@ class SendEmailNewGroupTheme extends Command
         foreach ($notices as $notice) {
             if($nr>50) exit;
 
-            $forum = Forum::find($notice->forum_id);
+            $notifiable_class = "\\App\Models\\".$notice->type;
+
+            $notifiable = $notifiable_class::find($notice->notifiable_id);
             $user = User::find($notice->user_id);
-            $group = Group::find($forum->group_id);
+            $group = Group::find($notifiable->group_id);
 
             //ha valamelyikük nem található meg, akkor törli az értesítést
-            if(is_null($forum) || is_null($user) || is_null($group) ) {
+            if(is_null($notifiable) || is_null($user) || is_null($group) ) {
                 DB::table('notices')->delete($notice->id);
                 continue;
             }
@@ -53,19 +55,18 @@ class SendEmailNewGroupTheme extends Command
 
             $data['name'] = $user->name;
             $data['group_name'] = $group->name;
-            $data['theme_title'] = $forum->title;
-            $data['theme_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $forum->id . '/' . $forum->slug;
+            $data['theme_title'] = $notifiable->title;
+            $data['theme_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
             $data['email'] = $user->email;
             $data['user_id'] = $user->id;
-            $data['theme'] = $forum->body;
+            $data['theme'] = $notifiable->body;
 
             //ezt már nem küldi ki újból
-            DB::table('notices')->where('forum_id',$notice->forum_id)->where('user_id',$notice->user_id)->where('type', 'forum')->update(['email_sent' => 1]);
+            DB::table('notices')->where('notifiable_id',$notice->notifiable_id)->where('user_id',$notice->user_id)->where('type', 'Forum')->update(['email_sent' => 1]);
 
             if($notice->comment_id==0) {     //új téma
-                $data['author_name'] = $forum->user->name;
+                $data['author_name'] = $notifiable->user->name;
                 $email_template = 'groupthemes.new_theme_email';
-                DB::table('notices')->delete($notice->id);
                 $data['subject'] = "Új téma a(z) '". $group->name."' csoportodban";
             }
             else {                           //hozzászólás értesítés
@@ -76,7 +77,7 @@ class SendEmailNewGroupTheme extends Command
                 }
                 $data['author_name'] = $comment->commenter->name;
                 $data['comment'] = $comment->body;
-                $data['subject'] = "Új hozzászólás a(z) '".$forum->title."' beszélgetésben";
+                $data['subject'] = "Új hozzászólás a(z) '".$notifiable->title."' beszélgetésben";
                 $email_template = 'groupthemes.new_comment_email';
             }
 
