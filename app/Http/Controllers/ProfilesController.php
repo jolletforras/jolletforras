@@ -446,8 +446,9 @@ class ProfilesController extends Controller
                 $user->group_theme_notice=$group_theme_notice;
                 $user->save();
 
+                //ha comment_id==0, akkor az új téma értesítést
                 if ($group_theme_notice==0) {
-                    DB::table('forum_user')->where('user_id', $user->id)->where('new', 1)->delete();
+                    DB::table('notices')->where('user_id', $user->id)->where('type', 'forum')->where('comment_id', 0)->delete();
                 }
             }
 
@@ -462,8 +463,9 @@ class ProfilesController extends Controller
                 $user->theme_comment_notice=$theme_comment_notice;
                 $user->save();
 
+                //az ask_notice==0 azt jelenti, hogy saját hozzászólásom utáni értesítés kérés
                 if ($theme_comment_notice==0) {
-                    DB::table('forum_user')->where('user_id', $user->id)->where('new', 0)->where('ask_notice', 0)->delete(); //ahol külön kérnek értesítést hozzászólásra, ott nem törli
+                    DB::table('notices')->where('user_id', $user->id)->where('type', 'forum')->where('comment_id','<>',0)->where('ask_notice', 0)->delete(); //ahol külön kérnek értesítést hozzászólásra, ott nem törli
                 }
             }
 

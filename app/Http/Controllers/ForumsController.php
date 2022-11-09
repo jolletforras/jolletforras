@@ -98,7 +98,7 @@ class ForumsController extends Controller
         else {
             $group = Group::findOrFail($forum->group_id);
 
-            //Téma felvételkor forum_user táblában a forum_id-val felvevődik az összes user_id és a new = 1 lesz.
+            //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id és a new = 1 lesz.
             $member_list = $this->getGroupMemberListWithGroupThemeNotice($group);
             $forum->members()->attach($member_list, ['new'=>1]);
 

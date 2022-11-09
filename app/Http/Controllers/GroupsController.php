@@ -305,8 +305,8 @@ class GroupsController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $forum_id)->get();
 
-        //new=0 hozzászolás értesítés
-        $notice = DB::table('forum_user')->where('forum_id',$forum_id)->where('user_id',Auth::user()->id)->where('new',0)->where('ask_notice',1)->first();
+        //nézi, hogy kértem-e értesítést ennél a témánál, ha ige, kipipálja
+        $notice = DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',Auth::user()->id)->where('type', 'forum')->where('ask_notice',1)->first();
         $askNotice = empty($notice) ? 0 : 1;
 
         return view('groupthemes.show', compact('group','forum','comments','askNotice'));

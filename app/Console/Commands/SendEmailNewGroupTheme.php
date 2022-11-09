@@ -34,7 +34,7 @@ class SendEmailNewGroupTheme extends Command
      */
     public function handle()
     {
-        $notices = DB::table('forum_user')->where('email_sent', 0)->oldest('updated_at')->get();
+        $notices = DB::table('notices')->where('email_sent', 0)->oldest('updated_at')->get();
 
         $nr = 1;
         foreach ($notices as $notice) {
@@ -44,8 +44,9 @@ class SendEmailNewGroupTheme extends Command
             $user = User::find($notice->user_id);
             $group = Group::find($forum->group_id);
 
+            //ha valamelyikük nem található meg, akkor törli az értesítést
             if(is_null($forum) || is_null($user) || is_null($group) ) {
-                DB::table('forum_user')->delete($notice->id);
+                DB::table('notices')->delete($notice->id);
                 continue;
             }
 
@@ -58,25 +59,25 @@ class SendEmailNewGroupTheme extends Command
             $data['user_id'] = $user->id;
             $data['theme'] = $forum->body;
 
-            if($notice->new==1) {
+            //ezt már nem küldi ki újból
+            DB::table('notices')->where('forum_id',$notice->forum_id)->where('user_id',$notice->user_id)->where('type', 'forum')->update(['email_sent' => 1]);
+
+            if($notice->comment_id==0) {     //új téma
                 $data['author_name'] = $forum->user->name;
                 $email_template = 'groupthemes.new_theme_email';
-                DB::table('forum_user')->delete($notice->id);
+                DB::table('notices')->delete($notice->id);
                 $data['subject'] = "Új téma a(z) '". $group->name."' csoportodban";
             }
-            else {
-                //hozzászólás értesítés
+            else {                           //hozzászólás értesítés
                 $comment = Comment::find($notice->comment_id);
+                //ha nem találja a hozzászólást, akkor továbblép
                 if(is_null($comment)) {
-                    DB::table('forum_user')->delete($notice->id);
                     continue;
                 }
                 $data['author_name'] = $comment->commenter->name;
                 $data['comment'] = $comment->body;
                 $data['subject'] = "Új hozzászólás a(z) '".$forum->title."' beszélgetésben";
                 $email_template = 'groupthemes.new_comment_email';
-
-                DB::table('forum_user')->where('forum_id',$notice->forum_id)->where('user_id',$notice->user_id)->update(['email_sent' => 1,'updated_at' => date("Y-m-d H:i:s", strtotime('now'))]); //ezt már nem küldi ki újból
             }
 
             Mail::send($email_template, $data, function ($message) use ($data) {
