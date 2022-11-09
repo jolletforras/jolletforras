@@ -6,10 +6,14 @@
 		</div>
 
 		<div class="form-group">
+			<label for="meta_description">Meta leírás:</label>
+			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($news)) {{$news->meta_description}} @endif" id="meta_description">
+		</div>
+
+		<div class="form-group">
 			<label for="body">Szöveg:</label>
 			<textarea class="form-control" required="required" rows="20" name="body" cols="50">@if(isset($news)) {{$news->body}} @endif</textarea>
 		</div>
-
 
 		<div class="form-group">
 			<label for="tag_list">Címkék:</label>

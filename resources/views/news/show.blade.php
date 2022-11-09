@@ -1,6 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Hírek a Társadalmi Jóllét Portálon. Építő közösségek híreit, információit olvashatod. Csatlakozz hozzánk és adj hírt Te is a saját közösségedről! Várunk!')
-@section('url', 'https://tarsadalmijollet.hu/hirek')
+@section('title'){{ $news->title }}@endsection
+@section('description'){{ $news->meta_description }}@endsection
+@section('url'){{url('hir')}}/{{$news->id}}/{{$news->slug}}@endsection
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/hirek" />
 @endsection
 

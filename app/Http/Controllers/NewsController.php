@@ -59,6 +59,7 @@ class NewsController extends Controller
 
         $news = Auth::user()->news()->create([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title'))
         ]);
@@ -104,6 +105,7 @@ class NewsController extends Controller
 
         $news->update([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title'))
         ]);
