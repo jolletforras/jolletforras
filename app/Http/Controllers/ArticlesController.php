@@ -47,6 +47,7 @@ class ArticlesController extends Controller
 
         $article = Auth::user()->articles()->create([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title'))
         ]);
@@ -85,6 +86,7 @@ class ArticlesController extends Controller
 
         $article->update([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title'))
         ]);

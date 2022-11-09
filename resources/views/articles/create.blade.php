@@ -29,6 +29,11 @@
 				</div>
 
 				<div class="form-group">
+					<label for="meta_description">Meta leírás:</label>
+					<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" id="meta_description">
+				</div>
+
+				<div class="form-group">
 					<textarea class="form-control" required="required" rows="20" name="body" cols="50"></textarea>
 				</div>
 

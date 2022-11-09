@@ -15,6 +15,11 @@
 				</div>
 
 				<div class="form-group">
+					<label for="meta_description">Meta leírás:</label>
+					<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="{{$article->meta_description}}" id="meta_description">
+				</div>
+
+				<div class="form-group">
 					<textarea class="form-control" required="required" rows="20" name="body" cols="50">{{$article->body}}</textarea>
 				</div>
 
