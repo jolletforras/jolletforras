@@ -16,6 +16,7 @@ use App\Models\Forum;
 use App\Models\ForumTag;
 use App\Models\Comment;
 use App\Models\Event;
+use App\Models\Notice;
 use App\Http\Requests\GroupRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -427,8 +428,7 @@ class GroupsController extends Controller
 
     public function cron_test()
     {
-
-        $notices = DB::table('notices')->where('email_sent', 0)->oldest('updated_at')->get();
+        $notices = Notice::where('email_sent', 0)->oldest('updated_at')->get();
 
         $nr = 1;
         foreach ($notices as $notice) {
@@ -438,14 +438,18 @@ class GroupsController extends Controller
 
             $notifiable = $notifiable_class::find($notice->notifiable_id);
             $user = User::find($notice->user_id);
-            $group = Group::find($notifiable->group_id);
 
             //ha valamelyikük nem található meg, akkor törli az értesítést
-            if(is_null($notifiable) || is_null($user) || is_null($group) ) {
-                DB::table('notices')->delete($notice->id);
+            if(is_null($notifiable) || is_null($user) ) {
+                $notice->delete();
                 continue;
             }
 
+            $group = Group::find($notifiable->group_id);
+            if(is_null($group)) {
+                $notice->delete();
+                continue;
+            }
 
             $data['name'] = $user->name;
             $data['group_name'] = $group->name;
@@ -456,12 +460,12 @@ class GroupsController extends Controller
             $data['theme'] = $notifiable->body;
 
             //ezt már nem küldi ki újból
-            DB::table('notices')->where('notifiable_id',$notice->notifiable_id)->where('user_id',$notice->user_id)->where('type', 'Forum')->update(['email_sent' => 1]);
+            //DB::table('notices')->where('notifiable_id',$notice->notifiable_id)->where('user_id',$notice->user_id)->where('type', 'Forum')->update(['email_sent' => 1]);
+            $notice->update(['email_sent' => 1]);
 
             if($notice->comment_id==0) {     //új téma
                 $data['author_name'] = $notifiable->user->name;
                 $email_template = 'groupthemes.new_theme_email';
-                DB::table('notices')->delete($notice->id);
                 $data['subject'] = "Új téma a(z) '". $group->name."' csoportodban";
             }
             else {                           //hozzászólás értesítés
