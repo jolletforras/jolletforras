@@ -44,10 +44,9 @@ class SendNoticeEmails extends Command
             $notifiable_class = "\\App\Models\\".$notice->type;
 
             $notifiable = $notifiable_class::find($notice->notifiable_id);
-            $user = User::find($notice->user_id);
 
             //ha valamelyikük nem található meg, akkor törli az értesítést
-            if(is_null($notifiable) || is_null($user) ) {
+            if(is_null($notifiable) || is_null($notice->user) ) {
                 $notice->delete();
                 continue;
             }
@@ -58,22 +57,24 @@ class SendNoticeEmails extends Command
                 continue;
             }
 
-
-            $data['name'] = $user->name;
+            $data['name'] = $notice->user->name;
             $data['group_name'] = $group->name;
-            $data['theme_title'] = $notifiable->title;
-            $data['theme_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
-            $data['email'] = $user->email;
-            $data['user_id'] = $user->id;
-            $data['theme'] = $notifiable->body;
+            $data['post_title'] = $notifiable->title;
+            $data['post_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
+            $data['email'] = $notice->user->email;
+            $data['user_id'] = $notice->user->id;
+            $data['post'] = $notifiable->body;
+            $data['type'] = $notice->type=="Forum" ? "téma" :"esemény";
+            $data['type_txt1'] = $notice->type=="Forum" ? "témát" :"eseményt";
+            $data['type_txt2'] = $notice->type=="Forum" ? "beszélgetésnél" :"eseménynél";
 
             //ezt már nem küldi ki újból
             $notice->update(['email_sent' => 1]);
 
             if($notice->comment_id==0) {     //új téma
                 $data['author_name'] = $notifiable->user->name;
-                $email_template = 'groupthemes.new_theme_email';
-                $data['subject'] = "Új téma a(z) '". $group->name."' csoportodban";
+                $email_template = 'groups.emails.new_post_email';
+                $data['subject'] = "Új ".$data['type']." a(z) '". $group->name."' csoportodban";
             }
             else {                           //hozzászólás értesítés
                 $comment = Comment::find($notice->comment_id);
@@ -84,7 +85,7 @@ class SendNoticeEmails extends Command
                 $data['author_name'] = $comment->commenter->name;
                 $data['comment'] = $comment->body;
                 $data['subject'] = "Új hozzászólás a(z) '".$notifiable->title."' beszélgetésben";
-                $email_template = 'groupthemes.new_comment_email';
+                $email_template = 'groups.emails.new_comment_email';
             }
 
             Mail::send($email_template, $data, function ($message) use ($data) {
