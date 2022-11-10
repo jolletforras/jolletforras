@@ -60,7 +60,13 @@ class SendNoticeEmails extends Command
             $data['name'] = $notice->user->name;
             $data['group_name'] = $group->name;
             $data['post_title'] = $notifiable->title;
-            $data['post_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
+            if($notice->type=="Forum") {
+                $data['post_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
+            }
+            else {
+                $data['post_url'] = 'esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
+            }
+
             $data['email'] = $notice->user->email;
             $data['user_id'] = $notice->user->id;
             $data['post'] = $notifiable->body;
