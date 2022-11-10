@@ -20,8 +20,8 @@
                         </div>
 
                         <div class="form-group" style="padding-left: 10px;">
-                            <input name="group_theme_notice" type="checkbox" value="1" @if($user->group_theme_notice) checked @endif>
-                            ha valamelyik csoportomban témát hoznak létre
+                            <input name="new_post_notice" type="checkbox" value="1" @if($user->new_post_notice) checked @endif>
+                            ha valamelyik csoportomban témát vagy eseményt hoznak létre
                         </div>
 
                         <div class="form-group" style="padding-left: 10px;">

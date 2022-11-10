@@ -435,20 +435,20 @@ class ProfilesController extends Controller
 			}
 
 
-            $group_theme_notice = empty($request->get('group_theme_notice')) ? 0 : 1;
-            if($user->group_theme_notice != $group_theme_notice) {
-                if ($group_theme_notice) {
-                    $message_r[]='Ismét fogsz kapni levélben értesítést, ha valamelyik csoportodban létrehoznak egy témát.';
+            $new_post_notice = empty($request->get('new_post_notice')) ? 0 : 1;
+            if($user->new_post_notice != $new_post_notice) {
+                if ($new_post_notice) {
+                    $message_r[]='Ismét fogsz kapni levélben értesítést, ha valamelyik csoportodban létrehoznak egy témát vagy eseményt.';
                 }
                 else {
-                    $message_r[]='A továbbiakban nem fogsz levélben értesítést kapni, ha valamelyik csoportodban létrehoznak egy témát.';
+                    $message_r[]='A továbbiakban nem fogsz levélben értesítést kapni, ha valamelyik csoportodban létrehoznak egy témát vagy eseményt.';
                 }
-                $user->group_theme_notice=$group_theme_notice;
+                $user->new_post_notice=$new_post_notice;
                 $user->save();
 
-                //ha comment_id==0, akkor az új téma értesítést
-                if ($group_theme_notice==0) {
-                    $user->notices()->where('type', 'Forum')->where('comment_id', 0)->delete();
+                //ha comment_id==0, akkor törli az új téma és esemény értesítést
+                if ($new_post_notice==0) {
+                    $user->notices()->where('comment_id', 0)->delete();
                 }
             }
 
