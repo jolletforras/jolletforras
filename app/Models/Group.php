@@ -47,6 +47,11 @@ class Group extends Model
         return $this->belongsToMany(User::class)->wherePivot('admin',1)->withTimestamps();
     }
 
+    public function members_ask_new_post_notice()
+    {
+        return $this->belongsToMany(User::class)->wherePivot('new_post_notice',1)->withTimestamps();
+    }
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
@@ -87,6 +92,11 @@ class Group extends Model
         return User::members()->whereNotIn('id', $this->member_list)->orderBy('name', 'ASC')->pluck('name', 'id');
     }
 
+    public function getMemberListWithNewPostNoticeAttribute()
+    {
+        return $this->members->where('new_post_notice',1)->pluck('id')->all();
+    }
+
     public function isMember() {
         return $this->members->contains('id', Auth::user()->id);
     }
@@ -117,4 +127,5 @@ class Group extends Model
 
         return $location;
     }
+
 }

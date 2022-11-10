@@ -101,8 +101,7 @@ class ForumsController extends Controller
             $group = Group::findOrFail($forum->group_id);
 
             //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id és a comment_id = 0 lesz.
-            $member_list = $this->getGroupMemberListWithGroupThemeNotice($group);
-            foreach($member_list as $user_id) {
+            foreach($group->member_list_with_new_post_notice as $user_id) {
                 if($user_id!=Auth::user()->id) {
                     Notice::create(['notifiable_id' => $forum->id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0]);
                 }
@@ -161,17 +160,4 @@ class ForumsController extends Controller
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
         }
 	}
-
-    private function getGroupMemberListWithGroupThemeNotice($group) {
-        $member_list = array();
-
-        foreach($group->members as $member) {
-            if($member->group_theme_notice) {
-                $member_list[]=$member->id;
-            }
-        }
-
-        return $member_list;
-    }
-
 }
