@@ -44,7 +44,7 @@
 				<span style="padding-top: 10px; font-size: 18px;">Helyi csoport</span>
 				<a href="#local_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 			</label>
-			<div id="local_info" class="collapse info">Ezt a részt csak szükséges kitöltened, ha helyi csoportról van szó.</div>
+			<div id="local_info" class="collapse info">Ezt a részt csak akkor szükséges kitöltened, ha helyi csoportról van szó.</div>
 		</div>
 
 		<div id="local-block">
