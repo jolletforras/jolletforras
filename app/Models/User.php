@@ -101,6 +101,11 @@ class User extends Authenticatable
         return $this->hasMany(News::class);
     }
 
+    public function notices()
+    {
+        return $this->hasMany(Notice::class);
+    }
+
     public function getTagListAttribute()
     {
         return $this->tags->lists('id')->all();

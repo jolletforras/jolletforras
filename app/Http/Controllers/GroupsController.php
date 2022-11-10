@@ -306,8 +306,8 @@ class GroupsController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $forum_id)->get();
 
-        //nézi, hogy kértem-e értesítést ennél a témánál, ha ige, kipipálja
-        $notice = DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',Auth::user()->id)->where('type', 'Forum')->where('ask_notice',1)->first();
+        //nézi, hogy kértem-e értesítést ennél a témánál, ha igen, kipipálja
+        $notice = Notice::findBy($forum_id,Auth::user()->id,'Forum')->where('ask_notice',1)->first();
         $askNotice = empty($notice) ? 0 : 1;
 
         return view('groupthemes.show', compact('group','forum','comments','askNotice'));
@@ -460,7 +460,6 @@ class GroupsController extends Controller
             $data['theme'] = $notifiable->body;
 
             //ezt már nem küldi ki újból
-            //DB::table('notices')->where('notifiable_id',$notice->notifiable_id)->where('user_id',$notice->user_id)->where('type', 'Forum')->update(['email_sent' => 1]);
             $notice->update(['email_sent' => 1]);
 
             if($notice->comment_id==0) {     //új téma

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Comment;
+use App\Models\Notice;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 use Mail;
@@ -25,7 +26,7 @@ class SendNoticeEmails extends Command
      *
      * @var string
      */
-    protected $description = 'Send email to a group member in case of new theme';
+    protected $description = 'Send email to a group member in different cases';
 
     /**
      * Execute the console command.
@@ -34,7 +35,7 @@ class SendNoticeEmails extends Command
      */
     public function handle()
     {
-        $notices = DB::table('notices')->where('email_sent', 0)->oldest('updated_at')->get();
+        $notices = Notice::where('email_sent', 0)->oldest('updated_at')->get();
 
         $nr = 1;
         foreach ($notices as $notice) {
@@ -44,11 +45,16 @@ class SendNoticeEmails extends Command
 
             $notifiable = $notifiable_class::find($notice->notifiable_id);
             $user = User::find($notice->user_id);
-            $group = Group::find($notifiable->group_id);
 
             //ha valamelyikük nem található meg, akkor törli az értesítést
-            if(is_null($notifiable) || is_null($user) || is_null($group) ) {
-                DB::table('notices')->delete($notice->id);
+            if(is_null($notifiable) || is_null($user) ) {
+                $notice->delete();
+                continue;
+            }
+
+            $group = Group::find($notifiable->group_id);
+            if(is_null($group)) {
+                $notice->delete();
                 continue;
             }
 
@@ -62,7 +68,7 @@ class SendNoticeEmails extends Command
             $data['theme'] = $notifiable->body;
 
             //ezt már nem küldi ki újból
-            DB::table('notices')->where('notifiable_id',$notice->notifiable_id)->where('user_id',$notice->user_id)->where('type', 'Forum')->update(['email_sent' => 1]);
+            $notice->update(['email_sent' => 1]);
 
             if($notice->comment_id==0) {     //új téma
                 $data['author_name'] = $notifiable->user->name;
