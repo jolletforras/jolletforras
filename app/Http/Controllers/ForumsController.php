@@ -12,6 +12,7 @@ use App\Models\Forum;
 use App\Models\Group;
 use App\Models\ForumTag;
 use App\Models\Comment;
+use App\Models\Notice;
 use App\Http\Requests\ForumRequest;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -103,7 +104,7 @@ class ForumsController extends Controller
             $member_list = $this->getGroupMemberListWithGroupThemeNotice($group);
             foreach($member_list as $user_id) {
                 if($user_id!=Auth::user()->id) {
-                    DB::table('notices')->insert(['notifiable_id' => $forum->id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0]);
+                    Notice::create(['notifiable_id' => $forum->id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0]);
                 }
             }
 

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Notice;
 use Mail;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -79,7 +80,7 @@ class CommentsController extends Controller
                     $notice = DB::table('notices')->where('notifiable_id',$commentable_id)->where('user_id',$commenter->id)->where('type','Forum')->first();
                     //ha nincs fenn, akkor felveszi, de én levelet most nem kapok
                     if(is_null($notice)) {
-                        DB::table('notices')->insert(['notifiable_id' => $commentable_id,'user_id' => $commenter->id,'type' => 'Forum','comment_id'=>$c->id,'email_sent' => 1]);
+                        Notice::create(['notifiable_id' => $commentable_id,'user_id' => $commenter->id,'type' => 'Forum','comment_id'=>$c->id,'email_sent' => 1]);
                     }
                 }
             }
@@ -116,7 +117,7 @@ class CommentsController extends Controller
                 DB::table('notices')->where('notifiable_id',$forum_id)->where('user_id',$user_id)->where('type', 'Forum')->update(['ask_notice' => $ask_notice]);
             }
             else {                      //ha nincs fenn, akkor felveszi
-                DB::table('notices')->insert(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'forum','comment_id'=>-1,'email_sent' =>1,'ask_notice' => $ask_notice]);
+                Notice::create(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'forum','comment_id'=>-1,'email_sent' =>1,'ask_notice' => $ask_notice]);
             }
         }
         else { //ha nem kér, akkor törli az értesítés (akkor se kapok ha korábban hozzászóltam, csak ha újból és arra értesítést kérek)
