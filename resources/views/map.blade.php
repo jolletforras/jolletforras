@@ -8,7 +8,7 @@
 		<div class="inner_box">
 			A térkép használatához belépés szükséges. Az alábbi kép a 2022.11.11-es állapotot mutatja.
 		</div>
-		<img width="100%" src="{{ url('/') }}/images/terkep.png" alt="térkép">
+		<img width="100%" src="{{ url('/') }}/images/terkep.jpg" alt="térkép">
 	@else
 		@push('styles')
 <link rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' crossorigin='' />
