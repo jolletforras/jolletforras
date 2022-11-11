@@ -35,7 +35,17 @@
 				&Sigma;: <span id="count">{{count($users)}}</span>
 			</div>
 			@else
-				<div class="col-sm-12"><h2>Nyilvánosan elérhető bemutatkozások</h2></div>
+				<div class="col-sm-12">
+					<h2>Nyilvánosan elérhető bemutatkozások</h2><a href="#public_introduction_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="inner_box collapse" id="public_introduction_info" style="font-size: 18px">
+								További bemutatkozások megtekintéséhez lépj be vagy regisztrálj az oldalon!
+							</div>
+						</div>
+					</div>
+				</div>
+
 			@endif
 		</div>
 	</div>
