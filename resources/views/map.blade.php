@@ -3,10 +3,12 @@
 @stop
 
 @section('content')
-	@if (!Auth::check()) 
+	@if (!Auth::check())
+		<h2>Térkép</h2>
 		<div class="inner_box">
-			A térkép megnézéséhez belépés szükséges.
+			A térkép használatához belépés szükséges. Az alábbi kép a 2022.11.11-es állapotot mutatja.
 		</div>
+		<img width="100%" src="{{ url('/') }}/images/terkep.png" alt="térkép">
 	@else
 		@push('styles')
 <link rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' crossorigin='' />
