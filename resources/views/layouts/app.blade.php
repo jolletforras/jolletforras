@@ -143,7 +143,9 @@
 
 	    </div>
 		<footer class="footer">
-			© 2022 Kontaktia Kft. – Minden jog fenntartva!    <a href="{{ url('/adatkezeles') }}">Adatkezelési tájékoztató</a>
+			<div class="left"><a href="{{ url('/adatkezeles') }}">Adatkezelési tájékoztató</a></div>
+			<div class="center"><a href="mailto:tarsadalmi.jollet@gmail.com">tarsadalmi.jollet@gmail.com</a></div>
+			<div class="right">© 2022 Társadalmi Jóllét Portál – Minden jog fenntartva!</div>
 		</footer>
 	</div>
 

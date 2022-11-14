@@ -447,16 +447,35 @@ h3 {
 }
 
 .footer  {
-	background-color: #f5fcf5;
+	background-color: lightgray;
 	min-height: 30px;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: Arial, Helvetica, sans-serif;
-	margin-top: 20px;
+	color: #707070;
+	margin-top: 25px;
 	margin-bottom: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	padding-left: 20px;
+	padding-right: 20px;
 	border: 1px solid #e7e7e7;
-	//text-align: center;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
 }
 
+.footer a {
+	color: #707070;
+}
+
+.footer .left {
+	margin-right: 10px;
+}
+
+.footer .center {
+
+}
+
+.footer .right {
+	margin-left: 10px;
+}
