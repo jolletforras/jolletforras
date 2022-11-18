@@ -4,6 +4,7 @@
 		tinymce.init({
 			entity_encoding : "raw",
 			selector: 'textarea',
+			relative_urls : false,
 			image_class_list: [
 				{title: 'img-responsive', value: 'img-responsive'},
 			],
