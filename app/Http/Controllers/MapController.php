@@ -18,8 +18,8 @@ class MapController extends Controller
             $initialMarkers[] = [
                 'name' => '<a href="/profil/'.$user->id.'/'.$user->slug.'" style="font-size:12px;">'.$user->name.'</a>',
                 'position' => [
-                    'lat' => $user->lat,
-                    'lng' => $user->lng
+                    'lat' => $user->lat+random_int(-50,50)/5000,
+                    'lng' => $user->lng+random_int(-50,50)/5000
                 ]
             ];
         }
