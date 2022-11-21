@@ -101,9 +101,12 @@ class ForumsController extends Controller
             $group = Group::findOrFail($forum->group_id);
 
             //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id és a comment_id = 0 lesz.
-            foreach($group->member_list_with_new_post_notice as $user_id) {
-                if($user_id!=Auth::user()->id) {
-                    Notice::create(['notifiable_id' => $forum->id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0,'login_code' => Str::random(10)]);
+            foreach($group->member_list as $user_id) {
+                $notice = Notice::create(['notifiable_id' => $forum->id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0]);
+
+                //ha új témára értesítést kér, akkor beállítódik az email kiküldés (kivéve a létrehozót)
+                if($user_id!=Auth::user()->id && in_array($user_id, $group->member_list_with_new_post_notice)) {
+                    $notice->update(['email' => 1,'login_code' => Str::random(10)]);
                 }
             }
 

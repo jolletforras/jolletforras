@@ -35,7 +35,7 @@ class SendNoticeEmails extends Command
      */
     public function handle()
     {
-        $notices = Notice::where('email_sent', 0)->oldest('updated_at')->get();
+        $notices = Notice::where('email', 1)->where('email_sent', 0)->oldest('updated_at')->get();
 
         $nr = 1;
         foreach ($notices as $notice) {
