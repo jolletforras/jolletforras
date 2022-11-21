@@ -36,6 +36,11 @@ class Group extends Model
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
+    public function themes()
+    {
+        return $this->hasMany(Forum::class);
+    }
+
     public function noadmins()
     {
         return $this->belongsToMany(User::class)->wherePivot('admin',0)->withTimestamps();

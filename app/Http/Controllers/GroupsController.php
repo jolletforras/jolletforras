@@ -225,11 +225,22 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($id);
 
-
         $is_member = $group->isMember();
 
         if(!$is_member) {
-            $group->members()->attach(Auth::user()->id);
+            $user_id = Auth::user()->id;
+
+            $group->members()->attach($user_id);
+
+            //itt abban az esetben ha adott témánál/eseménynél még nem létezik, akkor fel kell venni
+            $themes = $group->themes()->pluck('id')->toArray();
+            foreach($themes as $forum_id) {
+                $notice = Notice::findBy($forum_id,$user_id,'Forum')->first();
+                if(is_null($notice)) {
+                    Notice::create(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
+                }
+            }
+
         }
 
         return redirect('csoport/'.$id.'/'.$name.'/beszelgetesek')->with('message', 'A csoporthoz sikeresen csatlakoztál!');
@@ -249,7 +260,15 @@ class GroupsController extends Controller
         $is_member = $group->isMember();
 
         if($is_member) {
-            $group->members()->detach(Auth::user()->id);
+            $user_id = Auth::user()->id;
+
+            $group->members()->detach($user_id);
+
+            //itt minden témánál az email-t 0-ra kell állítani, hogy már ne kapjon levelet
+            $themes = $group->themes()->pluck('id')->toArray();
+            foreach($themes as $forum_id) {
+                Notice::findBy($forum_id,$user_id,'Forum')->update(['email' => 0]);
+            }
         }
 
         return redirect('csoport/'.$id.'/'.$name)->with('message', 'A csoportból sikeresen kiléptél!');
