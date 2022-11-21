@@ -70,8 +70,11 @@ class CommentsController extends Controller
             }
 
             if($c_type=="GroupTheme") {
-                //adott forum_id-nál minden usernek beállítódik a legutolsó comment_id, az email_sent=0-ra állítja
-                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->update(['comment_id'=>$c->id,'email_sent' => 0]);
+                //adott forum_id-nál minden usernek beállítódik a legutolsó comment_id
+                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->update(['comment_id'=>$c->id]);
+
+                //adott forum_id-nál minden usernek aki kér értesítést beállítódik az email_sent=0-ra állítja (csak azoknak kellene aki mindenképp vagy saját után kérnek értesítést)
+                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->where('email',1)->update(['email_sent' => 0]);
 
                 //minden user kap új login_code-ot
                 $notices = Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->get();
@@ -79,16 +82,9 @@ class CommentsController extends Controller
                     $n->update(['login_code' => Str::random(10)]);
                 }
 
-                //a hozzászólást létrehozó nem kap értesítést
-                Notice::findBy($commentable_id,Auth::user()->id,'Forum')->update(['email_sent' => 1]);
-
-                //amennyiben kérek értesítést arra az esetre ha hozzászólnak általam hozzászólt témához (most még nem kapok)
+                //amennyiben kér értesítést arra az esetre ha hozzászólnak az általa hozzászólt témához => beállítódik a levél küldés, de most még nem kap értesítést
                 if($commenter->theme_comment_notice) {
-                    $notice = Notice::findBy($commentable_id,$commenter->id,'Forum')->first();
-                    //ha nincs fenn, akkor felveszi, de én levelet most nem kapok
-                    if(is_null($notice)) {
-                        Notice::create(['notifiable_id' => $commentable_id,'user_id' => $commenter->id,'type' => 'Forum','comment_id'=>$c->id,'email_sent' => 1]);
-                    }
+                    Notice::findBy($commentable_id, $commenter->id, 'Forum')->update(['email' => 1, 'email_sent' => 1]);
                 }
             }
 
@@ -117,17 +113,13 @@ class CommentsController extends Controller
 
         $notice = Notice::findBy($forum_id,$user_id,'Forum')->first();
 
-        //ha értesítést kér adott témánál
+        //ha értesítést kér adott témánál (email_sent = 1, mert akkor épp látott mindent, mikor beállította a kérést)
         if($ask_notice==1) {
-            if($notice) {               //fel van e véve a kommentelő a forum_id-val a  notices-ban
-                $notice->update(['ask_notice' => $ask_notice]);
-            }
-            else {                      //ha nincs fenn, akkor felveszi
-                Notice::create(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'forum','comment_id'=>-1,'email_sent' =>1,'ask_notice' => $ask_notice]);
-            }
+            $notice->update(['email' => 1, 'email_sent' =>1,'ask_notice' => 1]);
         }
-        else { //ha nem kér, akkor törli az értesítés (akkor se kapok ha korábban hozzászóltam, csak ha újból és arra értesítést kérek)
-            $notice->delete();
+        else {
+            //ha nem kér, akkor kiveszi az email értesítés (akkor se kap ha korábban hozzászólt, csak ha újból értesítést kér)
+            $notice->update(['email' => 0, 'email_sent' =>0,'ask_notice' => 0]);
         }
 
         $response = array('status' => 'success');

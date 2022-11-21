@@ -446,9 +446,9 @@ class ProfilesController extends Controller
                 $user->new_post_notice=$new_post_notice;
                 $user->save();
 
-                //ha comment_id==0, akkor törli az új téma és esemény értesítést
+                //ha nem kér új téma/esemény (comment_id==0) esetén az email értesítést, akkor csak akkor veszi ki az értesítés, ha külön nem kértek értesítést (de akkor már nem új témaként fog kimenni a levél)
                 if ($new_post_notice==0) {
-                    $user->notices()->where('comment_id', 0)->delete();
+                    $user->notices()->where('comment_id', 0)->where('ask_notice', 0)->update(['email' => 0]);
                 }
             }
 
@@ -463,9 +463,9 @@ class ProfilesController extends Controller
                 $user->theme_comment_notice=$theme_comment_notice;
                 $user->save();
 
-                //az ask_notice==0 azt jelenti, hogy saját hozzászólásom utáni értesítés kérés
+                //ha még új téma (comment_id=0) vagy kérnek rá külön értesítést (ask_notice=1), akkor nem veszi ki az email értesítést
                 if ($theme_comment_notice==0) {
-                    $user->notices()->where('type', 'Forum')->where('comment_id','<>',0)->where('ask_notice', 0)->delete(); //ahol külön kérnek értesítést hozzászólásra, ott nem törli
+                    $user->notices()->where('type', 'Forum')->where('comment_id','<>',0)->where('ask_notice', 0)->update(['email' => 0]); //ahol külön kérnek értesítést hozzászólásra, ott nem törli
                 }
             }
 

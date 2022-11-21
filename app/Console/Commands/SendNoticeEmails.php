@@ -45,15 +45,15 @@ class SendNoticeEmails extends Command
 
             $notifiable = $notifiable_class::find($notice->notifiable_id);
 
-            //ha valamelyikük nem található meg, akkor törli az értesítést
+            //ha valamelyikük nem található meg, akkor törli az email értesítést
             if(is_null($notifiable) || is_null($notice->user) ) {
-                $notice->delete();
+                $notice->update(['email' => 0]);
                 continue;
             }
 
             $group = Group::find($notifiable->group_id);
             if(is_null($group)) {
-                $notice->delete();
+                $notice->update(['email' => 0]);
                 continue;
             }
 
