@@ -108,7 +108,7 @@ class EventsController extends Controller
             //Esemény felvételkor notices táblában az event_id-val felvevődik az összes user_id és a comment_id = 0 lesz.
             foreach($group->member_list_with_new_post_notice as $user_id) {
                 if($user_id!=Auth::user()->id) {
-                    Notice::create(['notifiable_id' => $event->id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0]);
+                    Notice::create(['notifiable_id' => $event->id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0,'login_code' => Str::random(10)]);
                 }
             }
 

@@ -85,6 +85,10 @@ Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupsController@themecr
 Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
 Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
 
+Route::get('/email/{code}/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'NoticesController@email_theme_login');
+Route::get('/email/{code}/esemeny/{id}/{slug}', 'NoticesController@email_event_login');
+
+
 Route::get('/irasok', 'ArticlesController@index');
 Route::get('/iras/{id}/{title}', 'ArticlesController@show');
 Route::get('/iras/uj', 'ArticlesController@create');

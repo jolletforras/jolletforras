@@ -12,6 +12,7 @@ use App\Models\Notice;
 use Mail;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Illuminate\Support\Str;
 
 class CommentsController extends Controller
 {
@@ -69,8 +70,14 @@ class CommentsController extends Controller
             }
 
             if($c_type=="GroupTheme") {
-                //adott forum_id-nál minden usernek beállítódik a legutolsó comment_id és az  email_sent=0-ra
+                //adott forum_id-nál minden usernek beállítódik a legutolsó comment_id, az email_sent=0-ra állítja
                 Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->update(['comment_id'=>$c->id,'email_sent' => 0]);
+
+                //minden user kap új login_code-ot
+                $notices = Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->get();
+                foreach($notices as $n) {
+                    $n->update(['login_code' => Str::random(10)]);
+                }
 
                 //a hozzászólást létrehozó nem kap értesítést
                 Notice::findBy($commentable_id,Auth::user()->id,'Forum')->update(['email_sent' => 1]);
