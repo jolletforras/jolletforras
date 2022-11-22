@@ -246,6 +246,26 @@ class GroupsController extends Controller
         return redirect('csoport/'.$id.'/'.$name.'/beszelgetesek')->with('message', 'A csoporthoz sikeresen csatlakoztál!');
     }
 
+    //az éles adatbázisban a hiányzó notice-ok felvétele
+    public function add_notice()
+    {
+        $groups = Group::get();
+
+        foreach ($groups as $group) {
+            foreach ($group->members as $user) {
+                $themes = $group->themes()->pluck('id')->toArray();
+                foreach($themes as $forum_id) {
+                    $notice = Notice::findBy($forum_id,$user->id,'Forum')->first();
+                    if(is_null($notice)) {
+                        Notice::create(['notifiable_id' => $forum_id,'user_id' =>$user->id,'type' => 'Forum','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
+                    }
+                }
+            }
+        }
+        echo 'Sikeresen fel lettek véve a notice-ok!';
+    }
+
+
     /**
      * User leaves the a group
      *
