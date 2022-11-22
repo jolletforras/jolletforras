@@ -60,7 +60,7 @@ Route::post('/meghivo/uj', 'InviteController@store');
 Route::get('meghivo/aktival/{code}', 'InviteController@activate');
 
 //az éles adatbázisban a hiányzó notice-ok felvétele
-Route::get('/add_notice', 'GroupsController@add_notice');
+//Route::get('/add_notice', 'GroupsController@add_notice');
 
 Route::get('/csoportok', 'GroupsController@index');
 Route::get('/csoport/cimke/{id}/{tag}', 'TagsController@group_show');
