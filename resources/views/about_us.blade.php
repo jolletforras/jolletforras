@@ -34,5 +34,4 @@
 			</ul>
 			Mindezekkel támogatjuk a társadalmi jóllét érdekében kezdeményezett ügyeket, programokat, közösségeket.<br>
 			<br>
-			<br>
     	</div>
