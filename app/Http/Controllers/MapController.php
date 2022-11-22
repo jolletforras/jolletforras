@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserSkill;
 use App\Models\Group;
 
 class MapController extends Controller
 {
-    public function members()
+    protected function markers($users)
     {
-        $users = User::members()->whereNotNull('lat')->whereNotNull('lng')->get();
-
         $initialMarkers = array();
 
         foreach($users as $user) {
@@ -24,9 +23,39 @@ class MapController extends Controller
             ];
         }
 
+        return $initialMarkers;
+    }
+
+    public function members()
+    {
+        $users = User::members()->whereNotNull('lat')->whereNotNull('lng')->get();
+
+        $initialMarkers = $this->markers($users);
+
+        $tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+
+        $tags_slug = UserSkill::pluck('slug', 'id')->all();
+
         $map_type = 'tarsak';
 
-        return view('map', compact('initialMarkers','map_type'));
+        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
+    }
+
+    public function skill_show($id) {
+
+        $tag = UserSkill::findOrFail($id);
+
+        $users = $tag->users()->members()->whereNotNull('lat')->whereNotNull('lng')->get();
+
+        $initialMarkers = $this->markers($users);
+
+        $tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+
+        $tags_slug = UserSkill::pluck('slug', 'id')->all();
+
+        $map_type = 'tarsak';
+
+        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
     }
 
     public function groups()

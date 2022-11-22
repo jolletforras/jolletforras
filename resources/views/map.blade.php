@@ -20,6 +20,15 @@
 					<option value="csoportok" @if($map_type=="csoportok") selected="selected" @endif>csoportok</option>
 				</select>
 			</div>
+			@if(isset($tags))
+			<div class="col-sm-3" style="padding-top:3px;">
+				<select id="tag" name="tag" class="form-control">
+					@foreach($tags as $key => $val)
+						<option value="{{ $key }}">{{ $val }}</option>
+					@endforeach
+				</select>
+			</div>
+			@endif
 		</div>
 		<div id="map" style="width: 100%; height: 88vh;"></div>
 
@@ -98,5 +107,24 @@
 			var map_type= $("#map_type").val();
 			location.href="{{ url('terkep')}}/"+map_type;
 		});
+
+		@if (isset($tags))
+			$('#tag').select2({
+				placeholder: 'Keresés címke szerint',
+				tags: false
+			});
+
+			var tags = {
+			@foreach ($tags_slug as $id => $slug)
+			{{$id}}:"{{$slug}}",
+			@endforeach
+			};
+
+
+			$("#tag").change(function () {
+				var id= $("#tag").val();
+				location.href="{{ url('terkep/tarsak')}}/ertes/"+id+"/"+tags[id];
+			});
+		@endif
 	</script>
 @endsection

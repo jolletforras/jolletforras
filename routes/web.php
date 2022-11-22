@@ -30,6 +30,7 @@ Route::get('/adatkezeles', 'HomeController@datahandling');
 
 Route::get('/terkep/tarsak', 'MapController@members');
 Route::get('/terkep/csoportok', 'MapController@groups');
+Route::get('/terkep/tarsak/ertes/{id}/{tag}', 'MapController@skill_show');
 
 Route::get('/tarsak', 'ProfilesController@index');
 Route::post('/user/filter', 'ProfilesController@filter');
