@@ -88,11 +88,11 @@ class CommentsController extends Controller
                 }
 
                 //megnövelem a számlálóm 1-el mindenkinek a hozzászóló kivételével
-                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->where('user_id','<>',$commenter->id)->increment('counter', 1);
+                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->where('user_id','<>',$commenter->id)->increment('new', 1);
 
                 //növeli a csoporthoz tartozó userek új számlálóját 1-el, kivétel a hozzászóló
                 $theme = $commentable;
-                $theme->group->members()->where('users.id','<>',$commenter_id)->increment('counter', 1);
+                $theme->group->members()->where('users.id','<>',$commenter_id)->increment('new_post', 1);
             }
 
             //dd($request->all());
