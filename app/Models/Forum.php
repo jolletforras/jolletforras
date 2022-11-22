@@ -24,6 +24,11 @@ class Forum extends Model
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
     public function tags()
     {
     	return $this->belongsToMany(ForumTag::class)->withTimestamps();
@@ -44,4 +49,9 @@ class Forum extends Model
     {
     	return $this->tags->lists('id')->all();
     }
+/*
+    public function getGroupAttribute()
+    {
+        return $this->group->all();
+    }*/
 }

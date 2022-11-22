@@ -76,7 +76,7 @@ class CommentsController extends Controller
                 //adott forum_id-nál minden usernek aki kér értesítést beállítódik az email_sent=0-ra állítja (csak azoknak kellene aki mindenképp vagy saját után kérnek értesítést)
                 Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->where('email',1)->update(['email_sent' => 0]);
 
-                //minden user kap új login_code-ot
+                //minden user kap új login_code-ot, mivel ez egyedi mindenkinek, ezért egyenként kell megadni
                 $notices = Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->get();
                 foreach($notices as $n) {
                     $n->update(['login_code' => Str::random(10)]);
@@ -86,6 +86,13 @@ class CommentsController extends Controller
                 if($commenter->theme_comment_notice) {
                     Notice::findBy($commentable_id, $commenter->id, 'Forum')->update(['email' => 1, 'email_sent' => 1]);
                 }
+
+                //megnövelem a számlálóm 1-el mindenkinek a hozzászóló kivételével
+                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->where('user_id','<>',$commenter->id)->increment('counter', 1);
+
+                //növeli a csoporthoz tartozó userek új számlálóját 1-el, kivétel a hozzászóló
+                $theme = $commentable;
+                $theme->group->members()->where('users.id','<>',$commenter_id)->increment('counter', 1);
             }
 
             //dd($request->all());
