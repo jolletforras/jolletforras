@@ -43,7 +43,7 @@
 <body id="app-layout">
 	<div class="base">
 		<div class="oldal_nev">
-	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
+	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>@if( Auth::check() && Auth::user()->new_post > 0)<a href="" id="notice">Friss <span>{{ Auth::user()->new_post }}</span></a>@endif
   		</div>
 
 		<nav class="navbar navbar-default">

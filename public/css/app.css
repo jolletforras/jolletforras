@@ -28,7 +28,31 @@ body {
     text-decoration: none;
 }
 
+#notice {
+	float: right;
+	margin-top: 5px;
+	margin-right: 10%;
+	color: #337ab7;
+	text-shadow: none;
+	font-size: 18px;
+}
+
+#notice span {
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	border-radius: 50%;
+	background-color: #EE4529;
+	color: #FFF;
+	line-height: 16px;
+	font-size: 10px;
+	text-align: center;
+	margin-left: 2px;
+	padding-top: 1px;
+}
+
 h1 {
+	display: inline-block;
 	font-size: 160%;
     font-family: "Times New Roman", Times, serif;	
     margin-top: 0px;
@@ -397,6 +421,10 @@ h3 {
 		display: block;
 		text-align: center;
 		padding: 10px;
+	}
+
+	#notice {
+		margin-right: 5%;
 	}
 }
 
