@@ -43,9 +43,9 @@
 <body id="app-layout">
 	<div class="base">
 		<div class="oldal_nev">
-	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>@if( Auth::check() && Auth::user()->new_post > 0)<a href="" id="notice">Friss <span>{{ Auth::user()->new_post }}</span></a>@endif
-  		</div>
-
+	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
+		</div>
+		@if( Auth::check() && Auth::user()->new_post > 0)<div id="notice" data-toggle="modal" data-target="#notice-modal">Friss <span>{{ Auth::user()->new_post }}</span></div>@endif
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
@@ -138,6 +138,96 @@
 					{!!  Session::get('message') !!}
 				</div>
 			@endif
+
+			<div class="modal fade" id="notice-modal" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Friss történések</h4>
+						</div>
+						<div class="modal-body">
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+							<p>itt lesznek.</p>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+
+				</div>
+			</div>
+
 			@yield('content')
 
 
