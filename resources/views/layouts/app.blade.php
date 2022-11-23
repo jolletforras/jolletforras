@@ -151,8 +151,15 @@
 						</div>
 						<div class="modal-body">
 							@foreach(\App\Models\Notice::findNew()->get() as $notice)
-								@if($forum = \App\Models\Forum::find($notice->notifiable_id))
-							<a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - {{ $forum->title }} ({{$notice->new}})</a><br>
+								@if($notice->type=="Forum")
+									@if($forum = \App\Models\Forum::find($notice->notifiable_id))
+								<a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - "{{ $forum->title }}" téma ({{$notice->new}})</a><br>
+									@endif
+								@endif
+								@if($notice->type=="Event")
+									@if($event = \App\Models\Event::find($notice->notifiable_id))
+										<a href="{{url('esemeny')}}/{{ $event->id }}/{{$event->slug}}">{{$event->group->name}} - "{{ $event->title }}" esemény ({{$notice->new}})</a><br>
+									@endif
 								@endif
 							@endforeach
 						</div>
