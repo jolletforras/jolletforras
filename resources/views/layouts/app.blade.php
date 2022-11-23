@@ -139,6 +139,7 @@
 				</div>
 			@endif
 
+			@if( Auth::check() && Auth::user()->new_post > 0)
 			<div class="modal fade" id="notice-modal" role="dialog">
 				<div class="modal-dialog">
 
@@ -149,84 +150,18 @@
 							<h4 class="modal-title">Friss történések</h4>
 						</div>
 						<div class="modal-body">
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
-							<p>itt lesznek.</p>
+							@foreach(\App\Models\Notice::findNew()->get() as $notice)
+								@if($forum = \App\Models\Forum::find($notice->notifiable_id))
+							<a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - {{ $forum->title }} ({{$notice->new}})</a><br>
+								@endif
+							@endforeach
 						</div>
 						<div class="modal-footer"></div>
 					</div>
 
 				</div>
 			</div>
+			@endif
 
 			@yield('content')
 
