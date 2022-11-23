@@ -56,6 +56,13 @@ class EventsController extends Controller
                 return  redirect('csoport/'.$group->id.'/'.$group->slug);
             }
 
+            //esemény megnézése után nulláza a notice számlálóját és ugyanannyival a user-ét is
+            $notice = Notice::findBy($id,Auth::user()->id,'Event')->first();
+            $user_new_post = Auth::user()->new_post - $notice->new;
+            $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
+            Auth::user()->update(['new_post'=>$user_new_post]);
+            $notice->update(['new'=>0]);
+
             $has_access = $group->isAdmin();
         }
         else {
