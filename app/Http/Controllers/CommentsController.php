@@ -69,6 +69,15 @@ class CommentsController extends Controller
                 });
             }
 
+            if($c_type=="GroupTheme" || ($c_type=="Event" && $commentable->group_id>0)) {
+                //megnövelem a számlálóm 1-el mindenkinek a hozzászóló kivételével
+                Notice::where('notifiable_id',$commentable_id)->where('type',$c_class)->where('user_id','<>',$commenter->id)->increment('new', 1);
+
+                //növeli a csoporthoz tartozó userek új számlálóját 1-el, kivétel a hozzászóló
+                $commentable->group->members()->where('users.id','<>',$commenter_id)->increment('new_post', 1);
+            }
+
+            //ez egyelőre csak a csoport beszélgetésnél, mivel csoport eseménynél csak új esemény létrehozásakor küld ki értesítést (amennyiben kért)
             if($c_type=="GroupTheme") {
                 //adott forum_id-nál minden usernek beállítódik a legutolsó comment_id
                 Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->update(['comment_id'=>$c->id]);
@@ -86,13 +95,6 @@ class CommentsController extends Controller
                 if($commenter->theme_comment_notice) {
                     Notice::findBy($commentable_id, $commenter->id, 'Forum')->update(['email' => 1, 'email_sent' => 1]);
                 }
-
-                //megnövelem a számlálóm 1-el mindenkinek a hozzászóló kivételével
-                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->where('user_id','<>',$commenter->id)->increment('new', 1);
-
-                //növeli a csoporthoz tartozó userek új számlálóját 1-el, kivétel a hozzászóló
-                $theme = $commentable;
-                $theme->group->members()->where('users.id','<>',$commenter_id)->increment('new_post', 1);
             }
 
             //dd($request->all());
