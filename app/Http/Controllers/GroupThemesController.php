@@ -47,9 +47,20 @@ class GroupThemesController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $forum_id)->get();
 
-        //nézi, hogy kértem-e értesítést ennél a témánál, ha igen, kipipálja
-        $notice = Notice::findBy($forum_id,Auth::user()->id,'Forum')->where('ask_notice',1)->first();
-        $askNotice = empty($notice) ? 0 : 1;
+
+        $notice = Notice::findBy($forum_id,Auth::user()->id,'Forum')->first();
+
+        $askNotice = 0;
+        if($notice) {
+            //nézi, hogy kértem-e értesítést ennél a témánál, ha igen, kipipálja
+            $askNotice = $notice->ask_notice;
+
+            //nulláza a notice számlálóját és ugyanannyival a user-ét is
+            $user_new_post = Auth::user()->new_post - $notice->new;
+            $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
+            Auth::user()->update(['new_post'=>$user_new_post]);
+            $notice->update(['new'=>0]);
+        }
 
         return view('groupthemes.show', compact('group','forum','comments','askNotice'));
     }
