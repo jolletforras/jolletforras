@@ -42,7 +42,6 @@ body {
 #notice span {
 	width: 18px;
 	height: 18px;
-	position: absolute;
 	border-radius: 50%;
 	background-color: #0b8e33;
 	color: #FFF;
@@ -51,6 +50,8 @@ body {
 	text-align: center;
 	margin-left: 2px;
 	padding-top: 1px;
+	display: inline-block;
+	vertical-align: top;
 }
 
 #notice-modal .modal{

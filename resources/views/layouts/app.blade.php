@@ -27,7 +27,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
- 	<link href="{{ url('/') }}/css/app.css?ver=1.25" rel="stylesheet">
+ 	<link href="{{ url('/') }}/css/app.css?ver=1.26" rel="stylesheet">
 	@stack('styles')
 
 	<!-- Google tag (gtag.js) -->
@@ -45,7 +45,7 @@
 		<div class="oldal_nev">
 	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
 		</div>
-		@if( Auth::check() && Auth::user()->new_post > 0)<div id="notice" data-toggle="modal" data-target="#notice-modal">Friss <span>{{ Auth::user()->new_post }}</span></div>@endif
+		@if( Auth::check() && Auth::user()->new_post > 0)<div id="notice" data-toggle="modal" data-target="#notice-modal">Friss<span>{{ Auth::user()->new_post }}</span></div>@endif
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
