@@ -105,10 +105,22 @@ class EventsController extends Controller
         else {
             $group = Group::findOrFail($event->group_id);
 
-            //Esemény felvételkor notices táblában az event_id-val felvevődik az összes user_id és a comment_id = 0 lesz.
-            foreach($group->member_list_with_new_post_notice as $user_id) {
-                if($user_id!=Auth::user()->id) {
-                    Notice::create(['notifiable_id' => $event->id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'email_sent' =>0,'ask_notice' => 0,'login_code' => Str::random(10)]);
+            //Esemény felvételkor notices táblában az event_id-val felvevődik az összes user_id, a comment_id = 0, a new=1 lesz.
+            foreach($group->members as $user) {
+                $user_id = $user->id;
+
+                $new = 0; //aki felvette a témát annak ez nem számít újnak
+                if ($user_id != Auth::user()->id) {
+                    $user->new_post++; //a user-nél növeli az újak számlálóját
+                    $user->save();
+                    $new = 1;
+                }
+
+                $notice = Notice::create(['notifiable_id' => $event->id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'new'=>$new,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
+
+                //ha új eseményre értesítést kér, akkor beállítódik az email kiküldés (kivéve a létrehozót)
+                if ($user_id != Auth::user()->id && in_array($user_id, $group->member_list_with_new_post_notice)) {
+                    $notice->update(['email' => 1, 'login_code' => Str::random(10)]);
                 }
             }
 
