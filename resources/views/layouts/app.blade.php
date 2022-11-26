@@ -112,7 +112,7 @@
 									</li>
 								</ul>
 							</li>
-							<li class="width-narrow"><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Kilépek</a></li>
+							<li class="width-narrow"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-btn fa-sign-out"></i>Kilépek</a></li>
 							<li class="width-narrow"><a href="{{ url('/profil') }}/{{ Auth::user()->id }}/{{ Auth::user()->slug }}"><i class="fa fa-btn fa-user"></i>Adatlapom</a></li>
 							<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 								@csrf
