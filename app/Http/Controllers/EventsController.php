@@ -57,12 +57,14 @@ class EventsController extends Controller
             }
 
             //esemény megnézése után nulláza a notice számlálóját és ugyanannyival a user-ét is, amenniben van
-            $notice = Notice::findBy($id,Auth::user()->id,'Event')->first();
-            if($notice) {
-                $user_new_post = Auth::user()->new_post - $notice->new;
-                $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
-                Auth::user()->update(['new_post'=>$user_new_post]);
-                $notice->update(['new'=>0]);
+            if(Auth::check()) {
+                $notice = Notice::findBy($id,Auth::user()->id,'Event')->first();
+                if($notice) {
+                    $user_new_post = Auth::user()->new_post - $notice->new;
+                    $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
+                    Auth::user()->update(['new_post'=>$user_new_post]);
+                    $notice->update(['new'=>0]);
+                }
             }
 
             $has_access = $group->isAdmin();
