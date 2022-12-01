@@ -199,16 +199,9 @@ class ProfilesController extends Controller
 		 
 		$name=trim($request->get('name'));
 
-        //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-
-        $introduction = htmlspecialchars($request->get('introduction'));
-        //$introduction = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $introduction);
-
-        $intention = htmlspecialchars($request->get('intention'));
-        //$intention = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $intention);
-
-        $interest = htmlspecialchars($request->get('interest'));
-        //$interest = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $interest);
+        $introduction = $request->get('introduction');
+        $intention = $request->get('intention');
+        $interest = $request->get('interest');
 
 		$data = [
 			'name' => $name,

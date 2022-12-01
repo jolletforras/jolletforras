@@ -39,11 +39,9 @@
                         @endif
                         <br>
                         @if($type=='tab1')
-                            @if(strlen($user->introduction)>721)
-                                {!! nl2br(mb_substr($user->introduction,0,721)) !!}
+                            {!! justbr($user->introduction,721) !!}
+                            @if(strlen(strip_tags($user->introduction))>721)
                                 <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">... tovább</a>
-                            @else
-                                {!! nl2br($user->introduction) !!}
                             @endif
                             <p>jártasság, tudás: @include('profiles.partials.tags')</p>
                         @elseif($type=='tab2')

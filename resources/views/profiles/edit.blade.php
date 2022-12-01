@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+			@include('partials.tinymce_just_link_js')
+
 			@if(session()->has('warning'))
 	            <div class="panel panel-warning">
 	            	<div class="panel-heading">
@@ -111,7 +113,7 @@
 							<div id="intro_info" class="collapse info">
 								Mi mindent csináltál eddig és mivel foglalkozol most? Írj bátran mindarról, amit erre a portálra tartozónak gondolsz.
 							</div>
-							<textarea class="form-control" rows="4" name="introduction" cols="50">{{$user->introduction}}</textarea>
+							<textarea class="form-control" rows="5" name="introduction" cols="50">{{$user->introduction}}</textarea>
 						</div>
 
 						<div class="form-group">
@@ -120,14 +122,14 @@
 							<div id="intention_info" class="collapse info">
 								Mit szeretnél itt csinálni, milyen reményeid vannak az oldallal kapcsolatban?
 							</div>
-							<textarea class="form-control" rows="4" name="intention" cols="50">{{$user->intention}}</textarea>
+							<textarea class="form-control" rows="5" name="intention" cols="50">{{$user->intention}}</textarea>
 						</div>
 
 						<div class="form-group">
 							<b>Mi lelkesít, amivel a következő hónapokban foglalkozni szeretnél?*</b>
 							<a href="#interest_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 							<div id="interest_info" class="collapse info">Itt írhatsz konkrét kezdeményezéseidről, terveidről, amelyekkel a társadalmi jólléthez szeretnél hozzájárulni.</div>
-							<textarea class="form-control" rows="4" name="interest" cols="50">{{$user->interest}}</textarea>
+							<textarea class="form-control" rows="5" name="interest" cols="50">{{$user->interest}}</textarea>
 						</div>
 
 						<div class="form-group">

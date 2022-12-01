@@ -1,5 +1,17 @@
 <?php
 
+function justbr($text,$length)
+{
+    $text = strip_tags($text,"<p>");
+    $text = str_replace("<p>", "",$text);
+    $text = str_replace("</p>", "Ł",$text);
+    $text = mb_substr($text,0,$length);
+    $text = str_replace("Ł", "<br/>",$text);
+
+    return $text;
+}
+
+
 function addhttp($url)
 {
 	return is_numeric(strpos($url,'http')) || empty($url) ?  $url : 'http://'.$url;

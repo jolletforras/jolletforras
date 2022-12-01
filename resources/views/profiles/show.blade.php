@@ -35,16 +35,16 @@
 				<b>Weboldal:</b> <a href="{{$user->webpage_url}}" target="_blank">{{$user->webpage_name}}</a><br><br>
 			@endif
 			<b>Bemutatkozás:</b><br>
-			{!! nl2br($user->introduction) !!}<br>
+			{!! $user->introduction !!}
 			@include('profiles.partials.tags')<br><br>
 			@if($user->intention!='')
 				<b>Amiért itt vagyok a portálon:</b><br>
-				{!! nl2br($user->intention) !!}<br>
+				{!! $user->intention !!}<br>
 			@endif
 			<br>
 			@if($user->interest!='')
 				<b>Ez ami lelkesít, amivel a következő hónapokban foglalkozni szeretnék:</b><br>
-				{!! nl2br($user->interest) !!}<br>
+				{!! $user->interest !!}<br>
 			@endif
 			@if (Auth::check())
 				@include('profiles.partials.groups')
