@@ -35,7 +35,7 @@
 				<b>Weboldal:</b> <a href="{{$user->webpage_url}}" target="_blank">{{$user->webpage_name}}</a><br><br>
 			@endif
 			<b>Bemutatkozás:</b><br>
-			{!! $user->introduction !!}
+			{!! $user->introduction !!}<br>
 			@include('profiles.partials.tags')<br><br>
 			@if($user->intention!='')
 				<b>Amiért itt vagyok a portálon:</b><br>
