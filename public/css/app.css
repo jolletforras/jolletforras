@@ -302,6 +302,12 @@ h3 {
 	font-size: 18px;
 }
 
+.panel .introduction h4 {
+	margin-top: 12px;
+	margin-bottom: 0px;
+	font-size: 16px;
+}
+
 .modal-content {
 	max-width: 440px;
 }
