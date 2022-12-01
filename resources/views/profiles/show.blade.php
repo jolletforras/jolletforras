@@ -17,7 +17,7 @@
 	</div>
 	@endif
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-body introduction">
 			@include('profiles.partials.show_profilephoto')
 			@if (Auth::check())
 				<b>Email: </b>{{ $user->email }}<br><br>
@@ -34,18 +34,17 @@
 			@if($user->webpage_url!='')
 				<b>Weboldal:</b> <a href="{{$user->webpage_url}}" target="_blank">{{$user->webpage_name}}</a><br><br>
 			@endif
-			<b>Bemutatkozás:</b><br>
-			{!! $user->introduction !!}<br>
-			@include('profiles.partials.tags')<br><br>
+			<h4><b>Bemutatkozás:</b></h4>
+			{!! $user->introduction !!}
 			@if($user->intention!='')
-				<b>Amiért itt vagyok a portálon:</b><br>
-				{!! $user->intention !!}<br>
+				<h4><b>Amiért itt vagyok a portálon:</b></h4>
+				{!! $user->intention !!}
 			@endif
-			<br>
 			@if($user->interest!='')
-				<b>Ez ami lelkesít, amivel a következő hónapokban foglalkozni szeretnék:</b><br>
-				{!! $user->interest !!}<br>
+				<h4><b>Ez ami lelkesít, amivel a következő hónapokban foglalkozni szeretnék:</b></h4>
+				{!! $user->interest !!}
 			@endif
+			<h4><b>Jártasság, tudás:</b> @include('profiles.partials.tags')</h4>
 			@if (Auth::check())
 				@include('profiles.partials.groups')
 			@endif
