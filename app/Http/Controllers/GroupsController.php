@@ -326,12 +326,15 @@ class GroupsController extends Controller
     public function saveAdmin($id, Request $request)
     {
 
-        DB::table('group_user')->where('group_id',$id)->update(['admin' => 0]);
-        DB::table('group_user')->where('group_id',$id)->whereIn('user_id', $request->input('admin_list'))->update(['admin' => 1]);
+        if(empty($request->input('admin_list'))) {
+            $response = array('status' => 'error','message' => 'A kezelő nem törölhető, mivel egy kezelője kell legyen a csoportnak.');
+        }
+        else {
+            DB::table('group_user')->where('group_id',$id)->update(['admin' => 0]);
+            DB::table('group_user')->where('group_id',$id)->whereIn('user_id', $request->input('admin_list'))->update(['admin' => 1]);
 
-        $response = array(
-            'status' => 'success',
-        );
+            $response = array('status' => 'success');
+        }
 
         return \Response::json($response);
     }

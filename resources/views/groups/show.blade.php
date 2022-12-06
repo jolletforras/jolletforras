@@ -136,6 +136,13 @@
 					if(data['status']=='success') {
 						location.reload();
 					}
+					if(data['status']=='error') {
+						$('div.flash-message').removeClass("alert-info");
+						$('div.flash-message').addClass("alert-warning");
+						$('div.flash-message').html(data['message']);
+						$('div.flash-message').show();
+						setTimeout(function(){ window.location.href = "{{url('csoport')}}/{{$group->id}}/{{$group->slug}}"; }, 3000);
+					}
 				},
 				error: function(error){
 					console.log(error.responseText);
