@@ -123,7 +123,8 @@
 
 			$("#tag").change(function () {
 				var id= $("#tag").val();
-				location.href="{{ url('terkep/tarsak')}}/ertes/"+id+"/"+tags[id];
+				var map_type= $("#map_type").val();
+				location.href="{{ url('terkep')}}/"+map_type+"/cimke/"+id+"/"+tags[id];
 			});
 		@endif
 	</script>

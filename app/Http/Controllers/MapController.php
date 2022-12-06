@@ -6,10 +6,76 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserSkill;
 use App\Models\Group;
+use App\Models\GroupTag;
 
 class MapController extends Controller
 {
-    protected function markers($users)
+
+    public function members()
+    {
+        $users = User::members()->whereNotNull('lat')->whereNotNull('lng')->get();
+
+        $initialMarkers = $this->user_markers($users);
+
+        $tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+
+        $tags_slug = UserSkill::pluck('slug', 'id')->all();
+
+        $map_type = 'tarsak';
+
+        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
+    }
+
+    public function user_skill_show($id) {
+
+        $tag = UserSkill::findOrFail($id);
+
+        $users = $tag->users()->members()->whereNotNull('lat')->whereNotNull('lng')->get();
+
+        $initialMarkers = $this->user_markers($users);
+
+        $tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+
+        $tags_slug = UserSkill::pluck('slug', 'id')->all();
+
+        $map_type = 'tarsak';
+
+        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
+    }
+
+    public function groups()
+    {
+        $groups = Group::whereNotNull('lat')->whereNotNull('lng')->get();
+
+        $initialMarkers = $this->group_markers($groups);
+
+        $tags =  GroupTag::getTagList();
+
+        $tags_slug = GroupTag::pluck('slug', 'id')->all();
+
+        $map_type = 'csoportok';
+
+        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
+    }
+
+    public function group_tag_show($id) {
+
+        $tag = GroupTag::find($id);
+
+        $groups = $tag->groups()->whereNotNull('lat')->whereNotNull('lng')->get();
+
+        $initialMarkers = $this->group_markers($groups);
+
+        $tags =  GroupTag::getTagList();
+
+        $tags_slug = GroupTag::pluck('slug', 'id')->all();
+
+        $map_type = 'csoportok';
+
+        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
+    }
+
+    protected function user_markers($users)
     {
         $initialMarkers = array();
 
@@ -26,42 +92,8 @@ class MapController extends Controller
         return $initialMarkers;
     }
 
-    public function members()
+    protected function group_markers($groups)
     {
-        $users = User::members()->whereNotNull('lat')->whereNotNull('lng')->get();
-
-        $initialMarkers = $this->markers($users);
-
-        $tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
-
-        $tags_slug = UserSkill::pluck('slug', 'id')->all();
-
-        $map_type = 'tarsak';
-
-        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
-    }
-
-    public function skill_show($id) {
-
-        $tag = UserSkill::findOrFail($id);
-
-        $users = $tag->users()->members()->whereNotNull('lat')->whereNotNull('lng')->get();
-
-        $initialMarkers = $this->markers($users);
-
-        $tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
-
-        $tags_slug = UserSkill::pluck('slug', 'id')->all();
-
-        $map_type = 'tarsak';
-
-        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
-    }
-
-    public function groups()
-    {
-        $groups = Group::whereNotNull('lat')->whereNotNull('lng')->get();
-
         $initialMarkers = array();
 
         foreach($groups as $group) {
@@ -74,8 +106,6 @@ class MapController extends Controller
             ];
         }
 
-        $map_type = 'csoportok';
-
-        return view('map', compact('initialMarkers','map_type'));
+        return $initialMarkers;
     }
 }
