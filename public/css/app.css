@@ -39,7 +39,7 @@ body {
 	cursor:pointer;
 }
 
-#notice span {
+#notice span, #notice-modal span {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;

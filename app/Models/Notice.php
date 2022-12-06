@@ -33,6 +33,6 @@ class Notice extends Model
     {
         $two_weeks_before = date( 'Y-m-d', strtotime('-2 weeks'));
 
-        $query->where('user_id',Auth::user()->id)->where('new','>',0)->where('updated_at','>',$two_weeks_before);
+        $query->where('user_id',Auth::user()->id)->where('updated_at','>',$two_weeks_before)->orderBy('updated_at', 'DESC');
     }
 }

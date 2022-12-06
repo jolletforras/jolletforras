@@ -26,7 +26,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
- 	<link href="{{ url('/') }}/css/app.css?ver=1.28" rel="stylesheet">
+ 	<link href="{{ url('/') }}/css/app.css?ver=1.29" rel="stylesheet">
 	@stack('styles')
 
 	<!-- Google tag (gtag.js) -->
@@ -44,7 +44,7 @@
 		<div class="oldal_nev">
 	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
 		</div>
-		@if( Auth::check() && Auth::user()->new_post > 0)<div id="notice" data-toggle="modal" data-target="#notice-modal">Friss<span>{{ Auth::user()->new_post }}</span></div>@endif
+		@if( Auth::check())<div id="notice" data-toggle="modal" data-target="#notice-modal">Friss @if( Auth::user()->new_post>0)<span>{{ Auth::user()->new_post }}</span>@endif </div>@endif
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
@@ -138,7 +138,7 @@
 				</div>
 			@endif
 
-			@if( Auth::check() && Auth::user()->new_post > 0)
+			@if( Auth::check())
 			<div class="modal fade" id="notice-modal" role="dialog">
 				<div class="modal-dialog">
 
@@ -152,14 +152,24 @@
 							@foreach(\App\Models\Notice::findNew()->get() as $notice)
 								@if($notice->type=="Forum")
 									@if($forum = \App\Models\Forum::find($notice->notifiable_id))
-								<a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - "{{ $forum->title }}" téma ({{$notice->new}})</a><br>
+										@if($notice->new>0)
+								<b><a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - "{{ $forum->title }}" téma <span>{{$notice->new}}</span></a></b>
+										@else
+								<a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - "{{ $forum->title }}" téma</a>
+										@endif
 									@endif
 								@endif
 								@if($notice->type=="Event")
 									@if($event = \App\Models\Event::find($notice->notifiable_id))
-										<a href="{{url('esemeny')}}/{{ $event->id }}/{{$event->slug}}">{{$event->group->name}} - "{{ $event->title }}" esemény ({{$notice->new}})</a><br>
+										@if($notice->new>0)
+								<b><a href="{{url('esemeny')}}/{{ $event->id }}/{{$event->slug}}">{{$event->group->name}} - "{{ $event->title }}" esemény <span>{{$notice->new}}</span></a></b>
+										@else
+								<a href="{{url('esemeny')}}/{{ $event->id }}/{{$event->slug}}">{{$event->group->name}} - "{{ $event->title }}" esemény</a>
+										@endif
 									@endif
 								@endif
+								<br>
+								<hr>
 							@endforeach
 						</div>
 						<div class="modal-footer"></div>
