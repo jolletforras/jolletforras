@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	@yield('robots','')
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Ludescher Ottó" />
 	<meta name="description" content="@yield('description','A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	@yield('canonical','')
