@@ -16,7 +16,7 @@ class Notice extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'notifiable_id', 'user_id', 'type', 'comment_id', 'new', 'email', 'email_sent', 'ask_notice', 'login_code'
+        'notifiable_id', 'user_id', 'type', 'comment_id', 'new', 'email', 'email_sent', 'ask_notice', 'read_it', 'login_code'
     ];
 
     public function user()

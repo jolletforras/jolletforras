@@ -33,6 +33,9 @@
 					</div>
 				</div>
 			@endif
+			@if ($event->isGroupEvent() && $users_read_it && Auth::check() && Auth::user()->id==$event->user->id)
+				Látta: {!! $users_read_it !!}
+			@endif
 		</div>
 	</div>
 	@if(Auth::check())

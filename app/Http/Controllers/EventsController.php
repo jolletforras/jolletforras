@@ -48,6 +48,8 @@ class EventsController extends Controller
             return redirect('/');
         }
 
+        $users_read_it = '';
+
         if($event->isGroupEvent()) {
             $group = Group::findOrFail($event->group_id);
 
@@ -63,11 +65,20 @@ class EventsController extends Controller
                     $user_new_post = Auth::user()->new_post - $notice->new;
                     $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
                     Auth::user()->update(['new_post'=>$user_new_post]);
-                    $notice->update(['new'=>0]);
+                    $notice->update(['new'=>0,'read_it'=>1]);
                 }
             }
 
             $has_access = $group->isAdmin();
+
+            $users_read_it_r = array();
+            $notices = Notice::where('notifiable_id', $id)->where('type', 'Event')->where('read_it', 1)->get();
+            foreach($notices as $n) {
+                if($n->user->id!=$event->user->id) {
+                    $users_read_it_r[] = '<a href="'.url('profil').'/'.$n->user->id.'/'.$n->user->slug.'">'.$n->user->name.'</a>';
+                }
+            }
+            $users_read_it = implode(", ",$users_read_it_r);
         }
         else {
             $has_access = $event->isEditor();
@@ -75,7 +86,7 @@ class EventsController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->get();
 
-        return view('events.show', compact('event','has_access', 'comments'));
+        return view('events.show', compact('event','has_access', 'comments', 'users_read_it'));
     }
 
 

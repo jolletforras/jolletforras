@@ -64,10 +64,19 @@ class GroupThemesController extends Controller
             $user_new_post = Auth::user()->new_post - $notice->new;
             $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
             Auth::user()->update(['new_post'=>$user_new_post]);
-            $notice->update(['new'=>0]);
+            $notice->update(['new'=>0,'read_it'=>1]);
         }
 
-        return view('groupthemes.show', compact('group','forum','comments','askNotice'));
+        $users_read_it_r = array();
+        $notices = Notice::where('notifiable_id', $forum_id)->where('type', 'Forum')->where('read_it', 1)->get();
+        foreach($notices as $n) {
+            if($n->user->id!=$forum->user->id) {
+                $users_read_it_r[] = '<a href="'.url('profil').'/'.$n->user->id.'/'.$n->user->slug.'">'.$n->user->name.'</a>';
+            }
+        }
+        $users_read_it = implode(", ",$users_read_it_r);
+
+        return view('groupthemes.show', compact('group','forum','comments','askNotice','users_read_it'));
     }
 
 
