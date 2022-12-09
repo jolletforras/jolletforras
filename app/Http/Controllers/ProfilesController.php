@@ -413,6 +413,7 @@ class ProfilesController extends Controller
 	{
 		$message='Nem történt változtatás.';
 		$user=Auth::user();
+        $user->timestamps = false; //nem frissíti az update_at-et
         $message_r = array();
 		if($user->status==3 || $user->status==4) {
 			$my_post_comment_notice = empty($request->get('my_post_comment_notice')) ? 0 : 1;

@@ -43,6 +43,8 @@ class GroupThemesController extends Controller
     {
         $group = Group::findOrFail($group_id);
 
+        $user = Auth::user();
+
         //ha nem csoport tag akkor a csoport főoldalára irányít
         if(!$group->isMember()) {
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
@@ -53,7 +55,7 @@ class GroupThemesController extends Controller
         $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $forum_id)->get();
 
 
-        $notice = Notice::findBy($forum_id,Auth::user()->id,'Forum')->first();
+        $notice = Notice::findBy($forum_id,$user->id,'Forum')->first();
 
         $askNotice = 0;
         if($notice) {
@@ -61,9 +63,11 @@ class GroupThemesController extends Controller
             $askNotice = $notice->ask_notice;
 
             //nulláza a notice számlálóját és ugyanannyival a user-ét is
-            $user_new_post = Auth::user()->new_post - $notice->new;
+            $user_new_post = $user->new_post - $notice->new;
             $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
-            Auth::user()->update(['new_post'=>$user_new_post]);
+            $user->timestamps = false;
+            $user->new_post=$user_new_post;
+            $user->save();
             $notice->update(['new'=>0,'read_it'=>1]);
         }
 
