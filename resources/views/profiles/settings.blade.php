@@ -15,7 +15,7 @@
 
                         Kérek emailben értesítést:
                         <div class="form-group" style="padding-left: 10px;">
-                            <input name="my_post_comment_notice" type="checkbox" value="{{$user->my_post_comment_notice}}" @if($user->my_post_comment_notice) checked @endif>
+                            <input name="my_post_comment_notice" type="checkbox" value="1" @if($user->my_post_comment_notice) checked @endif>
                             ha hozzászólnak valamelyik bejegyzésemhez <i>(fórum témám, csoport témám, kezdeményezésem)</i>
                         </div>
 
