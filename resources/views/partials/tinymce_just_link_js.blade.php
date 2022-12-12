@@ -6,6 +6,7 @@
 			selector: 'textarea',
 			menubar:false,
 			relative_urls : false,
+			remove_script_host : false,
 			setup: function (editor) {
 				editor.on('init change', function () {
 					editor.save();
