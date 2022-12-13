@@ -330,8 +330,9 @@ h3 {
 }
 
 .img-responsive {
-	margin-left: 10px !important;
-	margin-right: 10px !important;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .field-icon {
