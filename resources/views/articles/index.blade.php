@@ -34,11 +34,14 @@
 	  <tr>
       	<td>
 			<h3><a href="{{ url('iras',$article->id) }}/{{$article->slug}}">{{ $article->title }}</a></h3>
-			@if (Auth::check() && Auth::user()->id==$article->user->id)
+			@if (Auth::check() && (Auth::user()->id==$article->user->id || Auth::user()->admin))
 				<a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" class="btn btn-default">módosít</a>
 			@endif
 			<article>
-				<div class="body">{!! $article->body !!}</div>
+				<div class="body">
+					<img class="img-responsive" style="max-height: 300px;" title="{{$article->slug}}" src="{{ url('/')}}/images/posts/{{$article->image}}">
+					{!! $article->short_description !!} <a href="{{ url('iras',$article->id) }}/{{$article->slug}}">... tovább</a>
+				</div>
 			</article>
 		</td>
       </tr>

@@ -49,7 +49,7 @@ class ArticlesController extends Controller
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'body' => $description,
-            'short_description' => justbr($description,500),
+            'short_description' => justbr($description,700),
             'image' => getfirstimage($description),
             'slug' => Str::slug($request->get('title'))
         ]);
