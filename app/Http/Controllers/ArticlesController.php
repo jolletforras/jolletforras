@@ -67,7 +67,7 @@ class ArticlesController extends Controller
 	{
 		$article = Article::findOrFail($id);
 
-		if(Auth::user()->id != $article->user_id) {
+		if(Auth::user()->id != $article->user_id || Auth::user()->admin) {
 			return redirect('/');
 		}
 
