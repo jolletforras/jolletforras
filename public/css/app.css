@@ -619,9 +619,15 @@ h3 {
 	}
 }
 
-@media all and (max-width:400px) {
+@media all and (max-width:500px) {
 	#banner {
 		height: 90px;
+	}
+}
+
+@media all and (max-width:400px) {
+	#banner {
+		height: 80px;
 	}
 
 	.base {
