@@ -5,7 +5,18 @@
 @endsection
 
 @section('content')
-        <h2><img src="images/tarsadalmijollet.jpg" alt="Társadalmi Jóllét" width="100%"></h2>
+        <div id="banner">
+            <h2><img src="images/tarsadalmijollet.png" alt="Társadalmi Jóllét"></h2>
+            <div class="container">
+                <p>
+                    A nagy fordulat egy ember életében: <br>
+                    "nekem mi jut?" helyett: "mi fakad belőlem?"<br>
+                    S ez elég ahhoz, hogy a bentről-fakadó<br>
+                    fényes legyen és folyton tisztuló.<br>
+                    <span>(Weöres Sándor)</span>
+                </p>
+            </div>
+        </div>
    		<div class="inner_box">
             A Társadalmi Jóllét Portál találkozási tér kíván lenni mindazon emberek és csoportok számára, akik cselekvőként részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.
             Célunk, hogy ez az oldal a lehető legjobban támogassa a cselekvők egymásra találását és mind erőteljesebb összekapcsolódását.<br>
