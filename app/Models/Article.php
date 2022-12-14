@@ -14,6 +14,8 @@ class Article extends Model
         'title',
         'meta_description',
         'body',
+        'short_description',
+        'image',
         'slug'
     ];
 

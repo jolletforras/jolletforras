@@ -43,12 +43,14 @@ class ArticlesController extends Controller
 	
 	public function store(Request $request)
 	{
-		//Auth::user()->articles()->create($request->all());
+        $description = $request->get('body');
 
         $article = Auth::user()->articles()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
-            'body' => $request->get('body'),
+            'body' => $description,
+            'short_description' => justbr($description,500),
+            'image' => getfirstimage($description),
             'slug' => Str::slug($request->get('title'))
         ]);
 
@@ -82,12 +84,14 @@ class ArticlesController extends Controller
 	{
 		$article = Article::findOrFail($id);
 
-		//$article->update($request->all());
+        $description = $request->get('body');
 
         $article->update([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
-            'body' => $request->get('body'),
+            'body' => $description,
+            'short_description' => justbr($description,500),
+            'image' => getfirstimage($description),
             'slug' => Str::slug($request->get('title'))
         ]);
 
