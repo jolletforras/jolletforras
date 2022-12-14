@@ -24,6 +24,10 @@
 	line-height: 160%;
 }
 
+#banner p span {
+	margin-left: 220px;
+}
+
 
 body {
   //font-family: 'Lato';
