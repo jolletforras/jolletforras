@@ -620,6 +620,10 @@ h3 {
 }
 
 @media all and (max-width:400px) {
+	#banner {
+		height: 90px;
+	}
+
 	.base {
 		margin-left: 0%;
 		margin-right: 0%;
