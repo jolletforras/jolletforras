@@ -96,7 +96,7 @@ h3 {
 	font-size: 18px;
 //line-height: 100%;
 	margin-top: 0px;
-	margin-bottom: 5px;
+	margin-bottom: 12px;
 //color: #707070;
 //display: inline;
 }
@@ -305,8 +305,7 @@ h3 {
 
 .inner_box h2 {
 	font-weight: bold;
-	color: black;
-	line-height: 130%;
+	color: #494949;
 	margin-top: 6px;
 	margin-bottom: 12px;
 	display: inline-block;
