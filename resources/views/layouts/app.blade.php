@@ -80,6 +80,7 @@
 							</li>
 							<li class="width-narrow"><a href="{{ url('kozossegimegallapodas') }}">Közösségi megállapodás</a></li>
 							<li class="width-narrow"><a href="{{ url('tudnivalok') }}">Tudnivalók</a></li>
+							<li class="width-narrow"><a href="{{ url('hirlevelek') }}">Hírlevelek</a></li>
 							<li><a href="{{ url('kapcsolat') }}">Kapcsolat</a></li>
 
 							@if(false && Auth::check() && Auth::user()->admin)
