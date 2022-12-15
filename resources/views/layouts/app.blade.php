@@ -48,7 +48,7 @@
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
-					<h2><img src="logo.png" alt="Társadalmi Jóllét"></h2>
+					<h2><img src="{{ url('/') }}/logo.png" alt="Társadalmi Jóllét"></h2>
                 					<!-- Collapsed Hamburger -->
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
 						<span class="sr-only">Toggle Navigation</span>
