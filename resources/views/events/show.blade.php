@@ -2,7 +2,7 @@
 @section('title'){{ $event->title }}@endsection
 @section('description'){{ $event->meta_description }}@endsection
 @section('url'){{url('esemeny')}}/{{$event->id}}/{{$event->slug}}@endsection
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/esemenyek" />
+@section('canonical')<link rel="canonical" href="{{url('esemeny')}}/{{$event->id}}/{{$event->slug}}" />
 @endsection
 
 @section('content')

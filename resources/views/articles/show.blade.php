@@ -2,7 +2,7 @@
 @section('title'){{ $article->title }}@endsection
 @section('description'){{ $article->meta_description }}@endsection
 @section('url'){{url('iras')}}/{{$article->id}}/{{$article->slug}}@endsection
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/irasok" />
+@section('canonical')<link rel="canonical" href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}" />
 @endsection
 
 @section('content')
