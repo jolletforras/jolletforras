@@ -2,8 +2,10 @@
 @section('title'){{ $article->title }}@endsection
 @section('description'){{ $article->meta_description }}@endsection
 @section('url'){{url('iras')}}/{{$article->id}}/{{$article->slug}}@endsection
-@section('canonical')<link rel="canonical" href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}" />
+@section('canonical')<link rel="canonical" href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}" />@endsection
+@section('image')@if(!empty($article->image)){{url('/')}}/images/posts/{{$article->image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
 @endsection
+
 
 @section('content')
 	<div class="inner_box" style="font-size: 16px;">
