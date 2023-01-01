@@ -96,14 +96,14 @@
                         <div class="form-group">
 							<label for="webpage_name">Weboldalad neve</label>
 							<a href="#webpage_name_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-							<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a portálon regisztráltaknak, írd ide. Ha több oldalad is van, azt az egyet írd ide, amit leginkább ide kapcsolódónak gondolsz.</div>
+							<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a portálon regisztráltaknak, írd ide. Ha több oldalad is van, akkor egymástól vesszővel elválasztva add meg.</div>
 							<input class="form-control" name="webpage_name" type="text" value="{{$user->webpage_name}}" id="webpage_name">
                         </div>
 
                         <div class="form-group">
 							<label for="webpage_url">Weboldalad linkje</label>
 							<a href="#webpage_url_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-							<div id="webpage_url_info" class="collapse info">A böngésződ szerkesztőlécéből másold be a hivatkozást.</div>
+							<div id="webpage_url_info" class="collapse info">A böngésződ szerkesztőlécéből másold be a hivatkozást. Ha több oldalad van, akkor a linkeket egymástól vesszővel választva add meg. Ugyanabban a sorrendbe tedd meg, ahogy a weboldalaid nevét adtad meg.</div>
 							<input class="form-control" name="webpage_url" type="text" value="{{$user->webpage_url}}" id="webpage_url">
                         </div>
 

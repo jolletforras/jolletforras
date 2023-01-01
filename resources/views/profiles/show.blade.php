@@ -32,7 +32,7 @@
 				<br><br>
 			<b>Legutóbb módosítva: </b>{{ $user->updated_at->format('Y-m-d') }}<br><br>
 			@if($user->webpage_url!='')
-				<b>Weboldal:</b> <a href="{{$user->webpage_url}}" target="_blank">{{$user->webpage_name}}</a><br><br>
+				<b>Weboldal:</b> {!!$user->webpages!!}<br><br>
 			@endif
 			<h4><b>Bemutatkozás:</b></h4>
 			{!! $user->introduction !!}

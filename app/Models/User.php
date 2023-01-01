@@ -117,6 +117,22 @@ class User extends Authenticatable
         return Carbon::parse($date)->format('Y-m-d');
     }
 
+    public function getWebpagesAttribute() {
+
+        $webpages = array();
+
+        $names = explode(",",$this->webpage_name);
+        $urls  = explode(",",$this->webpage_url);
+
+        $num = count($names) > count($urls) ? count($urls) : count($names);
+
+        for ($i = 0; $i < $num; $i++) {
+            $webpages[] = '<a href="'.trim($urls[$i]).'" target="_blank">'.trim($names[$i]).'</a>';
+        }
+
+        return implode(', ',$webpages);
+    }
+
     public function incompleteProfile() {
         return
             strlen($this->name)<2 ||
