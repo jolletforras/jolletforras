@@ -1,12 +1,11 @@
 @unless($group->members->isEmpty())
     <p>
-        <b>Tagok: </b>
-        @for ($i = 0; $i < $last=count($group->members)-1; $i++)
-            <a href="{{ url('profil',$group->members[$i]->id) }}/{{$group->members[$i]->slug}}">
-                {{$group->members[$i]->name}}</a>,&nbsp;
-        @endfor
-        <a href="{{ url('profil',$group->members[$last]->id) }}/{{$group->members[$last]->slug}}">
-            {{$group->members[$last]->name}}
-        </a>
+        <?php $members_html = array(); ?>
+        @foreach($group->members as $member)
+            @if($member->status==3)
+                <?php $members_link[] = '<a href="'.url('profil',$member->id).'/'.$member->slug.'">'.$member->name.'</a>' ?>
+            @endif
+        @endforeach
+        <b>Tagok: </b>{!! implode(', ',$members_link) !!}
     </p>
 @endunless
