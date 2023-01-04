@@ -155,11 +155,18 @@ class ProfilesController extends Controller
 	{
 		$user = User::findOrFail($id);
 
+        //ha nincs belépve és nem publikus a profil
         if(!Auth::check() && $user->public==0) return redirect()->guest('login');
 
         $myprofile = false;
         if(Auth::check()) {
             $myprofile = Auth::user()->id==$user->id;
+        }
+
+        //ha nem saját profil és nincs active (3) státuszban
+        if(!$myprofile && $user->id!=3) {
+            $message = "Jelenleg ".$user->name." adatlapja nem tekinthető meg.";
+            return view('no_page', compact('message'));
         }
 
 		return view('profiles.show', compact('user', 'myprofile'));
