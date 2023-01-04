@@ -16,7 +16,7 @@ class Forum extends Model
     
     public function user()
     {
-    	return $this->belongsTo(User::class)->members();
+    	return $this->belongsTo(User::class);
     }
 
     public function members()
