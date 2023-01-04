@@ -470,15 +470,19 @@ class ProfilesController extends Controller
                 }
             }
 
-			$deactivate_prev = $user->status==4 ? 1 : 0;
+    		$deactivate_prev = $user->status==4 ? 1 : 0;
 			$deactivate = empty($request->get('deactivate')) ? 0 : 1;
-            //dd($deactivate_prev.'|'.$deactivate);
 			if($deactivate!=$deactivate_prev) {
 				if ($deactivate) {
-					$user->status = 4;
-					$user->deleted_at = Carbon::now();
-                    $message_r[] = 'Sikeresen deaktiváltad magad. Amennyiben újból szeretnéd használni az oldalt, vedd ki a pipát a deaktiválásnál.';
-					$user->save();
+                    if($user->isAdminInGroup()) {
+                        $message_r[] = 'Nem deaktiválhatod a profilod, amíg valamelyik csoportban kezelő vagy! Előbb töröld magad mint kezelő a csoportokban.';
+                    }
+				    else {
+                        $user->status = 4;
+                        $user->deleted_at = Carbon::now();
+                        $message_r[] = 'Sikeresen deaktiváltad magad. Amennyiben újból szeretnéd használni az oldalt, vedd ki a pipát a deaktiválásnál.';
+                        $user->save();
+                    }
 				} else {
 					$user->status = 3;
 					$user->deleted_at = NULL;

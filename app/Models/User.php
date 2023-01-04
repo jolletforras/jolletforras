@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -139,6 +140,12 @@ class User extends Authenticatable
             strlen($this->city)=='' ||
             strlen($this->introduction)<config('constants.LENGTH_INTRO') ||
             $this->tags->count()==0;
+    }
+
+    public function isAdminInGroup() {
+        $groups = DB::table('group_user')->where('user_id',$this->id)->where('admin',1)->get();
+
+        return $groups->isNotEmpty();
     }
 
     public function scopeMembers($query)
