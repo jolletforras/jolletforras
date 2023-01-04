@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <input name="deactivate" type="checkbox" value="1" @if($deactivate) checked @endif>
-                            deaktiválom a profilom <i>(mások számára a profilom és a bejegyzéseim nem láthatóak)</i>
+                            deaktiválom a profilom <i>(mások számára a profilom nem látható)</i>
                         </div>
 
                         <br/>
