@@ -164,7 +164,7 @@ class ProfilesController extends Controller
         }
 
         //ha nem saját profil és nincs active (3) státuszban
-        if(!$myprofile && $user->id!=3) {
+        if(!$myprofile && $user->status!=3) {
             $message = "Jelenleg ".$user->name." adatlapja nem tekinthető meg.";
             return view('no_page', compact('message'));
         }
