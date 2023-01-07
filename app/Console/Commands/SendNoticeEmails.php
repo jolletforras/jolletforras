@@ -69,7 +69,7 @@ class SendNoticeEmails extends Command
 
             $data['email'] = $notice->user->email;
             $data['user_id'] = $notice->user->id;
-            $data['post'] = $notifiable->body;
+            $data['post'] = preg_replace("/<img[^>]+\>/i", "", $notifiable->body);
             $data['type'] = $notice->type=="Forum" ? "téma" :"esemény";
             $data['type_txt1'] = $notice->type=="Forum" ? "témát" :"eseményt";
             $data['type_txt2'] = $notice->type=="Forum" ? "beszélgetésnél" :"eseménynél";
