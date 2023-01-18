@@ -2,7 +2,7 @@
 @section('description', 'Adatkezelés. Így kezeljük a Társadalmi Jóllét Portálra regisztrált társak és közösségek adatait, hogy biztonságos és fenntartható teret nyújthassunk számukra.')
 @section('url', 'https://tarsadalmijollet.hu/adatkezeles')
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/adatkezeles" />
-
+@endsection
 @section('content')
    		<div class="inner_box" style="font-size: 18px">
             <h2>Adatkezelés</h2><br>
