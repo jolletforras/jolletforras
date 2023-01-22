@@ -24,7 +24,7 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-			'name' => 'required',
+			'name' => 'required|max:30',
 			'introduction' => 'required|min:30',
         	'zip_code' => 'required|numeric|min:1000',
             'location' => 'required|max:30',
@@ -43,6 +43,7 @@ class ProfileRequest extends FormRequest
     {
     	return [
     			'name.required' => 'Kérlek add meg a teljes neved',
+                'name.max' => 'A neved nem lehet több mint 30 karakter.',
                 'location.required' => 'Kérlek add meg a lakóhelyed',
     			'introduction.required'  => 'Kérlek add meg a bemutatkozásod',
     			'introduction.min'  => 'A bemutatkozásod leírása legalább :min karakter kell legyen',
