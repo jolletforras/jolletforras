@@ -225,13 +225,14 @@ class ProfilesController extends Controller
 			'interest' => $interest,
 			'slug' => Str::slug($name),
             'public' => $request->has('public') ? 1 : 0
-		];
+        ];
 
 		if($coordinates) {
 			$data['lat'] = $coordinates['lat'];
 			$data['lng'] = $coordinates['lng'];
 		}
 
+        $user->timestamps = true;
 		$user->update($data);
 
 		$user->tags()->sync($tag_list);
@@ -388,7 +389,6 @@ class ProfilesController extends Controller
 		}
 
 		$user=Auth::user();
-        $user->timestamps = false; //hogy az update_at ne módosuljon
 		$user->password=bcrypt($request->get('password'));
 		$user->save();
 
@@ -421,7 +421,6 @@ class ProfilesController extends Controller
 	{
 		$message='Nem történt változtatás.';
 		$user=Auth::user();
-        $user->timestamps = false; //nem frissíti az update_at-et
         $message_r = array();
 		if($user->status==3 || $user->status==4) {
 			$my_post_comment_notice = empty($request->get('my_post_comment_notice')) ? 0 : 1;

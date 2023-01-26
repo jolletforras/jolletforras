@@ -15,6 +15,8 @@ class User extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable;
 
+    public $timestamps = false; // put this code
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'activation_code', 'activated', 'full_name', 'location',
         'city', 'zip_code', 'introduction', 'intention', 'interest', 'slug', 'lat', 'lng',
-        'facebook_url', 'webpage_name', 'webpage_url', 'birth_year', 'public', 'last_login', 'new_post'
+        'facebook_url', 'webpage_name', 'webpage_url', 'birth_year', 'public', 'last_login', 'new_post', 'updated_at'
     ];
 
     /**
@@ -43,6 +45,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['updated_at'];
 
     //A user can start many panel discussions (forums).
     public function forums()
