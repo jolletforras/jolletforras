@@ -106,6 +106,7 @@ class ForumsController extends Controller
 
                 $new = 0; //aki felvette a témát annak ez nem számít újnak
                 if($user_id!=Auth::user()->id) {
+                    $user->timestamps = false; //hogy az update_at ne módosuljon
                     $user->new_post++; //a user-nél növeli az újak számlálóját
                     $user->save();
                     $new = 1;

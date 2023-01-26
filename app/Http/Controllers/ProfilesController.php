@@ -388,6 +388,7 @@ class ProfilesController extends Controller
 		}
 
 		$user=Auth::user();
+        $user->timestamps = false; //hogy az update_at ne módosuljon
 		$user->password=bcrypt($request->get('password'));
 		$user->save();
 
