@@ -64,7 +64,6 @@ class EventsController extends Controller
                 if($notice) {
                     $user_new_post = Auth::user()->new_post - $notice->new;
                     $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
-                    Auth::user()->timestamps = false; //hogy az update_at ne módosuljon
                     Auth::user()->update(['new_post'=>$user_new_post]);
                     $notice->update(['new'=>0,'read_it'=>1]);
                 }
@@ -134,7 +133,6 @@ class EventsController extends Controller
 
                 $new = 0; //aki felvette a témát annak ez nem számít újnak
                 if ($user_id != Auth::user()->id) {
-                    $user->timestamps = false; //hogy az update_at ne módosuljon
                     $user->new_post++; //a user-nél növeli az újak számlálóját
                     $user->save();
                     $new = 1;

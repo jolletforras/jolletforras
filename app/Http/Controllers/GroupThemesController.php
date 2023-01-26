@@ -65,7 +65,6 @@ class GroupThemesController extends Controller
             //nulláza a notice számlálóját és ugyanannyival a user-ét is
             $user_new_post = $user->new_post - $notice->new;
             $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
-            $user->timestamps = false;
             $user->new_post=$user_new_post;
             $user->save();
             $notice->update(['new'=>0,'read_it'=>1]);

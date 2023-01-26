@@ -51,7 +51,6 @@ class ForgotPasswordController extends Controller
             $message->to($data['email']);
         });
 
-        $user->timestamps = false; //hogy az update_at ne módosuljon
         $user->password=bcrypt($data['password']);
         $user->save();
 
