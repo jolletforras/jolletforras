@@ -71,7 +71,7 @@
  							<b>Lakóhely*</b>
 							<a href="#location_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 							<div id="location_info" class="collapse info">Budapest esetén a kerületet add meg itt</div>
-							<input class="form-control" maxlength="30" required="required" name="location" type="text" value="{{$user->location}}">
+							<input class="form-control" maxlength="30" name="location" type="text" value="{{$user->location}}">
 						</div>	
 
 						<div class="form-group">
