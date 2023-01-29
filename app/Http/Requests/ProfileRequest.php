@@ -24,13 +24,13 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-			'name' => 'required|max:30',
-			'introduction' => 'required|min:30',
-        	'zip_code' => 'required|numeric|min:1000',
-            'location' => 'required|max:30',
-            'webpage_name' => 'max:200',
-            'webpage_url' => 'max:200',
-        	'tag_list' => 'required',
+			//'name' => 'required|max:30',
+			//'introduction' => 'required|min:30',
+        	//'zip_code' => 'required|numeric|min:1000',
+            //'location' => 'required|max:30',
+            //'webpage_name' => 'max:200',
+            //'webpage_url' => 'max:200',
+        	//'tag_list' => 'required',
         ];
     }
     
