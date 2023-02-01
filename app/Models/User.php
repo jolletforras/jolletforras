@@ -86,6 +86,11 @@ class User extends Authenticatable
         return $this->belongsToMany(UserSkill::class)->withTimestamps();
     }
 
+    public function interest_tags()
+    {
+        return $this->belongsToMany(UserInterest::class)->withTimestamps();
+    }
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');

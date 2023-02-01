@@ -38,7 +38,7 @@
 							@endif
 
 							@if(count($user->skill_tags)==0)
-								<li>Legalább egy címke (válassz egyet a felsoroltak közül vagy vegyél fel újat, ha a felsorolásban nem szerepel)</li>
+								<li>Legalább egy jártasság, tudás címke (válassz egyet a felsoroltak közül vagy vegyél fel újat, ha a felsorolásban nem szerepel)</li>
 							@endif
 						</ul>
 						@endif
@@ -139,6 +139,17 @@
 							<select id="skill_tag_list" name="skill_tag_list[]" class="form-control" multiple>
 								@foreach($skill_tags as $key => $val)
 									<option value="{{ $key }}" @if(isset($selected_skill_tags) && in_array($key,$selected_skill_tags)) selected @endif>{{ $val }}</option>
+								@endforeach
+							</select>
+						</div>
+
+						<div class="form-group">
+							<b>Itt add meg címkékkel, hogy mi az ami érdekel amivel mások szolgálatára lehetsz*</b>
+							<a href="#interest_tag_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+							<div id="interest_tag_info" class="collapse info">Miben szeretnéd elmélyíteni a tudásod ami a közösség szolgálatára lehet? Címkét úgy tudsz felvenni, hogy elkezded írni amit fel szeretnél venni. A megjelenő listában rákattintasz a megfelelőre. Ha nincs olyan, akkor írd be teljesen a címkéd, majd kattints a listában rá.</div>
+							<select id="interest_tag_list" name="interest_tag_list[]" class="form-control" multiple>
+								@foreach($interest_tags as $key => $val)
+									<option value="{{ $key }}" @if(isset($selected_interest_tags) && in_array($key,$selected_interest_tags)) selected @endif>{{ $val }}</option>
 								@endforeach
 							</select>
 						</div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\User;
 use App\Models\UserSkill;
+use App\Models\UserInterest;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -183,8 +184,11 @@ class ProfilesController extends Controller
 		
 		$skill_tags = UserSkill::pluck('name', 'id');
         $selected_skill_tags = $user->skill_tags->pluck('id')->toArray();
+
+        $interest_tags = UserInterest::pluck('name', 'id');
+        $selected_interest_tags = $user->interest_tags->pluck('id')->toArray();
 		
-		return view('profiles.edit', compact('user', 'skill_tags', 'selected_skill_tags'));
+		return view('profiles.edit', compact('user', 'skill_tags', 'selected_skill_tags', 'interest_tags', 'selected_interest_tags'));
 	}
 	
 
@@ -199,9 +203,9 @@ class ProfilesController extends Controller
 		$zip_code=$request->get('zip_code');
 		$coordinates=$this->getCoordinates($zip_code);
 
-
 		$skill_tag_list=$this->getTagList((array)$request->input('skill_tag_list'), 'App\Models\UserSkill');
-		
+        $interest_tag_list=$this->getTagList((array)$request->input('interest_tag_list'), 'App\Models\UserInterest');
+
 		$user = User::findOrFail($id);
 		 
 		$name=trim($request->get('name'));
@@ -236,6 +240,7 @@ class ProfilesController extends Controller
 		$user->update($data);
 
 		$user->skill_tags()->sync($skill_tag_list);
+        $user->interest_tags()->sync($interest_tag_list);
 
 		$message='Adataidat sikeresen módosítottad!';
 
