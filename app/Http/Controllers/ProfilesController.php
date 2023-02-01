@@ -131,7 +131,7 @@ class ProfilesController extends Controller
 		$users=$query->get();
 
 		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
-        $interest_tags = [''=>''] + InterestSkill::pluck('name', 'id')->all();
+        $interest_tags = [''=>''] + UserInterest::pluck('name', 'id')->all();
 
 		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'skill_tags', 'interest_tags', 'city', 'district'))->render();
 
