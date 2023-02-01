@@ -484,6 +484,14 @@ h3 {
 	#banner div {
 		margin-left: 330px;
 	}
+
+	.profile-list .header {
+		padding-bottom: 7px;
+	}
+
+	.profile-list .select2-container {
+		margin-bottom: 3px;
+	}
 }
 
 @media all and (max-width:1024px) {
@@ -503,6 +511,12 @@ h3 {
 	#banner p {
 		margin-top: 30px;
 		font-size: 19px;
+	}
+
+	.base {
+		margin-left: 2%;
+		margin-right: 2%;
+		width: 96%;
 	}
 }
 
@@ -552,12 +566,6 @@ h3 {
         border-color: #ff9b00;
         border-radius: 5px;
     }
-
-    .base {
-		margin-left: 5%;
-		margin-right: 5%;
-		width: 90%;
-	}
 
 	.main {
 		padding: 10px 6px;
@@ -611,12 +619,6 @@ h3 {
 
 	#banner p {
 		font-size: 14px;
-	}
-
-	.base {
-		margin-left: 2%;
-		margin-right: 2%;
-		width: 96%;
 	}
 
 	.main {

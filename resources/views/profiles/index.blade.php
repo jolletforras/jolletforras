@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+<div class="profile-list">
 	<div class="header">
 		<div class="row">
 			@if (Auth::check())
@@ -58,6 +58,7 @@
 	<div id="result">
 		@include('profiles.partials.members_tabs')
 	</div>
+</div>
 @endsection
 
 @section('footer')
