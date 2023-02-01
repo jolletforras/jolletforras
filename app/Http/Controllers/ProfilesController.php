@@ -118,7 +118,7 @@ class ProfilesController extends Controller
 
 		$query = User::members()->latest('updated_at');
 
-		if (isset($city) && $city!="") {
+		if (isset($city) && $city!="-") {
 			$query=$query->where('city','=', $city);
 		}
 

@@ -38,7 +38,7 @@ class ProfileTagsController extends Controller
 		$skill_tag = UserSkill::findOrFail($skill_id);
 		$query=$skill_tag->users()->members()->latest('updated_at');
 
-		if (isset($city) && $city!="") {
+		if (isset($city) && $city!="-") {
 			$query=$query->where('city','=', $city);
 		};
 
@@ -89,7 +89,7 @@ class ProfileTagsController extends Controller
 
         $query=$interest_tag->users()->members()->latest('updated_at');
 
-        if (isset($city) && $city!="") {
+        if (isset($city) && $city!="-") {
             $query=$query->where('city','=', $city);
         };
 

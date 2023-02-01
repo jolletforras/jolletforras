@@ -24,17 +24,19 @@
 						@endforeach
 				</select>
 				<select id="city" onchange="CityFilter();" name="city">
-					<option value="" selected="selected">Minden település</option>
+					<option value="-" selected="selected">Minden település</option>
 					@foreach(constx('CITY') as $key => $val)
 						<option value="{{ $key }}">{{ $val }}</option>
 					@endforeach
 				</select>
-				<select id="district" onchange="DistrictFilter();" name="district" style="visibility: hidden;">
-					<option value="" selected="selected">Minden kerület</option>
-					@foreach(constx('DISTRICT') as $key => $val)
-						<option value="{{ $key }}">{{ $val }}</option>
-					@endforeach
-				</select>
+				<span id="district_block"  style="display: none;">
+					<select id="district" onchange="DistrictFilter();" name="district">
+						<option value="-" selected="selected">Minden kerület</option>
+						@foreach(constx('DISTRICT') as $key => $val)
+							<option value="{{ $key }}">{{ $val }}</option>
+						@endforeach
+					</select>
+				</span>
 				&Sigma;: <span id="count">{{count($users)}}</span>
 			</div>
 			@else
@@ -60,6 +62,14 @@
 
 @section('footer')
 	<script>
+		$('#city').select2({
+			placeholder: 'Település szerint',
+		});
+
+		$('#district').select2({
+			placeholder: 'Kerület szerint',
+		});
+
 		$('#skill_tag').select2({
 			placeholder: 'Keresés címke szerint',
 			skill_tags: false
@@ -118,10 +128,12 @@
 			var district="";
 
 			if(city=='Budapest') {
-				document.getElementById("district").style.visibility = "visible";
+				//document.getElementById("district_block").style.visibility = "visible";
+				$("#district_block").show();
 			}
 			else {
-				document.getElementById("district").style.visibility = "hidden";
+				//document.getElementById("district_block").style.visibility = "hidden";
+				$("#district_block").hide();
 			}
 
 			if ($("#skill_tag").val()==0 && $("#interest_tag").val()==0) {
