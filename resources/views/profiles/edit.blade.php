@@ -37,7 +37,7 @@
 								<li>Mi lelkesít, amivel a következő hónapokban foglalkozni szeretnél? (minimum {{config('constants.LENGTH_INTEREST')}} karakter  - most ennyi van: {{strlen($user->interest)}})</li>
 							@endif
 
-							@if(count($user->tags)==0)
+							@if(count($user->skill_tags)==0)
 								<li>Legalább egy címke (válassz egyet a felsoroltak közül vagy vegyél fel újat, ha a felsorolásban nem szerepel)</li>
 							@endif
 						</ul>
@@ -136,9 +136,9 @@
 							<b>Itt add meg címkékkel, hogy mi az a jártasság, tudás, tapasztalat amivel mások szolgálatára lehetsz*</b>
 							<a href="#skill_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 							<div id="skill_info" class="collapse info">Miben van jártasságod, mit tudnál hozzáadni egy közösséghez? Címkét úgy tudsz felvenni, hogy elkezded írni amit fel szeretnél venni. A megjelenő listában rákattintasz a megfelelőre. Ha nincs olyan, akkor írd be teljesen a címkéd, majd kattints a listában rá.</div>
-							<select id="tag_list" name="tag_list[]" class="form-control" multiple>
-								@foreach($tags as $key => $val)
-									<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
+							<select id="skill_tag_list" name="skill_tag_list[]" class="form-control" multiple>
+								@foreach($skill_tags as $key => $val)
+									<option value="{{ $key }}" @if(isset($selected_skill_tags) && in_array($key,$selected_skill_tags)) selected @endif>{{ $val }}</option>
 								@endforeach
 							</select>
 						</div>

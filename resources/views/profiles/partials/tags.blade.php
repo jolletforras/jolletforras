@@ -1,13 +1,13 @@
-@unless($user->tags->isEmpty())
+@unless($user->skill_tags->isEmpty())
     @if (Auth::check())
-        @for ($i = 0; $i < $last=count($user->tags)-1; $i++)
-        <a href="{{ url('tagok')}}/ertes/{{$user->tags[$i]->id }}/{{$user->tags[$i]->slug}}">{{ $user->tags[$i]->name }}</a>,
+        @for ($i = 0; $i < $last=count($user->skill_tags)-1; $i++)
+        <a href="{{ url('tagok')}}/ertes/{{$user->skill_tags[$i]->id }}/{{$user->skill_tags[$i]->slug}}">{{ $user->skill_tags[$i]->name }}</a>,
         @endfor
-        <a href="{{ url('tagok')}}/ertes/{{$user->tags[$last]->id }}/{{$user->tags[$last]->slug}}">{{ $user->tags[$last]->name }}</a>
+        <a href="{{ url('tagok')}}/ertes/{{$user->skill_tags[$last]->id }}/{{$user->skill_tags[$last]->slug}}">{{ $user->skill_tags[$last]->name }}</a>
     @else
-        @for ($i = 0; $i < $last=count($user->tags)-1; $i++)
-        {{ $user->tags[$i]->name }},
+        @for ($i = 0; $i < $last=count($user->skill_tags)-1; $i++)
+        {{ $user->skill_tags[$i]->name }},
         @endfor
-        {{ $user->tags[$last]->name }}
+        {{ $user->skill_tags[$last]->name }}
     @endif
 @endunless

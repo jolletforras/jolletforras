@@ -14,7 +14,7 @@
 			</div>
 			<div class="col-sm-3" style="padding-top:3px;">
 				<select id="tag" name="tag" class="form-control">
-					@foreach($tags as $key => $val)
+					@foreach($skill_tags as $key => $val)
 						<option value="{{ $key }}">{{ $val }}</option>
 					@endforeach
 				</select>
@@ -59,11 +59,11 @@
 	<script>
 		$('#tag').select2({
 			placeholder: 'Keresés címke szerint',
-			tags: false
+			skill_tags: false
 		});
 
-		var tags = {
-		@foreach ($tags_slug as $id => $slug)
+		var skill_tags = {
+		@foreach ($skill_tags_slug as $id => $slug)
 			{{$id}}:"{{$slug}}",
 		@endforeach
 		};
@@ -71,7 +71,7 @@
 
 		$("#tag").change(function () {
 			var id= $("#tag").val();
-			location.href="{{ url('tagok')}}/ertes/"+id+"/"+tags[id];
+			location.href="{{ url('tagok')}}/ertes/"+id+"/"+skill_tags[id];
 		});
 
 		function CityName() {

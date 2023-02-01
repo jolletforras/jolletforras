@@ -34,22 +34,22 @@ class ProfilesController extends Controller
 
         if(Auth::check())
         {
-            $users = User::with('tags')->members()->latest('updated_at')->get();
+            $users = User::with('skill_tags')->members()->latest('updated_at')->get();
         }
         else {
-            $users = User::with('tags')->members()->latest('updated_at')->where('public','=', 1)->get();
+            $users = User::with('skill_tags')->members()->latest('updated_at')->where('public','=', 1)->get();
         }
 
 
-		$tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
 
 		$city=$district=$tag_id=NULL;
 
-		$tags_slug = UserSkill::pluck('slug', 'id')->all();
+		$skill_tags_slug = UserSkill::pluck('slug', 'id')->all();
 
-		//return view('profiles.index', compact('users', 'tags', 'tag_id', 'tags_slug', 'type', 'city', 'district'));
+		//return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'type', 'city', 'district'));
 
-		return view('profiles.index', compact('users', 'tags', 'tag_id', 'tags_slug', 'city', 'district'));
+		return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'city', 'district'));
 
 	}
 
@@ -57,17 +57,17 @@ class ProfilesController extends Controller
 	{
 		//if (empty($type)) $type=constx('URL_STORY');
 
-		$users = User::with('tags')->latest('updated_at')->where('status','=', 2)->get();
+		$users = User::with('skill_tags')->latest('updated_at')->where('status','=', 2)->get();
 
-		$tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
 
 		$city=$district=$tag_id=NULL;
 
-		$tags_slug = UserSkill::pluck('slug', 'id')->all();
+		$skill_tags_slug = UserSkill::pluck('slug', 'id')->all();
 
-		//return view('profiles.index', compact('users', 'tags', 'tag_id', 'tags_slug', 'type', 'city', 'district'));
+		//return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'type', 'city', 'district'));
 
-		return view('profiles.index', compact('users', 'tags', 'tag_id', 'tags_slug', 'city', 'district'));
+		return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'city', 'district'));
 
 	}
 
@@ -119,7 +119,7 @@ class ProfilesController extends Controller
 		$city=$request->get('city');
 		$district=$request->get('district');
 
-		$query = User::with('tags')->members()->latest('updated_at');
+		$query = User::with('skill_tags')->members()->latest('updated_at');
 
 		if (isset($city) && $city!="") {
 			$query=$query->where('city','=', $city);
@@ -133,9 +133,9 @@ class ProfilesController extends Controller
 
 		$users=$query->get();
 
-		$tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
 
-		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'tags', 'city', 'district'))->render();
+		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'skill_tags', 'city', 'district'))->render();
 
 		$response = array(
 			'status' => 'success',
@@ -181,10 +181,10 @@ class ProfilesController extends Controller
 	{
 		$user=Auth::user();
 		
-		$tags = UserSkill::pluck('name', 'id');
-        $selected_tags = $user->tags->pluck('id')->toArray();
+		$skill_tags = UserSkill::pluck('name', 'id');
+        $selected_skill_tags = $user->skill_tags->pluck('id')->toArray();
 		
-		return view('profiles.edit', compact('user', 'tags', 'selected_tags'));
+		return view('profiles.edit', compact('user', 'skill_tags', 'selected_skill_tags'));
 	}
 	
 
@@ -200,7 +200,7 @@ class ProfilesController extends Controller
 		$coordinates=$this->getCoordinates($zip_code);
 
 
-		$tag_list=$this->getTagList((array)$request->input('tag_list'), 'App\Models\UserSkill');
+		$skill_tag_list=$this->getTagList((array)$request->input('skill_tag_list'), 'App\Models\UserSkill');
 		
 		$user = User::findOrFail($id);
 		 
@@ -235,7 +235,7 @@ class ProfilesController extends Controller
         $user->timestamps = true;
 		$user->update($data);
 
-		$user->tags()->sync($tag_list);
+		$user->skill_tags()->sync($skill_tag_list);
 
 		$message='Adataidat sikeresen módosítottad!';
 

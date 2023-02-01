@@ -81,7 +81,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class);
     }
 
-    public function tags()
+    public function skill_tags()
     {
         return $this->belongsToMany(UserSkill::class)->withTimestamps();
     }
@@ -118,7 +118,7 @@ class User extends Authenticatable
 
     public function getTagListAttribute()
     {
-        return $this->tags->lists('id')->all();
+        return $this->skill_tags->lists('id')->all();
     }
 
     public function getCreatedAtAttribute($date)
@@ -148,7 +148,7 @@ class User extends Authenticatable
             strlen($this->name)<2 ||
             strlen($this->city)=='' ||
             strlen($this->introduction)<config('constants.LENGTH_INTRO') ||
-            $this->tags->count()==0;
+            $this->skill_tags->count()==0;
     }
 
     public function isAdminInGroup() {

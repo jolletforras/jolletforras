@@ -15,19 +15,19 @@ class SkillsController extends Controller
 {
     public function profiles_show($id) {
 
-		$tag = UserSkill::findOrFail($id);
+		$skill_tag = UserSkill::findOrFail($id);
 
-		$users=$tag->users()->members()->latest('updated_at')->get();
+		$users=$skill_tag->users()->members()->latest('updated_at')->get();
 
 		$city=$district=NULL;
 
-		$tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
 
-		$tags_slug = UserSkill::pluck('slug', 'id')->all();
+		$skill_tags_slug = UserSkill::pluck('slug', 'id')->all();
 
-		$tag_id=$id;
+		$skill_tag_id=$id;
 
-		return view('profiles.index', compact('users', 'tags', 'tag_id', 'tags_slug', 'city', 'district'));
+		return view('profiles.index', compact('users', 'skill_tags', 'skill_tag_id', 'skill_tags_slug', 'city', 'district'));
 	}
 
 	public function profiles_filter(Request $request)
@@ -36,9 +36,9 @@ class SkillsController extends Controller
 		$city=$request->get('city');
 		$district=$request->get('district');
 
-		$tag = UserSkill::findOrFail($skill_id);
+		$skill_tag = UserSkill::findOrFail($skill_id);
 
-		$query=$tag->users()->members()->latest('updated_at');
+		$query=$skill_tag->users()->members()->latest('updated_at');
 
 		if (isset($city) && $city!="") {
 			$query=$query->where('city','=', $city);
@@ -51,9 +51,9 @@ class SkillsController extends Controller
 
 		$users=$query->get();
 
-		$tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
 
-		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'tags', 'city', 'district'))->render();
+		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'skill_tags', 'city', 'district'))->render();
 
 		$response = array(
 			'status' => 'success',
