@@ -12,14 +12,17 @@
 			<div class="col-sm-3">
 				<a href="{{url('meghivo')}}/uj" type="submit" class="btn btn-default">Meghívó küldése</a>
 			</div>
-			<div class="col-sm-3" style="padding-top:3px;">
-				<select id="skill_tag" name="skill_tag" class="form-control">
+			<div class="col-sm-9" style="padding-top:3px;">
+				<select id="skill_tag" name="skill_tag" class="form-control" style="width:220px;">
 					@foreach($skill_tags as $key => $val)
 						<option value="{{ $key }}"@if(isset($skill_tag_id) && $key==$skill_tag_id) selected @endif>{{ $val }}</option>
 					@endforeach
 				</select>
-			</div>
-			<div class="col-sm-6" style="padding-top:3px;">
+				<select id="interest_tag" name="interest_tag" class="form-control" style="width:220px;">
+						@foreach($interest_tags as $key => $val)
+							<option value="{{ $key }}"@if(isset($interest_tag_id) && $key==$interest_tag_id) selected @endif>{{ $val }}</option>
+						@endforeach
+				</select>
 				<select id="city" onchange="CityFilter();" name="city">
 					<option value="" selected="selected">Minden település</option>
 					@foreach(constx('CITY') as $key => $val)
@@ -79,6 +82,29 @@
 			}
 		});
 
+		$('#interest_tag').select2({
+			placeholder: 'Keresés címke szerint',
+			interest_tags: false
+		});
+
+		var interest_tags = {
+		@foreach ($interest_tags_slug as $id => $slug)
+		{{$id}}:"{{$slug}}",
+		@endforeach
+		};
+
+
+		$("#interest_tag").change(function () {
+			var id= $("#interest_tag").val();
+			if(id==0) {
+				location.href="{{ url('tarsak')}}";
+			}
+			else {
+				location.href="{{ url('tagok')}}/erdeklodes/"+id+"/"+interest_tags[id];
+			}
+		});
+
+
 		function CityName() {
 			select_city=document.getElementById("city");
 			var x = select_city.selectedIndex;
@@ -98,11 +124,14 @@
 				document.getElementById("district").style.visibility = "hidden";
 			}
 
-			if ($("#skill_tag").val()==0) {
+			if ($("#skill_tag").val()==0 && $("#interest_tag").val()==0) {
 				Filter(city, district);
 			}
+			else if($("#skill_tag").val()!=0) {
+				SkillTagFilter(city, district);
+			}
 			else {
-				TagFilter(city, district);
+				InterestTagFilter(city, district);
 			}
 		}
 
@@ -111,11 +140,15 @@
 			var district=document.getElementById("district").selectedIndex;
 
 			if (district==0) district="";
-			if ($("#skill_tag").val()==0) {
+
+			if ($("#skill_tag").val()==0 && $("#interest_tag").val()==0) {
 				Filter(city, district);
 			}
+			else if($("#skill_tag").val()!=0) {
+				SkillTagFilter(city, district);
+			}
 			else {
-				TagFilter(city, district);
+				InterestTagFilter(city, district);
 			}
 		}
 
@@ -139,7 +172,7 @@
 			});
 		}
 
-		function TagFilter(city, district) {
+		function SkillTagFilter(city, district) {
 			var tag_id = $("#skill_tag").val();
 
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -150,7 +183,31 @@
 				data: {
 					_token: CSRF_TOKEN,
 					city: city,
+					district: district,
 					skill_id: tag_id,
+				},
+				success: function (data) {
+					$('#result').html(data.html);
+					$('#count').html(data.count);
+					$("#myTab").find('li:eq(1)').removeClass('active');
+					$("#myTab").find('li:eq(0)').addClass('active');
+				}
+			});
+		}
+
+		function InterestTagFilter(city, district) {
+			var tag_id = $("#interest_tag").val();
+
+			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+			$.ajax({
+				type: "POST",
+				url: '{{ url('interest/filter') }}',
+				data: {
+					_token: CSRF_TOKEN,
+					city: city,
+					district: district,
+					interest_id: tag_id,
 				},
 				success: function (data) {
 					$('#result').html(data.html);
