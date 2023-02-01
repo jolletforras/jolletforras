@@ -13,9 +13,9 @@
 				<a href="{{url('meghivo')}}/uj" type="submit" class="btn btn-default">Meghívó küldése</a>
 			</div>
 			<div class="col-sm-3" style="padding-top:3px;">
-				<select id="tag" name="tag" class="form-control">
+				<select id="skill_tag" name="skill_tag" class="form-control">
 					@foreach($skill_tags as $key => $val)
-						<option value="{{ $key }}">{{ $val }}</option>
+						<option value="{{ $key }}"@if(isset($skill_tag_id) && $key==$skill_tag_id) selected @endif>{{ $val }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -57,7 +57,7 @@
 
 @section('footer')
 	<script>
-		$('#tag').select2({
+		$('#skill_tag').select2({
 			placeholder: 'Keresés címke szerint',
 			skill_tags: false
 		});
@@ -69,9 +69,14 @@
 		};
 
 
-		$("#tag").change(function () {
-			var id= $("#tag").val();
-			location.href="{{ url('tagok')}}/ertes/"+id+"/"+skill_tags[id];
+		$("#skill_tag").change(function () {
+			var id= $("#skill_tag").val();
+			if(id==0) {
+				location.href="{{ url('tarsak')}}";
+			}
+			else {
+				location.href="{{ url('tagok')}}/ertes/"+id+"/"+skill_tags[id];
+			}
 		});
 
 		function CityName() {
@@ -93,7 +98,7 @@
 				document.getElementById("district").style.visibility = "hidden";
 			}
 
-			if ($("#tag").val()=="") {
+			if ($("#skill_tag").val()==0) {
 				Filter(city, district);
 			}
 			else {
@@ -106,7 +111,7 @@
 			var district=document.getElementById("district").selectedIndex;
 
 			if (district==0) district="";
-			if ($("#tag").val()=="") {
+			if ($("#skill_tag").val()==0) {
 				Filter(city, district);
 			}
 			else {
@@ -116,6 +121,7 @@
 
 		function Filter(city, district) {
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
 			$.ajax({
 				type: "POST",
 				url: '{{ url('user/filter') }}',
@@ -134,7 +140,7 @@
 		}
 
 		function TagFilter(city, district) {
-			var tag_id = $("#tag").val();
+			var tag_id = $("#skill_tag").val();
 
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 

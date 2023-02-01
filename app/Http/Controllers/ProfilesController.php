@@ -42,7 +42,7 @@ class ProfilesController extends Controller
         }
 
 
-		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = ['0'=>'nincs megadva értés címke'] + UserSkill::pluck('name', 'id')->all();
 
 		$city=$district=$tag_id=NULL;
 

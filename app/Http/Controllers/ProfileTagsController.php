@@ -10,7 +10,7 @@ use App\Models\UserSkill;
 
 class ProfileTagsController extends Controller
 {
-    public function profiles_show($id) {
+    public function profiles_show_by_skill($id) {
 
 		$skill_tag = UserSkill::findOrFail($id);
 
@@ -18,7 +18,7 @@ class ProfileTagsController extends Controller
 
 		$city=$district=NULL;
 
-		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = ['0'=>'nincs megadva értés címke'] + UserSkill::pluck('name', 'id')->all();
 
 		$skill_tags_slug = UserSkill::pluck('slug', 'id')->all();
 
@@ -27,7 +27,7 @@ class ProfileTagsController extends Controller
 		return view('profiles.index', compact('users', 'skill_tags', 'skill_tag_id', 'skill_tags_slug', 'city', 'district'));
 	}
 
-	public function profiles_filter(Request $request)
+	public function profiles_filter_by_skill(Request $request)
 	{
 		$skill_id=$request->get('skill_id');
 		$city=$request->get('city');
@@ -48,7 +48,7 @@ class ProfileTagsController extends Controller
 
 		$users=$query->get();
 
-		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+		$skill_tags = ['0'=>'nincs megadva értés címke'] + UserSkill::pluck('name', 'id')->all();
 
 		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'skill_tags', 'city', 'district'))->render();
 

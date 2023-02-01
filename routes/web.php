@@ -55,8 +55,11 @@ Route::get('jovahagyra_var', 'ProfilesController@waitingforapprove');
 Route::get('jovahagy/{id}', 'ProfilesController@approve');
 Route::get('elutasit/{id}', 'ProfilesController@decline');
 
-Route::get('/tagok/ertes/{id}/{tag}', 'ProfileTagsController@profiles_show');
-Route::post('/skill/filter', 'ProfileTagsController@profiles_filter');
+Route::get('/tagok/ertes/{id}/{tag}', 'ProfileTagsController@profiles_show_by_skill');
+Route::post('/skill/filter', 'ProfileTagsController@profiles_filter_by_skill');
+
+Route::get('/tagok/erdeklodes/{id}/{tag}', 'ProfileTagsController@profiles_show_by_interest');
+Route::post('/interest/filter', 'ProfileTagsController@profiles_filter_by_interest');
 
 Route::get('/meghivo/uj', 'InviteController@create');
 Route::post('/meghivo/uj', 'InviteController@store');
