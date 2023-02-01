@@ -44,7 +44,8 @@
 				<h4><b>Ez ami lelkesít, amivel a következő hónapokban foglalkozni szeretnék:</b></h4>
 				{!! $user->interest !!}
 			@endif
-			<h4><b>Jártasság, tudás:</b> @include('profiles.partials.tags')</h4>
+			<h4><b>Jártasság, tudás:</b> @include('profiles.partials.skill_tags')</h4>
+			<h4><b>Érdeklődés:</b> @include('profiles.partials.interest_tags')</h4>
 			@if (Auth::check())
 				@include('profiles.partials.groups')
 			@endif
