@@ -7,11 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\UserSkill;
-use App\Models\IdeaSkill;
-use App\Models\ProjectSkill;
-use App\Models\GroupTheme;
 
-class SkillsController extends Controller
+class ProfileTagsController extends Controller
 {
     public function profiles_show($id) {
 
@@ -62,41 +59,4 @@ class SkillsController extends Controller
 		);
 		return \Response::json($response);
 	}
-
-
-	public function ideas_show($id) {
-		$tag = IdeaSkill::findOrFail($id);
-
-		$ideas=$tag->ideas()->latest('updated_at')->get();
-
-		$tags = [''=>''] + IdeaSkill::pluck('name', 'id')->all();
-
-		$tags_slug = IdeaSkill::pluck('slug', 'id')->all();
-
-		return view('ideas.index', compact('ideas', 'tags', 'tags_slug'));
-	}
-
-	public function projects_show($id) {
-		$tag = ProjectSkill::findOrFail($id);
-
-		$projects=$tag->projects()->latest('updated_at')->get();
-
-		$tags = [''=>''] + ProjectSkill::pluck('name', 'id')->all();
-
-		$tags_slug = ProjectSkill::pluck('slug', 'id')->all();
-
-		return view('projects.index', compact('projects', 'tags', 'tags_slug'));
-	}
-
-    public function groups_show($id) {
-        $tag = GroupTheme::findOrFail($id);
-
-        $groups=$tag->groups()->latest('updated_at')->get();
-
-        $tags = [''=>''] + GroupTheme::pluck('name', 'id')->all();
-
-        $tags_slug = GroupTheme::pluck('slug', 'id')->all();
-
-        return view('groups.index', compact('groups', 'tags', 'tags_slug'));
-    }
 }

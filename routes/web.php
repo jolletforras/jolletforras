@@ -55,8 +55,8 @@ Route::get('jovahagyra_var', 'ProfilesController@waitingforapprove');
 Route::get('jovahagy/{id}', 'ProfilesController@approve');
 Route::get('elutasit/{id}', 'ProfilesController@decline');
 
-Route::get('/tagok/ertes/{id}/{tag}', 'SkillsController@profiles_show');
-Route::post('/skill/filter', 'SkillsController@profiles_filter');
+Route::get('/tagok/ertes/{id}/{tag}', 'ProfileTagsController@profiles_show');
+Route::post('/skill/filter', 'ProfileTagsController@profiles_filter');
 
 Route::get('/meghivo/uj', 'InviteController@create');
 Route::post('/meghivo/uj', 'InviteController@store');
@@ -127,7 +127,7 @@ Route::post('kezdemenyezes/uj', 'ProjectsController@store');
 Route::get('/kezdemenyezes/{id}/{title}/modosit', 'ProjectsController@edit');
 Route::post('/kezdemenyezes/{id}/{title}/modosit', 'ProjectsController@update');
 Route::get('/kezdemenyezes/{id}/{title}/torol', 'ProjectsController@delete');
-Route::get('/kezdemenyezes/ertes/{id}/{tag}', 'SkillsController@projects_show');
+Route::get('/kezdemenyezes/ertes/{id}/{tag}', 'TagsController@projects_show');
 
 Route::get('/hirlevelek', 'NewslettersController@index');
 Route::get('/hirlevel/{id}/{title}', 'NewslettersController@show');

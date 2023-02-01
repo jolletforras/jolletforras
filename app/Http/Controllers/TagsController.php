@@ -9,9 +9,49 @@ use App\Http\Controllers\Controller;
 use App\Models\ForumTag;
 use App\Models\GroupTag;
 use App\Models\NewsTag;
+use App\Models\IdeaSkill;
+use App\Models\ProjectSkill;
+use App\Models\GroupTheme;
 
 class TagsController extends Controller
 {
+
+    public function ideas_show($id) {
+        $tag = IdeaSkill::findOrFail($id);
+
+        $ideas=$tag->ideas()->latest('updated_at')->get();
+
+        $tags = [''=>''] + IdeaSkill::pluck('name', 'id')->all();
+
+        $tags_slug = IdeaSkill::pluck('slug', 'id')->all();
+
+        return view('ideas.index', compact('ideas', 'tags', 'tags_slug'));
+    }
+
+    public function projects_show($id) {
+        $tag = ProjectSkill::findOrFail($id);
+
+        $projects=$tag->projects()->latest('updated_at')->get();
+
+        $tags = [''=>''] + ProjectSkill::pluck('name', 'id')->all();
+
+        $tags_slug = ProjectSkill::pluck('slug', 'id')->all();
+
+        return view('projects.index', compact('projects', 'tags', 'tags_slug'));
+    }
+
+    public function groups_show($id) {
+        $tag = GroupTheme::findOrFail($id);
+
+        $groups=$tag->groups()->latest('updated_at')->get();
+
+        $tags = [''=>''] + GroupTheme::pluck('name', 'id')->all();
+
+        $tags_slug = GroupTheme::pluck('slug', 'id')->all();
+
+        return view('groups.index', compact('groups', 'tags', 'tags_slug'));
+    }
+
     public function forum_show($id) {
 		$tag = ForumTag::findOrFail($id);
 
