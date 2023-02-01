@@ -41,23 +41,21 @@ class ProfilesController extends Controller
             $users = User::with('skill_tags')->members()->latest('updated_at')->where('public','=', 1)->get();
         }
 
+        $city=$district=NULL;
 
-		$skill_tags = ['0'=>'nincs megadva értés címke'] + UserSkill::pluck('name', 'id')->all();
-
-		$city=$district=$tag_id=NULL;
-
+		$skill_tags = ['0'=>'jártasság, tudás - mind'] + UserSkill::pluck('name', 'id')->all();
 		$skill_tags_slug = UserSkill::pluck('slug', 'id')->all();
 
-		//return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'type', 'city', 'district'));
+        $interest_tags = ['0'=>'érdeklődés - mind'] + UserInterest::pluck('name', 'id')->all();
+        $interest_tags_slug = UserInterest::pluck('slug', 'id')->all();
 
-		return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'city', 'district'));
+		return view('profiles.index', compact('users', 'skill_tags', 'skill_tags_slug', 'interest_tags', 'interest_tags_slug', 'city', 'district'));
 
 	}
 
+	//ez most nincs használva
 	public function waitingforapprove($type=null)
 	{
-		//if (empty($type)) $type=constx('URL_STORY');
-
 		$users = User::with('skill_tags')->latest('updated_at')->where('status','=', 2)->get();
 
 		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
@@ -65,8 +63,6 @@ class ProfilesController extends Controller
 		$city=$district=$tag_id=NULL;
 
 		$skill_tags_slug = UserSkill::pluck('slug', 'id')->all();
-
-		//return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'type', 'city', 'district'));
 
 		return view('profiles.index', compact('users', 'skill_tags', 'tag_id', 'skill_tags_slug', 'city', 'district'));
 
@@ -120,7 +116,7 @@ class ProfilesController extends Controller
 		$city=$request->get('city');
 		$district=$request->get('district');
 
-		$query = User::with('skill_tags')->members()->latest('updated_at');
+		$query = User::members()->latest('updated_at');
 
 		if (isset($city) && $city!="") {
 			$query=$query->where('city','=', $city);
@@ -135,8 +131,9 @@ class ProfilesController extends Controller
 		$users=$query->get();
 
 		$skill_tags = [''=>''] + UserSkill::pluck('name', 'id')->all();
+        $interest_tags = [''=>''] + InterestSkill::pluck('name', 'id')->all();
 
-		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'skill_tags', 'city', 'district'))->render();
+		$returnHTML = view('profiles.partials.members_tabs', compact('users', 'skill_tags', 'interest_tags', 'city', 'district'))->render();
 
 		$response = array(
 			'status' => 'success',
