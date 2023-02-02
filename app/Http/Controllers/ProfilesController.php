@@ -43,8 +43,8 @@ class ProfilesController extends Controller
 
         $city=$district=NULL;
 
-		$skill_tags = ['0'=>'jártasság, tudás - mind'] + UserSkill::pluck('name', 'id')->all();
-		$skill_tags_slug = UserSkill::pluck('slug', 'id')->all();
+		$skill_tags = ['0'=>'jártasság, tudás - mind'] + UserSkill::active()->pluck('name', 'id')->all();
+		$skill_tags_slug = UserSkill::active()->pluck('slug', 'id')->all();
 
         $interest_tags = ['0'=>'érdeklődés - mind'] + UserInterest::pluck('name', 'id')->all();
         $interest_tags_slug = UserInterest::pluck('slug', 'id')->all();

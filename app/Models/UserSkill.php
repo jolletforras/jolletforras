@@ -17,4 +17,9 @@ class UserSkill extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function scopeActive($query)
+    {
+        $query->where('status','=', 1);
+    }
 }
