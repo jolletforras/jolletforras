@@ -21,8 +21,8 @@
 			@include('profiles.partials.show_profilephoto')
 			@if (Auth::check())
 				<b>Email: </b>{{ $user->email }}<br><br>
+				@if(Auth::user()->admin)<b>Státusz:</b> {{ $user->status_txt }}<br><br>@endif
 			@endif
-			@if(Auth::user()->admin)<b>Státusz:</b> {{ $user->status_txt }}<br><br>@endif
 			<b>Lakóhely:</b>
                 @if($user->city=="Budapest")
 				    @if($user->location!=''){{ $user->location }} @else {{ $user->city }} @endif
