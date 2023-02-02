@@ -95,6 +95,7 @@ Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
 
 Route::get('/email/{code}/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'NoticesController@email_theme_login');
 Route::get('/email/{code}/esemeny/{id}/{slug}', 'NoticesController@email_event_login');
+Route::post('/getNotices', 'NoticesController@get_noticies');
 
 
 Route::get('/irasok', 'ArticlesController@index');

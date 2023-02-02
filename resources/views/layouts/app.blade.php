@@ -45,7 +45,7 @@
 		<div class="oldal_nev">
 	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
 		</div>
-		@if( Auth::check())<div id="notice" data-toggle="modal" data-target="#notice-modal">Friss @if( Auth::user()->new_post>0)<span>{{ Auth::user()->new_post }}</span>@endif </div>@endif
+		@if( Auth::check())<div id="notice" data-toggle="modal" data-target="#notice-modal"><i class="fa fa-bell-o" aria-hidden="true"></i>@if( Auth::user()->new_post>0)<span id="notice-counter">{{ Auth::user()->new_post }}</span>@endif </div>@endif
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
@@ -149,32 +149,9 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Friss történések</h4>
+							<h4 class="modal-title">Friss történések a csoportodban</h4>
 						</div>
-						<div class="modal-body">
-							@foreach(\App\Models\Notice::findNew()->get() as $notice)
-								@if($notice->type=="Forum")
-									@if($forum = \App\Models\Forum::find($notice->notifiable_id))
-										@if($notice->new>0)
-								<b><a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - "{{ $forum->title }}" téma <span>{{$notice->new}}</span></a></b>
-										@else
-								<a href="{{url('csoport')}}/{{$forum->group->id}}/{{$forum->group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{$forum->group->name}} - "{{ $forum->title }}" téma</a>
-										@endif
-									@endif
-								@endif
-								@if($notice->type=="Event")
-									@if($event = \App\Models\Event::find($notice->notifiable_id))
-										@if($notice->new>0)
-								<b><a href="{{url('esemeny')}}/{{ $event->id }}/{{$event->slug}}">{{$event->group->name}} - "{{ $event->title }}" esemény <span>{{$notice->new}}</span></a></b>
-										@else
-								<a href="{{url('esemeny')}}/{{ $event->id }}/{{$event->slug}}">{{$event->group->name}} - "{{ $event->title }}" esemény</a>
-										@endif
-									@endif
-								@endif
-								<br>
-								<hr>
-							@endforeach
-						</div>
+						<div class="modal-body" id="notice-content"> ... mindjárt betölt</div>
 						<div class="modal-footer"></div>
 					</div>
 
@@ -201,6 +178,30 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
+	<script>
+		$(document).on('click','#notice',function(){
+
+			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+			$.ajax({
+				type: "POST",
+				url: '{{ url('getNotices') }}',
+				data: {
+					_token: CSRF_TOKEN,
+				},
+				success: function(data) {
+					if(data['status']=='success') {
+						$("#notice-counter").html(data.notice_counter);
+						$("#notice-content").html(data.content_html);
+					}
+				},
+				error: function(error){
+					console.log(error.responseText);
+				}
+			});
+		});
+
+	</script>
 
 
     @yield('footer')
