@@ -45,7 +45,7 @@
 		<div class="oldal_nev">
 	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
 		</div>
-		@if( Auth::check())<div id="notice" data-toggle="modal" data-target="#notice-modal"><i class="fa fa-bell-o" aria-hidden="true"></i>@if( Auth::user()->new_post>0)<span id="notice-counter">{{ Auth::user()->new_post }}</span>@endif </div>@endif
+		@if( Auth::check())<div id="notice" data-toggle="modal" data-target="#notice-modal"><i class="fa fa-bell-o" aria-hidden="true"></i>@if( Auth::user()->new_post>0)<span>{{ Auth::user()->new_post }}</span>@endif </div>@endif
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
@@ -151,8 +151,8 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">Friss történések a csoportodban</h4>
 						</div>
-						<div class="modal-body" id="notice-content"> ... mindjárt betölt</div>
-						<div class="modal-footer"></div>
+						<div class="modal-body" id="notice-content"> ... hamarosan megjelenik</div>
+						<div class="modal-footer"><input type="hidden" name="notice-loaded" id="notice-loaded" value="0"></div>
 					</div>
 
 				</div>
@@ -183,22 +183,25 @@
 
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-			$.ajax({
-				type: "POST",
-				url: '{{ url('getNotices') }}',
-				data: {
-					_token: CSRF_TOKEN,
-				},
-				success: function(data) {
-					if(data['status']=='success') {
-						$("#notice-counter").html(data.notice_counter);
-						$("#notice-content").html(data.content_html);
+			if($("#notice-loaded").val()==0) {
+
+				$.ajax({
+					type: "POST",
+					url: '{{ url('getNotices') }}',
+					data: {
+						_token: CSRF_TOKEN,
+					},
+					success: function(data) {
+						if(data['status']=='success') {
+							$("#notice-content").html(data.content_html);
+							$("#notice-loaded").val(1);
+						}
+					},
+					error: function(error){
+						console.log(error.responseText);
 					}
-				},
-				error: function(error){
-					console.log(error.responseText);
-				}
-			});
+				});
+			}
 		});
 
 	</script>

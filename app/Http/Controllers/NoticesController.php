@@ -77,7 +77,6 @@ class NoticesController extends Controller
         $response = array(
             'status' => 'success',
             'content_html' => $content_html,
-            'notice_counter' =>  Auth::user()->new_post,
         );
         return \Response::json($response);
     }
