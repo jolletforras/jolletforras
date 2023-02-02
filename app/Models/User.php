@@ -148,6 +148,10 @@ class User extends Authenticatable
         return implode(', ',$webpages);
     }
 
+    public function getStatusTxtAttribute() {
+        return $this->status == 0 ? "emailcím nincs megerősítve" : ($this->status == 1 ? "emailcím megerősítve" : ($this->status == 3 ? "aktív" : "deaktíválta magát"));
+    }
+
     public function incompleteProfile() {
         return
             strlen($this->name)<2 ||

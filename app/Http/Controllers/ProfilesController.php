@@ -161,8 +161,8 @@ class ProfilesController extends Controller
             $myprofile = Auth::user()->id==$user->id;
         }
 
-        //ha nem saját profil és nincs active (3) státuszban
-        if(!$myprofile && $user->status!=3) {
+        //ha nem saját profil, nincs active (3) státuszban és nem admin
+        if(!$myprofile && $user->status!=3 && !Auth::user()->admin) {
             $message = "Jelenleg ".$user->name." adatlapja nem tekinthető meg.";
             return view('no_page', compact('message'));
         }

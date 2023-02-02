@@ -95,6 +95,13 @@ class RegisterController extends Controller
             $message->to($data['email']);
         });
 
+        Mail::send('auth.emails.new_user', $data, function($message) use ($data)
+        {
+            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->subject("új regisztráló");
+            $message->to('tarsadalmi.jollet@gmail.com');
+        });
+
         return $user;
     }
 
