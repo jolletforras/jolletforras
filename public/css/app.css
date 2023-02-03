@@ -684,6 +684,10 @@ h3 {
 	h3 {
 		font-size: 16px;
 	}
+
+	.panel-body {
+		padding: 5px;
+	}
 }
 
 @media all and (max-width:500px) {
