@@ -97,7 +97,7 @@ class HomeController extends Controller
         $forums = Forum::with('user', 'tags')->where('created_at','>',$date)->where('group_id', 0)->latest('updated_at')->get();
         $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
         $articles = Article::latest()->where('created_at','>',$date)->get();
-        $newsletters = Newsletter::latest()->get();
+        $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
 
         return view('lastweeks',compact('users','groups','forums','events','articles','newsletters'));
     }
