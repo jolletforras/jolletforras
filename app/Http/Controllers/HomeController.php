@@ -8,6 +8,7 @@ use App\Models\Group;
 use App\Models\Forum;
 use App\Models\Event;
 use App\Models\Article;
+use App\Models\Newsletter;
 
 class HomeController extends Controller
 {
@@ -96,8 +97,9 @@ class HomeController extends Controller
         $forums = Forum::with('user', 'tags')->where('created_at','>',$date)->where('group_id', 0)->latest('updated_at')->get();
         $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
         $articles = Article::latest()->where('created_at','>',$date)->get();
+        $newsletters = Newsletter::latest()->get();
 
-        return view('lastweeks',compact('users','groups','forums','events','articles'));
+        return view('lastweeks',compact('users','groups','forums','events','articles','newsletters'));
     }
 
 
