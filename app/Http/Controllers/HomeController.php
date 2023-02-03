@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\Forum;
 use App\Models\Event;
+use App\Models\Article;
 
 class HomeController extends Controller
 {
@@ -94,8 +95,9 @@ class HomeController extends Controller
         $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->latest('updated_at')->get();
         $forums = Forum::with('user', 'tags')->where('created_at','>',$date)->where('group_id', 0)->latest('updated_at')->get();
         $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
+        $articles = Article::latest()->where('created_at','>',$date)->get();
 
-        return view('lastweeks',compact('users','groups','forums','events'));
+        return view('lastweeks',compact('users','groups','forums','events','articles'));
     }
 
 

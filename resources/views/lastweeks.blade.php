@@ -22,14 +22,18 @@
         @include('forums._list')
         <hr>
     @endif
+    @if($articles->isNotEmpty())
+         <h3>Új írások</h3>
+         @include('articles._list')
+         <hr>
+    @endif
+
+        <!--
+                <h3>Új hírlevelek</h3>-->
     @if($events->isNotEmpty())
         <h3>Új események</h3>
         @include('events._list')
         <hr>
     @endif
-        <!--
-            <h3>Új írások</h3>
-            <hr>
-            <h3>Új hírlevelek</h3>-->
     </div>
 @endsection
