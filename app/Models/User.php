@@ -175,4 +175,23 @@ class User extends Authenticatable
     {
         $query->where('admin','=', 1);
     }
+
+    public function getFullLocationAttribute() {
+        $location = "";
+        if($this->city=="Budapest") {
+            if($this->location!='') {
+                $location .= $this->location;
+                $location .= !is_numeric(stripos($this->location,"Budapest")) ? ", Budapest" : "";
+            }
+            else {
+                $location .= "Budapest";
+            }
+        }
+		else {
+            $location .= ($this->location!='' && $this->location!=$this->city) ? $this->location.',' : '';
+			$location .=  $this->city;
+        }
+
+        return $location;
+    }
 }

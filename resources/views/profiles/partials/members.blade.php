@@ -27,16 +27,7 @@
                     </td>
                     <td>
                         <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">{{ $user->name }}</a>
-                        @if($user->city=="Budapest")
-                            @if($user->location!='')
-                                {{ $user->location }}@if(!is_numeric(stripos($user->location,"Budapest"))), Budapest @endif
-                            @else
-                                Budapest
-                            @endif
-                        @else
-                            @if($user->location!='' && $user->location!=$user->city){{ $user->location }}, @endif
-                            {{ $user->city }}
-                        @endif
+                        {{ $user->full_location }}
                         <br>
                         @if($type=='tab1')
                             {!! justbr($user->introduction,721) !!}

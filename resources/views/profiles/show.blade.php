@@ -24,13 +24,8 @@
 				@if(Auth::user()->admin)<b>Státusz:</b> {{ $user->status_txt }}<br><br>@endif
 			@endif
 			<b>Lakóhely:</b>
-                @if($user->city=="Budapest")
-				    @if($user->location!=''){{ $user->location }} @else {{ $user->city }} @endif
-                @else
-                    @if($user->location!='' && $user->location!=$user->city){{ $user->location }}, @endif
-                    {{ $user->city }}
-                @endif
-				<br><br>
+				{{ $user->full_location }}
+			<br><br>
 			@if(isset($user->updated_at))<b>Legutóbb módosítva: </b>{{ $user->updated_at->format('Y-m-d') }}<br><br>@endif
 			@if($user->webpage_url!='')
 				<b>Weboldal:</b> {!!$user->webpages!!}<br><br>
