@@ -16,5 +16,13 @@
 		{!! $article->body !!}
 		@include('partials.author', ['author'=>'','obj'=>$article])
     </div>
+	@if(Auth::check())
+		@include('comments._show', [
+		'comments' => $comments,
+		'commentable_type'	=>'Article',
+		'commentable_url'	=>'iras/'.$article->id.'/'.$article->slug,
+		'commentable'	=>$article
+		] )
+	@endif
 @endsection
 

@@ -30,6 +30,11 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     public function getUpdatedAtAttribute($date)
     {
         return Carbon::parse($date)->format('Y-m-d');

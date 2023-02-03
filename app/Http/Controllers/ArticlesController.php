@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -31,8 +32,9 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
+        $comments = Comment::where('commentable_type', 'App\Models\Article')->where('commentable_id', $id)->get();
 
-        return view('articles.show', compact('article'));
+        return view('articles.show', compact('article','comments'));
     }
 
 
