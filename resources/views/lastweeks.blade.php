@@ -17,11 +17,14 @@
         @include('groups._group_list')
         <hr>
     @endif
-    <!--
+    @if($forums->isNotEmpty())
         <h3>Új fórumok</h3>
+        @include('forums._list')
         <hr>
-        <h3>Új írások</h3>
-        <hr>
-        <h3>Új hírlevelek</h3>-->
+    @endif
+        <!--
+            <h3>Új írások</h3>
+            <hr>
+            <h3>Új hírlevelek</h3>-->
     </div>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Forum;
 
 class HomeController extends Controller
 {
@@ -87,10 +88,12 @@ class HomeController extends Controller
      */
     public function lastweeks()
     {
-        $users = User::with('skill_tags')->members()->where('created_at','>', date("Y-m-d",strtotime("-1 month")))->latest('updated_at')->get();
-        $groups = Group::with('user', 'members', 'tags')->where('created_at','>', date("Y-m-d",strtotime("-1 month")))->latest('updated_at')->get();
+        $date = date("Y-m-d",strtotime("-1 month"));
+        $users = User::with('skill_tags')->members()->where('created_at','>',$date)->latest('updated_at')->get();
+        $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->latest('updated_at')->get();
+        $forums = Forum::with('user', 'tags')->where('created_at','>',$date)->where('group_id', 0)->latest('updated_at')->get();
 
-        return view('lastweeks',compact('users','groups'));
+        return view('lastweeks',compact('users','groups','forums'));
     }
 
 
