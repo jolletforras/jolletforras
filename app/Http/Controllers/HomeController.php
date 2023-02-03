@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -75,6 +76,19 @@ class HomeController extends Controller
     public function datahandling()
     {
         return view('data_handling');
+    }
+
+
+    /**
+     * Show what happened in the last weeks.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lastweeks()
+    {
+        $users = User::with('skill_tags')->members()->where('created_at','>', date("Y-m-d",strtotime("-1 month")))->latest('updated_at')->get();
+
+        return view('lastweeks',compact('users'));
     }
 
 

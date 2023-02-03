@@ -21,6 +21,7 @@ Route::get('/jelszo/ideiglenes', 'Auth\ForgotPasswordController@newpassword');
 Route::post('/jelszo/email', 'Auth\ForgotPasswordController@sendpassword');
 
 Route::get('/', 'HomeController@index');
+Route::get('/tortenesek', 'HomeController@lastweeks');
 Route::get('/programok', 'HomeController@events');
 Route::get('/kapcsolat', 'HomeController@connection');
 Route::post('/kepfeltoltes', 'HomeController@uploadimage');

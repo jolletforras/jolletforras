@@ -65,6 +65,9 @@
 						<ul class="nav navbar-nav" id="main-menu">
 							<li><a href="{{ url('/') }}">Nyitólap</a></li>
 							<li><a href="{{ url('/tarsak') }}">Társak</a></li>
+							@if(Auth::check())
+							<li><a href="{{ url('/tortenesek') }}">Történések</a></li>
+							@endif
                             <li><a href="{{ url('/csoportok') }}">Csoportok</a></li>
 							<li><a href="{{ url('terkep/tarsak') }}">Térkép</a></li>
 							<li><a href="{{ url('kezdemenyezesek') }}">Kezdeményezések</a></li>
