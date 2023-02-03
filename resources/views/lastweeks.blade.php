@@ -12,9 +12,12 @@
         @include('profiles.partials.members',['type'=>'tab1'])
         <hr>
     @endif
-        <!--
+    @if($groups->isNotEmpty())
         <h3>Új csoportok</h3>
+        @include('groups._group_list')
         <hr>
+    @endif
+    <!--
         <h3>Új fórumok</h3>
         <hr>
         <h3>Új írások</h3>
