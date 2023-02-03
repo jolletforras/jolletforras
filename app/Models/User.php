@@ -188,7 +188,7 @@ class User extends Authenticatable
             }
         }
 		else {
-            $location .= ($this->location!='' && $this->location!=$this->city) ? $this->location.',' : '';
+            $location .= ($this->location!='' && $this->location!=$this->city) ? $this->location.', ' : '';
 			$location .=  $this->city;
         }
 
