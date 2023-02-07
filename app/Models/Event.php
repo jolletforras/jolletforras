@@ -9,7 +9,7 @@ use Auth;
 class Event extends Model
 {
     protected $fillable = [
-        'title','meta_description','body','type','slug','visibility','group_id','created_at','updated_at'
+        'title','meta_description','expiration_date','body','type','slug','visibility','group_id','created_at','updated_at'
     ];
 
     public function user()

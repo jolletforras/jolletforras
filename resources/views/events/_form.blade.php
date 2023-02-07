@@ -11,6 +11,11 @@
 		</div>
 
 		<div class="form-group">
+			<label class="col-form-label" for="status">Érvényessége:</label>
+			<input type="text" class="form-control datepicker-event" required="required" placeholder="Dátum" name="expiration_date" value="@if(isset($event)){{$event->expiration_date}}@endif" data-language="hu" data-position="bottom left" data-date-format="yyyy-mm-dd" style="width:150px;"/>
+		</div>
+
+		<div class="form-group">
 			<textarea class="form-control" required="required" rows="20" name="body" cols="50">@if(isset($event)) {{$event->body}} @endif</textarea>
 		</div>
 

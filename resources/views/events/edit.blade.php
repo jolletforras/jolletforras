@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('datepicker-css')
+	<link href="{{ url('/') }}/css/datepicker.css" rel="stylesheet">
+@endsection
 
 @section('content')
 	@include('partials.tinymce_js')
@@ -19,3 +22,5 @@
 		</div>
 	</div>
 @stop
+
+@include('events._datepicker_footer')
