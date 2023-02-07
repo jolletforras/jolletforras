@@ -301,7 +301,7 @@ class GroupsController extends Controller
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
-        $events = Event::latest()->where('group_id', $group->id)->get();
+        $events = Event::latest()->where('group_id', $group->id)->where('expiration_date','>=',date('Y-m-d'))->get();
 
         $page = 'event';
 
