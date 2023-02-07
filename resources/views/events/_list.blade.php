@@ -9,7 +9,7 @@
         @endif
     @endif
     @if (Auth::check())
-        @if($event->isEditor())
+        @if($event->isEditor() || ($event->group_id==0 && Auth::user()->admin))
             <a href="{{url('esemeny')}}/{{$event->id}}/{{$event->slug}}/modosit" class="btn btn-default">módosít</a>
         @endif
     @endif

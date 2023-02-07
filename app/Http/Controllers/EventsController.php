@@ -24,7 +24,7 @@ class EventsController extends Controller
 	{
         if(Auth::check())
         {
-            $events = Event::latest()->where('visibility','<>', 'group')->get();
+            $events = Event::latest()->where('expiration_date','>=',date('Y-m-d'))->where('visibility','<>', 'group')->get();
         }
         else {
             $events = Event::latest()->where('visibility','=', 'public')->get();
@@ -162,7 +162,7 @@ class EventsController extends Controller
 		$event = Event::findOrFail($id);
 
 		if($event->group_id==0) {
-            if(!$event->isEditor()) return redirect('/');
+            if(!($event->isEditor() || Auth::user()->admin)) return redirect('/');
 
 		    $visibility = ['portal'=>'portál','public'=>'nyilvános'];
         } else {
