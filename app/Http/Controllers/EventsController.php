@@ -22,16 +22,20 @@ class EventsController extends Controller
 
 	public function index()
 	{
+        $events_expired = null;
+
         if(Auth::check())
         {
             $events = Event::latest()->where('expiration_date','>=',date('Y-m-d'))->where('visibility','<>', 'group')->get();
+            $events_expired = Event::latest()->where('expiration_date','<',date('Y-m-d'))->where('visibility','<>', 'group')->get();
         }
         else {
             $events = Event::latest()->where('visibility','=', 'public')->get();
         }
 
-		return view('events.index', compact('events'));
+		return view('events.index', compact('events','events_expired'));
 	}
+
 
     /**
      * Displays a specific event

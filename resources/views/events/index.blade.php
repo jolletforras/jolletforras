@@ -23,7 +23,15 @@
 		</div>
 	</div>
 	@include('events._create_events_info')
-	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
-		@include('events._list')
+	<div class="inner_box" style="margin-top:6px;">
+		@include('events._list',['events'=>$events])
+		@if(Auth::check() && $events_expired->isNotEmpty())
+			<hr>
+			<button href="#events_expired" data-toggle="collapse" class="btn btn-default"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Lejárt események</button>
+			<div class="collapse" id="events_expired">
+				<br>
+				@include('events._list',['events'=>$events_expired])
+			</div>
+		@endif
 	</div>
 @endsection
