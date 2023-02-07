@@ -302,10 +302,11 @@ class GroupsController extends Controller
         }
 
         $events = Event::latest()->where('group_id', $group->id)->where('expiration_date','>=',date('Y-m-d'))->get();
+        $events_expired = Event::latest()->where('group_id', $group->id)->where('expiration_date','<',date('Y-m-d'))->get();
 
         $page = 'event';
 
-        return view('groupevents.index', compact('group','page','events'));
+        return view('groupevents.index', compact('group','page','events','events_expired'));
     }
 
 
