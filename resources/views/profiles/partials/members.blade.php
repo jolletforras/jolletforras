@@ -35,7 +35,7 @@
                                 <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">... tovább</a>
                             @endif
                             <p>jártasság, tudás: @include('profiles.partials.skill_tags')
-                            @unless($user->interest_tags->isEmpty())<br>tanulás: @include('profiles.partials.interest_tags')@endunless</p>
+                            @unless($user->interest_tags->isEmpty())<br>érdeklődés, tanulás: @include('profiles.partials.interest_tags')@endunless</p>
                         @elseif($type=='tab2')
                             {{ $user->interest }}
                         @endif
