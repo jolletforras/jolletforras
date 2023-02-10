@@ -2,7 +2,7 @@
 
 		<div class="form-group">
 			<label for="title">Cím:</label>
-			<input class="form-control" required="required" name="title" type="text" value="@if(isset($news)) {{$news->title}} @endif" id="title">
+			<input class="form-control" required="required" name="title" type="text" maxlength="60" value="@if(isset($news)) {{$news->title}} @endif" id="title">
 		</div>
 
 		<div class="form-group">

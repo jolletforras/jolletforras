@@ -11,7 +11,7 @@
 
 				<div class="form-group">
 					<label for="title">Cím:</label>
-					<input class="form-control" required="required" name="title" type="text" value="{{$article->title}}" id="title">
+					<input class="form-control" required="required" name="title" type="text" maxlength="60" value="{{$article->title}}" id="title">
 				</div>
 
 				<div class="form-group">

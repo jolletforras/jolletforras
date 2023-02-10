@@ -1,6 +1,6 @@
 		<div class="form-group">
 			<label for="title">Megnevezés*:</label>
-			<input class="form-control" required="required" name="title" type="text" value="@if(isset($project)) {{old('title',$project->title)}} @else {{old('title')}} @endif" id="title">
+			<input class="form-control" required="required" name="title" type="text" maxlength="60" value="@if(isset($project)) {{old('title',$project->title)}} @else {{old('title')}} @endif" id="title">
 		</div>
 	
 		<div class="form-group">
