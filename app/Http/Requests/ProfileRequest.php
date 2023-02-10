@@ -23,6 +23,7 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
+        //azért van kommentben, mert így lehetséges a részleges mentés, nem kell mindent egyszerre kitöltsön
         return [
 			//'name' => 'required|max:30',
 			//'introduction' => 'required|min:30',
@@ -30,7 +31,14 @@ class ProfileRequest extends FormRequest
             //'location' => 'required|max:30',
             //'webpage_name' => 'max:200',
             //'webpage_url' => 'max:200',
-        	//'tag_list' => 'required',
+        	//'interest_tag_list' => 'required',
+
+            //a maxot lehet berakni és azt ami kötelező elsőre; a többi adat megmarad, kivétel a select-eknél az újonnan felvettek
+            'name' => 'required|max:30',
+            'location' => 'max:30',
+            'webpage_name' => 'max:200',
+            'webpage_url' => 'max:200',
+            //'skill_tag_list' => 'max:30',
         ];
     }
     
@@ -54,7 +62,8 @@ class ProfileRequest extends FormRequest
                 'location.max' => 'A település neve nem lehet hosszabb mint 30 karakter.',
                 'webpage_name.max' => 'A weboldal cím nem lehet több mint 200 karakter.',
                 'webpage_url.max' => 'A weboldal link nem lehet több mint 200 karakter.',
-    			'tag_list.required' => 'Kérlek legalább egy címkét adjál meg, miben van jártasságod, mit tudnál hozzáadni egy közösséghez',
+    			'skill_tag_list.required' => 'Kérlek legalább egy címkét adjál meg, miben van jártasságod, mit tudnál hozzáadni egy közösséghez',
+                //'skill_tag_list.max' => 'A jártasság, tudás címke nem lehet több 30 karakternél',
     	];
     }
 }
