@@ -14,7 +14,7 @@ trait TagTrait {
 	 */
 	private function getTagList(array $tag_list, $tag_class) {
 		for($i=0; $i<count($tag_list); $i++) {
-			if (! intval($tag_list[$i])) {
+			if (!is_numeric($tag_list[$i])) {
 				$tag = $tag_class::create([
 						'name' =>$tag_list[$i],
 						'user_id' => Auth::user()->id,
