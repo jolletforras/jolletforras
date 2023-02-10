@@ -61,13 +61,13 @@ class NoticesController extends Controller
             $new = $notice->new > 0 ? " <span>".$notice->new."</span>" : "";
             if ($notice->type == "Forum") {
                 if ($forum = Forum::find($notice->notifiable_id)) {
-                    $url = '<a href="csoport/' . $forum->group->id . '/' . $forum->group->slug . '/tema/' . $forum->id . '/' . $forum->slug . '">' . $forum->group->name . ' - "' . $forum->title . '" téma' . $new . '</a>';
+                    $url = '<a href="'.url('/').'/csoport/' . $forum->group->id . '/' . $forum->group->slug . '/tema/' . $forum->id . '/' . $forum->slug . '">' . $forum->group->name . ' - "' . $forum->title . '" téma' . $new . '</a>';
                 }
             }
 
             if ($notice->type == "Event") {
                 if ($event = Event::find($notice->notifiable_id)) {
-                    $url = '<a href="esemeny/' . $event->id . '/' . $event->slug . '">' . $event->group->name . ' - "' . $event->title . '" esemény' . $new . '</a>';
+                    $url = '<a href="'.url('/').'/esemeny/' . $event->id . '/' . $event->slug . '">' . $event->group->name . ' - "' . $event->title . '" esemény' . $new . '</a>';
                 }
             }
             $content_html .= $notice->new > 0 ? '<b>' . $url . '</b>' : $url;
