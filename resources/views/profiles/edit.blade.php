@@ -133,7 +133,7 @@
 						</div>
 
 						<div class="form-group">
-							<b>Itt add meg címkékkel, hogy mi az a jártasság, tudás, tapasztalat amivel mások szolgálatára lehetsz*</b>
+							<b>Itt add meg címkékkel, hogy mi az a jártasság, tudás, tapasztalat, amivel mások szolgálatára lehetsz*</b>
 							<a href="#skill_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 							<div id="skill_info" class="collapse info">Miben van jártasságod, mit tudnál hozzáadni egy közösséghez? Címkét úgy tudsz felvenni, hogy elkezded írni amit fel szeretnél venni. A megjelenő listában rákattintasz a megfelelőre. Ha nincs olyan, akkor írd be teljesen a címkéd, majd kattints a listában rá.</div>
 							<select id="skill_tag_list" name="skill_tag_list[]" class="form-control tag-list" multiple>
@@ -144,7 +144,7 @@
 						</div>
 
 						<div class="form-group">
-							<b>Itt add meg címkékkel, hogy mi az ami érdekel amiben fejlődni szeretnél*</b>
+							<b>Itt add meg címkékkel, hogy mi az ami érdekel, amiben fejlődni szeretnél*</b>
 							<a href="#interest_tag_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 							<div id="interest_tag_info" class="collapse info">Miben szeretnéd elmélyíteni a tudásod ami a közösség szolgálatára lehet? Címkét úgy tudsz felvenni, hogy elkezded írni amit fel szeretnél venni. A megjelenő listában rákattintasz a megfelelőre. Ha nincs olyan, akkor írd be teljesen a címkéd, majd kattints a listában rá.</div>
 							<select id="interest_tag_list" name="interest_tag_list[]" class="form-control tag-list" multiple>
