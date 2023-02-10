@@ -41,7 +41,7 @@
 				{!! $user->interest !!}
 			@endif
 			<h4><b>Jártasság, tudás:</b> @include('profiles.partials.skill_tags')</h4>
-			@unless($user->interest_tags->isEmpty())<h4><b>Érdeklődés:</b> @include('profiles.partials.interest_tags')</h4>@endunless
+			@unless($user->interest_tags->isEmpty())<h4><b>Érdeklődés, tanulás:</b> @include('profiles.partials.interest_tags')</h4>@endunless
 			@if (Auth::check())
 				@include('profiles.partials.groups')
 			@endif
