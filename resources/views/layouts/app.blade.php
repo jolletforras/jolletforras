@@ -70,10 +70,11 @@
 							@endif
                             <li><a href="{{ url('/csoportok') }}">Csoportok</a></li>
 							<li><a href="{{ url('terkep/tarsak') }}">Térkép</a></li>
+							@if(Auth::check())
 							<li><a href="{{ url('kezdemenyezesek') }}">Kezdeményezések</a></li>
 							<li><a href="{{ url('forum') }}">Fórum</a></li>
+							@endif
 							<li><a href="{{ url('irasok') }}">Írások</a></li>
-							<li><a href="{{ url('hirek') }}">Hírek</a></li>
 							<li><a href="{{ url('esemenyek') }}">Események</a></li>
 							<li class="width-wide"><a href="">Olvasd el</a>
 								<ul>
