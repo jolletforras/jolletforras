@@ -1,5 +1,9 @@
         @csrf
 
+		@if(isset($group_id))
+		<input name="group_id" type="hidden" value="{{$group_id}}">
+		@endif
+
 		<div class="form-group">
 			<label for="title">Cím:</label>
 			<input class="form-control" required="required" name="title" type="text" maxlength="60" value="@if(isset($news)) {{$news->title}} @endif" id="title">

@@ -8,7 +8,7 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<form method="POST" action="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" accept-charset="UTF-8">
-				@include('news._form', ['submitButtonText'=>'Módosít'])
+				@include('groupnews._form', ['submitButtonText'=>'Módosít'])
 			</form>
 		</div>
 	</div>

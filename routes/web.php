@@ -94,6 +94,14 @@ Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@cr
 Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
 Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
 
+Route::get('/csoport/{id}/{group_slug}/hirek', 'GroupNewsController@index');
+Route::get('/csoport/{group_id}/{group_slug}/hir/{news_id}/{news_slug}', 'GroupNewsController@show');
+Route::get('/csoport/{group_id}/{group_slug}/hir/uj', 'GroupNewsController@create');
+Route::post('/hir/uj', 'GroupNewsController@store');
+Route::get('/hir/{id}/{title}/modosit', 'GroupNewsController@edit');
+Route::post('/hir/{id}/{title}/modosit', 'GroupNewsController@update');
+
+
 Route::get('/email/{code}/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'NoticesController@email_theme_login');
 Route::get('/email/{code}/esemeny/{id}/{slug}', 'NoticesController@email_event_login');
 Route::post('/getNotices', 'NoticesController@get_noticies');
@@ -109,10 +117,10 @@ Route::post('/iras/{id}/{title}/modosit', 'ArticlesController@update');
 
 Route::get('/hirek', 'NewsController@index');
 Route::get('/hir/{id}/{title}', 'NewsController@show');
-Route::get('/hir/uj', 'NewsController@create');
-Route::post('/hir/uj', 'NewsController@store');
-Route::get('/hir/{id}/{title}/modosit', 'NewsController@edit');
-Route::post('/hir/{id}/{title}/modosit', 'NewsController@update');
+//Route::get('/hir/uj', 'NewsController@create');
+//Route::post('/hir/uj', 'NewsController@store');
+//Route::get('/hir/{id}/{title}/modosit', 'NewsController@edit');
+//Route::post('/hir/{id}/{title}/modosit', 'NewsController@update');
 Route::get('/hir/cimke/{id}/{tag}', 'TagsController@news_show');
 
 
