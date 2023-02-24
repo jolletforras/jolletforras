@@ -69,7 +69,8 @@ class ArticlesController extends Controller
 	{
 		$article = Article::findOrFail($id);
 
-		if(!(Auth::user()->id != $article->user_id || Auth::user()->admin)) {
+        //ha nem a szerző, vagy nem a portál admin, akkor főoldalra irányít
+		if(!(Auth::user()->id == $article->user_id || Auth::user()->admin)) {
 			return redirect('/');
 		}
 
