@@ -20,13 +20,20 @@ class NewsController extends Controller
 		$this->middleware('auth', ['except'=>['index','show']]);
 	}
 
-	public function index(Request $request)
+	public function index()
 	{
-		$newss = News::latest()->get();
+        if(Auth::check()) {
+            $newss = News::where('visibility', '<>', 'group')->latest()->get();
+        }
+        else {
+            $newss = News::where('visibility','public')->latest()->get();
+        }
 
-        $tags = [''=>''] + NewsTag::pluck('name', 'id')->all();
+        $news_tags = NewsTag::getTagsOfPublicNews();
 
-        $tags_slug = NewsTag::pluck('slug', 'id')->all();
+        $tags = [''=>''] +$news_tags->pluck('name', 'id')->all();
+
+        $tags_slug = $news_tags->pluck('slug', 'id')->all();
 
 		return view('news.index', compact('newss', 'tags', 'tags_slug'));
 	}
