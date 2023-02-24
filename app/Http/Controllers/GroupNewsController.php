@@ -16,9 +16,11 @@ use App\Models\Group;
 class GroupNewsController extends Controller
 {
     use TagTrait;
+    private $visibility_options;
 
     public function __construct() {
 		$this->middleware('auth', ['except'=>['index','show']]);
+        $this->visibility_options = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
 	}
 
 	public function index($id)
@@ -60,7 +62,9 @@ class GroupNewsController extends Controller
 
         $tags = NewsTag::pluck('name', 'id');
 
-		return view('groupnews.create', compact('tags','group_id'));
+        $visibility_options = $this->visibility_options;
+
+		return view('groupnews.create', compact('tags','group_id','visibility_options'));
 	}
 	
 	public function store(Request $request)
@@ -71,7 +75,8 @@ class GroupNewsController extends Controller
             'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
             'slug' => Str::slug($request->get('title')),
-            'group_id' => $request->get('group_id')
+            'group_id' => $request->get('group_id'),
+            'visibility' => $request->get('visibility')
         ]);
 
         if(!empty($request->input('tag_list'))) {
@@ -93,16 +98,14 @@ class GroupNewsController extends Controller
 	{
 	    $news = News::findOrFail($id);
 
-		if(!(Auth::user()->id == $news->user_id || Auth::user()->admin)) {
-			return redirect('/');
-		}
+        if (!($news->group->isAdmin())) return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'Csak a csoport kezelői tudják módosítani a híreket!');
 
         $tags = NewsTag::pluck('name', 'id');
         $selected_tags = $news->tags->pluck('id')->toArray();
 
-        //dd($news->group->id);
+        $visibility_options = $this->visibility_options;
 
-		return view('groupnews.edit', compact('news', 'tags', 'selected_tags'));
+		return view('groupnews.edit', compact('news', 'tags', 'selected_tags','visibility_options'));
 	}
 
 	/**
@@ -123,7 +126,8 @@ class GroupNewsController extends Controller
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'body' => $request->get('body'),
-            'slug' => Str::slug($request->get('title'))
+            'slug' => Str::slug($request->get('title')),
+            'visibility' => $request->get('visibility')
         ]);
 
         $news->tags()->sync($tag_list);
