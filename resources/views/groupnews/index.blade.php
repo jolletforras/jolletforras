@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="inner_box collapse" id="create_news_info" style="font-size: 18px">
-					Csoport kezelőként lehetőséged van a csoport aktuális történéseit, eseményeit egy hírben összefoglalni.
+					Csoport kezelőként lehetőséged van a csoport aktuális történéseit, eseményeit egy-egy hírbejegyzésben összefoglalni.
 				</div>
 			</div>
 		</div>
