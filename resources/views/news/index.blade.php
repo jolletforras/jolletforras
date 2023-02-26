@@ -40,6 +40,7 @@
 			@endif
 			<article>
 				<div class="body">{!!$news->body !!}</div>
+				@include('partials.author', ['author'=>'','obj'=>$news])
 			</article>
 			@if (Auth::check())
 				@include('partials.tags',['url'=>'hir','obj'=>$news])
