@@ -34,7 +34,7 @@
                     Az egyéni és a közösségi fontosság összehangolásával működünk, azaz a szolidáris működést szem előtt tartva, ám az egyén szabadságát nem sértve.</li>
 
                 <li><b>Hatalompolitizálás nincs</b><br>
-                    Ez a tér nem kapcsolódik semmilyen módon a jelenlegi hatalompolitikai formációkhoz, pártokhoz vagy folyamatokhoz. Az oldalon nem lehet semmilyen hatalompolitikai tevékenységet folytatni, sem egyéni, sem csoport szinten.</li>
+                    Ez a tér nem kapcsolódik semmilyen módon hatalompolitikai formációkhoz, pártokhoz vagy folyamatokhoz. Az oldalon nem lehet semmilyen hatalompolitikai tevékenységet folytatni, sem egyéni, sem csoport szinten.</li>
 
                 <li><b>Fókuszáltság</b><br>
                     Szem előtt tartjuk a küldetést és a célt.  Amikor kezdeményezünk valamit, akkor feltesszük magunknak a kérdést: hogyan szolgálja ez a társadalmi jóllétet? A jelen és korábbi rendszerekkel csak annyiban foglalkozunk, amennyiben információkat és tapasztalatot merítünk belőle, hogy mit szeretnénk másképp és milyen lehetőségek nyílnak ezek elérésére.</li>
