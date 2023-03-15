@@ -27,7 +27,27 @@ class GroupThemesController extends Controller
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
-        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->latest('updated_at')->get();
+        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->latest('updated_at')->get();
+
+        $tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
+
+        $tags_slug = ForumTag::pluck('slug', 'id')->all();
+
+        $page = 'conversation';
+
+        return view('groupthemes.index', compact('group','page','forums', 'tags', 'tags_slug'));
+    }
+
+    public function closedthemes($id)
+    {
+        $group = Group::findOrFail($id);
+
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isMember()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }
+
+        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 0)->latest('updated_at')->get();
 
         $tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
 
@@ -93,5 +113,25 @@ class GroupThemesController extends Controller
         $tags = ForumTag::pluck('name', 'id');
 
         return view('groupthemes.create', compact('tags','group_id'));
+    }
+
+    /**
+     * Close a group theme
+     *
+     * @return Response
+     */
+    public function closetheme($group_id,$group_slug,$forum_id,$forum_slug) {
+
+        $group = Group::findOrFail($group_id);
+
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isAdmin()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug)->with('message', 'Nincs jogosultságod a beszédet lezárni!');
+        }
+
+        $forum = Forum::findOrFail($forum_id);
+        $forum->update(['active' => 0]);
+
+        return redirect('csoport/'.$group_id.'/'.$group_slug.'/beszelgetesek')->with('message', 'A beszélgetést sikeresen lezártad!');
     }
 }
