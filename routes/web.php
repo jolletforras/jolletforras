@@ -90,10 +90,11 @@ Route::post('/csoport/{id}/invite', 'GroupsController@invite');
 Route::get('/csoport/{group_id}/{group_slug}/beszelgetesek', 'GroupThemesController@index');
 Route::get('/csoport/{group_id}/{group_slug}/kozlemenyek', 'GroupThemesController@announcement');
 Route::get('/csoport/{group_id}/{group_slug}/lezart-beszelgetesek', 'GroupThemesController@closedthemes');
-Route::get('/csoport/{group_id}/{group_slug}/lezar-beszelgetest/{forum_id}/{forum_slug}', 'GroupThemesController@closetheme');
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'GroupThemesController@show');
 Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@create');
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}/modosit', 'GroupThemesController@edit');
+Route::get('/csoport/{group_id}/{group_slug}/lezar-beszelgetest/{forum_id}/{forum_slug}', 'GroupThemesController@closetheme');
+Route::get('/csoport/{group_id}/{group_slug}/megnyit-beszelgetest/{forum_id}/{forum_slug}', 'GroupThemesController@opentheme');
 
 Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
 Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');

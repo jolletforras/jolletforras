@@ -21,7 +21,11 @@
 						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{$forum->id}}/{{$forum->slug}}/modosit" class="btn btn-default btn-xs">módosít</a>
 					@endif
 					@if ($group->isAdmin())
+						@if($forum->active)
 						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/lezar-beszelgetest/{{ $forum->id }}/{{$forum->slug}}" class="btn btn-default btn-xs">lezár</a>
+						@else
+						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/megnyit-beszelgetest/{{ $forum->id }}/{{$forum->slug}}" class="btn btn-default btn-xs">megnyit</a>
+						@endif
 					@endif
 				</p>
 				{!! $forum->body !!}

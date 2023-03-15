@@ -159,4 +159,25 @@ class GroupThemesController extends Controller
 
         return redirect('csoport/'.$group_id.'/'.$group_slug.'/beszelgetesek')->with('message', 'A beszélgetést sikeresen lezártad!');
     }
+
+    /**
+     * Close a group theme
+     *
+     * @return Response
+     */
+    public function opentheme($group_id,$group_slug,$forum_id,$forum_slug) {
+
+        $group = Group::findOrFail($group_id);
+
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isAdmin()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug)->with('message', 'Nincs jogosultságod a beszédet lezárni!');
+        }
+
+        $forum = Forum::findOrFail($forum_id);
+        $forum->timestamps = false; //hogy az update_at ne módosuljon
+        $forum->update(['active' => 1]);
+
+        return redirect('csoport/'.$group_id.'/'.$group_slug.'/beszelgetesek')->with('message', 'A beszélgetést sikeresen lezártad!');
+    }
 }
