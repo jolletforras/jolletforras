@@ -1,6 +1,6 @@
 		@csrf
 
-		<input name="group_id" type="hidden" value="{{$group_id}}">
+		<input name="group_id" type="hidden" value="{{$group->id}}">
 
 		<div class="form-group">
 			<label for="title">Cím:</label>
@@ -12,6 +12,11 @@
 			<textarea class="form-control" required="required" rows="20" name="body" cols="50">@if(isset($forum)) {{$forum->body}} @endif</textarea>
 		</div>
 
+		@if($group->isAdmin())
+		<div class="form-group">
+			<input name="announcement" type="checkbox" value="1" @if(isset($forum) && $forum->announcement) checked @endif> közlemény
+		</div>
+		@endif
 
 		<div class="form-group">
 			<label for="tag_list">Címkék:</label>

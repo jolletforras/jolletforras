@@ -100,6 +100,11 @@ class ForumsController extends Controller
         else {
             $group = Group::findOrFail($forum->group_id);
 
+            if($group->isAdmin()) {
+                $announcement = empty($request->get('announcement')) ? 0 : 1;
+                $forum->update(['announcement' => $announcement]);
+            }
+
             //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id, a comment_id = 0, a new=1 lesz.
             foreach($group->members as $user) {
                 $user_id = $user->id;
@@ -168,6 +173,11 @@ class ForumsController extends Controller
         }
         else {
             $group = Group::findOrFail($forum->group_id);
+
+            if($group->isAdmin()) {
+                $announcement = empty($request->get('announcement')) ? 0 : 1;
+                $forum->update(['announcement' => $announcement]);
+            }
 
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
         }

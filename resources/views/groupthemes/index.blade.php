@@ -18,7 +18,7 @@
 				<p>
 					Felvette: <a href="{{ url('profil',$forum->user->id) }}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>,	{{ $forum->updated_at }}
 					@if (Auth::user()->id==$forum->user->id)
-						<a href="{{url('forum')}}/{{$forum->id}}/{{$forum->slug}}/modosit" class="btn btn-default btn-xs">módosít</a>
+						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{$forum->id}}/{{$forum->slug}}/modosit" class="btn btn-default btn-xs">módosít</a>
 					@endif
 					@if ($group->isAdmin())
 						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/lezar-beszelgetest/{{ $forum->id }}/{{$forum->slug}}" class="btn btn-default btn-xs">lezár</a>

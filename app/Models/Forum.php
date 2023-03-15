@@ -10,7 +10,7 @@ class Forum extends Model
 {
     use HasFactory;
 
-    protected $fillable = [	'title','body','slug','group_id', 'active' ];
+    protected $fillable = [	'title','body','slug','group_id', 'active', 'announcement' ];
     
     protected $dates=['updated_at']; //így használhatóak a carbon függvényel, pl. $forum->updated_at->format('Y-m-d');
     

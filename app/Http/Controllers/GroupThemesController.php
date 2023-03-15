@@ -110,9 +110,33 @@ class GroupThemesController extends Controller
      */
     public function create($group_id,$slug) {
 
+        $group = Group::findOrFail($group_id);
+
         $tags = ForumTag::pluck('name', 'id');
 
-        return view('groupthemes.create', compact('tags','group_id'));
+        return view('groupthemes.create', compact('tags','group_id','group'));
+    }
+
+    /**
+     * Edit a specific forum
+     *
+     * @param  integer $id The forum ID
+     * @return Response
+     */
+    public function edit($group_id,$slug,$forum_id)
+    {
+        $group = Group::findOrFail($group_id);
+
+        $forum = Forum::findOrFail($forum_id);
+
+        if(Auth::user()->id != $forum->user->id) {
+            return redirect('/');
+        }
+
+        $tags = ForumTag::pluck('name', 'id');
+        $selected_tags = $forum->tags->pluck('id')->toArray();
+
+        return view('groupthemes.edit', compact('forum', 'tags', 'selected_tags','group'));
     }
 
     /**
