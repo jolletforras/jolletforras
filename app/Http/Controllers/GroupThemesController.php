@@ -38,6 +38,26 @@ class GroupThemesController extends Controller
         return view('groupthemes.index', compact('group','page','forums', 'tags', 'tags_slug'));
     }
 
+    public function announcement($id)
+    {
+        $group = Group::findOrFail($id);
+
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isMember()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }
+
+        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->where('announcement', 1)->latest('updated_at')->get();
+
+        $tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
+
+        $tags_slug = ForumTag::pluck('slug', 'id')->all();
+
+        $page = 'announcement';
+
+        return view('groupthemes.index', compact('group','page','forums', 'tags', 'tags_slug'));
+    }
+
     public function closedthemes($id)
     {
         $group = Group::findOrFail($id);
@@ -53,7 +73,7 @@ class GroupThemesController extends Controller
 
         $tags_slug = ForumTag::pluck('slug', 'id')->all();
 
-        $page = 'conversation';
+        $page = 'closed-conversation';
 
         return view('groupthemes.index', compact('group','page','forums', 'tags', 'tags_slug'));
     }

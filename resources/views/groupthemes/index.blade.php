@@ -4,14 +4,23 @@
 	@include('groups._group_menu')
 	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
 		<div class="row">
-			<div class="col-sm-9"><a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/lezart-beszelgetesek">Lezárt beszélgetések</a></div>
-			<div class="col-sm-3 text-right">
+			@if ($page=="conversation")
+			<div class="col-sm-6">
 				@if (Auth::check())
-					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default right"><i class="fa fa-plus" aria-hidden="true"></i>Új téma</a>
+					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>
+						@if ($page=="conversation")Új téma @else Új közlemény @endif
+					</a>
 				@endif
 			</div>
+			<div class="col-sm-6 text-right">
+					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/lezart-beszelgetesek" class="right">Lezárt beszélgetések</a>
+			</div>
+			@endif
+			@if ($page=="closed-conversation")<div class="col-sm-6"><h3>Lezárt beszélgetések</h3></div>@endif
 		</div>
+		@if ($page!="announcement")
 		<hr style="margin-top:2px;">
+		@endif
 		@foreach ($forums as $forum)
 			@if(isset($forum->user->id))
 				<h3><a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{ $forum->title }}</a></h3>
