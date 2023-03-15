@@ -44,6 +44,12 @@ class CommentsController extends Controller
             ++$commentable->counter;
             $commentable->save();
 
+            //ha hozzászólnak a lezárt téma megnyílik
+            if( $c_type=="GroupTheme" && !$commentable->active) {
+                $commentable->timestamps = false; //hogy az update_at ne módosuljon
+                $commentable->update(['active' => 1]);
+            }
+
             $commentable_types = ['GroupTheme'=>'csoport téma','Forum'=>'fórum', 'Project'=>'kezdeményezés', 'Event'=>'esemény', 'Article'=>'írás'];
 
             $commenter=User::findOrFail($commenter_id);
