@@ -154,6 +154,7 @@ class GroupThemesController extends Controller
         }
 
         $forum = Forum::findOrFail($forum_id);
+        $forum->timestamps = false; //hogy az update_at ne módosuljon
         $forum->update(['active' => 0]);
 
         return redirect('csoport/'.$group_id.'/'.$group_slug.'/beszelgetesek')->with('message', 'A beszélgetést sikeresen lezártad!');
