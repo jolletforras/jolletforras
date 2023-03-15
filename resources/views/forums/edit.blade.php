@@ -4,7 +4,7 @@
 	@include('partials.tinymce_js')
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h2>@if($forum->group_id==0) Fórum @else Csoport @endif témám szerkesztése</h2>
+			<h2>Fórum témám szerkesztése</h2>
 
 			@include('errors.list')
 		</div>
