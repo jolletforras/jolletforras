@@ -4,19 +4,29 @@
 	@include('groups._group_menu')
 	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
 		<div class="row">
-			@if ($page=="conversation")
-			<div class="col-sm-6">
-				@if (Auth::check())
-					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>
-						@if ($page=="conversation")Új téma @else Új közlemény @endif
-					</a>
+			<div class="col-sm-4">
+				@if ($page=="conversation")
+					@if($status=='closed')
+						<h3>Lezárt beszélgetések</h3>
+					@else
+						<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új téma</a>
+					@endif
 				@endif
 			</div>
-			<div class="col-sm-6 text-right">
-					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/lezart-beszelgetesek" class="right">Lezárt beszélgetések</a>
+			<div class="col-sm-3" style="padding-top:4px;">
+				@if ($page!="announcement")
+				<select id="tag" name="tag" class="form-control">
+					@foreach($tags as $key => $val)
+						<option value="{{ $key }}">{{ $val }}</option>
+					@endforeach
+				</select>
+				@endif
 			</div>
-			@endif
-			@if ($page=="closed-conversation")<div class="col-sm-6"><h3>Lezárt beszélgetések</h3></div>@endif
+			<div class="col-sm-5 text-right">
+				@if ($page=="conversation" && $status=='active')
+					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/lezart-beszelgetesek" class="right">Lezárt beszélgetések</a>
+				@endif
+			</div>
 		</div>
 		@if ($page!="announcement")
 		<hr style="margin-top:2px;">
@@ -47,4 +57,10 @@
 			@endif
 		@endforeach
 	</div>
+@endsection
+
+@section('footer')
+	@if ($page!="announcement")
+		@include('partials.search_tag_script',['url'=>'csoport/'.$group->id.'/'.$group->slug.'/tema'])
+	@endif
 @endsection

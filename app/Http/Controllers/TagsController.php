@@ -11,6 +11,7 @@ use App\Models\GroupTag;
 use App\Models\NewsTag;
 use App\Models\IdeaSkill;
 use App\Models\ProjectSkill;
+use App\Models\Group;
 use App\Models\GroupTheme;
 
 class TagsController extends Controller
@@ -63,6 +64,24 @@ class TagsController extends Controller
 
 		return view('forums.index', compact('forums', 'tags', 'tags_slug'));
 	}
+
+    public function group_theme_show($group_id,$group_slug,$tag_id) {
+
+        $group = Group::findOrFail($group_id);
+
+        $tag = ForumTag::findOrFail($tag_id);
+
+        $forums=$tag->forums()->latest('created_at')->get();
+
+        $tags = [''=>''] + ForumTag::where('group_id', $group_id)->pluck('name', 'id')->all();
+
+        $tags_slug = ForumTag::where('group_id', $group_id)->pluck('slug', 'id')->all();
+
+        $page = 'conversation';
+        $status='all';
+
+        return view('groupthemes.index', compact('group','page','status','forums','tags','tags_slug'));
+    }
 
     public function group_show($id) {
         $tag = GroupTag::findOrFail($id);

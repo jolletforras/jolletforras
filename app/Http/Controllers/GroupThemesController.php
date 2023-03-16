@@ -29,13 +29,14 @@ class GroupThemesController extends Controller
 
         $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->latest('updated_at')->get();
 
-        $tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
+        $tags = [''=>''] + ForumTag::where('group_id', $id)->pluck('name', 'id')->all();
 
-        $tags_slug = ForumTag::pluck('slug', 'id')->all();
+        $tags_slug = ForumTag::where('group_id', $id)->pluck('slug', 'id')->all();
 
         $page = 'conversation';
+        $status='active';
 
-        return view('groupthemes.index', compact('group','page','forums', 'tags', 'tags_slug'));
+        return view('groupthemes.index', compact('group','page','status','forums', 'tags', 'tags_slug'));
     }
 
     public function announcement($id)
@@ -49,13 +50,10 @@ class GroupThemesController extends Controller
 
         $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->where('announcement', 1)->latest('updated_at')->get();
 
-        $tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
-
-        $tags_slug = ForumTag::pluck('slug', 'id')->all();
-
         $page = 'announcement';
+        $status='active';
 
-        return view('groupthemes.index', compact('group','page','forums', 'tags', 'tags_slug'));
+        return view('groupthemes.index', compact('group','page','status','forums'));
     }
 
     public function closedthemes($id)
@@ -69,13 +67,14 @@ class GroupThemesController extends Controller
 
         $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 0)->latest('updated_at')->get();
 
-        $tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
+        $tags = [''=>''] + ForumTag::where('group_id', $id)->pluck('name', 'id')->all();
 
         $tags_slug = ForumTag::pluck('slug', 'id')->all();
 
-        $page = 'closed-conversation';
+        $page = 'conversation';
+        $status='closed';
 
-        return view('groupthemes.index', compact('group','page','forums', 'tags', 'tags_slug'));
+        return view('groupthemes.index', compact('group','page','status','forums', 'tags', 'tags_slug'));
     }
 
 
