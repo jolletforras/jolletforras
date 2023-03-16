@@ -48,7 +48,7 @@
 					@endif
 				</p>
 				{!! $forum->body !!}
-				<br>
+				@include('partials.tags',['url'=>'csoport/'.$group->id.'/'.$group->slug.'/tema','obj'=>$forum])
 				<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
 				@if( $forum->counter>0)
 					&nbsp;&nbsp;<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{ $forum->counter }} hozzászolás</a>

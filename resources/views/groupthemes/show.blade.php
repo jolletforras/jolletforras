@@ -16,7 +16,7 @@
 				{!! $forum->body !!}
 			</div>
 			<div class="form-group">
-				@include('partials.tags',['url'=>'csoport','obj'=>$group])
+				@include('partials.tags',['url'=>'csoport/'.$group->id.'/'.$group->slug.'/tema','obj'=>$forum])
 			</div>
 			<div class="form-group">
 				<input type="checkbox" onchange="check()" name="comment_notice" id="comment_notice" value="hozzászólás értesítés"  @if ($askNotice) checked @endif>
