@@ -10,7 +10,7 @@ class ForumTag extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'user_id'
+        'name', 'slug', 'user_id', 'group_id'
     ];
 
 	public function forums()

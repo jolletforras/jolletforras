@@ -41,7 +41,7 @@ class ForumsController extends Controller
 
 		$tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
 
-		$tags_slug = ForumTag::pluck('slug', 'id')->all();
+		$tags_slug = ForumTag::where('group_id', 0)->pluck('slug', 'id')->all();
 
 		return view('forums.index', compact('forums', 'tags', 'tags_slug'));
 	}
@@ -71,7 +71,7 @@ class ForumsController extends Controller
 	 * @return Response
 	 */
 	public function create() {
-		$tags = ForumTag::pluck('name', 'id');
+		$tags = ForumTag::where('group_id', 0)->pluck('name', 'id');
 
 		return view('forums.create', compact('tags'));
 	}
@@ -83,7 +83,7 @@ class ForumsController extends Controller
 	 */
 	public function store(ForumRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag');
+		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag',$request->get('group_id'));
 
 		$forum = Auth::user()->forums()->create([
 				'title' => $request->get('title'),
@@ -142,7 +142,7 @@ class ForumsController extends Controller
 			return redirect('/');
 		}
 	
-		$tags = ForumTag::pluck('name', 'id');
+		$tags = ForumTag::where('group_id', 0)->pluck('name', 'id');
         $selected_tags = $forum->tags->pluck('id')->toArray();
 		
 		return view('forums.edit', compact('forum', 'tags', 'selected_tags'));
@@ -156,10 +156,10 @@ class ForumsController extends Controller
 	 */
 	public function update($id, ForumRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag');
-		
-		$forum = Forum::findOrFail($id);
+        $forum = Forum::findOrFail($id);
 
+		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag',$forum->group_id);
+		
 		$forum->update([
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
