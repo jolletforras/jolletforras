@@ -132,7 +132,7 @@ class GroupThemesController extends Controller
 
         $group = Group::findOrFail($group_id);
 
-        $tags = ForumTag::pluck('name', 'id');
+        $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
 
         return view('groupthemes.create', compact('tags','group_id','group'));
     }
@@ -153,7 +153,7 @@ class GroupThemesController extends Controller
             return redirect('/');
         }
 
-        $tags = ForumTag::pluck('name', 'id');
+        $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
         $selected_tags = $forum->tags->pluck('id')->toArray();
 
         return view('groupthemes.edit', compact('forum', 'tags', 'selected_tags','group'));
