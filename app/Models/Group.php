@@ -133,4 +133,26 @@ class Group extends Model
         return $location;
     }
 
+    //ezt most nem használom
+    public function get_card_text() {
+        $tags_text = $card_text ='';
+        $tags = array();
+        if(Auth::check() && $this->tags->isNotEmpty()) {
+            foreach($this->tags as $tag) {
+                $tags[] = $tag->name;
+            }
+            $tags_text .= implode(', ',$tags);
+        }
+        $length_tag_text = strlen($tags_text);
+        $length_text = strlen($this->description)+$length_tag_text;
+        if($length_text>500) {
+            $card_text .= nl2br(mb_substr($this->description,0,400-$length_tag_text));
+            $card_text .= '<a href="'.url('csoport',$this->id).'/'.$this->slug.'">... tovább</a>';
+        }
+        else {
+            $card_text .= nl2br($this->description);
+        }
+
+        return $card_text;
+    }
 }
