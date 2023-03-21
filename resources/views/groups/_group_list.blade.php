@@ -10,9 +10,6 @@
                         - <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
                     @endif
                 </h3>
-                @if ($group->isAdmin())
-                    <p><a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/modosit" type="submit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"> </i>Módosít</a></p>
-                @endif
                 <p>
                 @if(Auth::check() && strlen($group->description)>800)
                     {!! nl2br(mb_substr($group->description,0,800)) !!}
