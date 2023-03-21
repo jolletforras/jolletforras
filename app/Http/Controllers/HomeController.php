@@ -166,8 +166,6 @@ class HomeController extends Controller
          $tmpimagename = 'tmp_'.$imagename.'.'.$request->file('file')->getClientOriginalExtension();
          $request->file('file')->move($base_path,$tmpimagename);
 
-         //return response()->json(['location'=>"/images/posts/$tmpimagename"]);
-
          $tmpfile=$base_path.$tmpimagename;
          generateImage($tmpfile, 600, 1, $base_path.$imagename.'.jpg');//1=>width
          unlink($tmpfile);
