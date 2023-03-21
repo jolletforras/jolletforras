@@ -44,7 +44,7 @@ class TagsController extends Controller
     public function groups_show($id) {
         $tag = GroupTheme::findOrFail($id);
 
-        $groups=$tag->groups()->latest('updated_at')->get();
+        $groups=$tag->groups()->orderBy('name')->get();
 
         $tags = [''=>''] + GroupTheme::pluck('name', 'id')->all();
 
