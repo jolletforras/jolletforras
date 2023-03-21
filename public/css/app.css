@@ -417,6 +417,16 @@ h3 {
 	background-position: center center;
 }
 
+.group .card .image-box {
+	padding-bottom: 30%;
+}
+
+.group .card .image-box .image {
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
 .card .card-body {
 	height: auto;
 	padding: 10px 10px 10px 15px;

@@ -1,5 +1,5 @@
 @foreach ($groups as $group)
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-6 col-md-4 group">
         <div class="card">
             <div class="card-header"></div>
             <div class="image-box">
@@ -18,8 +18,8 @@
                     @endif
                 </h3>
                 <p>
-                @if(strlen($group->description)>700)
-                    {!! nl2br(mb_substr($group->description,0,700)) !!}
+                @if(strlen($group->description)>800)
+                    {!! nl2br(mb_substr($group->description,0,800)) !!}
                     <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">... tovább</a>
                 @else
                     {!! nl2br($group->description) !!}
