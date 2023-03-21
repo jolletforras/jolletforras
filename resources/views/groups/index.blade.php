@@ -80,7 +80,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="result">
+	<div class="row" id="result">
 		@include('groups._group_list')
 	</div>
 @endsection

@@ -446,6 +446,10 @@ h3 {
 	position: relative;
 }
 
+.card .card-body .tags{
+	height: 35px;
+}
+
 .footer  {
 	background-color: #f6f6f6;
 	min-height: 30px;

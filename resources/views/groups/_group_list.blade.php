@@ -1,8 +1,11 @@
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        @for ($i = 0; $i < $num=$groups->count(); $i++)
-            <?php $group = $groups[$i]; ?>
+@foreach ($groups as $group)
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card">
+            <div class="card-header"></div>
+            <div class="image-box">
+                <div class="image" style="background-image:url('images/groups/{{$group->id}}.jpg');"></div>
+            </div>
+            <div class="card-body">
             @if(isset($group->user->id))
                 <h3>
                     <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">{{ $group->name }}</a>
@@ -11,17 +14,18 @@
                     @endif
                 </h3>
                 <p>
-                @if(Auth::check() && strlen($group->description)>800)
-                    {!! nl2br(mb_substr($group->description,0,800)) !!}
+                @if(strlen($group->description)>700)
+                    {!! nl2br(mb_substr($group->description,0,700)) !!}
                     <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">... tovább</a>
                 @else
                     {!! nl2br($group->description) !!}
                 @endif
+                </p>
                 @if (Auth::check())
                     @include('partials.tags',['url'=>'csoport','obj'=>$group])
                 @endif
-                @if($i!=$num-1)<hr>@endif
             @endif
-        @endfor
+            </div>
+        </div>
     </div>
-</div>
+@endforeach
