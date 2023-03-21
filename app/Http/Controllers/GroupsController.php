@@ -456,7 +456,7 @@ class GroupsController extends Controller
         $request->file('image')->move($base_path,$tmpimagename);
 
         $tmpfile=$base_path.$tmpimagename;
-        generateImage($tmpfile, 400, 1, $base_path.'g_'.$imagename.'.jpg');//1=>width
+        generateImage($tmpfile, 400, 1, $base_path.$imagename.'.jpg');//1=>width
         unlink($tmpfile);
 
         return redirect('/csoport/'.$id.'/'.$name)->with('message', 'A csoportképet sikeresen feltöltötted!');
