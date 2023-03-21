@@ -12,7 +12,7 @@
 			@endif
 		</p>
 		@if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
-			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg"></p>
+			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg" style="max-width: 50%;"></p>
 		@endif
 		<p>{!! nl2br($group->description) !!}</p>
 		@if ($is_member)
