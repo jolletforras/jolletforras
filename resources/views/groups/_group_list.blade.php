@@ -3,7 +3,11 @@
         <div class="card">
             <div class="card-header"></div>
             <div class="image-box">
+                @if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
                 <div class="image" style="background-image:url('images/groups/{{$group->id}}.jpg');"></div>
+                @else
+                <div class="image" style="background-image:url('images/tarsadalmijollet.png');"></div>
+                @endif
             </div>
             <div class="card-body">
             @if(isset($group->user->id))
