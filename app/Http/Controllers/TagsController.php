@@ -41,16 +41,18 @@ class TagsController extends Controller
         return view('projects.index', compact('projects', 'tags', 'tags_slug'));
     }
 
-    public function groups_show($id) {
-        $tag = GroupTheme::findOrFail($id);
+    public function group_show($id) {
+        $tag = GroupTag::findOrFail($id);
 
         $groups=$tag->groups()->orderBy('name')->get();
 
-        $tags = [''=>''] + GroupTheme::pluck('name', 'id')->all();
+        $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
 
-        $tags_slug = GroupTheme::pluck('slug', 'id')->all();
+        $city=NULL;
 
-        return view('groups.index', compact('groups', 'tags', 'tags_slug'));
+        $tags_slug = GroupTag::pluck('slug', 'id')->all();
+
+        return view('groups.index', compact('groups', 'tags', 'tags_slug', 'city'));
     }
 
     public function forum_show($id) {
@@ -81,20 +83,6 @@ class TagsController extends Controller
         $status='all';
 
         return view('groupthemes.index', compact('group','page','status','forums','tags','tags_slug'));
-    }
-
-    public function group_show($id) {
-        $tag = GroupTag::findOrFail($id);
-
-        $groups=$tag->groups()->latest('created_at')->get();
-
-        $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
-
-        $city=NULL;
-
-        $tags_slug = GroupTag::pluck('slug', 'id')->all();
-
-        return view('groups.index', compact('groups', 'tags', 'tags_slug', 'city'));
     }
 
     public function news_show($id) {
