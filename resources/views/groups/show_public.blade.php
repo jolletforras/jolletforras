@@ -12,6 +12,9 @@
 				- <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
 			@endif
 		</h2>
+		@if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
+			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg" style="max-width: 50%;"></p>
+		@endif
 		<p>{!! nl2br($group->description) !!}</p>
 		@if($group->webpage_url!='')
 			<p><b>Weboldal:</b> <a href="{{$group->webpage_url}}" target="_blank">{{$group->webpage_name}}</a></p>
