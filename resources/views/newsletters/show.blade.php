@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('title'){{ $newsletter->title }}@endsection
+@section('description'){{ $newsletter->meta_description }}@endsection
+@section('url'){{url('hirlevel')}}/{{$newsletter->id}}/{{$newsletter->slug}}@endsection
+@section('canonical')<link rel="canonical" href="{{url('iras')}}/{{$newsletter->id}}/{{$newsletter->slug}}" />@endsection
+@section('image')@if(!empty($newsletter->image)){{url('/')}}/images/posts/{{$newsletter->image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
+@endsection
 
 @section('content')
 	<div class="panel panel-default">

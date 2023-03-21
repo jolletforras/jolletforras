@@ -9,7 +9,7 @@ class Newsletter extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'title','body','short_description','slug'];
+    protected $fillable = [ 'title','meta_description','short_description','body','slug'];
 
 
     public function user()
