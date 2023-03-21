@@ -11,8 +11,8 @@
 				<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/kepfeltoltes" type="submit" class="btn btn-default">Képfeltöltés</a>
 			@endif
 		</p>
-		@if(file_exists(public_path('images/groups/g_'.$group->id.'.jpg')))
-			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/g_{{ $group->id}}.jpg"></p>
+		@if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
+			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg"></p>
 		@endif
 		<p>{!! nl2br($group->description) !!}</p>
 		@if ($is_member)
