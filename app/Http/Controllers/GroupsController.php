@@ -413,6 +413,55 @@ class GroupsController extends Controller
         return \Response::json($response);
     }
 
+    /**
+     * Upload user group image
+     *
+     * @return Response
+     */
+    public function uploadImage($id,$name)
+    {
+        return view('groups.upload_image', compact('id','name'));
+    }
+
+
+    /**
+     * Save user group image
+     *
+     * @return Response
+     */
+    public function saveImage($id,$name,Request $request)
+    {
+        $rules = [
+            'image' => 'required|mimes:jpeg,png,gif|max:2048'
+        ];
+
+        $messages = [
+            'image.required' => 'Képfájl kiválasztása szükséges',
+            'image.mimes' => 'A kép fájltípusa .jpg, .png, .gif kell legyen',
+            'image.max' => 'A kép nem lehet nagyobb mint :max KB',
+        ];
+
+        //dd($request);
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect('csoport/'.$id.'/'.$name.'/kepfeltoltes')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $imagename=$id;
+        $base_path=base_path().'/public/images/groups/';
+        $tmpimagename = 'tmp_'.$imagename.'.'.$request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move($base_path,$tmpimagename);
+
+        $tmpfile=$base_path.$tmpimagename;
+        generateImage($tmpfile, 400, 1, $base_path.'g_'.$imagename.'.jpg');//1=>width
+        unlink($tmpfile);
+
+        return redirect('/csoport/'.$id.'/'.$name)->with('message', 'A csoportképet sikeresen feltöltötted!');
+    }
+
     public function cron_test()
     {
         //tesztelés esetén ide másold a SendNoticeEmails.php-ból
