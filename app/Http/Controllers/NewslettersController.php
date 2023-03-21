@@ -53,6 +53,7 @@ class NewslettersController extends Controller
             'meta_description' => $request->get('meta_description'),
             'short_description' => $request->get('short_description'),
             'body' => $request->get('body'),
+            'image' => getfirstimage('body'),
             'slug' => Str::slug($request->get('title'))
         ]);
 
@@ -87,13 +88,14 @@ class NewslettersController extends Controller
 	{
 		$newsletter = Newsletter::findOrFail($id);
 
-		//$newsletter->update($request->all());
+        $description = $request->get('body');
 
         $newsletter->update([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'short_description' => $request->get('short_description'),
             'body' => $request->get('body'),
+            'image' => getfirstimage($description),
             'slug' => Str::slug($request->get('title'))
         ]);
 
