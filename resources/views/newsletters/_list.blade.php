@@ -9,9 +9,7 @@
                     <a href="{{url('hirlevel')}}/{{$newsletter->id}}/{{$newsletter->slug}}/modosit">módosít</a>
                 @endif
                 <article>
-                    <div class="body">
-                        {!! justbr($newsletter->body,1000) !!} <a href="{{ url('hirlevel',$newsletter->id) }}/{{$newsletter->slug}}">... tovább</a>
-                    </div>
+                    <div class="body">{!! $newsletter->short_description !!}  <a href="{{ url('hirlevel',$newsletter->id) }}/{{$newsletter->slug}}">... tovább</a></div>
                 </article>
             </td>
         </tr>

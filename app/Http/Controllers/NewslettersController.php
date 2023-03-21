@@ -51,6 +51,7 @@ class NewslettersController extends Controller
         $newsletter = Auth::user()->newsletters()->create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
+            'short_description' => $request->get('short_description'),
             'slug' => Str::slug($request->get('title'))
         ]);
 
@@ -90,6 +91,7 @@ class NewslettersController extends Controller
         $newsletter->update([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
+            'short_description' => $request->get('short_description'),
             'slug' => Str::slug($request->get('title'))
         ]);
 

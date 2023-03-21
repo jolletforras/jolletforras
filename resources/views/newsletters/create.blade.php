@@ -23,6 +23,12 @@
 				</div>
 
 				<div class="form-group">
+					<label for="title">Rövid leírás:</label>
+					<textarea class="form-control" required="required" rows="20" name="short_description" cols="50"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="title">Teljes hírlevél:</label>
 					<textarea class="form-control" required="required" rows="20" name="body" cols="50"></textarea>
 				</div>
 
