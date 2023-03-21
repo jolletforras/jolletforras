@@ -40,10 +40,10 @@ class GroupsController extends Controller
     {
         if(Auth::check())
         {
-            $groups = Group::with('user', 'members', 'tags')->latest('updated_at')->get();
+            $groups = Group::with('user', 'members', 'tags')->orderBy('name')->get();
         }
         else {
-            $groups = Group::with('user', 'members', 'tags')->latest('updated_at')->where('public','=', 1)->get();
+            $groups = Group::with('user', 'members', 'tags')->orderBy('name')->where('public','=', 1)->get();
         }
 
         $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
