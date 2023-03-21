@@ -9,6 +9,8 @@ use App\Models\Forum;
 use App\Models\Event;
 use App\Models\Article;
 use App\Models\Newsletter;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -157,31 +159,19 @@ class HomeController extends Controller
      */
     public function uploadimage(Request $request)
     {
+         $base_path=base_path().'/public/images/posts/';
+         $fileName=pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
+         $imagename=Auth::user()->id.'-'.Str::slug($fileName).'-'.rand(1000,9999);
 
-        /*$fileName=$request->file('file')->getClientOriginalName();
-        $request->file('file')->storeAs('public/images', $fileName);
-        return response()->json(['location'=>"/storage/images/$fileName"]);*/
+         $tmpimagename = 'tmp_'.$imagename.'.'.$request->file('file')->getClientOriginalExtension();
+         $request->file('file')->move($base_path,$tmpimagename);
 
-        //$fileName=$request->file('file')->getClientOriginalName();
-        // $imgpath = request()->file('file')->store('public/images');
-        //return response()->json(['location' => "/storage/$imgpath"]);
-        //request()->file('file')->store('public/images');
-        //return response()->json(['location'=>"/storage/images/$fileName"]);
+         //return response()->json(['location'=>"/images/posts/$tmpimagename"]);
 
-
-        $base_path=base_path().'/public/images/posts/';
-        $fileName=$request->file('file')->getClientOriginalName();
-        $request->file('file')->move($base_path,$fileName);
-        return response()->json(['location'=>"/images/posts/$fileName"]);
-
-
-        /* $mainImage = $request->file('file');
-
-         $fileName=time().'.'.$mainImage->getClientOriginalName();
-         Image::make($mainImage)->save(public_path('images/posts/'.$fileName));
-
-         return json_encode(['location' => asset('images/posts/'.$fileName)]);*/
-
+         $tmpfile=$base_path.$tmpimagename;
+         generateImage($tmpfile, 600, 1, $base_path.$imagename.'.jpg');//1=>width
+         unlink($tmpfile);
+         return response()->json(['location'=>"/images/posts/$imagename.jpg"]);
     }
 
 }
