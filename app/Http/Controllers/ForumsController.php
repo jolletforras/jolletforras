@@ -37,7 +37,7 @@ class ForumsController extends Controller
 	 */
 	public function index()
 	{
-		$forums = Forum::with('user', 'tags')->where('group_id', 0)->latest('updated_at')->get();
+		$forums = Forum::with('user', 'tags')->where('active', 1)->where('group_id', 0)->latest('updated_at')->get();
 
 		$tags = [''=>''] + ForumTag::pluck('name', 'id')->all();
 
