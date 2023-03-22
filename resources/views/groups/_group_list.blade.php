@@ -1,3 +1,5 @@
+<div class="row">
+<?php $i=1; ?>
 @foreach ($groups as $group)
     <div class="col-12 col-sm-6 col-md-4 group">
         <div class="card">
@@ -34,4 +36,10 @@
             </div>
         </div>
     </div>
-@endforeach
+        @if($i%3==0)
+</div>
+<div class="row">
+        @endif
+        <?php $i++ ?>
+    @endforeach
+</div>
