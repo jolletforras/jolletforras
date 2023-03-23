@@ -61,15 +61,21 @@ class SendNoticeEmails extends Command
             $data['group_name'] = $group->name;
             $data['post_title'] = $notifiable->title;
             if($notice->type=="Forum") {
-                $data['post_url'] = 'email/'.$notice->login_code.'/csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
+                $data['post_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
             }
             else {
-                $data['post_url'] = 'email/'.$notice->login_code.'/esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
+                $data['post_url'] = 'esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
+            }
+
+            $post = preg_replace("/<img[^>]+\>/i", "", $notifiable->body);
+            if(strlen(strip_tags($post))>400) {
+                $post = justbr($post,400);
+                $post .= '<i><a href="https://tarsadalmijollet.hu/'.$data['post_url'].'"> ... tovább</a></i>';
             }
 
             $data['email'] = $notice->user->email;
             $data['user_id'] = $notice->user->id;
-            $data['post'] = preg_replace("/<img[^>]+\>/i", "", $notifiable->body);
+            $data['post'] = $post;
             $data['type'] = $notice->type=="Forum" ? "téma" :"esemény";
             $data['type_txt1'] = $notice->type=="Forum" ? "témát" :"eseményt";
             $data['type_txt2'] = $notice->type=="Forum" ? "beszélgetésnél" :"eseménynél";
