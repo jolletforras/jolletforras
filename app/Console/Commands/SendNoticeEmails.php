@@ -67,15 +67,8 @@ class SendNoticeEmails extends Command
                 $data['post_url'] = 'esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
             }
 
-            $post = preg_replace("/<img[^>]+\>/i", "", $notifiable->body);
-            if(strlen(strip_tags($post))>400) {
-                $post = justbr($post,400);
-                $post .= '<i><a href="https://tarsadalmijollet.hu/'.$data['post_url'].'"> ... tovább</a></i>';
-            }
-
             $data['email'] = $notice->user->email;
             $data['user_id'] = $notice->user->id;
-            $data['post'] = $post;
             $data['type'] = $notice->type=="Forum" ? "téma" :"esemény";
             $data['type_txt1'] = $notice->type=="Forum" ? "témát" :"eseményt";
             $data['type_txt2'] = $notice->type=="Forum" ? "beszélgetésnél" :"eseménynél";
@@ -85,6 +78,8 @@ class SendNoticeEmails extends Command
 
             if($notice->comment_id==0) {     //új téma
                 $data['author_name'] = $notifiable->user->name;
+                $post = preg_replace("/<img[^>]+\>/i", "", $notifiable->body);
+                $data['post'] = $this->get_shorter($post,$data['post_url'],400);
                 $email_template = 'groups.emails.new_post_email';
                 $data['subject'] = "Új ".$data['type']." a(z) '". $group->name."' csoportodban";
             }
@@ -95,7 +90,7 @@ class SendNoticeEmails extends Command
                     continue;
                 }
                 $data['author_name'] = $comment->commenter->name;
-                $data['comment'] = $comment->body;
+                $data['comment'] = $this->get_shorter($comment->body,$data['post_url'],400);
                 $data['subject'] = "Új hozzászólás a(z) '".$notifiable->title."' beszélgetésben";
                 $email_template = 'groups.emails.new_comment_email';
             }
@@ -111,4 +106,14 @@ class SendNoticeEmails extends Command
             $nr++;
         }
     }
+
+    private function get_shorter($post,$post_url, $length) {
+        if(strlen(strip_tags($post))>$length) {
+            $post = justbr($post,$length);
+            $post .= '<i> ... <a href="https://tarsadalmijollet.hu/'.$post_url.'" style="text-decoration: none;">tovább</a></i>';
+        }
+        return $post;
+    }
 }
+
+
