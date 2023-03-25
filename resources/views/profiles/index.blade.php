@@ -37,7 +37,6 @@
 						@endforeach
 					</select>
 				</span>
-				&Sigma;: <span id="count">{{count($users)}}</span>
 			</div>
 			@else
 				<div class="col-sm-12">
