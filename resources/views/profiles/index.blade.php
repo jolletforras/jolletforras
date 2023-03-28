@@ -49,11 +49,10 @@
 						</div>
 					</div>
 				</div>
-
 			@endif
 		</div>
 	</div>
-
+	<hr style="margin-top: 0px;margin-bottom: 10px;">
 	@include('profiles.partials.members_tabs')
 
 </div>
