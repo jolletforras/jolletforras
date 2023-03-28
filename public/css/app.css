@@ -504,6 +504,11 @@ h3 {
 	margin-left: 10px;
 }
 
+.table td {
+	border-top: 0px !important;
+	border-bottom: 1px solid #ddd;
+}
+
 @media all and (max-width:1200px) {
 	#banner div {
 		margin-left: 330px;
