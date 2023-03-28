@@ -54,9 +54,8 @@
 		</div>
 	</div>
 
-	<div id="result">
-		@include('profiles.partials.members_tabs')
-	</div>
+	@include('profiles.partials.members_tabs')
+
 </div>
 @endsection
 
