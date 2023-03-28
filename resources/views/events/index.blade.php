@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-9">
 			<h2>Események</h2><a href="#events_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
 		</div>
@@ -15,7 +15,7 @@
 			@endif
 		</div>
 	</div>
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-12">
 			<div class="inner_box collapse" id="events_info" style="font-size: 18px">
 				Ezen az oldalon találod a regisztrált tagok és a csoportok nyilvános eseményeit.
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	@include('events._create_events_info')
-	<div class="inner_box" style="margin-top:6px;">
+	<div class="inner_box narrow-page" style="margin-top:6px;">
 		@include('events._list',['events'=>$events])
 		@if(Auth::check() && $events_expired->isNotEmpty())
 			<hr>

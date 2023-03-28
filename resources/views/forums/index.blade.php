@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-3">
 			<h2>Fórum</h2>
 		</div>
@@ -16,7 +16,7 @@
 			<a href="#forum_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('forum')}}/uj" type="submit" class="btn btn-default">Új téma</a>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-12">
 			<div class="inner_box collapse" id="forum_info" style="font-size: 18px">
 				Van egy témád, amiben szeretnéd megkérdezni a többiek véleményét? Itt hozhatsz létre egy új témát.<br>
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
+	<div class="inner_box narrow-page" style="margin-top:6px;">
 		@include('forums._list')
 	</div>
 @endsection

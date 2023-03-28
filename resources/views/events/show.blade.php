@@ -7,7 +7,7 @@
 
 @section('content')
 	<div class="flash-message alert alert-info" style="display:none;"></div>
-	<div class="panel panel-default">
+	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
 			<h2>{{ $event->title }}</h2>@if($event->isGroupEvent())&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}/esemenyek"> << {{$event->group->name}}</a>@endif
 		</div>
