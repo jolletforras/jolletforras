@@ -18,5 +18,7 @@
 			</div>
 		</div>
 	</div>
-	@include('newsletters._list')
+	<div class="inner_box narrow-page">
+		@include('newsletters._list')
+	</div>
 @endsection

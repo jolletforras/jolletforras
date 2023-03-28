@@ -1,4 +1,3 @@
-<div class="inner_box narrow-page">
     <table class="table">
         <tbody>
         @foreach ($newsletters as $newsletter)
@@ -16,4 +15,3 @@
         @endforeach
         </tbody>
     </table>
-</div>
