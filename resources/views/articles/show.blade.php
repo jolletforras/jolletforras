@@ -8,7 +8,7 @@
 
 
 @section('content')
-	<div class="inner_box" style="font-size: 16px;">
+	<div class="inner_box">
 		<h2>{{ $article->title }}</h2>
 		@if (Auth::check() && Auth::user()->id==$article->user->id)
 			<a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
