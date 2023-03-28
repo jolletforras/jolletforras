@@ -17,7 +17,7 @@
                 </p>
             </div>
         </div>
-   		<div class="inner_box narrow-page">
+   		<div class="inner_box">
             A Társadalmi Jóllét Portál találkozási tér kíván lenni mindazon emberek és csoportok számára, akik cselekvőként részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.
             Célunk, hogy ez az oldal a lehető legjobban támogassa a cselekvők egymásra találását és mind erőteljesebb összekapcsolódását.<br>
             <b>Téged várunk, ha:</b>
