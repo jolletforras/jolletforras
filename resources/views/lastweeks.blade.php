@@ -64,7 +64,7 @@
                  <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" class="edit">módosít</a><br>
              @endif
              <p style="text-align: center;"><img src="{{ url('/images/posts') }}/{{ $article->image}}" style="max-width: 500px; max-height: 500px;"></p>
-             <p>{!! $article->short_description !!}</p>
+             <p>{!! $article->short_description !!} <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}">... tovább</a></p>
          </div>
         @endforeach
          <hr>
