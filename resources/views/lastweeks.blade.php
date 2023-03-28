@@ -34,7 +34,6 @@
     @if($newsletters->isNotEmpty())
         <h3>Új hírlevelek</h3>
         @include('newsletters._list')
-        <hr>
     @endif
     @if($events->isNotEmpty())
         <h3>Új események</h3>
