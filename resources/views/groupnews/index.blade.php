@@ -6,7 +6,7 @@
 
 @section('content')
 	@include('groups._group_menu')
-	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
+	<div class="inner_box narrow-page" style="margin-top:6px;">
 		@if($group->isAdmin())
 		<div class="row">
 			<div class="col-sm-9" style="padding-top:4px;"></div>

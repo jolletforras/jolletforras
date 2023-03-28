@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-3">
 			<h2>Hírek</h2><a href="#news_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
 		</div>
@@ -20,14 +20,14 @@
 		@endif
 		<div class="col-sm-6 text-right"></div>
 	</div>
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-12">
 			<div class="inner_box collapse" id="news_info" style="font-size: 18px">
 				Ezen az oldalon találhatod a csoportok nyilvános híreit.
 			</div>
 		</div>
 	</div>
-	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
+	<div class="inner_box narrow-page" style="margin-top:6px;">
 		@for ($i = 0; $i < $num=$newss->count(); $i++)
 			<?php $news = $newss[$i]; ?>
 			<h3>

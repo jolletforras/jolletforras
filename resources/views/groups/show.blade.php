@@ -4,7 +4,7 @@
 	<div class="flash-message alert alert-info" style="display:none;"></div>
 
 	@include('groups._group_menu')
-	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
+	<div class="inner_box narrow-page" style="margin-top:6px;">
        	<p>
 			@if ($is_admin)
 				<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/modosit" type="submit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"> </i>Módosít</a>
@@ -34,7 +34,7 @@
 		@if ($is_admin)
 		<label for="admin_list">Csoport kezelők felvétele, módosítása</label>
 		<div class="row">
-			<div class="form-group col-sm-4">
+			<div class="form-group col-sm-6">
 				<select id="admin_list" name="admin_list[]" class="form-control" multiple>
 					@foreach($members as $key => $val)
 						<option value="{{ $key }}" @if(isset($admins) && in_array($key,$admins)) selected @endif>{{ $val }}</option>
@@ -47,7 +47,7 @@
 		</div>
 		<label for="remove_member">Csoporttag kiléptetés</label>
 		<div class="row">
-			<div class="form-group col-sm-4">
+			<div class="form-group col-sm-6">
 				<select id="remove_member" name="remove_member" class="form-control">
 					<option value=""></option>
 					@foreach($noadmins as $key => $val)
@@ -63,7 +63,7 @@
 		@if ($is_member)
 		<label for="invited_user">Meghívás a csoportba</label>
 		<div class="row">
-			<div class="form-group col-sm-4">
+			<div class="form-group col-sm-6">
 				<select id="invited_user" name="invited_user" class="form-control">
 					<option value=""></option>
 					@foreach($nogroupmembers as $key => $val)

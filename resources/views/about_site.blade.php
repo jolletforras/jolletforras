@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<div class="inner_box" style="font-size: 18px">
+	<div class="inner_box narrow-page">
 		<h2>Tudnivalók Társadalmi Jóllét Portálról</h2><br>
 		<br>
 		<b>Kik állnak a portál működése mögött?</b><br>

@@ -1,4 +1,4 @@
-   		<div class="inner_box">
+   		<div class="inner_box narrow-page">
 	  		<b>Milyen egy emberközpontú, társadalmi jóllétet teremtő világ?</b><br>
 			Egy olyan hely, ahol az emberek biztonságban érzik magukat, felszabadultan önmaguk lehetnek, miközben megvan mindenük ahhoz, hogy életük kiteljesedhessen.
 			Ehhez a kiteljesedéshez arra van szükségük, hogy értéket adjanak a helyi közösségüknek, ami ezáltal megteremti tagjai számára az egészséges, boldog, kiegyensúlyozott élethez szükséges támogatói környezetet.

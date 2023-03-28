@@ -1,4 +1,4 @@
-	<div class="row group-head">
+	<div class="row group-head narrow-page">
 		<div class="col-sm-12">
 			<h2>{!! $group->name !!}</h2>
 			<div class="menu">
@@ -10,5 +10,6 @@
 				<a class="@if ($page=="announcement") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/kozlemenyek">Közlemények</a>
 				@endif
 			</div>
+			<hr style="margin-top:10px;margin-bottom:5px;">
 		</div>
 	</div>

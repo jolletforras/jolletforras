@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="panel panel-default">
+	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
 			<h2>{{ $forum->title }}</h2>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/beszelgetesek"> << {{$group->name}}</a>
 		</div>

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-   		<div class="inner_box">
+   		<div class="inner_box narrow-page">
             <h2>Társadalmi Jóllét Portál Közösségi megállapodás</h2><br>
             <br>
             Alapértékeink, ami szerint működünk:

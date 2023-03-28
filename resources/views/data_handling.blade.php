@@ -4,7 +4,7 @@
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/adatkezeles" />
 @endsection
 @section('content')
-   		<div class="inner_box" style="font-size: 18px">
+   		<div class="inner_box narrow-page">
             <h2>Adatkezelés</h2><br>
             <br>
             <b>A tarsadalmijollet.hu webhely adatai</b><br>

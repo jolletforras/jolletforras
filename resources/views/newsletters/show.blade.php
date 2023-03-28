@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-	<div class="panel panel-default">
+	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
 			<h2>{{ $newsletter->title }}</h2>
 		</div>

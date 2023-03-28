@@ -5,8 +5,12 @@
 @endsection
 
 @section('content')
-    <h2>Az elmúlt 1 hónap történései</h2><br>
-   	<div class="inner_box">
+    <div class="row narrow-page">
+        <div class="col-sm-6">
+            <h2>Az elmúlt 1 hónap történései</h2>
+        </div>
+    </div>
+   	<div class="inner_box narrow-page">
     @if($users->isNotEmpty())
         <h3>Új tagok</h3>
         @include('profiles.partials.members',['type'=>'tab1'])

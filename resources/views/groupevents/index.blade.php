@@ -2,7 +2,7 @@
 
 @section('content')
 	@include('groups._group_menu')
-	<div class="inner_box" style="margin-top:6px;">
+	<div class="inner_box narrow-page" style="margin-top:6px;">
 		<div class="row">
 			<div class="col-sm-9"></div>
 			<div class="col-sm-3 text-right">

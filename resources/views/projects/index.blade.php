@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="row">
-		<div class="col-sm-7">
+	<div class="row narrow-page">
+		<div class="col-sm-5">
 			<h2>Kezdeményezések</h2>
 		</div>
 		<div class="col-sm-3" style="padding-top:4px;">
@@ -12,11 +12,11 @@
 				@endforeach
 			</select>
 		</div>
-		<div class="col-sm-2 text-right">
+		<div class="col-sm-4 text-right">
 			<a href="{{url('kezdemenyezes')}}/uj" type="submit" class="btn btn-default">Új kezdeményezés</a>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default narrow-page">
 		<div class="panel-body">
 			@foreach ($projects as $project)
 				@if(isset($project->user->id))

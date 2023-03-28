@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-9">
 			<h2>Hírlevelek</h2>
 		</div>
@@ -11,7 +11,7 @@
 		</div>
 		@endif
 	</div>
-	<div class="row">
+	<div class="row narrow-page">
 		<div class="col-sm-12">
 			<div class="inner_box collapse" id="newsletter_info" style="font-size: 18px">
 				Ezen az oldalon a hírlevelek találhatóak.

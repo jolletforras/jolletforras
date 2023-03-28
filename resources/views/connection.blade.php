@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-   		<div class="inner_box">
+   		<div class="inner_box narrow-page">
             Ha szeretnél kapcsolatba lépni a Társadalmi Jóllét Portál működtetőivel, szervezőivel, ezeken az elérhetőségeken teheted meg:<br>
             <br>
             Központi mail címünk:<br>
