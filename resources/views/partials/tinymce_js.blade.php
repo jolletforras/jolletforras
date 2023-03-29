@@ -23,29 +23,36 @@
 			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ",
 
 			images_upload_handler: function (blobInfo, success, failure) {
-				var xhr, formData;
-				xhr = new XMLHttpRequest();
-				xhr.withCredentials = false;
-				xhr.open('POST', '/kepfeltoltes');
-				var token = '{{ csrf_token() }}';
-				xhr.setRequestHeader("X-CSRF-Token", token);
-				xhr.onload = function () {
-					var json;
-					if (xhr.status != 200) {
-						failure('HTTP Error: ' + xhr.status);
-						return;
-					}
-					json = JSON.parse(xhr.responseText);
+				var image_size = Math.floor(blobInfo.blob().size / 1024);  // image size in kbytes
+				var max_size   = 3072;                // max size in kbytes
+				if( image_size  > max_size ){
+					failure('A kép ('+ image_size  + ' KB) túl nagy, a maximális képméret: ' + max_size + ' KB');
+					return;
+				}else{
+					var xhr, formData;
+					xhr = new XMLHttpRequest();
+					xhr.withCredentials = false;
+					xhr.open('POST', '/kepfeltoltes');
+					var token = '{{ csrf_token() }}';
+					xhr.setRequestHeader("X-CSRF-Token", token);
+					xhr.onload = function () {
+						var json;
+						if (xhr.status != 200) {
+							failure('HTTP Error: ' + xhr.status);
+							return;
+						}
+						json = JSON.parse(xhr.responseText);
 
-					if (!json || typeof json.location != 'string') {
-						failure('Invalid JSON: ' + xhr.responseText);
-						return;
-					}
-					success(json.location);
-				};
-				formData = new FormData();
-				formData.append('file', blobInfo.blob(), blobInfo.filename());
-				xhr.send(formData);
+						if (!json || typeof json.location != 'string') {
+							failure('Invalid JSON: ' + xhr.responseText);
+							return;
+						}
+						success(json.location);
+					};
+					formData = new FormData();
+					formData.append('file', blobInfo.blob(), blobInfo.filename());
+					xhr.send(formData);
+				}
 			}
 		});
 	</script>
