@@ -432,7 +432,7 @@ class GroupsController extends Controller
     public function saveImage($id,$name,Request $request)
     {
         $rules = [
-            'image' => 'required|mimes:jpeg,png,gif|max:2048'
+            'image' => 'required|mimes:jpeg,png,gif|max:3072'
         ];
 
         $messages = [
