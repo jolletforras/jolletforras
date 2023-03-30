@@ -457,7 +457,7 @@ h3 {
 .card .card-body p {
 	height: 180px;
 	line-height: 20px;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 300;
 	color: #575757;
 	overflow: hidden;
@@ -719,6 +719,11 @@ h3 {
 
 	.panel-body {
 		padding: 5px;
+	}
+
+	.col-12 {
+		padding-right: 0px;
+		padding-left: 0px;
 	}
 }
 
