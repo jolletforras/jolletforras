@@ -615,10 +615,6 @@ h3 {
 		margin: 0px 2px;
 	}
 
-	.inner_box {
-		font-size: 16px !important;
-	}
-
 	#app-navbar-collapse {
 		margin-left: 15px;
 	}
@@ -677,7 +673,7 @@ h3 {
 
 	.inner_box {
 		padding: 5px 5px 0px 5px;
-		line-height: 130%;
+		line-height: 150%;
 		text-align: left;
 		font-size: 16px !important;
 	}
@@ -769,7 +765,7 @@ h3 {
 	.inner_box {
 		border-radius: 0px;
 		padding: 5px 3px 0px 3px;
-		line-height: 130%;
+		line-height: 150%;
 	}
 }
 
