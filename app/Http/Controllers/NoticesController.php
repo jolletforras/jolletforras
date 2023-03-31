@@ -61,7 +61,8 @@ class NoticesController extends Controller
             $new = $notice->new > 0 ? " <span>".$notice->new."</span>" : "";
             if ($notice->type == "Forum") {
                 if ($forum = Forum::find($notice->notifiable_id)) {
-                    $url = '<a href="'.url('/').'/csoport/' . $forum->group->id . '/' . $forum->group->slug . '/tema/' . $forum->id . '/' . $forum->slug . '">' . $forum->group->name . ' - "' . $forum->title . '" téma' . $new . '</a>';
+                    $bookmark = $notice->comment_id>0 ? "#".$notice->comment_id : "";
+                    $url = '<a href="'.url('/').'/csoport/' . $forum->group->id . '/' . $forum->group->slug . '/tema/' . $forum->id . '/' . $forum->slug . $bookmark.'">' . $forum->group->name . ' - "' . $forum->title . '" téma' . $new . '</a>';
                 }
             }
 

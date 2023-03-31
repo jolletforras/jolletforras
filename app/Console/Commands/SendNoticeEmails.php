@@ -89,6 +89,7 @@ class SendNoticeEmails extends Command
                 if(is_null($comment)) {
                     continue;
                 }
+                $data['post_url'] .= "#".$notice->comment_id;
                 $data['author_name'] = $comment->commenter->name;
                 $data['comment'] = $this->get_shorter($comment->body,$data['post_url'],400);
                 $data['subject'] = "Új hozzászólás a(z) '".$notifiable->title."' beszélgetésben";
