@@ -176,14 +176,26 @@ class CommentsController extends Controller
     }
 
 
+    public function set_shorted_text() {
+        $comments = Comment::where('shorted_text',NULL)->get();
+        foreach($comments as $c) {
+            if(strlen($c->body)>600) {
+                $c->shorted_text = $this->subtext_keep_link($c->body,600);
+                $c->save();
+            }
+        }
+    }
+
     private function subtext_keep_link($text,$length)
     {
+        if(mb_substr($text,$length-1,2)=='<a')
+            $length--;
         $text = mb_substr($text,0,$length);             //marad ez ha nincs benne <a tag vagy le van zárva a vágás előtt
         $p1 = mb_strrpos($text,"<a");                   //a végéről kezdve megkeresi az első <a-t
         if(is_numeric($p1)) {
             $p2 = mb_strrpos($text,"</a>");             //a végéről kezdve megkeresi az első </a>-t
             if(!is_numeric($p2) || $p2<$p1) {           //ha a link félbe van vágva (nem talál </a>-t vagy a <a előtt van)
-                $text = mb_substr($text,0,$p1-1);       //levágja a link előtt szöveget
+                $text = mb_substr($text,0,$p1);       //levágja a link előtt szöveget
             }
         }
 
