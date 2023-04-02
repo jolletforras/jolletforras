@@ -6,7 +6,11 @@
             @foreach ($comments as $comment)
                 <a name="{{$comment->id}}"></a>
                 <b><a href="{{url('profil')}}/{{$comment->commenter->id}}/{{$comment->commenter->slug}}">{{ $comment->commenter->name }}</a></b>, <b>{{ $comment->updated_at }}</b> <br/>
-                {!! nl2br($comment->body) !!}<br/>
+                @if(isset($comment->shorted_text))
+                <div id="shorted-{{$comment->id}}">{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
+                @endif
+                <div id="full-{{$comment->id}}" @if(isset($comment->shorted_text)) style="display: none;"@endif>{!! nl2br($comment->body) !!}</div>
+                <br/>
                 <hr>
             @endforeach
         </div>
@@ -18,10 +22,12 @@
         <button type="button" onclick="save()">Küldés</button>
     </div>
 </div>
-@include('partials.comment_script', [
-    'commentable_type'	=>$commentable_type,
-    'commentable_url'	=>$commentable_url,
-    'commentable_id'	=>$commentable->id,
-    'name'				=>$commentable->user->name,
-    'email'				=>$commentable->user->email
-] )
+@section('footer')
+    @include('partials.comment_script', [
+        'commentable_type'	=>$commentable_type,
+        'commentable_url'	=>$commentable_url,
+        'commentable_id'	=>$commentable->id,
+        'name'				=>$commentable->user->name,
+        'email'				=>$commentable->user->email
+    ] )
+@endsection

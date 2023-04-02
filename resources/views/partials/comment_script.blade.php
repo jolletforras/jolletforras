@@ -28,4 +28,11 @@
         });
         $("#comment").val('');
     }
+
+    $('.more').on('click', function(event) {
+        event.preventDefault();
+        var comment_id = $(this).closest('.more').data('value');
+        $("#shorted-"+comment_id).hide();
+        $("#full-"+comment_id).show();
+    });
 </script>
