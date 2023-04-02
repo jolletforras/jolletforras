@@ -1,6 +1,6 @@
 @unless($obj->tags->isEmpty())
 <p class="tags">
-<b>Címék: </b>
+<b>Címkék: </b>
 @for ($i = 0; $i < $last=count($obj->tags)-1; $i++)
 <a href="{{ url('/')}}/{{$url}}/cimke/{{$obj->tags[$i]->id }}/{{$obj->tags[$i]->slug}}">{{ $obj->tags[$i]->name }}</a>,
 @endfor
