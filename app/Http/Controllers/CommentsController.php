@@ -34,10 +34,13 @@ class CommentsController extends Controller
 
             $commentable = $commentable_class::findOrFail($commentable_id);
 
+            $comment_length = strlen($comment);
+
             $c = new Comment();
             $comment = htmlspecialchars($comment);
             $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-            $comment = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $comment);
+            $comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
+            $c->shorted_text = $comment_length>600 ? $this->subtext_keep_link($comment,600) : null;
             $c->body = $comment;
             $c->commenter_id = $commenter_id;
             $commentable->comments()->save($c);
@@ -170,5 +173,20 @@ class CommentsController extends Controller
             'msg' => $msg,
         );
         return \Response::json($response);
+    }
+
+
+    private function subtext_keep_link($text,$length)
+    {
+        $text = mb_substr($text,0,$length);             //marad ez ha nincs benne <a tag vagy le van zárva a vágás előtt
+        $p1 = mb_strrpos($text,"<a");                   //a végéről kezdve megkeresi az első <a-t
+        if(is_numeric($p1)) {
+            $p2 = mb_strrpos($text,"</a>");             //a végéről kezdve megkeresi az első </a>-t
+            if(!is_numeric($p2) || $p2<$p1) {           //ha a link félbe van vágva (nem talál </a>-t vagy a <a előtt van)
+                $text = mb_substr($text,0,$p1-1);       //levágja a link előtt szöveget
+            }
+        }
+
+        return $text;
     }
 }
