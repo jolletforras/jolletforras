@@ -7,12 +7,12 @@
 	
 		<div class="form-group">
 			<label for="description">A csoport bemutatása, célja*:</label>
-			<textarea name="description" class="form-control" required="required" rows="4">@if(isset($group)){{old('description',$group->description)}}@else{{old('description')}}@endif</textarea>
+			<textarea name="description" class="form-control" required="required" rows="4">@if(isset($group)){{old('description',htmlspecialchars_decode($group->description))}}@else{{old('description')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="agreement">Csoport megállapodás*:</label>
-			<textarea name="agreement" class="form-control" required="required" rows="4">@if(isset($group)){{old('agreement',$group->agreement)}}@else{{old('agreement')}}@endif</textarea>
+			<textarea name="agreement" class="form-control" required="required" rows="4">@if(isset($group)){{old('agreement',htmlspecialchars_decode($group->agreement))}}@else{{old('agreement')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">
