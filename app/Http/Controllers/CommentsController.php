@@ -175,7 +175,7 @@ class CommentsController extends Controller
         return \Response::json($response);
     }
 
-
+/*
     public function set_shorted_text() {
         $comments = Comment::where('shorted_text',NULL)->get();
         foreach($comments as $c) {
@@ -185,7 +185,7 @@ class CommentsController extends Controller
             }
         }
     }
-
+*/
     private function subtext_keep_link($text,$length)
     {
         if(mb_substr($text,$length-1,2)=='<a')
