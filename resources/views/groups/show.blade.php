@@ -24,7 +24,6 @@
 		@if($group->webpage_url!='')
 			<p><b>Weboldal:</b> <a href="{{$group->webpage_url}}" target="_blank">{{$group->webpage_name}}</a></p>
 		@endif
-		@include('groups._members')
 		@include('partials.tags',['url'=>'csoport','obj'=>$group])
 		@include('groups._admins')
 		@if($group->city!='')
