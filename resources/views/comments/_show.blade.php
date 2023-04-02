@@ -10,7 +10,6 @@
                 <div id="shorted-{{$comment->id}}">{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
                 @endif
                 <div id="full-{{$comment->id}}" @if(isset($comment->shorted_text)) style="display: none;"@endif>{!! nl2br($comment->body) !!}</div>
-                <br/>
                 <hr>
             @endforeach
         </div>
