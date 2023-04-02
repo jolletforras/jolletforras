@@ -100,6 +100,8 @@ Route::get('/csoport/{group_id}/{group_slug}/lezar-beszelgetest/{forum_id}/{foru
 Route::get('/csoport/{group_id}/{group_slug}/megnyit-beszelgetest/{forum_id}/{forum_slug}', 'GroupThemesController@opentheme');
 Route::get('/csoport/{group_id}/{group_slug}/tema/cimke/{tag_id}/{tag}', 'TagsController@group_theme_show');
 
+Route::get('/csoport/{id}/{slug}/tagok', 'GroupsController@members');
+
 Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
 Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
 

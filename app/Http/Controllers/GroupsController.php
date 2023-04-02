@@ -291,6 +291,22 @@ class GroupsController extends Controller
         return redirect('csoport/'.$id.'/'.$name)->with('message', 'A csoportból sikeresen kiléptél!');
     }
 
+    public function members($id,$slug)
+    {
+        $group = Group::findOrFail($id);
+
+        //ha nem csoport tag akkor a csoport főoldalára irányít
+        if(!$group->isMember()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }
+
+        $users = $group->members()->get();
+
+        $page = 'members';
+
+        return view('groups.members', compact('group','page','users'));
+    }
+
 
     public function events($id,$slug)
     {
