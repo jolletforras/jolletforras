@@ -86,8 +86,10 @@ class ForumsController extends Controller
 		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag',$request->get('group_id'));
 
         $body = $request->get('body');
+        $body = preg_replace("/<\/?div[^>]*\>/i", "", $body);
+        $body = preg_replace("/<\/?span[^>]*\>/i", "", $body);
         $text = preg_replace("/<img[^>]+\>/i", "",$body); //a képet kivesszük belőle
-        $shorted_text = strlen($text)>600 ? $this->get_shorted_text($text,500) : null;
+        $shorted_text = strlen($body)>600 ? $this->get_shorted_text($text,500) : null;
 
 		$forum = Auth::user()->forums()->create([
 				'title' => $request->get('title'),
@@ -166,6 +168,8 @@ class ForumsController extends Controller
 		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag',$forum->group_id);
 
         $body = $request->get('body');
+        $body = preg_replace("/<\/?div[^>]*\>/i", "", $body);
+        $body = preg_replace("/<\/?span[^>]*\>/i", "", $body);
         $text = preg_replace("/<img[^>]+\>/i", "",$body); //a képet kivesszük belőle
         $shorted_text = strlen($text)>600 ? $this->get_shorted_text($text,500) : null;
 
@@ -192,6 +196,17 @@ class ForumsController extends Controller
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
         }
 	}
+
+    public function set_body() {
+        $forums = Forum::get();
+        foreach($forums as $f) {
+            $body = $f->body;
+            $body = preg_replace("/<\/?div[^>]*\>/i", "", $body);
+            $body = preg_replace("/<\/?span[^>]*\>/i", "", $body);
+            $f->body = $body;
+            $f->save();
+        }
+    }
 
     public function set_shorted_text() {
         $forums = Forum::where('shorted_text',NULL)->get();
