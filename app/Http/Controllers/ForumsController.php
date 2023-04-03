@@ -222,6 +222,6 @@ class ForumsController extends Controller
     private function get_shorted_text($text,$min_length)
     {
         $pos = mb_strpos($text,"</p>",500);
-        return mb_substr($text,0,$pos);
+        return mb_substr($text,0,$pos)." #...#</p>";
     }
 }

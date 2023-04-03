@@ -48,7 +48,7 @@
 					@endif
 				</p>
 				@if(isset($forum->shorted_text))
-					{!! $forum->shorted_text !!} <a style="display: inline;" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">... tovább</a></p>
+					{!! str_replace("#...#","<a href='".url('csoport')."/".$group->id."/".$group->slug."/tema/".$forum->id."/".$forum->slug."'>... tovább</a>",$forum->shorted_text) !!}
 				@else
 					{!! preg_replace("/<img[^>]+\>/i", "",$forum->body) !!}
 				@endif
