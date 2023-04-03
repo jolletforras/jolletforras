@@ -9,7 +9,7 @@
 			<div class="form-group">
 				<b><a href="{{url('profil')}}/{{$forum->user->id}}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>, {{ $forum->updated_at }}</b>
 				@if (Auth::user()->id==$forum->user->id)
-					<a href="{{url('forum')}}/{{$forum->id}}/{{$forum->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+					<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{$forum->id}}/{{$forum->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 				@endif
 			</div>
 			<div class="form-group">
