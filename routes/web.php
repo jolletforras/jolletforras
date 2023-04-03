@@ -174,6 +174,7 @@ Route::post('/ask_comment_notice', 'CommentsController@ask_comment_notice');
 
 //Route::get('/set_shorted_text', 'CommentsController@set_shorted_text');
 Route::get('/set_shorted_text', 'ForumsController@set_shorted_text');
+Route::get('/set_body', 'ForumsController@set_body');
 
 Route::post('/send_message', 'MessageController@send_message');
 
