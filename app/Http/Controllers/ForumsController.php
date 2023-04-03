@@ -85,9 +85,14 @@ class ForumsController extends Controller
 	{
 		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag',$request->get('group_id'));
 
+        $body = $request->get('body');
+        $text = preg_replace("/<img[^>]+\>/i", "",$body); //a képet kivesszük belőle
+        $shorted_text = strlen($text)>600 ? $this->get_shorted_text($text,500) : null;
+
 		$forum = Auth::user()->forums()->create([
 				'title' => $request->get('title'),
-				'body' => $request->get('body'),
+                'shorted_text' => $shorted_text,
+				'body' => $body,
 				'slug' => Str::slug($request->get('title')),
                 'group_id' => $request->get('group_id')
 		]);
@@ -159,10 +164,15 @@ class ForumsController extends Controller
         $forum = Forum::findOrFail($id);
 
 		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ForumTag',$forum->group_id);
-		
+
+        $body = $request->get('body');
+        $text = preg_replace("/<img[^>]+\>/i", "",$body); //a képet kivesszük belőle
+        $shorted_text = strlen($text)>600 ? $this->get_shorted_text($text,500) : null;
+
 		$forum->update([
 				'title' => $request->get('title'),
-				'body' => $request->get('body'),
+                'shorted_text' => $shorted_text,
+                'body' => $body,
 				'slug' => Str::slug($request->get('title'))
 		]);
 	
@@ -182,4 +192,21 @@ class ForumsController extends Controller
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
         }
 	}
+
+    public function set_shorted_text() {
+        $forums = Forum::where('shorted_text',NULL)->get();
+        foreach($forums as $f) {
+            $text = preg_replace("/<img[^>]+\>/i", "",$f->body); //a képet kivesszük belőle
+            if(strlen($text)>600) {
+                $f->shorted_text = $this->get_shorted_text($text,500);
+                $f->save();
+            }
+        }
+    }
+
+    private function get_shorted_text($text,$min_length)
+    {
+        $pos = mb_strpos($text,"</p>",500);
+        return mb_substr($text,0,$pos);
+    }
 }
