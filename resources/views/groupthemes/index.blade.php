@@ -35,7 +35,7 @@
 			@if(isset($forum->user->id))
 				<h3><a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{ $forum->title }}</a></h3>
 				<p>
-					Felvette: <a href="{{ url('profil',$forum->user->id) }}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>,	{{ $forum->updated_at }}
+					<a href="{{ url('profil',$forum->user->id) }}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>,	{{ $forum->updated_at }}
 					@if (Auth::user()->id==$forum->user->id)
 						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{$forum->id}}/{{$forum->slug}}/modosit" class="btn btn-default btn-xs">módosít</a>
 					@endif
@@ -47,7 +47,11 @@
 						@endif
 					@endif
 				</p>
-				{!! $forum->body !!}
+				@if(isset($forum->shorted_text))
+					{!! $forum->shorted_text !!} <a style="display: inline;" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">... tovább</a></p>
+				@else
+					{!! preg_replace("/<img[^>]+\>/i", "",$forum->body) !!}
+				@endif
 				@include('partials.tags',['url'=>'csoport/'.$group->id.'/'.$group->slug.'/tema','obj'=>$forum])
 				<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
 				@if( $forum->counter>0)
