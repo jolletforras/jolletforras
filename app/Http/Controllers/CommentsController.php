@@ -132,6 +132,7 @@ class CommentsController extends Controller
         $notice = Notice::findBy($forum_id,$user_id,'Forum')->first();
 
         //ha értesítést kér adott témánál (email_sent = 1, mert akkor épp látott mindent, mikor beállította a kérést)
+        $notice->timestamps = false; //hogy az update_at ne módosuljon
         if($ask_notice==1) {
             $notice->update(['email' => 1, 'email_sent' =>1,'ask_notice' => 1]);
         }
