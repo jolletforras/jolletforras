@@ -771,6 +771,10 @@ h3 {
 		width: 100%;
 	}
 
+	.main {
+		line-height: 150%;
+	}
+
 	.inner_box {
 		border-radius: 0px;
 		padding: 5px 3px 0px 3px;
