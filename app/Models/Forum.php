@@ -38,11 +38,15 @@ class Forum extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-    
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d');
+    }
+
     public function getUpdatedAtAttribute($date)
     {
-    	//return (new Carbon($date))->format('Y-m-d');
-    	return Carbon::parse($date)->format('Y-m-d H:i');
+        return Carbon::parse($date)->format('Y-m-d');
     }
     
     public function getTagListAttribute()
