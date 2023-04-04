@@ -735,6 +735,10 @@ h3 {
 	#banner {
 		height: 100px;
 	}
+
+	.main {
+		line-height: 150%;
+	}
 }
 
 @media all and (max-width:400px) {
@@ -769,10 +773,6 @@ h3 {
 		margin-left: 0%;
 		margin-right: 0%;
 		width: 100%;
-	}
-
-	.main {
-		line-height: 150%;
 	}
 
 	.inner_box {
