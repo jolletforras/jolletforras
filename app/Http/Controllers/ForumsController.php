@@ -221,27 +221,18 @@ class ForumsController extends Controller
 
     private function get_shorted_text($text,$min_length)
     {
-        $p1 = mb_strpos($text,"</p>",$min_length);
-        $p2 = mb_strpos($text,"<br",$min_length);
-        if($p1<$p2) {
-           $text = mb_substr($text,0,$p1)." #...#</p>";
+        $pos = mb_strpos($text,"</p>",500);
+        if($pos>700) {
+            $text = str_replace("</p>","<br>",$text);
+            $text = str_replace("<br/>","<br>",$text);
+            $text = str_replace("<br />","<br>",$text);
+            $text = strip_tags($text,"<br>,<a>");
+            $pos = mb_strpos($text,"<br>",500);
+            $text = mb_substr($text,0,$pos)." #...#<br>";
         }
         else {
-           $pp1 = mb_strrpos($text,"<p>",$min_length);
-           if(is_numeric($pp1)) {
-               $pp2 = mb_strrpos($text,"</p>",$min_length);
-               if(is_numeric($pp2) && $pp2>$pp1) {  //vizsgálati pont előtt lezárt p van
-                   $text = mb_substr($text,0,$p2)." #...#<br>";
-               }
-               else {                               //vizsgálati pont előtt nyitott p van
-                   $text = mb_substr($text,0,$p1)." #...#</p>";
-               }
-           }
-           else {                                   //vizsgálati pont előtt nincs p
-               $text = mb_substr($text,0,$p2)." #...#<br>";
-           }
+            $text = mb_substr($text,0,$pos)." #...#</p>";
         }
-
         return $text;
     }
 }
