@@ -7,7 +7,7 @@
 		</div>
         <div class="panel-body">
 			<div class="form-group">
-				<b><a href="{{url('profil')}}/{{$forum->user->id}}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>, {{ $forum->updated_at }}</b>
+				<span class="author"><b><a href="{{url('profil')}}/{{$forum->user->id}}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>, {{ $forum->created_at }}</b></span>
 				@if (Auth::user()->id==$forum->user->id)
 					<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{$forum->id}}/{{$forum->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 				@endif
