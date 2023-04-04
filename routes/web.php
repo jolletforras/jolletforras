@@ -173,8 +173,12 @@ Route::post('/comment_delete', 'CommentsController@comment_delete');
 Route::post('/ask_comment_notice', 'CommentsController@ask_comment_notice');
 
 //Route::get('/set_shorted_text', 'CommentsController@set_shorted_text');
-Route::get('/set_shorted_text', 'ForumsController@set_shorted_text');
-Route::get('/set_body', 'ForumsController@set_body');
+//Route::get('/set_shorted_text', 'ForumsController@set_shorted_text');
+//Route::get('/set_body', 'ForumsController@set_body');
+
+Route::get('/set_body', 'EventsController@set_body');
+Route::get('/set_image', 'EventsController@set_image');
+Route::get('/set_shorted_text', 'EventsController@set_shorted_text');
 
 Route::post('/send_message', 'MessageController@send_message');
 

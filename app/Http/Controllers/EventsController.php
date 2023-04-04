@@ -116,11 +116,19 @@ class EventsController extends Controller
 	 */
 	public function store(Request $request) {
 
+        $body = $request->get('body');
+        $body = preg_replace("/<\/?div[^>]*\>/i", "", $body);
+        $body = preg_replace("/<\/?span[^>]*\>/i", "", $body);
+        $text = preg_replace("/<img[^>]+\>/i", "",$body); //a képet kivesszük belőle
+        $shorted_text = strlen($body)>600 ? $this->get_shorted_text($text,500) : null;
+
         $event = Auth::user()->events()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'expiration_date' => $request->get('expiration_date'),
-            'body' => $request->get('body'),
+            'shorted_text' => $shorted_text,
+            'body' => $body,
+            'image' => getfirstimage($body),
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility'),
             'group_id' => $request->get('group_id')
@@ -190,11 +198,19 @@ class EventsController extends Controller
 	{
 		$event = Event::findOrFail($id);
 
+        $body = $request->get('body');
+        $body = preg_replace("/<\/?div[^>]*\>/i", "", $body);
+        $body = preg_replace("/<\/?span[^>]*\>/i", "", $body);
+        $text = preg_replace("/<img[^>]+\>/i", "",$body); //a képet kivesszük belőle
+        $shorted_text = strlen($text)>600 ? $this->get_shorted_text($text,500) : null;
+
         $event->update([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'expiration_date' => $request->get('expiration_date'),
-            'body' => $request->get('body'),
+            'shorted_text' => $shorted_text,
+            'body' => $body,
+            'image' => getfirstimage($body),
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility'),
             'group_id' => $request->get('group_id')
@@ -257,5 +273,52 @@ class EventsController extends Controller
         }
 
         return \Response::json($response);
+    }
+
+    public function set_body() {
+        $events = Event::get();
+        foreach($events as $e) {
+            $body = $e->body;
+            $body = preg_replace("/<\/?div[^>]*\>/i", "", $body);
+            $body = preg_replace("/<\/?span[^>]*\>/i", "", $body);
+            $e->body = $body;
+            $e->save();
+        }
+    }
+
+    public function set_shorted_text() {
+        $events = Event::where('shorted_text',NULL)->get();
+        foreach($events as $e) {
+            $text = preg_replace("/<img[^>]+\>/i", "",$e->body); //a képet kivesszük belőle
+            if(strlen($text)>600) {
+                $e->shorted_text = $this->get_shorted_text($text,500);
+                $e->save();
+            }
+        }
+    }
+
+    public function set_image() {
+        $events = Event::where('image',NULL)->get();
+        foreach($events as $e) {
+            $e->image = getfirstimage($e->body);
+            $e->save();
+        }
+    }
+
+    private function get_shorted_text($text,$min_length)
+    {
+        $pos = mb_strpos($text,"</p>",500);
+        if($pos>700) {
+            $text = str_replace("</p>","<br>",$text);
+            $text = str_replace("<br/>","<br>",$text);
+            $text = str_replace("<br />","<br>",$text);
+            $text = strip_tags($text,"<br>,<a>");
+            $pos = mb_strpos($text,"<br>",500);
+            $text = mb_substr($text,0,$pos)." #...#<br>";
+        }
+        else {
+            $text = mb_substr($text,0,$pos)." #...#</p>";
+        }
+        return $text;
     }
 }
