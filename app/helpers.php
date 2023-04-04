@@ -14,7 +14,7 @@ function justbr($text,$length)
 
 function getfirstimage($description)
 {
-    $image = "";
+    $image = NULL;
 
     $start = strpos($description,'<img');
     if(is_numeric($start)) {
