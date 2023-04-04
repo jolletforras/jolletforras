@@ -5,7 +5,7 @@
         <div class="comments">
             @foreach ($comments as $comment)
                 <a name="{{$comment->id}}"></a>
-                <b><a href="{{url('profil')}}/{{$comment->commenter->id}}/{{$comment->commenter->slug}}">{{ $comment->commenter->name }}</a></b>, <b>{{ $comment->updated_at }}</b> <br/>
+                <b><a href="{{url('profil')}}/{{$comment->commenter->id}}/{{$comment->commenter->slug}}">{{ $comment->commenter->name }}</a></b>, <b>{{ $comment->created_at }}</b> <br/>
                 @if(isset($comment->shorted_text))
                 <div id="shorted-{{$comment->id}}">{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
                 @endif
