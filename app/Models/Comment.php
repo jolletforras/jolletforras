@@ -25,6 +25,12 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d H:i');
+    }
+
+
     public function getUpdatedAtAttribute($date)
     {
         //return (new Carbon($date))->format('Y-m-d');
