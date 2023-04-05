@@ -22,7 +22,7 @@
 				<input type="checkbox" onchange="check()" name="comment_notice" id="comment_notice" value="hozzászólás értesítés"  @if ($askNotice) checked @endif>
 				Kérek értesítést új hozzászólás esetén
 			</div>
-			@if ($users_read_it && Auth::user()->id==$forum->user->id)
+			@if ($users_read_it)
 			<div class="form-group">
 				Látta: {!! $users_read_it !!}
 			</div>
