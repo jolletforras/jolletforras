@@ -12,7 +12,7 @@
 			<br>
 			<b>Mi mindent tehetsz az oldalon regisztráció után?</b><br>
 			<ul>
-				<li>Kialakíthatod a személyes oldaladat, amivel megmutathatod, mi lelkesít, milyen közösségeid, ügyeid, tapasztalataid, felajánlásaid és terveid vannak. Azzal, hogy beírod a lakhelyedet, rákerülsz a Térképre, így láthatod, kik élnek helyben közel hozzád, akikkel kapcsolatba léphetsz, közösséget építhetsz.
+				<li>Kialakíthatod a személyes oldaladat, amivel megmutathatod, mi lelkesít, milyen közösségeid, ügyeid, tapasztalataid, felajánlásaid és terveid vannak. Azzal, hogy beírod a lakhelyedet, rákerülsz a <a href="{{ url('/') }}/terkep" target="_blank">Térképre</a>, így láthatod, kik élnek helyben közel hozzád, akikkel kapcsolatba léphetsz, közösséget építhetsz.
 					A címkék beállítása abban segít, hogy könnyebben rád találjon az, aki társat keres az ügyéhez és te is könnyen társakat találj.</li>
 				<li>Létrehozhatod meglévő közösséged csoportját, hogy itt szervezhessétek programjaitokat, belső kommunikációtokat, valamint hogy másoknak is bemutathassátok a közösséget, új tagokat hívhassatok be.</li>
 				<li>Új témában is indíthatsz csoportot, hogy egybegyűjtsd az érdeklődőket, társakat.</li>
