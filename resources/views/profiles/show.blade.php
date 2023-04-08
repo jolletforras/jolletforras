@@ -49,7 +49,7 @@
     </div>
 	<hr/>
 	@if(Auth::check() && Auth::user()->id != $user->id)
-	<div class="message-box">
+	<div class="message-box narrow-page">
 		<div class="alert alert-info" style="display: none;" id="message-alert">A üzeneted sikeresen elküldted!</div>
 		<div class="form-group">
 			<textarea class="form-control" rows="4" id="message" name="message" placeholder="Ide írva üzenetet küldhetsz neki"></textarea>
