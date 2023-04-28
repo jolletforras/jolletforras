@@ -9,7 +9,11 @@
 	<div class="flash-message alert alert-info" style="display:none;"></div>
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
-			<h2>{{ $event->title }}</h2>@if($event->isGroupEvent())&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}/esemenyek"> << {{$event->group->name}}</a>@endif
+			<h2>{{ $event->title }}</h2>
+			@if($event->isGroupEvent())&nbsp;&nbsp;&nbsp;&nbsp;
+				@if( Auth::check())	 <a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}/esemenyek"> << {{$event->group->name}}</a>
+				@else 	<a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}"> << {{$event->group->name}}</a>@endif
+			@endif
 		</div>
 		<div class="panel-body">
 			@if ($has_access)
