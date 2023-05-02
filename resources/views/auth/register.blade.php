@@ -102,6 +102,18 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6">
+                                {!! app('captcha')->display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block" style="color: #a94442;">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Regisztráció
@@ -114,4 +126,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @endsection
