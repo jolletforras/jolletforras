@@ -14,7 +14,7 @@
 				<a href="#article_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras')}}/uj" type="submit" class="btn btn-default">Új Írás</a>
 			</div>
 		</div>
-		@include('articles._new_article_info')
+			@include('articles._new_article_info', ['collapse'=>' collapse'])
 		@endif
 		@for ($i = 0; $i < $num=$articles->count(); $i++)
 			<?php $article = $articles[$i]; ?>

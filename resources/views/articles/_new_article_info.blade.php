@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
-        <div class="inner_box collapse" id="article_info" style="font-size: 18px">
+        <div class="inner_box{{$collapse}}" id="article_info" style="font-size: 18px">
             Ha szeretnél itt közzétenni írást, kérlek az alábbiakat fontold meg:<br>
             <ul>
                 <li>Az írás hogyan kapcsolódik a társadalmi jólléthez?</li>

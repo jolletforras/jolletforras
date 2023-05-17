@@ -15,7 +15,7 @@
 		</div>
 		@endif
 	</div>
-	@include('articles._new_article_info')
+	@include('articles._new_article_info', ['collapse'=>' collapse'])
 	<div class="row">
 		@include('articles._list')
 	</div>
