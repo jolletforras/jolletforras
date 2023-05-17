@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class ArticlesController extends Controller
 {
 	public function __construct() {
-		$this->middleware('auth', ['except'=>['index','show']]);
+		$this->middleware('auth', ['except'=>['index','show','show_user_articles']]);
         $this->show_options = ['just_profile'=>'csak a profilomnál','portal_too'=>'az Írások menüben is'];
 	}
 
