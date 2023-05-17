@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="inner_box collapse" id="article_info" style="font-size: 18px">
-					Ezen az oldalon elsősorban a regisztrált tagok saját írásait várjuk szeretettel. Ha szeretnél itt közzétenni írást, kérlek az alábbiakat fontold meg:<br>
+					Ha szeretnél itt közzétenni írást, kérlek az alábbiakat fontold meg:<br>
 					<ul>
 						<li>Az írás hogyan kapcsolódik a társadalmi jólléthez?</li>
 						<li>Törekedj a közérthetőségre, olvasható tagolásra és hogy az írás ne legyen túl hosszú. Ajánlott terjedelem: 300-1000 szó.</li>
