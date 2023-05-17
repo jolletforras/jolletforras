@@ -124,6 +124,11 @@ class ArticlesController extends Controller
             'show' => $request->get('show')
         ]);
 
-		return redirect('irasok')->with('message', 'Az írást sikeresen módosítottad! - '.$request->get('title'));
+        if($request->get('show')=='portal_too') {
+            return redirect('irasok')->with('message', 'Az írást sikeresen módosítottad! - '.$request->get('title'));
+        }
+        else {
+            return redirect('profil/'.Auth::user()->id.'/'.Auth::user()->slug.'/irasok')->with('message', 'Az írást sikeresen módosítottad! - '.$request->get('title'));
+        }
 	}
 }
