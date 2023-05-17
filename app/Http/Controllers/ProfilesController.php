@@ -171,7 +171,9 @@ class ProfilesController extends Controller
             return view('no_page', compact('message'));
         }
 
-		return view('profiles.show', compact('user', 'myprofile'));
+        $tab = "introduction";
+
+		return view('profiles.show', compact('user', 'myprofile','tab'));
 	}
 	
 	/**

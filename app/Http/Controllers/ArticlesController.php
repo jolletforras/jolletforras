@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -23,6 +24,16 @@ class ArticlesController extends Controller
 
 		return view('articles.index', compact('articles'));
 	}
+
+    public function show_user_articles($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $articles = $user->articles()->latest()->get();
+        $tab = "articles";
+
+        return view('articles.user_articles', compact('user','articles','tab'));
+    }
+
 
     /**
      * Displays a specific article
@@ -60,7 +71,15 @@ class ArticlesController extends Controller
             'show' => $request->get('show')
         ]);
 
-		return redirect('irasok');
+        Auth::user()->has_article = 1;
+        Auth::user()->save();
+
+        if($request->get('show')=='portal_too') {
+            return redirect('irasok');
+        }
+        else {
+            return redirect('profil/'.Auth::user()->id.'/'.Auth::user()->slug.'/irasok');
+        }
 	}
 
 	/**

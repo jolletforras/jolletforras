@@ -119,6 +119,7 @@ Route::post('/getNotices', 'NoticesController@get_noticies');
 
 
 Route::get('/irasok', 'ArticlesController@index');
+Route::get('/profil/{user_id}/{slug}/irasok', 'ArticlesController@show_user_articles');
 Route::get('/iras/{id}/{title}', 'ArticlesController@show');
 Route::get('/iras/uj', 'ArticlesController@create');
 Route::post('/iras/uj', 'ArticlesController@store');
