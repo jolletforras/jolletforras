@@ -14,6 +14,7 @@ class ArticlesController extends Controller
 {
 	public function __construct() {
 		$this->middleware('auth', ['except'=>['index','show']]);
+        $this->show_options = ['my_profile'=>'csak a profilomnál','portal_too'=>'az Írások menüben is'];
 	}
 
 	public function index(Request $request)
@@ -38,9 +39,11 @@ class ArticlesController extends Controller
     }
 
 
-	public function create(Request $request) 
+	public function create(Request $request)
 	{
-		return view('articles.create');
+        $show_options = $this->show_options;
+
+		return view('articles.create',compact('show_options'));
 	}
 	
 	public function store(Request $request)
@@ -53,7 +56,8 @@ class ArticlesController extends Controller
             'body' => $description,
             'short_description' => justbr($description,700),
             'image' => getfirstimage($description),
-            'slug' => Str::slug($request->get('title'))
+            'slug' => Str::slug($request->get('title')),
+            'show' => $request->get('show')
         ]);
 
 		return redirect('irasok');
@@ -74,7 +78,9 @@ class ArticlesController extends Controller
 			return redirect('/');
 		}
 
-		return view('articles.edit', compact('article'));
+        $show_options = $this->show_options;
+
+		return view('articles.edit', compact('article','show_options'));
 	}
 
 	/**
@@ -95,7 +101,8 @@ class ArticlesController extends Controller
             'body' => $description,
             'short_description' => justbr($description,700),
             'image' => getfirstimage($description),
-            'slug' => Str::slug($request->get('title'))
+            'slug' => Str::slug($request->get('title')),
+            'show' => $request->get('show')
         ]);
 
 		return redirect('irasok')->with('message', 'Az írást sikeresen módosítottad! - '.$request->get('title'));
