@@ -14,12 +14,12 @@ class ArticlesController extends Controller
 {
 	public function __construct() {
 		$this->middleware('auth', ['except'=>['index','show']]);
-        $this->show_options = ['my_profile'=>'csak a profilomnál','portal_too'=>'az Írások menüben is'];
+        $this->show_options = ['just_profile'=>'csak a profilomnál','portal_too'=>'az Írások menüben is'];
 	}
 
 	public function index(Request $request)
 	{
-		$articles = Article::latest()->get();
+		$articles = Article::where('show', 'portal_too')->latest()->get();
 
 		return view('articles.index', compact('articles'));
 	}
