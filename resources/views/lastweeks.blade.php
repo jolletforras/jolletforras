@@ -63,7 +63,7 @@
              @if (Auth::check() && (Auth::user()->id==$article->user->id || Auth::user()->admin))
                  <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" class="edit">módosít</a><br>
              @endif
-             <p style="text-align: center;"><img src="{{ url('/images/posts') }}/{{ $article->image}}" style="max-width: 500px; max-height: 500px;"></p>
+             <p style="text-align: center;"><img src="{{ url('/images/posts') }}/{{ $article->image}}" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;"></p>
              <p>{!! $article->short_description !!} <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}">... tovább</a></p>
          </div>
         @endforeach
