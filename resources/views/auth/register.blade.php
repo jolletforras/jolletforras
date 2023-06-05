@@ -104,7 +104,7 @@
                         <div class="form-group">
                             <div class="col-md-4"></div>
                             <div class="col-md-6">
-                                {!! app('captcha')->display() !!}
+                                <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}"></div>
                                 @if ($errors->has('g-recaptcha-response'))
                                     <span class="help-block" style="color: #a94442;">
                                         <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
@@ -129,5 +129,5 @@
 @endsection
 
 @section('footer')
-    {!! NoCaptcha::renderJs() !!}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @endsection
