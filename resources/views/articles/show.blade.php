@@ -15,6 +15,7 @@
 		@endif
 		{!! $article->body !!}
 		@include('partials.author', ['author'=>'','obj'=>$article])
+		<p><a href="{{url('irasok')}}"><< Írások</a></p>
     </div>
 	@if(Auth::check())
 		@include('comments._show', [
