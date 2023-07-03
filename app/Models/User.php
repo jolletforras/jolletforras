@@ -121,6 +121,11 @@ class User extends Authenticatable
         return $this->hasMany(Notice::class);
     }
 
+    public function commendations()
+    {
+        return $this->hasMany(Commendation::class);
+    }
+
     public function getTagListAttribute()
     {
         return $this->skill_tags->lists('id')->all();

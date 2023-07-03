@@ -169,6 +169,13 @@ Route::get('/forum/{id}/{title}/modosit', 'ForumsController@edit');
 Route::post('/forum/{id}/{title}/modosit', 'ForumsController@update');
 Route::get('/forum/cimke/{id}/{tag}', 'TagsController@forum_show');
 
+Route::get('/ajanlo', 'CommendationsController@index');
+Route::get('/ajanlo/{id}/{title}', 'CommendationsController@show');
+Route::get('/ajanlo/uj', 'CommendationsController@create');
+Route::post('ajanlo/uj', 'CommendationsController@store');
+Route::get('/ajanlo/{id}/{title}/modosit', 'CommendationsController@edit');
+Route::post('/ajanlo/{id}/{title}/modosit', 'CommendationsController@update');
+
 Route::post('/comment', 'CommentsController@comment');
 Route::post('/comment_delete', 'CommentsController@comment_delete');
 Route::post('/ask_comment_notice', 'CommentsController@ask_comment_notice');

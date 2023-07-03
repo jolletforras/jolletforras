@@ -76,6 +76,7 @@
 							@endif
 							<li><a href="{{ url('irasok') }}">Írások</a></li>
 							<li><a href="{{ url('hirek') }}">Hírek</a></li>
+							<li><a href="{{ url('ajanlo') }}">Ajánló</a></li>
 							<li><a href="{{ url('esemenyek') }}">Események</a></li>
 							<li class="width-wide"><a href="">Olvasd el</a>
 								<ul>
