@@ -12,7 +12,7 @@
         @include('partials.tags',['url'=>'forum','obj'=>$forum])
         <a href="{{ url('forum',$forum->id) }}/{{$forum->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
         @if( $forum->counter>0)
-            &nbsp;&nbsp;<a href="{{ url('forum',$forum->id) }}/{{$forum->slug}}">{{ $forum->counter }} hozzászolás</a>
+            &nbsp;&nbsp;<a href="{{ url('forum',$forum->id) }}/{{$forum->slug}}">{{ $forum->counter }} hozzászólás</a>
         @endif
         @if($i!=$num-1)<hr>@endif
     @endif

@@ -28,7 +28,7 @@
     @if (Auth::check())
         <a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
         @if( $event->counter>0)
-            &nbsp;&nbsp;<a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->counter }} hozzászolás</a>
+            &nbsp;&nbsp;<a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->counter }} hozzászólás</a>
         @endif
     @endif
     @if($i!=$num-1)<hr>@endif
