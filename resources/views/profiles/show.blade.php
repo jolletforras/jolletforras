@@ -55,7 +55,7 @@
 			<textarea class="form-control" rows="4" id="message" name="message" placeholder="Ide írva üzenetet küldhetsz neki"></textarea>
 		</div>
 		<div class="form-group">
-			<button type="button" onclick="send()">Küldés</button>
+			<button id="send_message_btn" type="button" onclick="send()">Küldés</button><span id="message_is_sending" style="display: none; font-style: italic;"> ... üzenetküldésed folyamatban van</span>
 		</div>
 	</div>
 	@endif
@@ -67,6 +67,9 @@
 			var message = $("#message").val();
 
 			if(message!="") {
+				$("#send_message_btn").prop('disabled', true);
+				$("#message_is_sending").show();
+
 				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 				$.ajax({
@@ -79,8 +82,10 @@
 					},
 					success: function(data) {
 						if(data['status']=='success') {
+							$("#message_is_sending").hide();
 							$("#message-alert").show().delay(3000).hide("slow");
 							$("#message").val("");
+							$("#send_message_btn").prop('disabled', false);
 						}
 					},
 					error: function(error){
