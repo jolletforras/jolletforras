@@ -78,5 +78,10 @@
         @include('events._list')
         <hr>
     @endif
+    @if($commendations->isNotEmpty())
+        <h3>Új ajánlók</h3>
+        @include('commendations._list')
+        <hr>
+    @endif
     </div>
 @endsection

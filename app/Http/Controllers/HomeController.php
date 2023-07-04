@@ -9,6 +9,7 @@ use App\Models\Forum;
 use App\Models\Event;
 use App\Models\Article;
 use App\Models\Newsletter;
+use App\Models\Commendation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -100,8 +101,9 @@ class HomeController extends Controller
         $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
         $articles = Article::latest()->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
+        $commendations = Commendation::where('active', 1)->latest()->where('created_at','>',$date)->get();
 
-        return view('lastweeks',compact('users','groups','forums','events','articles','newsletters'));
+        return view('lastweeks',compact('users','groups','forums','events','articles','newsletters','commendations'));
     }
 
 
