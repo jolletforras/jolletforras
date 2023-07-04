@@ -10,6 +10,10 @@
 		</div>
         <div class="panel-body">
 			{!! $commendation->body !!}
+			@if(!empty($commendation->url))
+				<br>
+				<a href="{!! $commendation->url !!}" target="_blank">{!! substr($commendation->url,0,50) !!}</a><br>
+			@endif
 			@include('partials.author', ['author'=>'','obj'=>$commendation])
 	    </div>
     </div>

@@ -8,6 +8,9 @@
             @endif
         </p>
         {!! $commendation->body !!}<br>
+        @if(!empty($commendation->url))
+        <a href="{!! $commendation->url !!}" target="_blank">{!! substr($commendation->url,0,50) !!}</a><br>
+        @endif
         <span class="author"><a href="{{ url('profil',$commendation->user->id) }}/{{$commendation->user->slug}}">{{ $commendation->user->name }}</a>,	{{ $commendation->created_at }}</span><br>
         @if (Auth::check())
             <a href="{{ url('ajanlo',$commendation->id) }}/{{$commendation->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>

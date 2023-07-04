@@ -72,6 +72,7 @@ class CommendationsController extends Controller
         Auth::user()->commendations()->create([
             'title' => $request->get('title'),
             'body' =>  $request->get('body'),
+            'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title'))
         ]);
 
@@ -108,6 +109,7 @@ class CommendationsController extends Controller
         $commendation->update([
             'title' => $request->get('title'),
             'body' =>  $request->get('body'),
+            'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title'))
         ]);
 

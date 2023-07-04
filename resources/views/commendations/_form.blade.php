@@ -10,6 +10,10 @@
 			<textarea class="form-control" required="required" rows="10" name="body" cols="50">@if(isset($commendation)) {{$commendation->body}} @endif</textarea>
 		</div>
 
+		<div class="form-group">
+			<label for="url">Itt add meg, ha van hozzá link:</label>
+			<input class="form-control" required="required" name="url" type="text" maxlength="255" value="@if(isset($commendation)) {{$commendation->url}} @endif" id="url">
+		</div>
 
 		<div class="form-group">
 			<input class="btn btn-primary" type="submit" value="{{$submitButtonText}}">
