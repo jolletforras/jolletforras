@@ -101,7 +101,7 @@ class HomeController extends Controller
         $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
         $articles = Article::latest()->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
-        $commendations = Commendation::where('active', 1)->latest()->where('created_at','>',$date)->get();
+        $commendations = Commendation::where('approved', 1)->where('active', 1)->latest()->where('created_at','>',$date)->get();
 
         return view('lastweeks',compact('users','groups','forums','events','articles','newsletters','commendations'));
     }
