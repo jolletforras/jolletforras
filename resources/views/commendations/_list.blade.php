@@ -5,12 +5,13 @@
         $my_post = $logged_in && Auth::user()->id==$commendation->user->id ? true : false;
         $admin = $logged_in && Auth::user()->admin;
     ?>
-    @if(isset($commendation->user->id) && ($commendation->active || $my_post || $admin))
+    @if(isset($commendation->user->id) && ($commendation->active && $commendation->approved || $my_post || $admin))
         <h3><a href="{{ url('ajanlo',$commendation->id) }}/{{$commendation->slug}}">{{ $commendation->title }}</a></h3>
         <p>
             @if($my_post || $admin)
                 <a href="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit">módosít</a>
-                @if(!$commendation->active) <i>inaktív</i>@endif
+                @if(!$commendation->active) <i>/inaktív/</i>@endif
+                @if(!$commendation->approved) <i>/nincs engedélyezve/</i>@endif
             @endif
         </p>
         {!! $commendation->body !!}<br>

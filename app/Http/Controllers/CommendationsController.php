@@ -50,6 +50,11 @@ class CommendationsController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Commendation')->where('commentable_id', $id)->get();
 
+        //csak akkor jeleníti meg, ha aktív és engdélyezve van vagy bejelentkezés esetén ha saját ajánló vagy admin
+        if(!($commendation->active && $commendation->approved || Auth::check() && ( Auth::user()->id==$commendation->user->id || Auth::user()->admin))) {
+            return redirect('/');
+        }
+
         return view('commendations.show', compact('commendation','comments'));
     }
 
@@ -75,12 +80,13 @@ class CommendationsController extends Controller
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title')),
-            'public' => $request->has('public') ? 1 : 0
+            'public' => $request->has('public') ? 1 : 0,
+            'active' => $request->has('active') ? 1 : 0
         ]);
 
         if(Auth::user()->admin) {
-            $active = $request->has('active') ? 1 : 0;
-            $commendation->update(['active' => $active]);
+            $approved = $request->has('approved') ? 1 : 0;
+            $commendation->update(['approved' => $approved]);
             $message = 'Az új ajánlót sikeresen felvetted!';
         }
         else {
@@ -131,12 +137,13 @@ class CommendationsController extends Controller
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title')),
-            'public' => $request->has('public') ? 1 : 0
+            'public' => $request->has('public') ? 1 : 0,
+            'active' => $request->has('active') ? 1 : 0
         ]);
 
         if(Auth::user()->admin) {
-            $active = $request->has('active') ? 1 : 0;
-            $commendation->update(['active' => $active]);
+            $approved = $request->has('approved') ? 1 : 0;
+            $commendation->update(['approved' => $approved]);
         }
 
 
