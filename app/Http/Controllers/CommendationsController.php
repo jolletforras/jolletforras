@@ -73,7 +73,8 @@ class CommendationsController extends Controller
             'title' => $request->get('title'),
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
-            'slug' => Str::slug($request->get('title'))
+            'slug' => Str::slug($request->get('title')),
+            'public' => $request->has('public') ? 1 : 0
         ]);
 
         return redirect('ajanlo')->with('message', 'Az új ajánlót sikeresen felvetted!');
@@ -110,7 +111,8 @@ class CommendationsController extends Controller
             'title' => $request->get('title'),
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
-            'slug' => Str::slug($request->get('title'))
+            'slug' => Str::slug($request->get('title')),
+            'public' => $request->has('public') ? 1 : 0
         ]);
 
 

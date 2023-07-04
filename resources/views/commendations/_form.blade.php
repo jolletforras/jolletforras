@@ -16,6 +16,13 @@
 		</div>
 
 		<div class="form-group">
+			<input name="public" type="checkbox" value="1" @if((!old() && $commendation->public) || old('public')) checked @endif>
+			<span style="padding-top: 10px; font-size: 18px;">Nyilvános</span>
+			<a href="#public_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<div id="public_info" class="collapse info">Ha nyilvános az ajánló, akkor nem regisztráltak számára is láthatóvá válik.</div>
+		</div>
+
+		<div class="form-group">
 			<input class="btn btn-primary" type="submit" value="{{$submitButtonText}}">
 		</div>
 
