@@ -14,7 +14,7 @@
                 @if(!$commendation->approved) <i>/nincs engedélyezve/</i>@endif
             @endif
         </p>
-        {!! $commendation->body !!}<br>
+        {!! nl2br($commendation->body) !!}<br>
         @if(!empty($commendation->url))
         <a href="{!! $commendation->url !!}" target="_blank">{!! substr($commendation->url,0,50) !!}</a><br>
         @endif

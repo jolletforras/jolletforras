@@ -9,7 +9,7 @@
 			@endif
 		</div>
         <div class="panel-body">
-			{!! $commendation->body !!}
+			{!! nl2br($commendation->body) !!}
 			@if(!empty($commendation->url))
 				<br>
 				<a href="{!! $commendation->url !!}" target="_blank">{!! substr($commendation->url,0,50) !!}</a><br>
