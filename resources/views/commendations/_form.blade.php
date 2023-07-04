@@ -12,22 +12,24 @@
 
 		<div class="form-group">
 			<label for="url">Itt add meg, ha van hozzá link:</label>
-			<input class="form-control" required="required" name="url" type="text" maxlength="255" value="@if(isset($commendation)) {{$commendation->url}} @endif" id="url">
+			<input class="form-control" name="url" type="text" maxlength="255" value="@if(isset($commendation)) {{$commendation->url}} @endif" id="url">
 		</div>
 
 		<div class="form-group">
-			<input name="public" type="checkbox" value="1" @if((!old() && $commendation->public) || old('public')) checked @endif>
+			<input name="public" type="checkbox" value="1" @if(isset($commendation) && $commendation->public) checked @endif>
 			<span style="padding-top: 10px; font-size: 18px;">Nyilvános</span>
 			<a href="#public_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
 			<div id="public_info" class="collapse info">Ha nyilvános az ajánló, akkor nem regisztráltak számára is láthatóvá válik.</div>
 		</div>
 
+		@if(Auth::user()->admin)
 		<div class="form-group">
-			<input name="active" type="checkbox" value="1" @if((!old() && $commendation->active) || old('active')) checked @endif>
+			<input name="active" type="checkbox" value="1" @if(isset($commendation) && $commendation->active) checked @endif>
 			<span style="padding-top: 10px; font-size: 18px;">Aktív</span>
 			<a href="#active_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
 			<div id="active_info" class="collapse info">Ha akkor láthatóvá válik az oldalon.</div>
 		</div>
+		@endif
 
 		<div class="form-group">
 			<input class="btn btn-primary" type="submit" value="{{$submitButtonText}}">

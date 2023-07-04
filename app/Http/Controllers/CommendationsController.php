@@ -8,6 +8,7 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommendationRequest;
 use Illuminate\Support\Str;
+use Mail;
 
 class CommendationsController extends Controller
 {
@@ -69,16 +70,33 @@ class CommendationsController extends Controller
      */
     public function store(CommendationRequest $request)
     {
-        Auth::user()->commendations()->create([
+        $commendation = Auth::user()->commendations()->create([
             'title' => $request->get('title'),
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title')),
-            'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0
+            'public' => $request->has('public') ? 1 : 0
         ]);
 
-        return redirect('ajanlo')->with('message', 'Az új ajánlót sikeresen felvetted!');
+        if(Auth::user()->admin) {
+            $active = $request->has('active') ? 1 : 0;
+            $commendation->update(['active' => $active]);
+            $message = 'Az új ajánlót sikeresen felvetted!';
+        }
+        else {
+            $data['id']= $commendation->id;
+            $data['slug']= $commendation->slug;
+            $data['title']= $commendation->title;
+            Mail::send('commendations.email', $data, function($message) use ($data)
+            {
+                $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+                $message->subject("új ajánló");
+                $message->to('tarsadalmi.jollet@gmail.com');
+            });
+            $message = 'Az új ajánlót sikeresen felvetted, jóváhagyásra vár.';
+        }
+
+        return redirect('ajanlo')->with('message', $message);
     }
 
     /**
@@ -113,9 +131,13 @@ class CommendationsController extends Controller
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title')),
-            'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0
+            'public' => $request->has('public') ? 1 : 0
         ]);
+
+        if(Auth::user()->admin) {
+            $active = $request->has('active') ? 1 : 0;
+            $commendation->update(['active' => $active]);
+        }
 
 
         return redirect('ajanlo')->with('message', 'Az ajánlót sikeresen módosítottad!');
