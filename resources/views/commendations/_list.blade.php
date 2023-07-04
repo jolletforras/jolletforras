@@ -1,10 +1,14 @@
 @for ($i = 0; $i < $num=$commendations->count(); $i++)
-    <?php $commendation = $commendations[$i]; ?>
-    @if(isset($commendation->user->id))
+    <?php
+        $commendation = $commendations[$i];
+        $my_post = Auth::check() && Auth::user()->id==$commendation->user->id ? true : false;
+    ?>
+    @if(isset($commendation->user->id) && ($commendation->active || $my_post))
         <h3><a href="{{ url('ajanlo',$commendation->id) }}/{{$commendation->slug}}">{{ $commendation->title }}</a></h3>
         <p>
-            @if (Auth::check() && Auth::user()->id==$commendation->user->id)
+            @if($my_post)
                 <a href="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit">módosít</a>
+                @if(!$commendation->active) <i>inaktív</i>@endif
             @endif
         </p>
         {!! $commendation->body !!}<br>

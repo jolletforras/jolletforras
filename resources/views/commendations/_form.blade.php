@@ -23,6 +23,13 @@
 		</div>
 
 		<div class="form-group">
+			<input name="active" type="checkbox" value="1" @if((!old() && $commendation->active) || old('active')) checked @endif>
+			<span style="padding-top: 10px; font-size: 18px;">Aktív</span>
+			<a href="#active_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<div id="active_info" class="collapse info">Ha akkor láthatóvá válik az oldalon.</div>
+		</div>
+
+		<div class="form-group">
 			<input class="btn btn-primary" type="submit" value="{{$submitButtonText}}">
 		</div>
 
