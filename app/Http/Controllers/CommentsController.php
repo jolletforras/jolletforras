@@ -53,7 +53,7 @@ class CommentsController extends Controller
                 $commentable->update(['active' => 1]);
             }
 
-            $commentable_types = ['GroupTheme'=>'csoport téma','Forum'=>'fórum', 'Project'=>'kezdeményezés', 'Event'=>'esemény', 'Article'=>'írás'];
+            $commentable_types = ['GroupTheme'=>'csoport téma','Forum'=>'fórum', 'Project'=>'kezdeményezés', 'Event'=>'esemény', 'Article'=>'írás', 'Commendation'=>'ajánló'];
 
             $commenter=User::findOrFail($commenter_id);
 
