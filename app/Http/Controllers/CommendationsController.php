@@ -91,7 +91,7 @@ class CommendationsController extends Controller
     {
         $commendation = Commendation::findOrFail($id);
 
-        if(Auth::user()->id != $commendation->user->id) {
+        if(Auth::user()->id != $commendation->user->id && !Auth::user()->admin) {
             return redirect('/');
         }
 

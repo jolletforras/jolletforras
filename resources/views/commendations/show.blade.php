@@ -4,7 +4,7 @@
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
 			<h2>{{ $commendation->title }}</h2>
-			@if (Auth::user()->id==$commendation->user->id)
+			@if (Auth::check() && (Auth::user()->id==$commendation->user->id || Auth::user()->admin))
 				<a href="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 			@endif
 		</div>
