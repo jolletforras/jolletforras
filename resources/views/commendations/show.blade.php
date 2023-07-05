@@ -17,11 +17,13 @@
 			@include('partials.author', ['author'=>'','obj'=>$commendation])
 	    </div>
     </div>
-	@include('comments._show', [
-	'comments' => $comments,
-    'commentable_type'	=>'Commendation',
-    'commentable_url'	=>'commendation/'.$commendation->id.'/'.$commendation->slug,
-    'commentable'	=>$commendation
-	] )
+	@if(Auth::check())
+		@include('comments._show', [
+		'comments' => $comments,
+		'commentable_type'	=>'Commendation',
+		'commentable_url'	=>'commendation/'.$commendation->id.'/'.$commendation->slug,
+		'commentable'	=>$commendation
+		] )
+	@endif
 @endsection
 
