@@ -24,7 +24,7 @@
             @if( $commendation->counter>0)
                 &nbsp;&nbsp;<a href="{{ url('commendation',$commendation->id) }}/{{$commendation->slug}}">{{ $commendation->counter }} hozzászólás</a>
             @endif
-            @if($i!=$num-1)<hr>@endif
         @endif
+        @if($i!=$num-1)<hr>@endif
     @endif
 @endfor
