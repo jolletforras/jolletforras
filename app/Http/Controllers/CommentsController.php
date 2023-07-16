@@ -63,6 +63,8 @@ class CommentsController extends Controller
           //ha én vagyok a kezdeményezés, fórum v. csoport téma létrehozó és kérek értesítést
             if($user->my_post_comment_notice) {
                 $data['commentable_type']=$commentable_types[$c_type];
+                $data['title']=$commentable->title;
+                $data['subject_extra'] = $c_type == "GroupTheme" ? "beszélgetés - ".$commentable->group->name." csoport" : $commentable_types[$c_type];
                 $data['name']=$request->get('name');
                 $data['email']=$email;
                 $data['commentable_url'] = $commentable_url."#".$c->id;
@@ -73,7 +75,7 @@ class CommentsController extends Controller
                 Mail::send('comments.email', $data, function($message) use ($data)
                 {
                     $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-                    $message->subject("értesítés - ".$data['commentable_type']." hozzászólás");
+                    $message->subject("Új hozzászólás - '".$data['title']."' ".$data['subject_extra']);
                     $message->to($data['email']);
                 });
             }
