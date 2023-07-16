@@ -82,7 +82,7 @@
 
 	</div>
 	@if (!$is_member)
-	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
+	<div class="inner_box narrow-page" style="margin-top:6px;">
 		<p>Amennyiben szeretnél te is tagja lenni a csoportnak, először olvasd el a csoport megállapodását és ha azokat el tudod fogadodni kattints a csatlakozás gombra.</p>
 		<p>
 			<b>Csoport megállapodás:</b><br>
