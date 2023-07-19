@@ -341,6 +341,7 @@ class ProfilesController extends Controller
 		unlink($tmpfile);
 
 		$user->has_photo=true;
+        $user->photo_counter++;
 
         if (!$user->incompleteProfile()) {
             $user->status = 3; //teljes tag

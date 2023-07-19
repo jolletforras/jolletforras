@@ -13,7 +13,7 @@
                     <td class="img_column">
                         @if(file_exists(public_path('images/profiles/k_'.$user->id.'.jpg')))
                             <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">
-                                <img src="{{ url('/images/profiles') }}/k_{{ $user->id}}.jpg">
+                                <img src="{{ url('/images/profiles') }}/k_{{ $user->id}}.jpg?{{ $user->photo_counter}}">
                             </a>
                         @elseif (Auth::check() && Auth::user()->id==$user->id)
                             <a href="{{ url('/profilom') }}/feltolt_profilkep">
