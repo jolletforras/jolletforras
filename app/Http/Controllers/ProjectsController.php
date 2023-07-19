@@ -17,7 +17,7 @@ class ProjectsController extends Controller
 	use TagTrait;
 	
 	public function __construct() {
-		$this->middleware('auth');
+		$this->middleware('auth', ['except' => ['index','show']]);
 	}
 
 	/**
@@ -28,7 +28,13 @@ class ProjectsController extends Controller
 	 */
 	public function index()
 	{
-		$projects = Project::with('user', 'members', 'tags')->latest('updated_at')->get();
+        if(Auth::check()) {
+            $projects = Project::with('user', 'members', 'tags')->latest('updated_at')->get();
+        }
+        else {
+            $projects = Project::with('user', 'members', 'tags')->latest('updated_at')->where('public','=', 1)->get();
+        }
+
 
 		$tags = [''=>''] + ProjectSkill::get()->pluck('name', 'id')->all();
 
@@ -79,7 +85,8 @@ class ProjectsController extends Controller
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
 				'slug' => Str::slug($request->get('title')),
-                'counter' => 0
+                'counter' => 0,
+                'public' => $request->has('public') ? 1 : 0
 		]);
 
 		$project->members()->attach($request->input('member_list'));
@@ -128,7 +135,8 @@ class ProjectsController extends Controller
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
-				'slug' => Str::slug($request->get('title'))
+				'slug' => Str::slug($request->get('title')),
+                'public' => $request->has('public') ? 1 : 0
 		]);
 
 		$project->members()->sync($request->input('member_list'));

@@ -11,7 +11,7 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'body', 'looking_for', 'slug', 'counter'
+        'title', 'body', 'looking_for', 'slug', 'counter', 'public'
     ];
 
     protected $dates=['updated_at', 'deleted_at'];
