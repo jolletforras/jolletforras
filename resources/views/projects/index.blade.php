@@ -6,14 +6,18 @@
 			<h2>Kezdeményezések</h2>
 		</div>
 		<div class="col-sm-3" style="padding-top:4px;">
+			@if(Auth::check())
 			<select id="tag" name="tag" class="form-control">
 				@foreach($tags as $key => $val)
 					<option value="{{ $key }}">{{ $val }}</option>
 				@endforeach
 			</select>
+			@endif
 		</div>
 		<div class="col-sm-4 text-right">
+			@if(Auth::check())
 			<a href="{{url('kezdemenyezes')}}/uj" type="submit" class="btn btn-default">Új kezdeményezés</a>
+			@endif
 		</div>
 	</div>
 	<div class="panel panel-default narrow-page">
