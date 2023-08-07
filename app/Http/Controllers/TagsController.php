@@ -44,7 +44,7 @@ class TagsController extends Controller
     public function group_show($id) {
         $tag = GroupTag::findOrFail($id);
 
-        $groups=$tag->groups()->orderBy('name')->get();
+        $groups=$tag->groups()->where('status','active')->orderBy('name')->get();
 
         $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
 

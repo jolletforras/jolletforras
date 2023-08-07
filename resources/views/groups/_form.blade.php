@@ -83,3 +83,12 @@
 			</label>
 			<div id="public_info" class="collapse info">Ha nyilvános a csoport, akkor annak bemutatását a nem regisztráltak is megnézhetik.</div>
 		</div>
+
+		<div class="form-group">
+			<label>
+				<input name="inactive" type="checkbox" value="1" @if(isset($group) && $group->status=='inactive') checked @endif>
+				<span style="padding-top: 10px; font-size: 18px;">Inaktív</span>
+				<a href="#inactive_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+			</label>
+			<div id="inactive_info" class="collapse info">Ha inaktív a csoport nem látható csoportok között.</div>
+		</div>

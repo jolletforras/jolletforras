@@ -40,10 +40,10 @@ class GroupsController extends Controller
     {
         if(Auth::check())
         {
-            $groups = Group::with('user', 'members', 'tags')->orderBy('name')->get();
+            $groups = Group::with('user', 'members', 'tags')->where('status','active')->orderBy('name')->get();
         }
         else {
-            $groups = Group::with('user', 'members', 'tags')->orderBy('name')->where('public','=', 1)->get();
+            $groups = Group::with('user', 'members', 'tags')->where('status','active')->orderBy('name')->where('public','=', 1)->get();
         }
 
         $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
@@ -203,6 +203,7 @@ class GroupsController extends Controller
             'city' => $request->get('city'),
             'slug' => Str::slug($request->get('name')),
             'public' => $request->has('public') ? 1 : 0,
+            'status' => $request->has('inactive') ? 'inactive' : 'active',
             'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
         ]);
 
@@ -410,7 +411,7 @@ class GroupsController extends Controller
     {
         $city=$request->get('city');
 
-        $query = Group::with('user', 'members', 'tags')->latest('updated_at');
+        $query = Group::with('user', 'members', 'tags')->where('status','active')->latest('updated_at');
 
         if (isset($city) && $city!="") {
             $query=$query->where('city','=', $city);
