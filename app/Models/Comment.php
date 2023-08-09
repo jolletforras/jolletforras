@@ -51,7 +51,7 @@ class Comment extends Model
             $since = $created_at->diffInHours($now).' ó.';
         }
         elseif ($minutes<10080) { //24*60*7 = 1 hét
-            $since = $created_at->diffInWeeks($now).' n.';
+            $since = $created_at->diffInDays($now).' n.';
         }
         elseif ($minutes<=40320) { //24*60*7*4 = 4 hét
             $since = $created_at->diffInWeeks($now).' hete';
