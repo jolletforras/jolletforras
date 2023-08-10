@@ -24,7 +24,10 @@
 			</div>
 			@if ($users_read_it)
 			<div class="form-group">
-				Látta: {!! $users_read_it !!}
+				Látta: <a href="#seen" data-toggle="collapse">{{$num_user_read_it}} ember</a>
+				<div class="row">
+					<div class="col-sm-12"><div class="collapse" id="seen">{!! $users_read_it !!}</div></div>
+				</div>
 			</div>
 			@endif
 	    </div>
