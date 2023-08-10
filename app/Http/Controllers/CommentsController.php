@@ -43,9 +43,19 @@ class CommentsController extends Controller
             $c->shorted_text = $comment_length>600 ? $this->subtext_keep_link($comment,600) : null;
             $c->body = $comment;
             $c->commenter_id = $commenter_id;
+            if(!empty($request->get('to_user_id'))) {
+                $c->lev1_comment_id = $request->get('to_comment_id');
+                $c->to_comment_id = $request->get('to_comment_id');
+                $c->to_user_id = $request->get('to_user_id');
+            }
             $commentable->comments()->save($c);
             ++$commentable->counter;
             $commentable->save();
+
+            if(empty($request->get('to_user_id'))) {
+                $c->lev1_comment_id = $c->id;
+                $c->save();
+            }
 
             //ha hozzászólnak a lezárt téma megnyílik
             if( $c_type=="GroupTheme" && !$commentable->active) {

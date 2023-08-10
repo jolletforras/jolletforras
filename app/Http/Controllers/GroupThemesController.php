@@ -91,7 +91,7 @@ class GroupThemesController extends Controller
 
         $forum = Forum::findOrFail($forum_id);
 
-        $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $forum_id)->get();
+        $comments = Comment::where('commentable_type', 'App\Models\Forum')->where('commentable_id', $forum_id)->orderBy('lev1_comment_id', 'ASC')->orderBy('created_at', 'ASC')->get();
 
 
         $notice = Notice::findBy($forum_id,$user->id,'Forum')->first();

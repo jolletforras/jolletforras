@@ -512,6 +512,21 @@ h3 {
 	font-size: 12px; color: #494949; font-family: Arial;
 }
 
+.comments .comment {
+	background-color:#fefffd;
+	border-radius:10px;
+	padding:10px;
+}
+
+.comments .level2 {
+	margin-left: 25px;
+}
+
+.comments .answer {
+	margin-bottom:10px;
+	font-size:14px;
+}
+
 @media all and (max-width:1200px) {
 	#banner div {
 		margin-left: 330px;
