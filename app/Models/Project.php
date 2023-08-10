@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 class Project extends Model
 {
@@ -34,6 +35,10 @@ class Project extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function isMember() {
+        return $this->members->contains('id', Auth::user()->id);
     }
 
     public function getUpdatedAtAttribute($date)

@@ -14,6 +14,8 @@
 				@include('projects._tags')
 				@if (Auth::user()->id==$project->user->id)
 					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+				@elseif($project->isMember())
+					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/kilep" type="submit" class="btn btn-default">Kilépek</a>
 				@endif
 			@endif
 	    </div>

@@ -147,9 +147,9 @@ class ProjectsController extends Controller
 	}
 
 	/**
-	 * Delete a specific idea
+	 * Delete a specific project
 	 *
-	 * @param  integer $id The idea ID
+	 * @param  integer $id The project ID
 	 * @return Response
 	 */
 	public function delete($id)
@@ -164,4 +164,25 @@ class ProjectsController extends Controller
 
 		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen törölted!');
 	}
+
+    /**
+     * Leave a specific project
+     *
+     * @param  integer $id The project ID
+     * @return Response
+     */
+    public function leave($id)
+    {
+        $project = Project::findOrFail($id);
+
+        $user_id = Auth::user()->id;
+
+        if($project->user->id == $user_id) {
+            return redirect('kezdemenyezesek')->with('message', 'A kezdeményezés létrehozójaként nem tudsz kilépni a kezdeményezésből!');;
+        }
+
+        $project->members()->detach($user_id);
+
+        return redirect('kezdemenyezesek')->with('message', 'A kezdeményezésből sikeresen kiléptél!');
+    }
 }
