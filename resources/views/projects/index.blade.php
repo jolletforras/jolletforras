@@ -26,7 +26,7 @@
 				@if(isset($project->user->id))
 					<h3><a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">{{ $project->title }}</a></h3>
 					<p>
-						<a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->updated_at }}
+						<a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}
 						@if (Auth::check() && Auth::user()->id==$project->user->id)
 							<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a>
 						@endif
