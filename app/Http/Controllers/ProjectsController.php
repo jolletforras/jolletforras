@@ -29,10 +29,10 @@ class ProjectsController extends Controller
 	public function index()
 	{
         if(Auth::check()) {
-            $projects = Project::with('user', 'members', 'tags')->latest('updated_at')->get();
+            $projects = Project::with('user', 'members', 'tags')->latest('created_at')->get();
         }
         else {
-            $projects = Project::with('user', 'members', 'tags')->latest('updated_at')->where('public','=', 1)->get();
+            $projects = Project::with('user', 'members', 'tags')->latest('created_at')->where('public','=', 1)->get();
         }
 
 
