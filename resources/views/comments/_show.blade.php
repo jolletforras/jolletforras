@@ -4,16 +4,21 @@
         <hr>
         <div class="comments">
         @foreach ($comments as $comment)
-            <div  id="comment-{{$comment->id}}" @if(isset($comment->to_user_id))class="comment level2" @else class="comment"@endif>
-            <?php $to_user = isset($comment->to_user_id) ? '<a href="'.url('profil').'/'.$comment->to_user->id.'/'.$comment->to_user->slug.'">'.$comment->to_user->name.'</a>, ':'';  ?>
+                <?php
+                $class_comment = isset($comment->to_user_id) ? "comment level2" : "comment";
+                $to_user = isset($comment->to_user_id) ? '<a href="'.url('profil').'/'.$comment->to_user->id.'/'.$comment->to_user->slug.'">'.$comment->to_user->name.'</a>, ':'';
+                $space_left = isset($comment->to_user_id) ? 40 : 10;
+                $display_full_comment = isset($comment->shorted_text) ? ' style="display: none;"':'';
+                ?>
+            <div  id="comment-{{$comment->id}}" class="{{$class_comment}}">
                 <a name="{{$comment->id}}"></a>
                 <span style='font-size:14px;'><a href="{{url('profil')}}/{{$comment->commenter->id}}/{{$comment->commenter->slug}}">{{ $comment->commenter->name }}</a></span> <br/>
             @if(isset($comment->shorted_text))
-                <div id="shorted-{{$comment->id}}" >{!! $to_user !!}}{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
+                <div id="shorted-{{$comment->id}}">{!! $to_user !!}}{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
             @endif
-                <div id="full-{{$comment->id}}" @if(isset($comment->shorted_text))style="display: none;"@endif>{!! $to_user !!}{!! nl2br($comment->body) !!}</div>
+                <div id="full-{{$comment->id}}"{{$display_full_comment}}>{!! $to_user !!}{!! nl2br($comment->body) !!}</div>
             </div>
-            <div class="answer" @if(isset($comment->to_user_id))style="margin-left: 40px;"@else style="margin-left: 10px;"@endif><a href="#valasz" onclick="answer({{$comment->id}},{{$comment->commenter->id}})">Válasz</a> <span style="margin-left:20px;">{{ $comment->since }}</span></div>
+            <div class="answer" style="margin-left: {{$space_left}}px;"><a href="#valasz" onclick="answer({{$comment->id}},{{$comment->commenter->id}})">Válasz</a> <span style="margin-left:20px;">{{ $comment->since }}</span></div>
         @endforeach
         </div>
     </div>
