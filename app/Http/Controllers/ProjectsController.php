@@ -11,6 +11,8 @@ use App\Models\Comment;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
@@ -53,9 +55,13 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
+        $members = $project->members()->orderBy('name', 'ASC')->pluck('name', 'user_id');
+        $admins = $project->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
+        $is_admin = Auth::check() && in_array(Auth::user()->id, $project->admin_list);
+
         $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
 
-		return view('projects.show', compact('project','comments'));
+		return view('projects.show', compact('project','members','admins','is_admin','comments'));
 	}
 	
 	/**
@@ -105,8 +111,9 @@ class ProjectsController extends Controller
 	public function edit($id)
 	{
 		$project = Project::findOrFail($id);
-		
-		if(Auth::user()->id != $project->user->id) {
+
+        //ha nem a projekt létrehozója vagy admin
+		if(!(Auth::user()->id == $project->user->id || in_array(Auth::user()->id,$project->admin_list))) {
 			return redirect('/');
 		}
 
@@ -184,5 +191,18 @@ class ProjectsController extends Controller
         $project->members()->detach($user_id);
 
         return redirect('kezdemenyezesek')->with('message', 'A kezdeményezésből sikeresen kiléptél!');
+    }
+
+    public function saveAdmin($id, Request $request)
+    {
+        DB::table('project_user')->where('project_id',$id)->update(['admin' => 0]);
+
+        if(!empty($request->input('admin_list'))) {
+            DB::table('project_user')->where('project_id', $id)->whereIn('user_id', $request->input('admin_list'))->update(['admin' => 1]);
+        }
+
+        $response = array('status' => 'success');
+
+        return \Response::json($response);
     }
 }

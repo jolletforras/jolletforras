@@ -12,7 +12,7 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'body', 'looking_for', 'slug', 'counter', 'public'
+        'title', 'body', 'looking_for', 'slug', 'counter', 'public', 'admin'
     ];
 
     protected $dates=['updated_at', 'deleted_at'];
@@ -32,6 +32,12 @@ class Project extends Model
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
+    public function admins()
+    {
+        return $this->belongsToMany(User::class)->wherePivot('admin',1)->withTimestamps();
+    }
+
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
@@ -39,6 +45,11 @@ class Project extends Model
 
     public function isMember() {
         return $this->members->contains('id', Auth::user()->id);
+    }
+
+    public function getAdminListAttribute()
+    {
+        return $this->admins->pluck('id')->all();
     }
 
     public function getCreatedAtAttribute($date)

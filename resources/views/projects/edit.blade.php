@@ -16,7 +16,9 @@
 			@include('projects._form')
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Módosít">
+				@if(Auth::user()->id == $project->user->id)
 				<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/torol" type="submit" class="btn btn-default">Törlöm a kezdeményezést</a>
+				@endif
 			</div>
 
 		</form>
