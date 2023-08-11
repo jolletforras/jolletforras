@@ -5,9 +5,10 @@
         <div class="comments">
         @foreach ($comments as $comment)
                 <?php
-                $class_comment = isset($comment->to_user_id) ? "comment level2" : "comment";
-                $to_user = isset($comment->to_user_id) ? '<a href="'.url('profil').'/'.$comment->to_user->id.'/'.$comment->to_user->slug.'">'.$comment->to_user->name.'</a>, ':'';
-                $space_left = isset($comment->to_user_id) ? 40 : 10;
+                $level2_comment = empty($comment->to_user_id) ? false : true;
+                $class_comment = $level2_comment ? "comment level2" : "comment";
+                $to_user = $level2_comment ? '<a href="'.url('profil').'/'.$comment->to_user->id.'/'.$comment->to_user->slug.'">'.$comment->to_user->name.'</a>, ':'';
+                $space_left = $level2_comment ? 40 : 10;
                 $display_full_comment = isset($comment->shorted_text) ? ' style="display: none;"':'';
                 ?>
             <div  id="comment-{{$comment->id}}" class="{{$class_comment}}">
