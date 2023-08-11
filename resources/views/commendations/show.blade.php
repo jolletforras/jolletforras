@@ -18,12 +18,18 @@
 	    </div>
     </div>
 	@if(Auth::check())
-		@include('comments._show', [
-		'comments' => $comments,
-		'commentable_type'	=>'Commendation',
-		'commentable_url'	=>'commendation/'.$commendation->id.'/'.$commendation->slug,
-		'commentable'	=>$commendation
-		] )
+		@include('comments._show', ['comments' => $comments] )
 	@endif
 @endsection
 
+@section('footer')
+	@if(Auth::check())
+		@include('partials.comment_script', [
+			'commentable_type'	=>'Commendation',
+			'commentable_url'	=>'commendation/'.$commendation->id.'/'.$commendation->slug,
+			'commentable_id'	=>$commendation->id,
+			'name'				=>$commendation->user->name,
+			'email'				=>$commendation->user->email
+		] )
+	@endif
+@endsection

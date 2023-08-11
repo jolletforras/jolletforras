@@ -35,12 +35,3 @@
         <button type="button" id="cancel" style="display: none;" onclick="cancel()">Mégse válaszolok</button>
     </div>
 </div>
-@section('footer')
-    @include('partials.comment_script', [
-        'commentable_type'	=>$commentable_type,
-        'commentable_url'	=>$commentable_url,
-        'commentable_id'	=>$commentable->id,
-        'name'				=>$commentable->user->name,
-        'email'				=>$commentable->user->email
-    ] )
-@endsection

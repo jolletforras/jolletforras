@@ -14,11 +14,17 @@
 			@include('partials.author', ['author'=>'','obj'=>$forum])
 	    </div>
     </div>
-	@include('comments._show', [
-	'comments' => $comments,
-    'commentable_type'	=>'Forum',
-    'commentable_url'	=>'forum/'.$forum->id.'/'.$forum->slug,
-    'commentable'	=>$forum
-	] )
+	@include('comments._show', ['comments' => $comments ] )
 @endsection
 
+@section('footer')
+	@if(Auth::check())
+		@include('partials.comment_script', [
+			'commentable_type'	=>'Forum',
+			'commentable_url'	=>'forum/'.$forum->id.'/'.$forum->slug,
+            'commentable_id'	=>$forum->id,
+            'name'				=>$forum->user->name,
+            'email'				=>$forum->user->email
+        ] )
+	@endif
+@endsection

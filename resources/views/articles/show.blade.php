@@ -18,12 +18,19 @@
 		<p><a href="{{url('irasok')}}"><< Írások</a></p>
     </div>
 	@if(Auth::check())
-		@include('comments._show', [
-		'comments' => $comments,
-		'commentable_type'	=>'Article',
-		'commentable_url'	=>'iras/'.$article->id.'/'.$article->slug,
-		'commentable'	=>$article
-		] )
+		@include('comments._show', ['comments' => $comments] )
+	@endif
+@endsection
+
+@section('footer')
+	@if(Auth::check())
+		@include('partials.comment_script', [
+			'commentable_type'	=>'Article',
+			'commentable_url'	=>'iras/'.$article->id.'/'.$article->slug,
+            'commentable_id'	=>$article->id,
+            'name'				=>$article->user->name,
+            'email'				=>$article->user->email
+        ] )
 	@endif
 @endsection
 

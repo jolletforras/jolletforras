@@ -33,12 +33,19 @@
 	    </div>
     </div>
 
-	@include('comments._show', [
-	'comments' => $comments,
-	'commentable_type'	=>'GroupTheme',
-	'commentable_url'	=>'csoport/'.$group->id.'/'.$group->slug.'/tema/'.$forum->id.'/'.$forum->slug,
-	'commentable'	=>$forum
-	] )
+	@include('comments._show', ['comments' => $comments] )
+@endsection
+
+@section('footer')
+	@if(Auth::check())
+		@include('partials.comment_script', [
+			'commentable_type'	=>'GroupTheme',
+			'commentable_url'	=>'csoport/'.$group->id.'/'.$group->slug.'/tema/'.$forum->id.'/'.$forum->slug,
+            'commentable_id'	=>$forum->id,
+            'name'				=>$forum->user->name,
+            'email'				=>$forum->user->email
+        ] )
+	@endif
 
 	<script type="text/javascript">
 		function check(){
@@ -65,4 +72,3 @@
 		}
 	</script>
 @endsection
-

@@ -22,7 +22,7 @@
 			{!! $event->body !!}
 			@include('partials.author', ['author'=>'Eseményt felvette: ','obj'=>$event])
 			@if ($event->isGroupEvent() && $event->visibility!='group' && $event->group->isAdmin())
-				<label for="invited_user">Meghívás az eseményre</label>
+				<label for="invited_user">Személyek meghívás az eseményre, akik nem tagjai a csoportnak</label>
 				<div class="row">
 					<div class="form-group col-sm-4">
 						<select id="invited_user" name="invited_user" class="form-control">
@@ -43,18 +43,22 @@
 		</div>
 	</div>
 	@if(Auth::check())
-		@include('comments._show', [
-		'comments' => $comments,
-		'commentable_type'	=>'Event',
-		'commentable_url'	=>'esemeny/'.$event->id.'/'.$event->slug,
-		'commentable'	=>$event
-		] )
+		@include('comments._show', ['comments' => $comments	] )
 	@endif
 @endsection
 
 @section('footer')
-	<script>
+	@if(Auth::check())
+		@include('partials.comment_script', [
+            'commentable_type'	=>'Event',
+            'commentable_url'	=>'esemeny/'.$event->id.'/'.$event->slug,
+            'commentable_id'	=>$event->id,
+            'name'				=>$event->user->name,
+            'email'				=>$event->user->email
+        ] )
+	@endif
 
+	<script>
 		$('#invited_user').select2({
 			placeholder: 'Írd be a nevet',
 			"language": {
