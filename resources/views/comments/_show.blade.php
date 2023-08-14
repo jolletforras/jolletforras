@@ -15,7 +15,7 @@
                 <a name="{{$comment->id}}"></a>
                 <span style='font-size:14px;'><a href="{{url('profil')}}/{{$comment->commenter->id}}/{{$comment->commenter->slug}}">{{ $comment->commenter->name }}</a></span> <br/>
             @if(isset($comment->shorted_text))
-                <div id="shorted-{{$comment->id}}">{!! $to_user !!}}{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
+                <div id="shorted-{{$comment->id}}">{!! $to_user !!}{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
             @endif
                 <div id="full-{{$comment->id}}"{{$display_full_comment}}>{!! $to_user !!}{!! nl2br($comment->body) !!}</div>
             </div>
