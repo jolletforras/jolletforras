@@ -17,7 +17,7 @@
             @if(isset($comment->shorted_text))
                 <div id="shorted-{{$comment->id}}">{!! $to_user !!}{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
             @endif
-                <div id="full-{{$comment->id}}"{{$display_full_comment}}>{!! $to_user !!}{!! nl2br($comment->body) !!}</div>
+                <div id="full-{{$comment->id}}"{!! $display_full_comment !!}>{!! $to_user !!}{!! nl2br($comment->body) !!}</div>
             </div>
             <div class="answer" style="margin-left: {{$space_left}}px;"><a href="#valasz" onclick="answer({{$comment->id}},{{$comment->commenter->id}})">Válasz</a> <span style="margin-left:20px;">{{ $comment->since }}</span></div>
         @endforeach
