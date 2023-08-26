@@ -44,6 +44,8 @@
 			@unless($user->interest_tags->isEmpty())<h4><b>Érdeklődés, tanulás:</b> @include('profiles.partials.interest_tags')</h4>@endunless
 			@if (Auth::check())
 				@include('profiles.partials.groups')
+				@include('profiles.partials.articles')
+				@include('profiles.partials.projects')
 			@endif
         </div>
     </div>
