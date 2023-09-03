@@ -64,28 +64,33 @@
 						<!-- Left Side Of Navbar -->
 						<ul class="nav navbar-nav" id="main-menu">
 							<li><a href="{{ url('/') }}">Nyitólap</a></li>
-							<li><a href="{{ url('/tarsak') }}">Társak</a></li>
 							@if(Auth::check())
-							<li><a href="{{ url('/tortenesek') }}">Történések</a></li>
+								<!--<li><a href="{{ url('/tortenesek') }}">Történések</a></li>-->
 							@endif
-                            <li><a href="{{ url('/csoportok') }}">Csoportok</a></li>
-							<li><a href="{{ url('terkep/tarsak') }}">Térkép</a></li>
-							<li><a href="{{ url('kezdemenyezesek') }}">Kezdeményezések</a></li>
-							<li><a href="{{ url('irasok') }}">Írások</a></li>
-							<li><a href="{{ url('hirek') }}">Hírek</a></li>
-							<li><a href="{{ url('ajanlo') }}">Ajánló</a></li>
-							<li><a href="{{ url('esemenyek') }}">Események</a></li>
-							<li class="width-wide"><a href="">Olvasd el</a>
+							<li class="width-wide"><a href="{{ url('/tortenesek') }}">Történések</a>
 								<ul>
-									<li><a href="{{ url('kozossegimegallapodas') }}">Közösségi megállapodás</a></li>
-									<li><a href="{{ url('tudnivalok') }}">Tudnivalók</a></li>
-									<li><a href="{{ url('hirlevelek') }}">Hírlevelek</a></li>
+									<li><a href="{{ url('tortenesek') }}">Elmúlt 1 hónapban</a></li>
+									<li><a href="{{ url('esemenyek') }}">Események</a></li>
+									<li><a href="{{ url('hirlevelek') }}">Portál Hírlevél</a></li>
+									<li><a href="{{ url('hirek') }}">Csoportok hírei</a></li>
 								</ul>
-							</li>
-							<li class="width-narrow"><a href="{{ url('kozossegimegallapodas') }}">Közösségi megállapodás</a></li>
-							<li class="width-narrow"><a href="{{ url('tudnivalok') }}">Tudnivalók</a></li>
-							<li class="width-narrow"><a href="{{ url('hirlevelek') }}">Hírlevelek</a></li>
-							<li><a href="{{ url('kapcsolat') }}">Kapcsolat</a></li>
+							<li>
+							<li class="width-narrow"><a href="{{ url('tortenesek') }}">Elmúlt 1 hónapban</a></li>
+							<li class="width-narrow"><a href="{{ url('esemenyek') }}">Események</a></li>
+							<li class="width-narrow"><a href="{{ url('hirek') }}">Csoportok hírei</a></li>
+							<li class="width-narrow"><a href="{{ url('hirlevelek') }}">Portál Hírlevél</a></li>
+							<li><a href="{{ url('/tarsak') }}">Társak</a></li>
+							<li><a href="{{ url('/csoportok') }}">Csoportok</a></li>
+							<li><a href="{{ url('terkep/tarsak') }}">Térkép</a></li>
+							<li class="width-wide"><a href="">Szellemiség</a>
+								<ul>
+									<li><a href="{{ url('irasok') }}">Írások</a></li>
+									<li><a href="{{ url('ajanlo') }}">Ajánló</a></li>
+								</ul>
+							<li>
+							<li class="width-narrow"><a href="{{ url('irasok') }}">Írások</a></li>
+							<li class="width-narrow"><a href="{{ url('ajanlo') }}">Ajánló</a></li>
+							<li><a href="{{ url('kezdemenyezesek') }}">Kezdeményezések</a></li>
 
 							@if(false && Auth::check() && Auth::user()->admin)
 								<li><a href="{{ url('jovahagyra_var') }}">Jóváhagy</a></li>
@@ -167,8 +172,12 @@
 
 	    </div>
 		<footer class="footer">
-			<div class="left"><a href="{{ url('/adatkezeles') }}">Adatkezelési tájékoztató</a></div>
-			<div class="center"><a href="mailto:tarsadalmi.jollet@gmail.com">tarsadalmi.jollet@gmail.com</a></div>
+			<div>
+				<a href="{{ url('/kozossegimegallapodas') }}">Közösségi megállapodás</a> -
+				<a href="{{ url('/adatkezeles') }}">Adatkezelési tájékoztató</a> -
+				<a href="{{ url('/tudnivalok') }}">Tudnivalók</a> -
+				<a href="{{ url('/kapcsolat') }}">Kapcsolat</a>
+			</div>
 			<div class="right">© 2023 Társadalmi Jóllét Portál</div>
 		</footer>
 	</div>
