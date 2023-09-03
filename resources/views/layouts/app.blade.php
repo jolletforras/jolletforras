@@ -63,9 +63,7 @@
 					@if(!Auth::check() || (Auth::check() && Auth::user()->status==3 && !Session::has('warning')))
 						<!-- Left Side Of Navbar -->
 						<ul class="nav navbar-nav" id="main-menu">
-							@if(Auth::check())
-								<!--<li><a href="{{ url('/tortenesek') }}">Történések</a></li>-->
-							@endif
+							<li><a href="{{ url('/') }}">Nyitó</a></li>
 							<li class="width-wide"><a href="{{ url('/tortenesek') }}">Történések</a>
 								<ul>
 									<li><a href="{{ url('tortenesek') }}">Elmúlt 1 hónapban</a></li>
