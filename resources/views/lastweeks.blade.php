@@ -7,7 +7,11 @@
 @section('content')
     <div class="row narrow-page">
         <div class="col-sm-6">
-            <h2>Az elmúlt 1 hónap történései</h2>
+            @if (Auth::check())
+                <h2>Az elmúlt 1 hónap történései</h2>
+            @else
+                <h2>Az elmúlt 1 hónap nyilvános történései</h2>
+            @endif
         </div>
     </div>
    	<div class="inner_box narrow-page">
@@ -48,11 +52,6 @@
             @endif
         </div>
         @endforeach
-        <hr>
-    @endif
-    @if($forums->isNotEmpty())
-        <h3>Új fórumok</h3>
-        @include('forums._list')
         <hr>
     @endif
     @if($articles->isNotEmpty())
