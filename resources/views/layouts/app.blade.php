@@ -63,7 +63,6 @@
 					@if(!Auth::check() || (Auth::check() && Auth::user()->status==3 && !Session::has('warning')))
 						<!-- Left Side Of Navbar -->
 						<ul class="nav navbar-nav" id="main-menu">
-							<li><a href="{{ url('/') }}">Nyitólap</a></li>
 							@if(Auth::check())
 								<!--<li><a href="{{ url('/tortenesek') }}">Történések</a></li>-->
 							@endif
@@ -75,10 +74,7 @@
 									<li><a href="{{ url('hirek') }}">Csoportok hírei</a></li>
 								</ul>
 							<li>
-							<li class="width-narrow"><a href="{{ url('tortenesek') }}">Elmúlt 1 hónapban</a></li>
-							<li class="width-narrow"><a href="{{ url('esemenyek') }}">Események</a></li>
-							<li class="width-narrow"><a href="{{ url('hirek') }}">Csoportok hírei</a></li>
-							<li class="width-narrow"><a href="{{ url('hirlevelek') }}">Portál Hírlevél</a></li>
+							<li class="width-narrow"><a href="{{ url('tortenesek') }}">Történések</a></li>
 							<li><a href="{{ url('/tarsak') }}">Társak</a></li>
 							<li><a href="{{ url('/csoportok') }}">Csoportok</a></li>
 							<li><a href="{{ url('terkep/tarsak') }}">Térkép</a></li>
@@ -88,9 +84,12 @@
 									<li><a href="{{ url('ajanlo') }}">Ajánló</a></li>
 								</ul>
 							<li>
-							<li class="width-narrow"><a href="{{ url('irasok') }}">Írások</a></li>
-							<li class="width-narrow"><a href="{{ url('ajanlo') }}">Ajánló</a></li>
+							<li class="width-narrow"><a href="{{ url('esemenyek') }}">Események</a></li>
 							<li><a href="{{ url('kezdemenyezesek') }}">Kezdeményezések</a></li>
+							<li class="width-narrow"><a href="{{ url('irasok') }}">Írások</a></li>
+							<li class="width-narrow"><a href="{{ url('hirlevelek') }}">Hírlevél</a></li>
+							<li class="width-narrow"><a href="{{ url('hirek') }}">Csoport hírek</a></li>
+							<li class="width-narrow"><a href="{{ url('ajanlo') }}">Ajánló</a></li>
 
 							@if(false && Auth::check() && Auth::user()->admin)
 								<li><a href="{{ url('jovahagyra_var') }}">Jóváhagy</a></li>
