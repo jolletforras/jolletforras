@@ -22,7 +22,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except'=>['index','aboutus','socialagreement','aboutsite','connection','datahandling']]);
+        $this->middleware('auth', ['except'=>['index','aboutus','socialagreement','aboutsite','connection','datahandling','lastweeks']]);
     }
 
 
@@ -95,15 +95,25 @@ class HomeController extends Controller
     public function lastweeks()
     {
         $date = date("Y-m-d",strtotime("-1 month"));
-        $users = User::with('skill_tags')->members()->where('created_at','>',$date)->latest('updated_at')->get();
-        $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->latest('updated_at')->get();
-        $forums = Forum::with('user', 'tags')->where('created_at','>',$date)->where('group_id', 0)->latest('updated_at')->get();
-        $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
+
+        if(Auth::check())
+        {
+            $users = User::with('skill_tags')->members()->where('created_at','>',$date)->latest('updated_at')->get();
+            $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->latest('updated_at')->get();
+            $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
+            $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->latest()->get();
+        }
+        else {
+            $users = User::with('skill_tags')->members()->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
+            $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
+            $events = Event::latest()->where('created_at','>',$date)->where('visibility','=', 'public')->get();
+            $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->where('public',1)->latest()->get();
+        }
+
         $articles = Article::latest()->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
-        $commendations = Commendation::where('approved', 1)->where('active', 1)->latest()->where('created_at','>',$date)->get();
 
-        return view('lastweeks',compact('users','groups','forums','events','articles','newsletters','commendations'));
+        return view('lastweeks',compact('users','groups','events','articles','newsletters','commendations'));
     }
 
 
