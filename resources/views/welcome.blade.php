@@ -6,7 +6,7 @@
 
 @section('content')
         <div id="banner">
-            <h2><img src="images/tarsadalmijollet.png" alt="Társadalmi Jóllét"></h2>
+            <h2><img src="images/tarsadalmijollet.png?2" alt="Társadalmi Jóllét"></h2>
             <div class="container">
                 <p>
                     A nagy fordulat egy ember életében: <br>
