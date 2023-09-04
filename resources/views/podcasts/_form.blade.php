@@ -17,7 +17,7 @@
 
 		<div class="form-group">
 			<label for="url">Csoport azonosító (ha van):</label>
-			<input class="form-control" name="group_id" type="text" maxlength="10" value="@if(isset($podcast)) {{$podcast->event_id}} @endif">
+			<input class="form-control" name="group_id" type="text" maxlength="10" value="@if(isset($podcast)) {{$podcast->group_id}} @endif">
 		</div>
 
 

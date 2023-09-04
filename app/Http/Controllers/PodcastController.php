@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Podcast;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
 {
@@ -61,7 +62,7 @@ class PodcastController extends Controller
     {
         $podcast = Podcast::findOrFail($id);
 
-        if(Auth::user()->id != $podcast->user->id && !Auth::user()->admin) {
+        if(!Auth::user()->admin) {
             return redirect('/');
         }
 
@@ -78,21 +79,17 @@ class PodcastController extends Controller
     {
         $podcast = Podcast::findOrFail($id);
 
+        $event_id = is_numeric($request->get('event_id')) ? $request->get('event_id') : NULL;
+        $group_id = is_numeric($request->get('group_id')) ? $request->get('group_id') : NULL;
+
         $podcast->update([
             'title' => $request->get('title'),
-            'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
+            'event_id' =>  $event_id,
+            'group_id' =>  $group_id,
             'slug' => Str::slug($request->get('title')),
-            'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0
         ]);
 
-        if(Auth::user()->admin) {
-            $approved = $request->has('approved') ? 1 : 0;
-            $podcast->update(['approved' => $approved]);
-        }
-
-
-        return redirect('ajanlo')->with('message', 'Az ajánlót sikeresen módosítottad!');
+        return redirect('az-uj-vilag-hangjai')->with('message', 'Az podcastot sikeresen felvetted!');
     }
 }
