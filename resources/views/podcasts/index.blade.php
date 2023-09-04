@@ -18,7 +18,7 @@
 	<div class="row narrow-page">
 		<div class="col-sm-12">
 			<div class="inner_box collapse" id="podcast_info" style="font-size: 18px">
-				Ezen az oldalon találhatod "az új világhangjai" podcast sorozat beszélgetéseit.
+				Ezen az oldalon találhatod "Az új világ hangjai" podcast sorozat beszélgetéseit. Sokféle jövőt elképzelhetünk. Az "Az új világ hangjai" hangcsatorna azokat az elképzeléseket gyűjti egybe, amelyekben a világunk egy olyan hely, ahol az emberek biztonságban érzik magukat, felszabadultan önmaguk lehetnek, miközben megvan mindenük ahhoz, hogy életük kiteljesedhessen. Ehhez a kiteljesedéshez arra van szükségük, hogy értéket adjanak a helyi közösségüknek, ami ezáltal megteremti tagjai számára az egészséges, boldog, kiegyensúlyozott élethez szükséges támogatói környezetet. Vagyis társadalmi jóllétet valósítunk meg, együtt. A beszélgetések egy-egy témakört fognak meg ebben a jövőképben.
 			</div>
 		</div>
 	</div>
