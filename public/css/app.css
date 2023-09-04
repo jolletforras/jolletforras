@@ -37,15 +37,21 @@ body {
   //background: url('../images/banner.jpg') no-repeat;
 }
 
+
 .base {
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
+	width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
+.narrow-page {
+	width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-.oldal_nev {	
+.oldal_nev {
     text-shadow: 0 1px #000; 
     margin-bottom: 0px;
     padding-top: 10px;
@@ -335,13 +341,6 @@ h3 {
 	font-size: 18px;
 }
 
-.narrow-page {
-	width: 80%;
-	margin-left: 10%;
-	margin-right: 10%;
-}
-
-
 .inner_box h2 {
 	font-weight: bold;
 	color: #494949;
@@ -528,7 +527,20 @@ h3 {
 	font-size:14px;
 }
 
-@media all and (max-width:1200px) {
+@media all and (max-width:1240px) {
+
+	.base {
+		width: 96%;
+		margin-left: 2%;
+		margin-right: 2%;
+	}
+
+    .narrow-page {
+        width: 100%;
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+
 	#banner div {
 		margin-left: 330px;
 	}
@@ -540,13 +552,6 @@ h3 {
 	.profile-list .select2-container {
 		margin-bottom: 3px;
 	}
-
-	.narrow-page {
-		width: 100%;
-		margin-left: 0%;
-		margin-right: 0%;
-	}
-
 }
 
 @media all and (max-width:1024px) {
@@ -567,11 +572,11 @@ h3 {
 		margin-top: 30px;
 		font-size: 19px;
 	}
+}
 
-	.base {
-		margin-left: 2%;
-		margin-right: 2%;
-		width: 96%;
+@media all and (max-width:840px) {
+	.podcast-iframe {
+		height: 102px !important;
 	}
 }
 
