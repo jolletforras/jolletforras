@@ -444,6 +444,8 @@ h3 {
 
 .card .card-body h3 {
 	display: inline-block;
+	height: 32px;
+	max-height: 32px;
 }
 
 .card .card-body .edit {
@@ -459,7 +461,7 @@ h3 {
 	font-weight: 300;
 	color: #575757;
 	overflow: hidden;
-	padding-right: 1rem;
+	text-align:justify;
 	margin: 0 0 15px 0;
 	position: relative;
 }
