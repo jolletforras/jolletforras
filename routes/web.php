@@ -30,6 +30,10 @@ Route::get('/tudnivalok', 'HomeController@aboutsite');
 Route::get('/adatkezeles', 'HomeController@datahandling');
 
 Route::get('/az-uj-vilag-hangjai', 'PodcastController@index');
+Route::get('/podcast/uj', 'PodcastController@create');
+Route::post('/podcast/uj', 'PodcastController@store');
+Route::get('/podcast/{id}/{title}/modosit', 'PodcastController@edit');
+Route::post('/podcast/{id}/{title}/modosit', 'PodcastController@update');
 
 Route::get('/terkep', 'MapController@members');
 Route::get('/terkep/tarsak', 'MapController@members');
