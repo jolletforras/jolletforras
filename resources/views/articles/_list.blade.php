@@ -1,5 +1,4 @@
 <div class="row">
-    <?php $i=1; ?>
 @foreach ($articles as $article)
     <div class="col-12 col-sm-6 col-md-4">
         <div class="card">
@@ -16,10 +15,5 @@
             </div>
         </div>
     </div>
-    @if($i%3==0)
-</div>
-<div class="row">
-    @endif
-    <?php $i++ ?>
 @endforeach
 </div>
