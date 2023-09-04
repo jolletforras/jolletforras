@@ -7,7 +7,7 @@
 @section('content')
 	<div class="row narrow-page">
 		<div class="col-sm-6">
-			<h2>Az új világhangjai</h2><a href="#podcast_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
+			<h2>Az új világ hangjai</h2><a href="#podcast_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
 		</div>
 		<div class="col-sm-6 text-right">
 			@if (Auth::check() && Auth::user()->admin)
