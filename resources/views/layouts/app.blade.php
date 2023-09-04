@@ -78,6 +78,7 @@
 							<li><a href="{{ url('terkep/tarsak') }}">Térkép</a></li>
 							<li class="width-wide"><a href="">Szellemiség</a>
 								<ul>
+									<li><a href="{{ url('az-uj-vilag-hangjai') }}">Az új világ hangjai</a></li>
 									<li><a href="{{ url('irasok') }}">Írások</a></li>
 									<li><a href="{{ url('ajanlo') }}">Ajánló</a></li>
 								</ul>

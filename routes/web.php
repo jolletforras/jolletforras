@@ -29,6 +29,8 @@ Route::get('/kozossegimegallapodas', 'HomeController@socialagreement');
 Route::get('/tudnivalok', 'HomeController@aboutsite');
 Route::get('/adatkezeles', 'HomeController@datahandling');
 
+Route::get('/az-uj-vilag-hangjai', 'PodcastController@index');
+
 Route::get('/terkep', 'MapController@members');
 Route::get('/terkep/tarsak', 'MapController@members');
 Route::get('/terkep/csoportok', 'MapController@groups');
