@@ -1,4 +1,3 @@
-<div class="row">
 @foreach ($articles as $article)
     <div class="col-12 col-sm-6 col-md-4">
         <div class="card">
@@ -18,4 +17,3 @@
         </div>
     </div>
 @endforeach
-</div>
