@@ -85,6 +85,7 @@
 							<li>
 							<li class="width-narrow"><a href="{{ url('esemenyek') }}">Események</a></li>
 							<li><a href="{{ url('kezdemenyezesek') }}">Kezdeményezések</a></li>
+							<li class="width-narrow"><a href="{{ url('az-uj-vilag-hangjai') }}">Az új világ hangjai</a></li>
 							<li class="width-narrow"><a href="{{ url('irasok') }}">Írások</a></li>
 							<li class="width-narrow"><a href="{{ url('hirlevelek') }}">Hírlevél</a></li>
 							<li class="width-narrow"><a href="{{ url('hirek') }}">Csoport hírek</a></li>
