@@ -22,6 +22,21 @@ class PodcastController extends Controller
         return view('podcasts.index', compact('podcasts'));
     }
 
+
+    /**
+     * Displays a specific podcast
+     *
+     * @param  integer $id The podcast ID
+     * @return Response
+     */
+    public function show($id)
+    {
+        $podcast = Podcast::findOrFail($id);
+
+        return view('podcasts.show', compact('podcast'));
+    }
+
+
     /**
      * Create a podcast
      *
@@ -43,6 +58,7 @@ class PodcastController extends Controller
 
         Podcast::create([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'url' =>  $request->get('url'),
             'event_id' =>  $event_id,
             'group_id' =>  $group_id,
@@ -84,6 +100,7 @@ class PodcastController extends Controller
 
         $podcast->update([
             'title' => $request->get('title'),
+            'meta_description' => $request->get('meta_description'),
             'url' =>  $request->get('url'),
             'event_id' =>  $event_id,
             'group_id' =>  $group_id,

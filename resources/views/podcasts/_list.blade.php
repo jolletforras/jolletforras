@@ -3,7 +3,7 @@
             $podcast = $podcasts[$i];
             $event = $podcast->event;
             ?>
-            <h3>{{ $podcast->title }} </h3>
+            <h3><a href="{{url('az-uj-vilag-hangjai')}}/{{$podcast->id}}/{{$podcast->slug}}">{{ $podcast->title }}</a></h3>
             @if (Auth::check() && Auth::user()->admin)
                 <a href="{{url('podcast')}}/{{$podcast->id}}/{{$podcast->slug}}/modosit">módosít</a>
             @endif

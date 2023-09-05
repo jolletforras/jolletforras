@@ -6,6 +6,11 @@
 		</div>
 
 		<div class="form-group">
+			<label for="meta_description">Meta leírás:</label>
+			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($podcast)) {{$podcast->meta_description}} @endif">
+		</div>
+
+		<div class="form-group">
 			<label for="url">Podcast url:</label>
 			<input class="form-control"  required="required" name="url" type="text" maxlength="255" value="@if(isset($podcast)) {{$podcast->url}} @endif">
 		</div>
