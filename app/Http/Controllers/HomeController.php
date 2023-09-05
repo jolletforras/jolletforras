@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\Forum;
 use App\Models\Event;
+use App\Models\Podcast;
 use App\Models\Article;
 use App\Models\Newsletter;
 use App\Models\Commendation;
@@ -110,10 +111,11 @@ class HomeController extends Controller
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->where('public',1)->latest()->get();
         }
 
+        $podcasts = Podcast::latest()->where('created_at','>',$date)->get();
         $articles = Article::latest()->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
 
-        return view('lastweeks',compact('users','groups','events','articles','newsletters','commendations'));
+        return view('lastweeks',compact('users','groups','events','podcasts','articles','newsletters','commendations'));
     }
 
 

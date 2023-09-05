@@ -54,6 +54,11 @@
         @endforeach
         <hr>
     @endif
+    @if($podcasts->isNotEmpty())
+        <h3>Az új világ hangjai</h3>
+        @include('podcasts._list')
+        <hr>
+    @endif
     @if($articles->isNotEmpty())
          <h3>Új írások</h3>
          @foreach ($articles as $article)
