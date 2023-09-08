@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('description', 'Az új világhangjai a Társadalmi Jóllét Portálon. Ki milyennek képzeli azt a bizonyos új világot.')
+@section('description', 'Az új világ hangjai a Társadalmi Jóllét Portálon. Ki milyennek képzeli azt a bizonyos új világot.')
 @section('url', 'https://tarsadalmijollet.hu/az-uj-vilag-hangjai')
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/az-uj-vilag-hangjai" />
 @endsection
