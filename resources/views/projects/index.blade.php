@@ -31,7 +31,14 @@
 							<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a>
 						@endif
 					</p>
-					<p>{!! nl2br($project->body) !!}</p>
+					<p>
+						@if(strlen($project->body)>800)
+							{!! nl2br(mb_substr($project->body,0,800)) !!}
+							<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">... tovább</a>
+						@else
+							{!! nl2br($project->body) !!}
+						@endif
+					</p>
 					@if (Auth::check())
 						@include('projects._members')
 						@include('projects._tags')
