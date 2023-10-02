@@ -15,9 +15,9 @@
 		</div>
         <div class="panel-body">
         	<p><b>{{ $project->user->name }}, {{ $project->updated_at }}</b></p>
-			<p>{{ $project->body }}</p>
+			<p>{!! nl2br($project->body) !!}</p>
 			@if(Auth::check())
-				<p>{{ $project->looking_for }}</p>
+				<p>{!! nl2br($project->looking_for) !!}</p>
 				@include('projects._members')
 				@include('projects._tags')
 				@if (Auth::user()->id == $project->user->id)

@@ -31,7 +31,7 @@
 							<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a>
 						@endif
 					</p>
-					<p>{{ $project->body }}</p>
+					<p>{!! nl2br($project->body) !!}</p>
 					@if (Auth::check())
 						@include('projects._members')
 						@include('projects._tags')
