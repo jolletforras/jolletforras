@@ -17,7 +17,7 @@ use Mail;
 class EventsController extends Controller
 {
 	public function __construct() {
-		$this->middleware('auth', ['except'=>['index','show']]);
+		$this->middleware('auth', ['except'=>['index','show','events_expired']]);
 	}
 
 	public function index()
@@ -27,15 +27,38 @@ class EventsController extends Controller
         if(Auth::check())
         {
             $events = Event::latest()->where('expiration_date','>=',date('Y-m-d'))->where('visibility','<>', 'group')->get();
-            $events_expired = Event::latest()->where('expiration_date','<',date('Y-m-d'))->where('visibility','<>', 'group')->get();
         }
         else {
             $events = Event::latest()->where('expiration_date','>=',date('Y-m-d'))->where('visibility','=', 'public')->get();
-            $events_expired = Event::latest()->where('expiration_date','<',date('Y-m-d'))->where('visibility','=', 'public')->get();
         }
 
-		return view('events.index', compact('events','events_expired'));
+		return view('events.index', compact('events'));
 	}
+
+
+    public function events_expired()
+    {
+        $events = null;
+
+        if(Auth::check())
+        {
+            $events = Event::latest()->where('expiration_date','<',date('Y-m-d'))->where('visibility','<>', 'group')->get();
+        }
+        else {
+            $events = Event::latest()->where('expiration_date','<',date('Y-m-d'))->where('visibility','=', 'public')->get();
+        }
+
+        $content_html ='<h2>Lejárt események</h2><br>';
+
+        $content_html .= view('events._list', compact('events'))->render();
+
+        $response = array(
+            'status' => 'success',
+            'content_html' => $content_html,
+        );
+
+        return \Response::json($response);
+    }
 
 
     /**

@@ -25,13 +25,35 @@
 	@include('events._create_events_info')
 	<div class="inner_box narrow-page" style="margin-top:6px;">
 		@include('events._list',['events'=>$events])
-		@if($events_expired->isNotEmpty())
-			<hr>
-			<button href="#events_expired" data-toggle="collapse" class="btn btn-default"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Lejárt események</button>
-			<div class="collapse" id="events_expired">
-				<br>
-				@include('events._list',['events'=>$events_expired])
-			</div>
-		@endif
+		<hr>
+		<button class="btn btn-default" id="events_expired_btn" onclick="loadEventsExpired()"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Lejárt események</button>
+		<div id="events_expired"></div>
 	</div>
+@endsection
+
+@section('footer')
+	<script type="text/javascript">
+		function loadEventsExpired(){
+			$("#events_expired").html('... hamarosan megjelenik');
+
+			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+			$.ajax({
+				type: "POST",
+				url: '{{ url('events_expired') }}',
+				data: {
+					_token: CSRF_TOKEN
+				},
+				success: function(data) {
+					if(data['status']=='success') {
+						$("#events_expired_btn").hide();
+						$("#events_expired").html(data['content_html']);
+					}
+				},
+				error: function(error){
+					console.log(error.responseText);
+				}
+			});
+		}
+	</script>
 @endsection
