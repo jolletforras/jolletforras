@@ -31,6 +31,7 @@ class EventsController extends Controller
         }
         else {
             $events = Event::latest()->where('expiration_date','>=',date('Y-m-d'))->where('visibility','=', 'public')->get();
+            $events_expired = Event::latest()->where('expiration_date','<',date('Y-m-d'))->where('visibility','=', 'public')->get();
         }
 
 		return view('events.index', compact('events','events_expired'));
