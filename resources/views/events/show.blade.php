@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-	<div class="flash-message alert alert-info" style="display:none;"></div>
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
 			<h2>{{ $event->title }}</h2>
@@ -22,6 +21,7 @@
 			{!! $event->body !!}
 			@include('partials.author', ['author'=>'Eseményt felvette: ','obj'=>$event])
 			@if ($event->isGroupEvent() && $event->visibility!='group' && $event->group->isAdmin())
+				<div class="flash-message alert alert-info" style="display:none;"></div>
 				<label for="invited_user">Személyek meghívás az eseményre, akik nem tagjai a csoportnak</label>
 				<div class="row">
 					<div class="form-group col-sm-4">
@@ -32,8 +32,8 @@
 							@endforeach
 						</select>
 					</div>
-					<div class="form-group col-sm-1">
-						<button type="button" class="btn btn-default" onclick="invite()">Meghív</button>
+					<div class="form-group col-sm-3">
+						<button type="button" id="invite_btn" class="btn btn-default" onclick="invite()">Meghív</button><span id="message_is_sending" style="display: none; font-style: italic;"> ... folyamatban</span>
 					</div>
 				</div>
 			@endif
@@ -75,6 +75,9 @@
 
 				var name = $( "#invited_user option:selected" ).text();
 
+				$("#invite_btn").prop('disabled', true);
+				$("#message_is_sending").show();
+
 				$.ajax({
 					type: "POST",
 					url: '{{url('esemeny')}}/{{$event->id}}/invite',
@@ -84,9 +87,11 @@
 					},
 					success: function(data) {
 						if(data['status']=='success') {
+							$("#message_is_sending").hide();
 							$('div.flash-message').html("Meghívó elküldve: "+name);
 							$('div.flash-message').show();
 							setTimeout(function(){ $('div.flash-message').hide(); }, 4000);
+							$("#invite_btn").prop('disabled', false);
 						}
 					},
 					error: function(error){
