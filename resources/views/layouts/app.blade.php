@@ -27,7 +27,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
 	@yield('datepicker-css','')
- 	<link href="{{ url('/') }}/css/app.css?ver=1.51" rel="stylesheet">
+ 	<link href="{{ url('/') }}/css/app.css?ver=1.52" rel="stylesheet">
 	@stack('styles')
 
 	<!-- Google tag (gtag.js) -->
