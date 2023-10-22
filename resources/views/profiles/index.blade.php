@@ -10,38 +10,40 @@
 		<div class="row">
 			@if (Auth::check())
 			<div class="col-sm-2">
-				<a href="{{url('meghivo')}}/uj" type="submit" class="btn btn-default">Meghívó küldése</a>
+				<a href="{{url('meghivo')}}/uj" type="submit" class="btn btn-default">Meghívó küldése</a><a href="#user_filter" data-toggle="collapse" id="user_filter_icon"><i class="fa fa-search" aria-hidden="true" style="margin-left: 4px;"></i></a>
 			</div>
 			<div class="col-sm-10" style="padding-top:3px;">
-				<select id="user_select" name="user_select" class="form-control" style="width:220px;" onchange="NameFilter();">
-					@foreach($user_names as $key => $val)
-						<option value="{{ $key }}"@if(isset($user_id) && $key==$user_id) selected @endif>{{ $val }}</option>
-					@endforeach
-				</select>
-				<select id="skill_tag" name="skill_tag" class="form-control" style="width:220px;">
-					@foreach($skill_tags as $key => $val)
-						<option value="{{ $key }}"@if(isset($skill_tag_id) && $key==$skill_tag_id) selected @endif>{{ $val }}</option>
-					@endforeach
-				</select>
-				<select id="interest_tag" name="interest_tag" class="form-control" style="width:220px;">
-						@foreach($interest_tags as $key => $val)
-							<option value="{{ $key }}"@if(isset($interest_tag_id) && $key==$interest_tag_id) selected @endif>{{ $val }}</option>
+				<div class="collapse" id="user_filter">
+					<select id="user_select" name="user_select" class="form-control" style="width:220px;" onchange="NameFilter();">
+						@foreach($user_names as $key => $val)
+							<option value="{{ $key }}"@if(isset($user_id) && $key==$user_id) selected @endif>{{ $val }}</option>
 						@endforeach
-				</select>
-				<select id="city" onchange="CityFilter();" name="city">
-					<option value="-" selected="selected">Minden település</option>
-					@foreach(constx('CITY') as $key => $val)
-						<option value="{{ $key }}">{{ $val }}</option>
-					@endforeach
-				</select>
-				<span id="district_block"  style="display: none;">
-					<select id="district" onchange="DistrictFilter();" name="district">
-						<option value="-" selected="selected">Minden kerület</option>
-						@foreach(constx('DISTRICT') as $key => $val)
+					</select>
+					<select id="skill_tag" name="skill_tag" class="form-control" style="width:220px;">
+						@foreach($skill_tags as $key => $val)
+							<option value="{{ $key }}"@if(isset($skill_tag_id) && $key==$skill_tag_id) selected @endif>{{ $val }}</option>
+						@endforeach
+					</select>
+					<select id="interest_tag" name="interest_tag" class="form-control" style="width:220px;">
+							@foreach($interest_tags as $key => $val)
+								<option value="{{ $key }}"@if(isset($interest_tag_id) && $key==$interest_tag_id) selected @endif>{{ $val }}</option>
+							@endforeach
+					</select>
+					<select id="city" onchange="CityFilter();" name="city">
+						<option value="-" selected="selected">Minden település</option>
+						@foreach(constx('CITY') as $key => $val)
 							<option value="{{ $key }}">{{ $val }}</option>
 						@endforeach
 					</select>
-				</span>
+					<span id="district_block"  style="display: none;">
+						<select id="district" onchange="DistrictFilter();" name="district">
+							<option value="-" selected="selected">Minden kerület</option>
+							@foreach(constx('DISTRICT') as $key => $val)
+								<option value="{{ $key }}">{{ $val }}</option>
+							@endforeach
+						</select>
+					</span>
+				</div>
 			</div>
 			@else
 				<div class="col-sm-12">

@@ -527,6 +527,18 @@ h3 {
 	font-size:14px;
 }
 
+#user_filter_icon {
+	display: none;
+}
+
+#user_filter.collapse {
+	display: block;
+}
+
+#user_filter.collapse.in {
+	display: inline-block;
+}
+
 @media all and (max-width:1240px) {
 
 	.base {
@@ -755,6 +767,19 @@ h3 {
 
 	.main {
 		line-height: 150%;
+	}
+
+	#user_filter_icon {
+		float: right;
+		display: inline-block;
+	}
+
+	#user_filter.collapse {
+		display: none;
+	}
+
+	#user_filter.collapse.in {
+		display: inline-block;
 	}
 }
 
