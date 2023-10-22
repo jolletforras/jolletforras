@@ -193,7 +193,7 @@
 					district: district,
 				},
 				success: function(data) {
-					$('#result').html(data.html);
+					$('#tab1').html(data.html);
 					$('#count').html(data.count);
 					$("#myTab").find('li:eq(1)').removeClass('active');
 					$("#myTab").find('li:eq(0)').addClass('active');

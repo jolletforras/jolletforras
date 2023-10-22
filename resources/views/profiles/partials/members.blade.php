@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-body"  id="result">
+    <div class="panel-body">
         <table class="table table-striped">
             <thead>
             <tr>
