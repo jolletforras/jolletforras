@@ -9,10 +9,15 @@
 	<div class="header narrow-page">
 		<div class="row">
 			@if (Auth::check())
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<a href="{{url('meghivo')}}/uj" type="submit" class="btn btn-default">Meghívó küldése</a>
 			</div>
-			<div class="col-sm-9" style="padding-top:3px;">
+			<div class="col-sm-10" style="padding-top:3px;">
+				<select id="user_select" name="user_select" class="form-control" style="width:220px;" onchange="NameFilter();">
+					@foreach($user_names as $key => $val)
+						<option value="{{ $key }}"@if(isset($user_id) && $key==$user_id) selected @endif>{{ $val }}</option>
+					@endforeach
+				</select>
 				<select id="skill_tag" name="skill_tag" class="form-control" style="width:220px;">
 					@foreach($skill_tags as $key => $val)
 						<option value="{{ $key }}"@if(isset($skill_tag_id) && $key==$skill_tag_id) selected @endif>{{ $val }}</option>
@@ -61,6 +66,10 @@
 
 @section('footer')
 	<script>
+		$('#user_select').select2({
+			placeholder: 'Név szerint',
+		});
+
 		$('#city').select2({
 			placeholder: 'Település szerint',
 		});
@@ -103,6 +112,14 @@
 		};
 
 
+		$("#user_select").change(function () {
+			var id= $("#user_select").val();
+			if(id!=0) {
+				location.href="{{ url('profil')}}/"+id;
+			}
+		});
+
+
 		$("#interest_tag").change(function () {
 			var id= $("#interest_tag").val();
 			if(id==0) {
@@ -112,7 +129,6 @@
 				location.href="{{ url('tagok')}}/erdeklodes/"+id+"/"+interest_tags[id];
 			}
 		});
-
 
 		function CityName() {
 			select_city=document.getElementById("city");
@@ -228,5 +244,6 @@
 				}
 			});
 		}
+
 	</script>
 @endsection

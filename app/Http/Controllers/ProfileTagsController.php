@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\UserSkill;
 use App\Models\UserInterest;
+use App\Models\User;
 
 class ProfileTagsController extends Controller
 {
@@ -16,6 +17,8 @@ class ProfileTagsController extends Controller
 		$skill_tag = UserSkill::findOrFail($id);
 
 		$users=$skill_tag->users()->members()->latest('updated_at')->get();
+
+        $user_names = ['0'=>'keresés név szerint'] + User::members()->pluck('name', 'id')->all();
 
 		$city=$district=NULL;
 
@@ -26,7 +29,7 @@ class ProfileTagsController extends Controller
         $interest_tags = ['0'=>'érdeklődés - mind'] + UserInterest::pluck('name', 'id')->all();
         $interest_tags_slug = UserInterest::pluck('slug', 'id')->all();
 
-		return view('profiles.index', compact('users', 'skill_tags', 'skill_tag_id', 'skill_tags_slug', 'interest_tags', 'interest_tags_slug', 'city', 'district'));
+		return view('profiles.index', compact('users', 'user_names', 'skill_tags', 'skill_tag_id', 'skill_tags_slug', 'interest_tags', 'interest_tags_slug', 'city', 'district'));
 	}
 
 	public function profiles_filter_by_skill(Request $request)
@@ -67,6 +70,8 @@ class ProfileTagsController extends Controller
 
         $users=$interest_tag->users()->members()->latest('updated_at')->get();
 
+        $user_names = ['0'=>'keresés név szerint'] + User::members()->pluck('name', 'id')->all();
+
         $city=$district=NULL;
 
         $skill_tags = ['0'=>'jártasság, tudás - mind'] + UserSkill::pluck('name', 'id')->all();
@@ -76,7 +81,7 @@ class ProfileTagsController extends Controller
         $interest_tags_slug = UserInterest::pluck('slug', 'id')->all();
         $interest_tag_id=$id;
 
-        return view('profiles.index', compact('users', 'skill_tags', 'skill_tags_slug', 'interest_tags', 'interest_tag_id', 'interest_tags_slug', 'city', 'district'));
+        return view('profiles.index', compact('users', 'user_names', 'skill_tags', 'skill_tags_slug', 'interest_tags', 'interest_tag_id', 'interest_tags_slug', 'city', 'district'));
     }
 
     public function profiles_filter_by_interest(Request $request)

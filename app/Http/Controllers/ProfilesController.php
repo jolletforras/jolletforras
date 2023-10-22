@@ -43,13 +43,15 @@ class ProfilesController extends Controller
 
         $city=$district=NULL;
 
+        $user_names = ['0'=>'keresés név szerint'] + User::members()->pluck('name', 'id')->all();
+
 		$skill_tags = ['0'=>'jártasság, tudás - mind'] + UserSkill::active()->pluck('name', 'id')->all();
 		$skill_tags_slug = UserSkill::active()->pluck('slug', 'id')->all();
 
         $interest_tags = ['0'=>'érdeklődés - mind'] + UserInterest::pluck('name', 'id')->all();
         $interest_tags_slug = UserInterest::pluck('slug', 'id')->all();
 
-		return view('profiles.index', compact('users', 'skill_tags', 'skill_tags_slug', 'interest_tags', 'interest_tags_slug', 'city', 'district'));
+		return view('profiles.index', compact('users', 'user_names', 'skill_tags', 'skill_tags_slug', 'interest_tags', 'interest_tags_slug', 'city', 'district'));
 
 	}
 
@@ -142,7 +144,7 @@ class ProfilesController extends Controller
 		);
 		return \Response::json($response);
 	}
-	
+
 	/**
 	 * Displays a specific user profile
 	 * 
