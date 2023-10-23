@@ -4,10 +4,17 @@
         var comment = $("#comment").val();
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         //console.log(response);
-        var to_user_id = $("#to_user_id").val();
+        var lev1_comment_id = $("#lev1_comment_id").val();
         var to_comment_id = $("#to_comment_id").val();
+        var to_user_id = $("#to_user_id").val();
         var url = $(location).attr('href');
-        url = url.replace('#hozzaszol', '#full-'+to_comment_id);
+        if(to_comment_id=='') {
+            url = url.substr(0,url.indexOf('#'));
+            url = url+"#hozzaszol";
+        }
+        else {
+            url = url.replace('#hozzaszol', '#full-'+to_comment_id);
+        }
 
         $.ajax({
             type: "POST",
@@ -20,6 +27,7 @@
                 name: "{{$name}}",
                 email: "{{$email}}",
                 commenter_id: "{{Auth::user()->id}}",
+                lev1_comment_id: lev1_comment_id,
                 to_comment_id: to_comment_id,
                 to_user_id: to_user_id,
                 comment: comment
@@ -46,9 +54,10 @@
         $("#full-"+comment_id).show();
     });
 
-    function answer(comment_id,to_user_id) {
+    function answer(lev1_comment_id,comment_id,to_user_id) {
         $("#comment-for-answer").html($("#comment-"+comment_id).html());
         $("#comment-for-answer").show();
+        $("#lev1_comment_id").val(lev1_comment_id);
         $("#to_user_id").val(to_user_id);
         $("#to_comment_id").val(comment_id);
         $("#comment").attr("placeholder", "Ide írva válaszolhatsz neki");
