@@ -66,7 +66,7 @@
 
     function edit(comment_id) {
         $("#update_comment_id").val(comment_id);
-        $("#comment").val($("#full-"+comment_id).html());
+        $("#comment").val($("#full-"+comment_id).text());
         $("#update_comment_btn").show();
         $("#add_comment_btn").hide();
     }
