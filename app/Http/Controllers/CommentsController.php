@@ -188,6 +188,29 @@ class CommentsController extends Controller
         return \Response::json($response);
     }
 
+    public function comment_update(Request $request)
+    {
+        $comment_id = $request->get('comment_id');
+        $comment = $request->get('comment');
+
+        if(!empty($comment)) {
+            $c = Comment::findOrFail($comment_id);
+
+            $comment_length = strlen($comment);
+            $comment = htmlspecialchars($comment);
+            $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
+            $comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
+            $c->shorted_text = $comment_length>600 ? $this->subtext_keep_link($comment,600) : null;
+            $c->body = $comment;
+            $c->save();
+        }
+
+        $response = array('status' => 'success');
+
+        return \Response::json($response);
+    }
+
+
 /*
     public function set_shorted_text() {
         $comments = Comment::where('shorted_text',NULL)->get();

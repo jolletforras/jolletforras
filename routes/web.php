@@ -189,6 +189,7 @@ Route::post('/ajanlo/{id}/{title}/modosit', 'CommendationsController@update');
 Route::post('/comment', 'CommentsController@comment');
 Route::post('/comment_delete', 'CommentsController@comment_delete');
 Route::post('/ask_comment_notice', 'CommentsController@ask_comment_notice');
+Route::post('/comment_update', 'CommentsController@comment_update');
 
 //Route::get('/set_shorted_text', 'CommentsController@set_shorted_text');
 //Route::get('/set_shorted_text', 'ForumsController@set_shorted_text');

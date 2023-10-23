@@ -6,6 +6,9 @@
         //console.log(response);
         var to_user_id = $("#to_user_id").val();
         var to_comment_id = $("#to_comment_id").val();
+        var url = $(location).attr('href');
+        url = url.replace('#hozzaszol', '#full-'+to_comment_id);
+
         $.ajax({
             type: "POST",
             url: '{{ url('comment') }}',
@@ -25,6 +28,7 @@
                 if(data['status']=='success') {
                     $("#to_user_id").val("");
                     $("#to_comment_id").val("");
+                    window.location.href = url;
                     location.reload();
                 }
             },
@@ -49,6 +53,42 @@
         $("#to_comment_id").val(comment_id);
         $("#comment").attr("placeholder", "Ide írva válaszolhatsz neki");
         $("#cancel").show();
+    }
+
+    function edit(comment_id) {
+        $("#update_comment_id").val(comment_id);
+        $("#comment").val($("#full-"+comment_id).html());
+        $("#update_comment_btn").show();
+        $("#add_comment_btn").hide();
+    }
+
+    function update(comment_id) {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var comment_id = $("#update_comment_id").val();
+        var comment = $("#comment").val();
+        var url = $(location).attr('href');
+        url = url.replace('#hozzaszol', '#full-'+comment_id);
+
+        $.ajax({
+            type: "POST",
+            url: '{{ url('comment_update') }}',
+            data: {
+                _token: CSRF_TOKEN,
+                comment_id: comment_id,
+                comment: comment
+            },
+            success: function(data) {
+                if(data['status']=='success') {
+                    $("#comment_id").val("");
+                    $("#comment").val("");
+                    window.location.href = url;
+                    location.reload();
+                }
+            },
+            error: function(error){
+                console.log(error.responseText);
+            }
+        });
     }
 
     function cancel() {
