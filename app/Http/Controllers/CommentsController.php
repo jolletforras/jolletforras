@@ -44,7 +44,7 @@ class CommentsController extends Controller
             $c->body = $comment;
             $c->commenter_id = $commenter_id;
             if(!empty($request->get('to_user_id'))) {
-                $c->lev1_comment_id = $request->get('to_comment_id');
+                $c->lev1_comment_id = $request->get('lev1_comment_id');
                 $c->to_comment_id = $request->get('to_comment_id');
                 $c->to_user_id = $request->get('to_user_id');
             }

@@ -5,6 +5,7 @@
         <div class="comments">
         @foreach ($comments as $comment)
                 <?php
+                $lev1_comment_id = empty($comment->to_user_id) ? $comment->id : $lev1_comment_id;
                 $level2_comment = empty($comment->to_user_id) ? false : true;
                 $class_comment = $level2_comment ? "comment level2" : "comment";
                 $to_user = $level2_comment ? '<a href="'.url('profil').'/'.$comment->to_user->id.'/'.$comment->to_user->slug.'">'.$comment->to_user->name.'</a>, ':'';
@@ -26,7 +27,7 @@
             @endif
                 <div id="full-{{$comment->id}}"{!! $display_full_comment !!}>{!! nl2br($comment->body) !!}</div>
             </div>
-            <div class="answer" style="margin-left: {{$space_left}}px;"><a href="#hozzaszol" onclick="answer({{$comment->id}},{{$comment->commenter->id}})">Válasz</a> <span style="margin-left:20px;">{{ $comment->since }}</span></div>
+            <div class="answer" style="margin-left: {{$space_left}}px;"><a href="#hozzaszol" onclick="answer({{$lev1_comment_id}},{{$comment->id}},{{$comment->commenter->id}})">Válasz</a> <span style="margin-left:20px;">{{ $comment->since }}</span></div>
         @endforeach
         </div>
     </div>
@@ -38,6 +39,7 @@
     </div>
     <div class="form-group ">
         <input type="hidden" name="update_comment_id" id="update_comment_id" value="">
+        <input type="hidden" name="lev1_comment_id" id="lev1_comment_id" value="">
         <input type="hidden" name="to_comment_id" id="to_comment_id" value="">
         <input type="hidden" name="to_user_id" id="to_user_id" value="">
         <button type="button" onclick="save()" id="add_comment_btn">Küldés</button>
