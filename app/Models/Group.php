@@ -15,7 +15,7 @@ class Group extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'description', 'agreement', 'slug', 'public', 'webpage_name', 'webpage_url', 'location',
+        'name', 'meta_description', 'description', 'agreement', 'slug', 'public', 'webpage_name', 'webpage_url', 'location',
         'city', 'zip_code', 'lat', 'lng', 'counter', 'status'
     ];
 

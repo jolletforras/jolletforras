@@ -4,7 +4,12 @@
 			<label for="name">Neve*:</label>
 			<input class="form-control" required="required" name="name" type="text" value="@if(isset($group)){{old('name',$group->name)}}@else{{old('name')}}@endif" id="name">
 		</div>
-	
+
+		<div class="form-group">
+			<label for="meta_description">Meta leírás:</label>
+			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($group)) {{$group->meta_description}} @endif" id="meta_description">
+		</div>
+
 		<div class="form-group">
 			<label for="description">A csoport bemutatása, célja*:</label>
 			<textarea name="description" class="form-control" required="required" rows="4">@if(isset($group)){{old('description',htmlspecialchars_decode($group->description))}}@else{{old('description')}}@endif</textarea>

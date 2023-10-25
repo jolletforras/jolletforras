@@ -124,6 +124,7 @@ class GroupsController extends Controller
 
         $group = Auth::user()->groups()->create([
             'name' => $request->get('name'),
+            'meta_description' => $request->get('meta_description'),
             'description' => $description,
             'agreement' => $agreement,
             'webpage_name' => $request->get('webpage_name'),
@@ -192,6 +193,7 @@ class GroupsController extends Controller
 
         $group->update([
             'name' => $request->get('name'),
+            'meta_description' => $request->get('meta_description'),
             'description' => $description,
             'agreement' => $agreement,
             'webpage_name' => $request->get('webpage_name'),
