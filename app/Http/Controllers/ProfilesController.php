@@ -179,8 +179,9 @@ class ProfilesController extends Controller
 
         //saját profilnál megmutatja az összes csoportot, amelyben benne van
         foreach($user->member_of_groups as $group) {
-            if($group->status=='active' || $myprofile) {
-                $groups[] = '<a href="'.url('csoport',$group->id).'/'.$group->slug.'" target="_blank">'.$group->name.'</a>';
+            if($group->isActive() || $myprofile) {
+                $style = $group->isActive() ? '' : ' style="color: grey;"';
+                $groups[] = '<a href="'.url('csoport',$group->id).'/'.$group->slug.'" target="_blank"'.$style.'>'.$group->name.'</a>';
             }
         }
 
