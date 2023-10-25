@@ -78,7 +78,7 @@ class User extends Authenticatable
     //ezen csoportok tagjai
     public function member_of_groups()
     {
-        return $this->belongsToMany(Group::class)->where('status','active');
+        return $this->belongsToMany(Group::class);
     }
 
     public function skill_tags()
