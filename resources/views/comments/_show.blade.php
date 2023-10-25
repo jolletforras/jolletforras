@@ -28,7 +28,7 @@
                 <div id="full-{{$comment->id}}"{!! $display_full_comment !!}>{!! nl2br($comment->body) !!}</div>
             </div>
             <div class="answer" style="margin-left: {{$space_left}}px;">
-                @if(isset($can_comment) && $can_comment)
+                @if(!isset($can_comment) || $can_comment)
                 <a style="margin-right:20px;" href="#hozzaszol" onclick="answer({{$lev1_comment_id}},{{$comment->id}},{{$comment->commenter->id}})">Válasz</a>
                 @endif
                 <span>{{ $comment->since }}</span>
@@ -36,7 +36,7 @@
         @endforeach
         </div>
     </div>
-    @if(isset($can_comment) && $can_comment)
+    @if(!isset($can_comment) || $can_comment)
     <hr>
     <a name="hozzaszol"></a>
     <div id="comment-for-answer" style="background-color:#fefffd; border-radius:10px; padding:10px; display: none; margin-bottom: 15px;"></div>
