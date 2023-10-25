@@ -107,7 +107,11 @@ class Group extends Model
     }
 
     public function isAdmin() {
-        return Auth::check() && $this->admins->contains('id', Auth::user()->id);;
+        return Auth::check() && $this->admins->contains('id', Auth::user()->id);
+    }
+
+    public function isActive() {
+        return $this->status=='active';
     }
 
     public function get_location() {
