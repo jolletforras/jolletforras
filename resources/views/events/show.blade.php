@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	@if(Auth::check())
-		@include('comments._show', ['comments' => $comments	] )
+		@include('comments._show', ['comments' => $comments, 'can_comment'=>!$event->isGroupEvent() || $event->group->isActive()] )
 	@endif
 @endsection
 
