@@ -27,10 +27,16 @@
             @endif
                 <div id="full-{{$comment->id}}"{!! $display_full_comment !!}>{!! nl2br($comment->body) !!}</div>
             </div>
-            <div class="answer" style="margin-left: {{$space_left}}px;"><a href="#hozzaszol" onclick="answer({{$lev1_comment_id}},{{$comment->id}},{{$comment->commenter->id}})">Válasz</a> <span style="margin-left:20px;">{{ $comment->since }}</span></div>
+            <div class="answer" style="margin-left: {{$space_left}}px;">
+                @if(isset($can_comment) && $can_comment)
+                <a style="margin-right:20px;" href="#hozzaszol" onclick="answer({{$lev1_comment_id}},{{$comment->id}},{{$comment->commenter->id}})">Válasz</a>
+                @endif
+                <span>{{ $comment->since }}</span>
+            </div>
         @endforeach
         </div>
     </div>
+    @if(isset($can_comment) && $can_comment)
     <hr>
     <a name="hozzaszol"></a>
     <div id="comment-for-answer" style="background-color:#fefffd; border-radius:10px; padding:10px; display: none; margin-bottom: 15px;"></div>
@@ -46,4 +52,5 @@
         <button type="button" onclick="update()" id="update_comment_btn" style="display: none;">Módosít</button>
         <button type="button" id="cancel" style="display: none;" onclick="cancel()">Mégse válaszolok</button>
     </div>
+    @endif
 </div>

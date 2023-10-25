@@ -33,7 +33,7 @@
 	    </div>
     </div>
 
-	@include('comments._show', ['comments' => $comments] )
+	@include('comments._show', ['comments' => $comments, 'can_comment'=>$group->isActive()] )
 @endsection
 
 @section('footer')
