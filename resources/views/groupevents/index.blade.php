@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-sm-9"></div>
 			<div class="col-sm-3 text-right">
-				@if (Auth::check())
+				@if (Auth::check() && $group->isActive())
 					<a href="#create_events_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/esemeny/uj" type="submit" class="btn btn-default">Esemény felvétele</a>
 				@endif
 			</div>
