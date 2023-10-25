@@ -8,7 +8,7 @@
 				@if ($page=="conversation")
 					@if($status=='closed')
 						<h3>Lezárt beszélgetések</h3>
-					@else
+					@elseif($group->isActive())
 						<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új téma</a>
 					@endif
 				@endif
