@@ -10,6 +10,7 @@ use App\Models\Event;
 use App\Models\Podcast;
 use App\Models\Article;
 use App\Models\Newsletter;
+use App\Models\News;
 use App\Models\Commendation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -101,21 +102,23 @@ class HomeController extends Controller
         {
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->latest('updated_at')->get();
             $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->latest('updated_at')->get();
-            $events = Event::latest()->where('created_at','>',$date)->where('visibility','<>', 'group')->get();
+            $events = Event::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->latest()->get();
+            $newss = News::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
         }
         else {
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
             $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
-            $events = Event::latest()->where('created_at','>',$date)->where('visibility','=', 'public')->get();
+            $events = Event::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->where('public',1)->latest()->get();
+            $newss = News::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
         }
 
         $podcasts = Podcast::latest()->where('created_at','>',$date)->get();
         $articles = Article::latest()->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
 
-        return view('lastweeks',compact('users','groups','events','podcasts','articles','newsletters','commendations'));
+        return view('lastweeks',compact('users','groups','events','podcasts','articles','newsletters','commendations','newss'));
     }
 
 

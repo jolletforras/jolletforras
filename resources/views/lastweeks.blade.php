@@ -74,6 +74,11 @@
          <hr>
     @endif
     @if($newsletters->isNotEmpty())
+        <h3>Új csoport hírek</h3>
+        @include('news._list')
+        <hr>
+    @endif
+    @if($newsletters->isNotEmpty())
         <h3>Új hírlevelek</h3>
         @include('newsletters._list')
     @endif
