@@ -32,9 +32,9 @@
             </h3>
             <p style="text-align: center;">
                 @if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
-                    <img src="{{ url('/images/groups') }}/{{$group->id}}.jpg" style="max-width: 500px; max-height: 500px;">
+                    <img src="{{ url('/images/groups') }}/{{$group->id}}.jpg" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;" class="img-responsive">
                 @else
-                    <img src="{{ url('/images') }}/tarsadalmijollet.png" style="max-width: 500px; max-height: 500px;">
+                    <img src="{{ url('/images') }}/tarsadalmijollet.png" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;" class="img-responsive">
                 @endif
             </p>
             @if(isset($group->user->id))
