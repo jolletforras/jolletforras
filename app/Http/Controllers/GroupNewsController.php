@@ -70,10 +70,13 @@ class GroupNewsController extends Controller
 	public function store(Request $request)
 	{
 
+        $news_text = $request->get('body');
+
         $news = Auth::user()->news()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
-            'body' => $request->get('body'),
+            'body' => $news_text,
+            'image' => getfirstimage($news_text),
             'slug' => Str::slug($request->get('title')),
             'group_id' => $request->get('group_id'),
             'visibility' => $request->get('visibility')
@@ -85,7 +88,7 @@ class GroupNewsController extends Controller
         }
 
 		//return redirect('hirek');
-        return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
+        return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'A csoport híreket sikeresen felvetted!');
 	}
 
 	/**
@@ -122,10 +125,13 @@ class GroupNewsController extends Controller
 
         //$nws->update($request->all());
 
+        $news_text = $request->get('body');
+
         $news->update([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
-            'body' => $request->get('body'),
+            'body' => $news_text,
+            'image' => getfirstimage($news_text),
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility')
         ]);
@@ -134,6 +140,7 @@ class GroupNewsController extends Controller
 
         //$group = Group::findOrFail($news->group_id);
 
-        return redirect('csoport/'.$news->group_id.'/'.$news->group->slug.'/hirek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
+        return redirect('csoport/'.$news->group_id.'/'.$news->group->slug.'/hirek')->with('message', 'A csoport híreket sikeresen módosítottad!');
 	}
+
 }

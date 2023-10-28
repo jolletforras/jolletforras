@@ -64,10 +64,13 @@ class NewsController extends Controller
 	{
         $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\NewsTag');
 
+        $news_text = $request->get('body');
+
         $news = Auth::user()->news()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
-            'body' => $request->get('body'),
+            'body' => $news_text,
+            'image' => getfirstimage($news_text),
             'slug' => Str::slug($request->get('title'))
         ]);
 
@@ -110,10 +113,13 @@ class NewsController extends Controller
 
         //$nws->update($request->all());
 
+        $news_text = $request->get('body');
+
         $news->update([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
-            'body' => $request->get('body'),
+            'body' => $news_text,
+            'image' => getfirstimage($news_text),
             'slug' => Str::slug($request->get('title'))
         ]);
 
