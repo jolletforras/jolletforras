@@ -51,8 +51,8 @@
                 @endif
             @endif
         </div>
-        @endforeach
         <hr>
+        @endforeach
     @endif
     @if($podcasts->isNotEmpty())
         <h3>Az új világ hangjai</h3>
