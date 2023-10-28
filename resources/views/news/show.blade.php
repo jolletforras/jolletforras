@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-	<div class="inner_box" style="font-size: 16px;">
+	<div class="inner_box">
 		<h2>{{ $news->title }}</h2>
 		@if (Auth::check() && Auth::user()->id==$news->user->id)
 			<a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
