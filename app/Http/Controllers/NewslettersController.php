@@ -48,12 +48,14 @@ class NewslettersController extends Controller
 	{
 		//Auth::user()->newsletters()->create($request->all());
 
-        $newsletter = Auth::user()->newsletters()->create([
+        $description = $request->get('body');
+
+        Auth::user()->newsletters()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'short_description' => $request->get('short_description'),
             'body' => $request->get('body'),
-            'image' => getfirstimage('body'),
+            'image' => getfirstimage($description),
             'slug' => Str::slug($request->get('title'))
         ]);
 
