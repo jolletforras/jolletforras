@@ -58,6 +58,7 @@ class NoticesController extends Controller
         $content_html = "";
         $notices = Notice::findNew()->get();
         foreach ($notices as $notice) {
+            $url = '';
             $new = $notice->new > 0 ? " <span>".$notice->new."</span>" : "";
             if ($notice->type == "Forum") {
                 if ($forum = Forum::find($notice->notifiable_id)) {
@@ -71,8 +72,10 @@ class NoticesController extends Controller
                     $url = '<a href="'.url('/').'/esemeny/' . $event->id . '/' . $event->slug . '">' . $event->group->name . ' - "' . $event->title . '" esemény' . $new . '</a>';
                 }
             }
-            $content_html .= $notice->new > 0 ? '<b>' . $url . '</b>' : $url;
-            $content_html .= '<br ><hr >';
+            if($url!='') {
+                $content_html .= $notice->new > 0 ? '<b>' . $url . '</b>' : $url;
+                $content_html .= '<br ><hr >';
+            }
         }
 
         $response = array(
