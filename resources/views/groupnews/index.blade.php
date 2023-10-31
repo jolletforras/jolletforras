@@ -1,8 +1,9 @@
 @extends('layouts.app')
-@section('description', 'Hírek a Társadalmi Jóllét Portálon. Építő közösségek híreit, információit olvashatod. Csatlakozz hozzánk és adj hírt Te is a saját közösségedről! Várunk!')
-@section('url', 'https://tarsadalmijollet.hu/hirek')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/hirek" />
-@endsection
+@section('title'){{ $group->name }} csoport hírei @endsection
+@section('description'){{ $group->meta_description }} @endsection
+@section('url'){{url('csoport')}}/{{$group->id}}/{{$group->slug.'/hirek'}}@endsection
+@section('canonical')<link rel="canonical" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/hirek"  />
+@section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg'}}@endsection
 
 @section('content')
 	@include('groups._group_menu')
