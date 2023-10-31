@@ -23,7 +23,7 @@ class NewsController extends Controller
 	public function index()
 	{
         if(Auth::check()) {
-            $newss = News::where('visibility', '<>', 'group')->latest()->get();
+            $newss = News::latest()->get();
         }
         else {
             $newss = News::where('visibility','public')->latest()->get();
