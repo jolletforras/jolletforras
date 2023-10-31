@@ -20,7 +20,7 @@ class GroupNewsController extends Controller
 
     public function __construct() {
 		$this->middleware('auth', ['except'=>['index','show']]);
-        $this->visibility_options = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
+        $this->visibility_options = ['portal'=>'portál','public'=>'nyilvános'];
 	}
 
 	public function index($id)
@@ -28,19 +28,24 @@ class GroupNewsController extends Controller
         $group = Group::findOrFail($id);
 
         //ha nem csoport tag akkor a csoport főoldalára irányít
-        if(!$group->isMember()) {
+       /* if(!$group->isMember()) {
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }*/
+
+        if(Auth::check()) {
+            $newss = News::where('group_id', $group->id)->latest()->get();
+        }
+        else {
+            $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
         }
 
-		$newss = News::where('group_id', $group->id)->latest()->get();
+        //$tags = [''=>''] + NewsTag::pluck('name', 'id')->all();
 
-        $tags = [''=>''] + NewsTag::pluck('name', 'id')->all();
-
-        $tags_slug = NewsTag::pluck('slug', 'id')->all();
+        //$tags_slug = NewsTag::pluck('slug', 'id')->all();
 
         $page = 'news';
 
-		return view('groupnews.index', compact('group', 'page', 'newss', 'tags', 'tags_slug'));
+		return view('groupnews.index', compact('group', 'page', 'newss'));
 	}
 
     /**

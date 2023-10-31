@@ -14,6 +14,7 @@ use App\Models\GroupTag;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Notice;
+use App\Models\News;
 use App\Http\Requests\GroupRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -67,10 +68,9 @@ class GroupsController extends Controller
 
         //dd($group->admin_list);
 
+        $page = 'description';
+
         if(Auth::check()) {
-
-            $page = 'description';
-
             $is_member = $group->isMember();
 
             $is_admin = in_array(Auth::user()->id, $group->admin_list);
@@ -83,10 +83,14 @@ class GroupsController extends Controller
 
             $nogroupmembers = $group->no_group_members_list;
 
-            return view('groups.show', compact('group', 'page', 'members', 'nogroupmembers', 'admins', 'noadmins', 'is_member', 'is_admin'));
+            $newss = News::where('group_id', $group->id)->latest()->get();
+
+            return view('groups.show', compact('group', 'newss', 'page', 'members', 'nogroupmembers', 'admins', 'noadmins', 'is_member', 'is_admin'));
         }
         else {
-            return view('groups.show_public', compact('group'));
+            $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
+
+            return view('groups.show_public', compact('group', 'newss', 'page'));
         }
     }
 

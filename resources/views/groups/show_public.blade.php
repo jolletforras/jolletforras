@@ -6,13 +6,18 @@
 @section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg'}}@endsection
 
 @section('content')
-	<div class="inner_box" style="margin-top:6px;font-size: 16px;">
-		<h2>
-			{{ $group->name }}
-			@if($group->city!='')
-				- <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
-			@endif
-		</h2>
+	@if($newss->isNotEmpty())
+	@include('groups._group_menu')
+	@endif
+	<div class="inner_box narrow-page" style="margin-top:6px;">
+		@if(!$newss->isNotEmpty())
+			<h2>
+				{{ $group->name }}
+				@if($group->city!='')
+					- <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
+				@endif
+			</h2>
+		@endif
 		@if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
 			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg" style="max-width: 50%;"></p>
 		@endif
