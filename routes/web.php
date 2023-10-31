@@ -102,7 +102,10 @@ Route::get('/csoport/{group_id}/{group_slug}/kozlemenyek', 'GroupThemesControlle
 Route::get('/csoport/{group_id}/{group_slug}/lezart-beszelgetesek', 'GroupThemesController@closedthemes');
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'GroupThemesController@show');
 Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@create');
+Route::post('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@store');
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}/modosit', 'GroupThemesController@edit');
+Route::post('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}/modosit', 'GroupThemesController@update');
+
 Route::get('/csoport/{group_id}/{group_slug}/lezar-beszelgetest/{forum_id}/{forum_slug}', 'GroupThemesController@closetheme');
 Route::get('/csoport/{group_id}/{group_slug}/megnyit-beszelgetest/{forum_id}/{forum_slug}', 'GroupThemesController@opentheme');
 Route::get('/csoport/{group_id}/{group_slug}/tema/cimke/{tag_id}/{tag}', 'TagsController@group_theme_show');
@@ -174,7 +177,7 @@ Route::post('/hirlevel/{id}/{title}/modosit', 'NewslettersController@update');
 Route::get('/forum', 'ForumsController@index');
 Route::get('/forum/{id}/{title}', 'ForumsController@show');
 Route::get('/forum/uj', 'ForumsController@create');
-Route::post('forum/uj', 'ForumsController@store');
+Route::post('/forum/uj', 'ForumsController@store');
 Route::get('/forum/{id}/{title}/modosit', 'ForumsController@edit');
 Route::post('/forum/{id}/{title}/modosit', 'ForumsController@update');
 Route::get('/forum/cimke/{id}/{tag}', 'TagsController@forum_show');

@@ -10,7 +10,7 @@
 		</div>
 		<div class="panel-body">
 
-			<form method="POST" action="{{url('forum')}}/{{$forum->id}}/{{$forum->slug}}/modosit" accept-charset="UTF-8">
+			<form method="POST" action="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{$forum->id}}/{{$forum->slug}}/modosit" accept-charset="UTF-8">
 				@include('groupthemes._form', ['submitButtonText'=>'Módosít'])
 			</form>
 		</div>

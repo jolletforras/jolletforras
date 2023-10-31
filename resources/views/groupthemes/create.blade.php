@@ -6,7 +6,7 @@
 	@include('errors.list')
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form method="POST" action="{{url('forum')}}/uj" accept-charset="UTF-8">
+			<form method="POST" action="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/uj" accept-charset="UTF-8">
 				@include('groupthemes._form', ['submitButtonText'=>'Mentés'])
 			</form>
 		</div>
