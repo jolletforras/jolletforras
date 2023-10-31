@@ -17,7 +17,10 @@
                     <li>A regisztrációhoz szükséges elolvasnod és elfogadnod a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodást</a> és az <a href="{{ url('/') }}/adatkezeles " target="_blank">Adatkezelést</a>.
                         Ajánljuk, hogy szintén olvasd el a <a href="{{ url('/') }}/tudnivalok " target="_blank">Tudnivalókat</a></li>
                 </ul>
-                Ha már regisztráltál, akkor fontos, hogy részletesen feltöltsd a személyes oldaladat, hiszen így tudsz bemutatkozni és elérhetővé válni mások számára, akik kapcsolatba szeretnének lépni veled.<br>
+                Miután regisztráltál, fontos, hogy részletesen feltöltsd a személyes oldaladat, hiszen így tudsz bemutatkozni és elérhetővé válni mások számára, akik kapcsolatba szeretnének lépni veled. Valamint onnantól kezdve tudod használni is a Portál lehetőségeit.
+                Adatlapod feltöltésénél néhány segítő kérdést is találsz:
+                Mi mindent csináltál eddig és mivel foglalkozol most? Miért jöttél a portálra? Mit szeretnél itt csinálni, milyen reményeid vannak az oldallal kapcsolatban? Mi az a jártasság, tudás, tapasztalat, amivel mások szolgálatára lehetsz? Mi az ami érdekel, amiben fejlődni szeretnél?
+                A fényképről se feledkezz meg, hogy láthatóvá válhass!<br>
                 Ha elakadnál a regisztrációnál vagy bármilyen kérdésed, észrevételed adódik akár most, akár a regisztráció után, a <a href="{{ url('/') }}/kapcsolat " target="_blank">Kapcsolat</a> oldalon elérsz bennünket és segítünk.<br>
                 <br>
             </div>
