@@ -172,8 +172,8 @@ class GroupThemesController extends Controller
 
         $group = Group::findOrFail($forum->group_id);
 
-        $announcement = $request->get('announcement');
-        if($group->isAdmin() && isset($announcement)) {
+        $is_announcement = $group->isAdmin() && $request->get('announcement');
+        if($is_announcement) {
             $forum->update(['announcement' => 1]);
         }
 
@@ -190,13 +190,13 @@ class GroupThemesController extends Controller
 
             $notice = Notice::create(['notifiable_id' => $forum->id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'new'=>$new,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
 
-            //ha új témára értesítést kér, akkor beállítódik az email kiküldés (kivéve a létrehozót)
-            if($user_id!=Auth::user()->id && in_array($user_id, $group->member_list_with_new_post_notice)) {
+            //ha új témára értesítést kér vagy közlemény, akkor beállítódik az email kiküldés (kivéve a létrehozót)
+            if($user_id!=Auth::user()->id && (in_array($user_id, $group->member_list_with_new_post_notice) || $is_announcement)) {
                 $notice->update(['email' => 1,'login_code' => Str::random(10)]);
             }
         }
 
-        if($group->isAdmin() && isset($announcement)) {
+        if($is_announcement) {
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/kozlemenyek')->with('message', 'A csoport közleményt sikeresen felvetted!');
         }
         else {
