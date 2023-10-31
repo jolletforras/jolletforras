@@ -2,7 +2,7 @@
 
 @section('content')
 	@include('partials.tinymce_js')
-	<h2>Új téma</h2>
+	<h2>{{$title}}</h2>
 	@include('errors.list')
 	<div class="panel panel-default">
 		<div class="panel-body">

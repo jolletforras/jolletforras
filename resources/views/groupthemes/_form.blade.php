@@ -12,10 +12,8 @@
 			<textarea class="form-control" required="required" rows="20" name="body" cols="50">@if(isset($forum)) {{$forum->body}} @endif</textarea>
 		</div>
 
-		@if($group->isAdmin())
-		<div class="form-group">
-			<input name="announcement" type="checkbox" value="1" @if(isset($forum) && $forum->announcement) checked @endif> közlemény
-		</div>
+		@if($group->isAdmin() && isset($announcement))
+			<input type="hidden" name="announcement" value="1">
 		@endif
 
 		<div class="form-group">

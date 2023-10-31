@@ -100,8 +100,9 @@ Route::post('/csoport/{id}/invite', 'GroupsController@invite');
 Route::get('/csoport/{group_id}/{group_slug}/beszelgetesek', 'GroupThemesController@index');
 Route::get('/csoport/{group_id}/{group_slug}/kozlemenyek', 'GroupThemesController@announcement');
 Route::get('/csoport/{group_id}/{group_slug}/lezart-beszelgetesek', 'GroupThemesController@closedthemes');
+
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'GroupThemesController@show');
-Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@create');
+Route::get('/csoport/{group_id}/{group_slug}/{type}/uj', 'GroupThemesController@create');
 Route::post('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@store');
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}/modosit', 'GroupThemesController@edit');
 Route::post('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}/modosit', 'GroupThemesController@update');

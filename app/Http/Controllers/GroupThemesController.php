@@ -132,13 +132,17 @@ class GroupThemesController extends Controller
      *
      * @return Response
      */
-    public function create($group_id,$slug) {
+    public function create($group_id,$slug,$type) {
 
         $group = Group::findOrFail($group_id);
 
         $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
 
-        return view('groupthemes.create', compact('tags','group_id','group'));
+        $title = $type=="tema" ? "Új téma" : "Új közlemény";
+
+        $announcement = $type == "kozlemeny" ? true : NULL;
+
+        return view('groupthemes.create', compact('tags','group_id','group','title','announcement'));
     }
 
     /**
@@ -168,9 +172,9 @@ class GroupThemesController extends Controller
 
         $group = Group::findOrFail($forum->group_id);
 
-        if($group->isAdmin()) {
-            $announcement = empty($request->get('announcement')) ? 0 : 1;
-            $forum->update(['announcement' => $announcement]);
+        $announcement = $request->get('announcement');
+        if($group->isAdmin() && isset($announcement)) {
+            $forum->update(['announcement' => 1]);
         }
 
         //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id, a comment_id = 0, a new=1 lesz.
@@ -192,7 +196,12 @@ class GroupThemesController extends Controller
             }
         }
 
-        return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen felvetted!');
+        if($group->isAdmin() && isset($announcement)) {
+            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/kozlemenyek')->with('message', 'A csoport közleményt sikeresen felvetted!');
+        }
+        else {
+            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen felvetted!');
+        }
     }
 
 
@@ -247,12 +256,12 @@ class GroupThemesController extends Controller
 
         $group = Group::findOrFail($forum->group_id);
 
-        if($group->isAdmin()) {
-            $announcement = empty($request->get('announcement')) ? 0 : 1;
-            $forum->update(['announcement' => $announcement]);
+        if($forum->announcement) {
+            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/kozlemenyek')->with('message', 'A csoport közleményt sikeresen módosítottad!');
         }
-
-        return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
+        else {
+            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
+        }
     }
 
     /**

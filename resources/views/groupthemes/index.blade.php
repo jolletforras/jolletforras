@@ -12,6 +12,9 @@
 						<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új téma</a>
 					@endif
 				@endif
+				@if ($page=="announcement" && $group->isActive() && $group->isAdmin())
+					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/kozlemeny/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új közlemény</a>
+				@endif
 			</div>
 			<div class="col-sm-3" style="padding-top:4px;">
 				@if ($page!="announcement")
@@ -28,9 +31,7 @@
 				@endif
 			</div>
 		</div>
-		@if ($page!="announcement")
 		<hr style="margin-top:2px;">
-		@endif
 		@foreach ($forums as $forum)
 			@if(isset($forum->user->id))
 				<h3><a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{ $forum->title }}</a></h3>
