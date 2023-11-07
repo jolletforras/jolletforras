@@ -42,7 +42,7 @@
 		<div class="flash-message alert alert-info" style="display:none;"></div>
 
 		@if ($is_admin)
-		<label for="admin_list">Csoport kezelők felvétele, módosítása</label>
+		<label for="admin_list">Csoportkezelők felvétele, módosítása</label>
 		<div class="row">
 			<div class="form-group col-sm-6">
 				<select id="admin_list" name="admin_list[]" class="form-control" multiple>
@@ -113,7 +113,7 @@
 @section('footer')
 	<script>
 		$('#admin_list').select2({
-			placeholder: 'Írd be ide a csoport kezelők nevét',
+			placeholder: 'Írd be ide a csoportkezelők nevét',
 			admin: true
 		});
 

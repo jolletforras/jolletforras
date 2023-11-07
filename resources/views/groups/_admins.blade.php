@@ -1,6 +1,6 @@
 @unless($group->admins->isEmpty())
     <p>
-        <b>Csoport kezelők: </b>
+        <b>Csoportkezelők: </b>
         @for ($i = 0; $i < $last=count($group->admins)-1; $i++)
             <a href="{{ url('profil',$group->admins[$i]->id) }}/{{$group->admins[$i]->slug}}">
                 {{$group->admins[$i]->name}}</a>,&nbsp;
