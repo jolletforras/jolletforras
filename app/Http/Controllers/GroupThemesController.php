@@ -132,18 +132,36 @@ class GroupThemesController extends Controller
      *
      * @return Response
      */
-    public function create($group_id,$slug,$type) {
+    public function createTheme($group_id,$slug) {
 
         $group = Group::findOrFail($group_id);
 
         $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
 
-        $title = $type=="tema" ? "Új téma" : "Új közlemény";
-
-        $announcement = $type == "kozlemeny" ? true : NULL;
+        $title = "Új téma";
+        $announcement = NULL;
 
         return view('groupthemes.create', compact('tags','group_id','group','title','announcement'));
     }
+
+    /**
+     * Create a group theme
+     *
+     * @return Response
+     */
+    public function createAnnouncement($group_id,$slug) {
+
+        $group = Group::findOrFail($group_id);
+
+        $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
+
+        $title = "Új közlemény";
+
+        $announcement = true;
+
+        return view('groupthemes.create', compact('tags','group_id','group','title','announcement'));
+    }
+
 
     /**
      * Store a specific group theme
