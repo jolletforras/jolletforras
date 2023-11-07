@@ -245,6 +245,26 @@ class GroupsController extends Controller
                 }
             }
 
+            //értesítés az kezelőknek
+            $admins = $group->admins()->get();
+
+            $data['user_url'] = 'profil/' . $user_id . '/' . Auth::user()->slug;
+            $data['user_name'] = Auth::user()->name;
+
+            $data['group_url'] = 'csoport/' . $group->id . '/' . $group->slug;
+            $data['group_name'] = $group->name;
+            $data['subject'] = $group->name." - új tag";
+
+            foreach($admins as $admin) {
+                $data['email'] = $admin->email;
+                $data['admin_name'] = $admin->name;
+
+                Mail::send('groups.emails.new_member_email', $data, function ($message) use ($data) {
+                    $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+                    $message->subject($data['subject']);
+                    $message->to($data['email']);
+                });
+            }
         }
 
         return redirect('csoport/'.$id.'/'.$name.'/beszelgetesek')->with('message', 'A csoporthoz sikeresen csatlakoztál!');
@@ -401,7 +421,7 @@ class GroupsController extends Controller
             $data['invited_name']=$invitedUser->name;
             $data['email']=$invitedUser->email;
 
-            Mail::send('groups.invite_email', $data, function($message) use ($data)
+            Mail::send('groups.emails.invite_email', $data, function($message) use ($data)
             {
                 $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
                 $message->subject("Meghívás a(z) ".$data['group_name']." csoportba");
