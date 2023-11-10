@@ -323,4 +323,21 @@ class GroupThemesController extends Controller
 
         return redirect('csoport/'.$group_id.'/'.$group_slug.'/beszelgetesek')->with('message', 'A beszélgetést sikeresen lezártad!');
     }
+
+    private function get_shorted_text($text,$min_length)
+    {
+        $pos = mb_strpos($text,"</p>",500);
+        if($pos>700) {
+            $text = str_replace("</p>","<br>",$text);
+            $text = str_replace("<br/>","<br>",$text);
+            $text = str_replace("<br />","<br>",$text);
+            $text = strip_tags($text,"<br>,<a>");
+            $pos = mb_strpos($text,"<br>",500);
+            $text = mb_substr($text,0,$pos)." #...#<br>";
+        }
+        else {
+            $text = mb_substr($text,0,$pos)." #...#</p>";
+        }
+        return $text;
+    }
 }
