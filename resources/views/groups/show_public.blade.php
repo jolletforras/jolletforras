@@ -3,7 +3,7 @@
 @section('description'){{ $group->meta_description }}@endsection
 @section('url'){{url('csoport')}}/{{$group->id}}/{{$group->slug}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}"  />@endsection
-@section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg'}}@endsection
+@section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg?'.$group->photo_counter}}@endsection
 
 @section('content')
 	@if($newss->isNotEmpty())
@@ -19,7 +19,7 @@
 			</h2>
 		@endif
 		@if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
-			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg" style="max-width: 50%;"></p>
+			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg?{{$group->photo_counter}}" style="max-width: 50%;"></p>
 		@endif
 		<p>{!! nl2br($group->description) !!}</p>
 		@if($group->webpage_url!='')

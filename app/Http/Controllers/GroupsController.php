@@ -502,6 +502,10 @@ class GroupsController extends Controller
         generateImage($tmpfile, 400, 1, $base_path.$imagename.'.jpg');//1=>width
         unlink($tmpfile);
 
+        $group = Group::findOrFail($id);
+        $group->photo_counter++;
+        $group->save();
+
         return redirect('/csoport/'.$id.'/'.$name)->with('message', 'A csoportképet sikeresen feltöltötted!');
     }
 
