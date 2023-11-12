@@ -9,12 +9,9 @@
 		<h2>Tudnivalók Társadalmi Jóllét Portálról</h2><br>
 		<br>
 		<b>Kik állnak a portál működése mögött?</b><br>
-		A tarsadalmijollet.hu domain regisztrációs és tárhely szolgáltatását támogatásként jelenleg a <a href="https://www.giganet.hu/" target="_blank">Giganet Internet Kft.</a> nyújtja.
-		A domain bejegyzését a <a href="https://www.kontaktia.hu/" target="_blank">Kontaktia Kft.</a> kezdeményezte, amelynek egyszemélyi tulajdonosa és vezetője <a href="https://tarsadalmijollet.hu/profil/77/pataki-andrea" target="_blank">Pataki Andrea</a>, a
-		<a href="https://tarsadalmijollet.hu/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Mag</a> csoport tagja.
-		Ennek oka, hogy a Társadalmi Jóllét Portálnak magának nincs formális szerveződése, amely ezt a jelenlegi előírások alapján megtehette volna.
-		A jelenlegi domain használó kifejezi szándékát, hogy amint ez változik, a jogot haladéktalanul és díjmentesen átengedi annak a szerveződésnek.
-		Amíg a domain használó a Kontaktia Kft., vállal minden kötelezettséget (adatkezelési felelősség, díjfizetés), ami ezzel jár.<br>
+		A tarsadalmijollet.hu tárhely szolgáltatását (virtuális szerverét) támogatásként jelenleg a <a href="https://www.giganet.hu/" target="_blank">Giganet Internet Kft.</a> nyújtja.
+		A domain használója <a href="https://tarsadalmijollet.hu/profil/72/ludescher-otto" target="_blank">Ludescher Ottó</a>, a Portál kezdeményezője és fejlesztője. Jelenleg ő viseli a domain fenntartás költségét. Ennek oka, hogy a Társadalmi Jóllét Portálnak magának nincs formális szerveződése. A jelenlegi domain használó kifejezi szándékát, hogy amint ez változik, a jogot haladéktalanul és díjmentesen átengedi annak a szerveződésnek.
+		A Portál működtetését a <a href="https://tarsadalmijollet.hu/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Mag</a> csoport vállalja. Ez jelenti a fejlesztést, tájékoztatást, a regisztráltak támogatását és a Portál kommunikációját egyaránt.<br>
 		<br>
 		<b>Ki és hogyan veheti igénybe az oldal szolgáltatásait?</b><br>
 		A portál szolgáltatásai alatt mindazokat a funkciókat értjük, amelyeket az oldalon használni lehet.

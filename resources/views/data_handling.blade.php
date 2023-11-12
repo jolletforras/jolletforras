@@ -9,15 +9,13 @@
             <br>
             <b>A tarsadalmijollet.hu webhely adatai</b><br>
             <i>A honlap (domain) használó és elérhetőségei</i><br>
-            Cégnév: Kontaktia Szolgáltató és Tanácsadó Korlátolt Felelősségű Társaság<br>
-            Székhely cím és postai cím: 6727 Szeged Pilisi u.6.<br>
-            Telefon: +36 30 289 78 30<br>
-            Cégjegyzékszáma:06-09-0212074<br>
-            Adószám: 14192182-2-06<br>
-            E-mail cím: kontaktia(kukac)kontaktia.hu<br>
+            Név: Ludescher Ottó magánszemély<br>
+            Cím: 4400 Nyíregyháza Zászlós utca 4. 2/33.<br>
+            Telefon: +36 70 593 5072<br>
+            E-mail cím: tarsadalmi.jollet(kukac)gmail.com<br>
             <i>Adatkezelésért felelős személyek</i><br>
-            Pataki Andrea tel: +36 30 289 78 30 e-mail: pataki.andrea(kukac)kontaktia.hu<br>
             Ludescher Ottó tel: +36 70 593 5072 email: ludescher.otto(kukac)gmail.com<br>
+            Pataki Andrea tel: +36 30 289 78 30 e-mail: pataki.andrea(kukac)kontaktia.hu<br>
             <i>A tárhely szolgáltató adatai és elérhetőségei</i><br>
             Cégnév: Giganet Internet Kft.<br>
             Székhely cím és postai cím :4400 Nyíregyháza Vasvári Pál utca 1. <br>
@@ -48,7 +46,7 @@
             Harmadik fél részére csak kifejezetten az érintett személy írásos hozzájárulása alapján, meghatározott feltételei mellett adunk át személyes adatot. Kivételt jelent ez alól a hatósági és/vagy bűnügyi célú adatszolgáltatás, amelyet a mindenkori hatályos előírások alapján bocsátunk a hatóság rendelkezésére.<br>
             <br>
             <b>Vonatkozó jogszabályok, irányelvek</b><br>
-            A Kontaktia Kft. (a továbbiakban: “Adatkezelő”) tevékenysége során a felhasználók (a továbbiakban: „Felhasználó”) adatainak kezelésében a személyes adatok védelméről és a közérdekű adatok megismeréséről az 2011. évi CXII.Törvény, a kutatás és közvetlen üzletszerzés célját szolgáló név-és lakcímadatok kezeléséről az 1995. évi CXIX.törvény alapján az alábbi adatkezelési szabályokat, valamint a GDPR szabályait érvényesíti. Amennyiben a hatályos jogszabályok közötti jogharmonizáció nem történt meg, úgy a magasabb rendű szabályozásnak megfelelően jár el.<br>
+            Adatkezelő a tevékenysége során a felhasználók (a továbbiakban: „Felhasználó”) adatainak kezelésében a személyes adatok védelméről és a közérdekű adatok megismeréséről az 2011. évi CXII.Törvény, a kutatás és közvetlen üzletszerzés célját szolgáló név-és lakcímadatok kezeléséről az 1995. évi CXIX.törvény alapján az alábbi adatkezelési szabályokat, valamint a GDPR szabályait érvényesíti. Amennyiben a hatályos jogszabályok közötti jogharmonizáció nem történt meg, úgy a magasabb rendű szabályozásnak megfelelően jár el.<br>
             <br>
             <b>Az adatkezelés alapja</b><br>
             <ul>
@@ -89,31 +87,15 @@
             Ezekkel a sütikkel azonosítjuk önt és a beállításait. Ilyen például az, hogy be van-e jelentkezve, illetve az, hogy hol tart a rendelésének folyamata.<br>
             Az oldalon jelenleg csak regisztrált felhasználóknál használunk ilyen sütit, az oldal adminisztrációs felületéhez való hozzáféréshez.<br>
             <i>Elemzéshez használt sütik</i><br>
-            Ahhoz, hogy az oldalunk a legjobb élményt nyújtsa, időről-időre elemezzük annak használatát. Ezek a sütik adatokat továbbítanak az elemző szoftver felé.<br>
-            Az oldalon jelenleg futó elemzéshez használt süti:<br>
-            <ul>
-                <li>Google Analytics követőkód</li>
-                <li>Facebook pixel</li>
-            </ul>
-            Az oldalon elhelyezett elemzéshez használt sütik számunkra nem beazonosítható módon tárolják a látogató adatait azzal a céllal, hogy az oldal elérésével és használatával kapcsolatos információkat elemezni tudjuk, amely segítségével az oldal felhasználói élményét fejleszthetjük tovább.<br>
-            Amennyiben szeretné megismerni ezen sütik működését, kérjük, olvassa el a Facebook és a Google aktuális adatkezelési szabályzatát.<br>
+            Segítségükkel az oldal elérésével és használatával kapcsolatosan jutunk hasznos információhoz. Ezek a sütik adatokat továbbítanak az elemző szoftver felé.<br>
+            Jelenleg futó elemzéshez használt süti: Google Analytics követőkód<br>
+            Az oldalon elhelyezett elemzéshez használt sütik számunkra nem beazonosítható módon tárolják a látogató adatait. Amennyiben szeretné megismerni ezen sütik működését, kérjük, olvassa el a Google aktuális adatkezelési szabályzatát.<br>
             <i>Hirdetésszolgáltatók sütijei</i><br>
-            Egyes aloldalakon reklámok jelenhetnek meg. Ezeket a reklámokat vagy külső szolgáltató, vagy valamelyik partnerünk adja. Ezek a sütik ahhoz kellenek, hogy lehetőleg ne terheljük önt olyan reklámokkal, melyek valószínűleg nem érdeklik önt.<br>
-            Az oldalon jelenleg futó hirdetésszolgáltatói sütik:<br>
-            <ul>
-                <li>Facebook pixel (oldal látogatása esetén)</li>
-                <li>Facebook event pixel (ajánlatkérés, regisztrációs űrlapok  kitöltése esetén)</li>
-                <li>Google Adwords remarketing adatbázis gyűjtés (oldal látogatása esetén)</li>
-            </ul>
-            Az oldalon elhelyezett hirdetésszolgáltatói sütik számunkra nem beazonosítható módon tárolják a látogató adatait azzal a céllal, hogy részére remarketing hirdetést jeleníthessenek meg  abban az esetben, ha saját céges felhasználói fiókunkból erre a célcsoportra hozunk létre hirdetést. Amennyiben szeretné megismerni ezen sütik működését, kérjük, olvassa el a Facebook és a Google aktuális adatkezelési szabályzatát.<br>
+            Az oldalon hirdetésszolgáltatók sütijei nincsenek elhelyezve.<br>
             <i>Egyéb harmadik fél sütijei</i><br>
             Ilyenek például a közösségi oldalak alkalmazásai, melyekkel kinyilváníthatja tetszését az oldalunk iránt, vagy megoszthatja azokat kedvenc közösségi oldalán.<br>
-            Az oldal jelenleg az alábbi sütiket használja:<br>
-            <ul>
-                 <li>Social Share for Facebook, Google+</li>
-                 <li>Like for Facebook</li >
-                 <li>Integrált Facebook Messenger alkalmazás</li >
-            </ul>
+            Az oldalon jelenleg harmadik fél sütijei nincsenek elhelyezve.<br>
+            <br>
             <b>A sütik karbantartása</b><br>
             Önnek lehetősége van arra, hogy karbantartsa és/vagy tetszés szerint törölje a sütiket. Kérjük, hogy az ezzel kapcsolatos tudnivalókért látogasson el az aboutcookies.org webhelyre.<br>
             Ön törölni tudja a számítógépén tárolt összes sütit, és a böngészőprogramok többségében le tudja tiltani a telepítésüket. Ebben az esetben azonban előfordulhat, hogy minden alkalommal, amikor ellátogat egy adott oldalra, manuálisan el kell végeznie egyes beállításokat, és számolnia kell azzal is, hogy bizonyos szolgáltatások és funkciók esetleg nem működnek.<br>
