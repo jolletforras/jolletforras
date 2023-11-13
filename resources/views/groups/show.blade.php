@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-	@if($is_admin || $newss->isNotEmpty())
+	@if($is_member || $newss->isNotEmpty())
 		@include('groups._group_menu')
 	@endif
 	<div class="inner_box narrow-page" style="margin-top:6px;">
-		@if(!$is_admin && !$newss->isNotEmpty())
+		@if(!$is_member && !$newss->isNotEmpty())
 			<h2>
 				{{ $group->name }}
 				@if($group->city!='')
