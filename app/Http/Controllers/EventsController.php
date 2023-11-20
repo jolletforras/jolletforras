@@ -73,7 +73,7 @@ class EventsController extends Controller
 
         //ha nincs bejelentkezve és az esemény nem nyilvános
         if(!Auth::check() && $event->visibility != 'public') {
-            return redirect('/');
+            return redirect('/login');
         }
 
         $users_read_it = '';
