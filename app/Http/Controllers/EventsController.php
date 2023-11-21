@@ -114,7 +114,22 @@ class EventsController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->get();
 
-        return view('events.show', compact('event','has_access', 'comments', 'users_read_it'));
+        $participate = false;
+        $participants = '';
+        if(Auth::check()) {
+            $participants_r = array();
+            foreach($event->participants as $user) {
+                if($user->id==Auth::user()->id) {
+                    $participate = true;
+                }
+                else {
+                    $participants_r[] = '<a href="'.url('profil').'/'.$user->id.'/'.$user->slug.'">'.$user->name.'</a>';
+                }
+            }
+            $participants = implode(", ",$participants_r);
+        }
+
+        return view('events.show', compact('event','has_access', 'comments', 'users_read_it','participate','participants'));
     }
 
 
@@ -295,6 +310,29 @@ class EventsController extends Controller
             });
 
         }
+
+        return \Response::json($response);
+    }
+
+    /**
+     * Set participation on this event
+     *
+     * @return Response
+     */
+    public function participate($id, Request $request)
+    {
+        $event = Event::findOrFail($id);
+        $user_id = Auth::user()->id;
+        $participate = $request->get('participate');
+
+        if($participate) {
+            $event->participants()->attach($user_id);
+        }
+        else {
+            $event->participants()->detach($user_id);
+        }
+
+        $response = array('status' => 'success');
 
         return \Response::json($response);
     }

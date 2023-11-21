@@ -157,6 +157,7 @@ Route::get('/esemeny/{id}/{title}/modosit', 'EventsController@edit');
 Route::post('/esemeny/{id}/{title}/modosit', 'EventsController@update');
 Route::post('/esemeny/{id}/invite', 'EventsController@invite');
 Route::post('/events_expired', 'EventsController@events_expired');
+Route::post('/esemeny/{id}/participate', 'EventsController@participate');
 
 Route::get('/kezdemenyezesek', 'ProjectsController@index');
 Route::get('/kezdemenyezes/{id}/{title}', 'ProjectsController@show');

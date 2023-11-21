@@ -21,6 +21,12 @@
 			@endif
 			{!! $event->body !!}
 			@include('partials.author', ['author'=>'Eseményt felvette: ','obj'=>$event])
+			@if($event->isGroupEvent() && Auth::check() && $event->group->isMember())
+				<input name="participate" id="participate" type="checkbox" onchange="check()"  value="1" @if($participate) checked @endif>
+				Részt veszek<br>
+				@if($participants) Ott lesznek: {!! $participants !!}<br>@endif
+				<br>
+			@endif
 			@if ($event->isGroupEvent() && $event->visibility!='group' && $event->group->isAdmin())
 				<div class="flash-message alert alert-info" style="display:none;"></div>
 				<label for="invited_user">Személyek meghívás az eseményre, akik nem tagjai a csoportnak</label>
@@ -100,6 +106,28 @@
 					}
 				});
 			}
+		}
+
+		function check(){
+			var participate = 0;
+			if($("#participate").is(':checked')) participate=1;
+
+			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+			$.ajax({
+				type: "POST",
+				url: '{{url('esemeny')}}/{{$event->id}}/participate',
+				data: {
+					_token: CSRF_TOKEN,
+					participate: participate
+				},
+				success: function(data) {
+					if(data['status']=='success') {}
+				},
+				error: function(error){
+					console.log(error.responseText);
+				}
+			});
 		}
 	</script>
 @endsection

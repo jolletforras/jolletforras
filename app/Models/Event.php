@@ -27,6 +27,11 @@ class Event extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function participants()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
     public function getCreatedAtAttribute($date)
     {
         return Carbon::parse($date)->format('Y-m-d');
