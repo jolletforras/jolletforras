@@ -1,5 +1,14 @@
 <script>
 
+    $(document).ready(function(){
+        if(navigator.userAgent.match(/Android/i)) {
+            $("#eszkoz").html("Android");
+        }
+        else {
+            $("#eszkoz").html("NEM Android");
+        }
+    });
+
     function save(){
         var comment = $("#comment").val();
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

@@ -42,6 +42,7 @@
     <div id="comment-for-answer" style="background-color:#fefffd; border-radius:10px; padding:10px; display: none; margin-bottom: 15px;"></div>
     <div class="form-group">
         <textarea class="form-control" rows="4" id="comment" name="comment" placeholder="Ide írva szólhatsz hozzá" onclick="$('#comment').focus()"></textarea>
+        <span id="eszkoz" style="font-size: 8px;"></span>
     </div>
     <div class="form-group ">
         <input type="hidden" name="update_comment_id" id="update_comment_id" value="">
