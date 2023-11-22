@@ -44,7 +44,7 @@
 					</div>
 				</div>
 			@endif
-			@if ($event->isGroupEvent() && $users_read_it && Auth::check() && Auth::user()->id==$event->user->id)
+			@if ($event->isGroupEvent() && $users_read_it && $event->group->isAdmin())
 				Látta: {!! $users_read_it !!}
 			@endif
 		</div>
