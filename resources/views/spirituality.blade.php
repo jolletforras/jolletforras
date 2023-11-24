@@ -2,7 +2,7 @@
 @section('description', 'Ez az oldal azt szolgálja, hogy ami átfogóan kapcsolódik a Társadalmi Jóllét Portál által is képviselt szellemiséghez, az helyet kaphasson itt.')
 @section('url', 'https://tarsadalmijollet.hu/szellemiseg')
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/szellemiseg" /> @endsection
-@section('image'){{ url('/images/szellemiseg.jpg')}}@endsection
+@section('image'){{ url('/images/szellemiseg.jpeg')}}@endsection
 
 @section('content')
     <div class="row narrow-page">
