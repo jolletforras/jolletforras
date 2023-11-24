@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Társak a térképen a Társadalmi Jóllét Portálon. A térkép használatához belépés szükséges. Az alábbi kép a 2023.11.24.-ei állapotot mutatja. ')
+@section('url', 'https://tarsadalmijollet.hu/terkep')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/terkep" /> @endsection
+@section('image'){{ url('/images/terkep.jpg')}}@endsection
 
 @section('content')
 	@if (!Auth::check())
