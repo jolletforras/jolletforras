@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('description', 'Ez az oldal azt szolgálja, hogy ami átfogóan kapcsolódik a Társadalmi Jóllét Portál által is képviselt szellemiséghez, az helyet kaphasson itt.')
+@section('description', 'Ami átfogóan kapcsolódik a Portál által is képviselt szellemiséghez, az helyet kap itt.')
 @section('url', 'https://tarsadalmijollet.hu/szellemiseg')
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/szellemiseg" /> @endsection
 @section('image'){{ url('/images/szellemiseg.jpeg')}}@endsection
