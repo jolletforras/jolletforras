@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('description', 'Írások a Társadalmi Jóllét Portálon. Milyen legyen az új világunk? Olvasd el a Portál tagjainak írásait, csatlakozz hozzánk és írj Te is saját cikket! Várunk!')
 @section('url', 'https://tarsadalmijollet.hu/irasok')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/irasok" />
-@endsection
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/irasok" /> @endsection
+@section('image'){{ url('/images/irasok.jpeg')}}@endsection
 
 @section('content')
 	<div class="row">
