@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except'=>['index','aboutus','socialagreement','aboutsite','connection','datahandling','lastweeks']]);
+        $this->middleware('auth', ['except'=>['index','aboutus','socialagreement','aboutsite','connection','datahandling','lastweeks','spirituality']]);
     }
 
 
@@ -86,6 +86,16 @@ class HomeController extends Controller
     public function datahandling()
     {
         return view('data_handling');
+    }
+
+    /**
+     * Show the spirituality of the page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function spirituality()
+    {
+        return view('spirituality');
     }
 
 

@@ -28,6 +28,7 @@ Route::post('/kepfeltoltes', 'HomeController@uploadimage');
 Route::get('/kozossegimegallapodas', 'HomeController@socialagreement');
 Route::get('/tudnivalok', 'HomeController@aboutsite');
 Route::get('/adatkezeles', 'HomeController@datahandling');
+Route::get('/szellemiseg', 'HomeController@spirituality');
 
 Route::get('/az-uj-vilag-hangjai', 'PodcastController@index');
 Route::get('/az-uj-vilag-hangjai/{id}/{title}', 'PodcastController@show');
