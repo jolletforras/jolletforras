@@ -6,7 +6,7 @@
 		<div class="inner_box">
 			A térkép használatához belépés szükséges. Az alábbi kép a 2023.11.24.-ei állapotot mutatja.
 		</div>
-		<img width="100%" src="{{ url('/') }}/images/terkep.jpg?ver=3" alt="térkép">
+		<img width="100%" src="{{ url('/') }}/images/terkep.jpg?3" alt="térkép">
 	@else
 		@push('styles')
 <link rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' crossorigin='' />
