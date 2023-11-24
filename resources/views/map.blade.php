@@ -1,12 +1,10 @@
 @extends('layouts.app')
-@section('robots')<meta name="robots" content="noindex,nofollow"/>
-@stop
 
 @section('content')
 	@if (!Auth::check())
 		<h2>Térkép</h2>
 		<div class="inner_box">
-			A térkép használatához belépés szükséges. Az alábbi kép a 2023.02.15.-ei állapotot mutatja.
+			A térkép használatához belépés szükséges. Az alábbi kép a 2023.11.24.-ei állapotot mutatja.
 		</div>
 		<img width="100%" src="{{ url('/') }}/images/terkep.jpg?ver=2" alt="térkép">
 	@else
