@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('robots')<meta name="robots" content="noindex,nofollow"/>
+@stop
 
 <!-- Main Content -->
 @section('content')
