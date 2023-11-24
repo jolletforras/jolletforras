@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Ajánlók a Társadalmi Jóllét Portálon. Olvasni, nézni, hallgatni valókat találsz itt, egy felvezető ajánlással.')
+@section('url', 'https://tarsadalmijollet.hu/ajanlo')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/irasok" /> @endsection
+@section('image'){{ url('/images/ajanlo.jpeg')}}@endsection
 
 @section('content')
 	<div class="row narrow-page">
