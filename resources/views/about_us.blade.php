@@ -16,11 +16,11 @@
 			<ul>
 				<li>Létrehozhatod meglévő közösséged csoportját, hogy itt szervezhessétek programjaitokat, belső kommunikációtokat, valamint hogy másoknak is bemutathassátok a közösséget, új tagokat hívhassatok be.</li>
 				<li>Új témában is indíthatsz csoportot, hogy egybegyűjtsd az érdeklődőket, társakat.</li>
-				<li>Nyithatsz olyan kérdésben fórumot, amihez véleményeket vagy segítséget vársz.</li>
+				<li>Hírt adhatsz a közösségedről a Csoportok hírei oldalon.</li>
 				<li>Felteheted ide a saját eseményedet vagy olyan programot, amely a Portál küldetésével és értékeivel egyezik.</li>
-				<li>Hírt adhatsz a közösségedről a Hírek oldalon.</li>
 				<li>Közzéteheted gondolataidat a társadalmi jólléthez, annak egy-egy témájához kapcsolódóan az Írások oldalon.</li>
-				<li>Bemutathatod ötleteidet, ügyeidet és társakat kereshetsz hozzájuk.</li>
+				<li>Készíthetsz ajánlót, amelyben olvasni-nézni-hallgatni való tartalmakra hívhatod fel a figyelmet.</li>
+				<li>Bemutathatod kezdeményezésedet és társakat kereshetsz hozzá.</li>
 			</ul>
 			<br>
 			<b>Mit vállalsz a regisztrációval és az oldal használatával?</b><br>
