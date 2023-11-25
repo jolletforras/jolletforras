@@ -35,8 +35,11 @@ class GroupNewsController extends Controller
         if(Auth::check()) {
             $newss = News::where('group_id', $group->id)->latest()->get();
         }
-        else {
+        elseif ($group->public){
             $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
+        }
+        else {                              //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános csoport híreit akarja megnyitni
+            return redirect('/login');
         }
 
         //$tags = [''=>''] + NewsTag::pluck('name', 'id')->all();
