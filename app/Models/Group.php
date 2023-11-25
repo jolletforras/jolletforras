@@ -41,6 +41,11 @@ class Group extends Model
         return $this->hasMany(Forum::class);
     }
 
+    public function newss()
+    {
+        return $this->hasMany(News::class);
+    }
+
     public function noadmins()
     {
         return $this->belongsToMany(User::class)->wherePivot('admin',0)->withTimestamps();
@@ -56,6 +61,8 @@ class Group extends Model
     {
         return $this->belongsToMany(User::class)->wherePivot('new_post_notice',1)->withTimestamps();
     }
+
+
 
     public function comments()
     {
@@ -103,7 +110,7 @@ class Group extends Model
     }
 
     public function isMember() {
-        return $this->members->contains('id', Auth::user()->id);
+        return Auth::check() && $this->members->contains('id', Auth::user()->id);
     }
 
     public function isAdmin() {
@@ -112,6 +119,17 @@ class Group extends Model
 
     public function isActive() {
         return $this->status=='active';
+    }
+
+    public function hasNews() {
+        if(Auth::check()) {
+            $newss = $this->newss()->get();
+        }
+        else {
+            $newss = $this->newss()->where('visibility','public')->get();
+        }
+
+        return $newss->isNotEmpty();
     }
 
     public function get_location() {

@@ -7,20 +7,29 @@
 				@endif
 			</h2>
 			<div class="menu">
-				<a class="@if ($page=="description") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}">Bemutatkozás</a>
+				<?php
+					$show_user = Auth::guest() && $group->user_visibility=='public' || Auth::check() && $group->user_visibility=='portal' || $group->isMember();
+					$show_news = $group->isMember() || $group->hasNews();
+				?>
 
-				@if(Auth::guest() && $group->user_visibility=='public' || Auth::check() && ($group->user_visibility=='portal' || $group->isMember()))
+				@if($group->isMember() || $show_user || $show_news)
+					<a class="@if ($page=="description") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}">Bemutatkozás</a>
+				@endif
+
+				@if($show_user)
 					<a class="@if ($page=="members") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tagok">Tagok</a>
 				@endif
 
-				@if(Auth::check() && $group->isMember())
+				@if($group->isMember())
 					<a class="@if ($page=="conversation") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/beszelgetesek">Beszélgetések</a>
 					<a class="@if ($page=="event") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/esemenyek">Események</a>
 				@endif
 
-				<a class="@if ($page=="news") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/hirek">Hírek</a>
+				@if($show_news)
+					<a class="@if ($page=="news") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/hirek">Hírek</a>
+				@endif
 
-				@if(Auth::check() && $group->isMember())
+				@if($group->isMember())
 					<a class="@if ($page=="announcement") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/kozlemenyek">Közlemények</a>
 				@endif
 			</div>

@@ -83,18 +83,14 @@ class GroupsController extends Controller
 
             $nogroupmembers = $group->no_group_members_list;
 
-            $newss = News::where('group_id', $group->id)->latest()->get();
-
-            return view('groups.show', compact('group', 'newss', 'page', 'members', 'nogroupmembers', 'admins', 'noadmins', 'is_member', 'is_admin'));
+            return view('groups.show', compact('group', 'page', 'members', 'nogroupmembers', 'admins', 'noadmins', 'is_member', 'is_admin'));
         }
         else {
             if(!$group->public) {                    //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános csoportot akar megnyitni
                 return redirect('/login');
             }
 
-            $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
-
-            return view('groups.show_public', compact('group', 'newss', 'page'));
+            return view('groups.show_public', compact('group', 'page'));
         }
     }
 
@@ -340,16 +336,14 @@ class GroupsController extends Controller
 
         if(Auth::check()) {
             $users = $group->members()->get();
-            $newss = News::where('group_id', $group->id)->latest()->get();
         }
         else {
             $users = $group->members()->where('public', 1)->get();
-            $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
         }
 
         $page = 'members';
 
-        return view('groups.members', compact('group','page','users','newss'));
+        return view('groups.members', compact('group','page','users'));
     }
 
 
