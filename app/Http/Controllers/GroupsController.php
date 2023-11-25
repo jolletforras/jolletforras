@@ -88,6 +88,10 @@ class GroupsController extends Controller
             return view('groups.show', compact('group', 'newss', 'page', 'members', 'nogroupmembers', 'admins', 'noadmins', 'is_member', 'is_admin'));
         }
         else {
+            if(!$group->public) {                    //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános csoportot akar megnyitni
+                return redirect('/login');
+            }
+
             $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
 
             return view('groups.show_public', compact('group', 'newss', 'page'));
