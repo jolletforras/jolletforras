@@ -2,7 +2,7 @@
 @section('title'){{ $group->name }} csoport hírei @endsection
 @section('description'){{ $group->meta_description }} @endsection
 @section('url'){{url('csoport')}}/{{$group->id}}/{{$group->slug.'/hirek'}}@endsection
-@section('canonical')<link rel="canonical" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/hirek"  />
+@section('canonical')<link rel="canonical" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/hirek"  />@endsection
 @section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg'}}@endsection
 
 @section('content')
