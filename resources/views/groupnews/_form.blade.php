@@ -29,7 +29,7 @@
 				@endforeach
 			</select>
 			<a href="#public_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
-			<div id="public_info" class="collapse info">Ha a láthatóság "portál", akkor csak a portálon regisztráltak számára elérhető a hír; ha "nyilvános" akkor a nem regisztráltak számára is látható.</div>
+			<div id="public_info" class="collapse info">Ha a láthatóság "portál", akkor csak a portálon regisztráltak számára elérhető a hír; ha "nyilvános" akkor a nem regisztráltak számára is látható, de csak abban az esetben ha a csoport nyilvánosan elérhető.</div>
 		</div>
 
 		<div class="form-group">
