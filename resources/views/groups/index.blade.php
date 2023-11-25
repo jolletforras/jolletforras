@@ -6,10 +6,14 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-sm-3">
-			<h2>Csoportok</h2><a href="#group_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
-		</div>
-		@if(Auth::check())
+		@if(Auth::guest())
+			<div class="col-sm-12">
+				<h2>Nyilvánosan elérhető csoportok</h2><a href="#group_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
+			</div>
+		@else
+			<div class="col-sm-3">
+				<h2>Csoportok</h2><a href="#group_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
+			</div>
 			<div class="col-sm-3" style="padding-top:4px;">
 				<select id="tag" name="tag" class="form-control">
 					@foreach($tags as $key => $val)
