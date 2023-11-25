@@ -33,8 +33,8 @@ class RedirectIfIncompleteProfile
 					$message.="
 					Kérlek, írj itt magadról!<br> 
                     A bemutatkozásoddal megajándékozod bizalmaddal a többieket, ahogyan Te is elolvashatod mások bemutatkozásait.<br>
-                    Azt javasoljuk, hogy ha még gondolkodsz, mit írj vagy ha kitöltés közben más dolgod akad, kattintson rá bátran a mentés gombra.  Az addig írtak nem vesznek el, onnan tudod folytatni a kitöltést. 
-                    Amíg nincs feltöltve a portré képe, addig az adatlapod egyébként sem válik láthatóvá. Azt követően pedig bármikor módosíthatod az adatlapod.<br>
+                    Azt javasoljuk, hogy ha még gondolkodsz, mit írj vagy ha kitöltés közben más dolgod akad, kattints rá bátran a mentés gombra.  Az addig írtak nem vesznek el, onnan tudod folytatni a kitöltést. 
+                    Amíg nincs feltöltve a portré képed, addig az adatlapod egyébként sem válik láthatóvá. Azt követően pedig bármikor módosíthatod az adatlapod.<br>
                     A csillaggal (*) jelölt mezők kitöltése szükséges. <br>
                     Ha az adatlap végén azt választod ki, hogy nyilvános a bemutatkozásod, akkor nem regisztráltak számára is láthatóvá válik. Alapesetben csak regisztráltak számára látható az adatlapod.";
 
