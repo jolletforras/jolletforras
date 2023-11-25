@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title'){{ $group->name }}@endsection
+@section('title'){{ $group->name }} csoport tagjai @endsection
 @section('description'){{ $group->meta_description }}@endsection
-@section('url'){{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tagok @endsection
+@section('url'){{url('csoport')}}/{{$group->id}}/{{$group->slug.'/tagok'}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tagok"  />@endsection
 @section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg?'.$group->photo_counter}}@endsection
 
