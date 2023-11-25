@@ -90,6 +90,17 @@
 		</div>
 
 		<div class="form-group">
+			<label for="user_visibility">Tagok láthatósága:</label>
+			<select name="user_visibility">
+				@foreach($user_visibility as $key => $val)
+					<option value="{{ $key }}"  @if(isset($group) && $key == $group->user_visibility) selected @endif>{{ $val }}</option>
+				@endforeach
+			</select>
+			<a href="#user_visibility" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<div id="user_visibility" class="collapse info">Ha a láthatóság "csoport", akkor csak a csoport tagok látják, hogy kik a tagjai a csoportnak; ha "portál" akkor minden regisztrált látja; ha "nyilvános" akkor a nem regisztráltak számára is látható, de csak azok a tagok akiknek nyilvános az adatlapja.</div>
+		</div>
+
+		<div class="form-group">
 			<label>
 				<input name="inactive" type="checkbox" value="1" @if(isset($group) && $group->status=='inactive') checked @endif>
 				<span style="padding-top: 10px; font-size: 18px;">Inaktív</span>

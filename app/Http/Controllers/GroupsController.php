@@ -108,7 +108,9 @@ class GroupsController extends Controller
 
         $members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
 
-        return view('groups.create', compact('members','tags'));
+        $user_visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
+
+        return view('groups.create', compact('members','tags','user_visibility'));
     }
 
     /**
@@ -144,6 +146,7 @@ class GroupsController extends Controller
             'city' => $request->get('city'),
             'slug' => Str::slug($request->get('name')),
             'public' => $request->has('public') ? 1 : 0,
+            'user_visibility' => $request->get('user_visibility'),
             'counter' => 0,
             'create_at' => date("Y-m-d H:i:s", strtotime('now'))
         ]);
@@ -174,7 +177,10 @@ class GroupsController extends Controller
         $tags = GroupTag::pluck('name', 'id');
         $selected_tags = $group->tags->pluck('id')->toArray();
 
-        return view('groups.edit', compact('group', 'members', 'tags', 'selected_tags'));
+        $user_visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
+
+
+        return view('groups.edit', compact('group', 'members', 'tags', 'selected_tags', 'user_visibility'));
     }
 
     /**
@@ -213,6 +219,7 @@ class GroupsController extends Controller
             'city' => $request->get('city'),
             'slug' => Str::slug($request->get('name')),
             'public' => $request->has('public') ? 1 : 0,
+            'user_visibility' => $request->get('user_visibility'),
             'status' => $request->has('inactive') ? 'inactive' : 'active',
             'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
         ]);
