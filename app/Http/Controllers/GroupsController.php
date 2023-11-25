@@ -28,7 +28,7 @@ class GroupsController extends Controller
     use ZipCodeTrait;
 
     public function __construct() {
-        $this->middleware('auth', ['except' => ['index','show']]);
+        $this->middleware('auth', ['except' => ['index','show','members']]);
     }
 
     /**
@@ -333,12 +333,17 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($id);
 
-        //ha nem csoport tag akkor a csoport főoldalára irányít
-        if(!$group->isMember()) {
+        //ha nem regisztrált, de nem nyilvánosak a tagok, vagy ha regisztált akkor nem látható portál szinten a tagok és nem csoport tag
+        if(Auth::guest() && $group->user_visibility!='public' || Auth::check() && ($group->user_visibility!='portal' && !$group->isMember())) {
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
-        $users = $group->members()->get();
+        if(Auth::check()) {
+            $users = $group->members()->get();
+        }
+        else {
+            $users = $group->members()->where('public', 1)->get();
+        }
 
         $page = 'members';
 
