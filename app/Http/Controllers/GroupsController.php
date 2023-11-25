@@ -340,14 +340,16 @@ class GroupsController extends Controller
 
         if(Auth::check()) {
             $users = $group->members()->get();
+            $newss = News::where('group_id', $group->id)->latest()->get();
         }
         else {
             $users = $group->members()->where('public', 1)->get();
+            $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
         }
 
         $page = 'members';
 
-        return view('groups.members', compact('group','page','users'));
+        return view('groups.members', compact('group','page','users','newss'));
     }
 
 

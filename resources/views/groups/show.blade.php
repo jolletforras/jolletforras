@@ -1,18 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-	@if($is_member || $newss->isNotEmpty())
-		@include('groups._group_menu')
-	@endif
+	@include('groups._group_menu')
 	<div class="inner_box narrow-page" style="margin-top:6px;">
-		@if(!$is_member && !$newss->isNotEmpty())
-			<h2>
-				{{ $group->name }}
-				@if($group->city!='')
-					- <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
-				@endif
-			</h2>
-		@endif
        	<p>
 			@if ($is_admin)
 				<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/modosit" type="submit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"> </i>Módosít</a>

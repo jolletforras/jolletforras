@@ -6,18 +6,8 @@
 @section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg?'.$group->photo_counter}}@endsection
 
 @section('content')
-	@if($newss->isNotEmpty())
 	@include('groups._group_menu')
-	@endif
 	<div class="inner_box narrow-page" style="margin-top:6px;">
-		@if(!$newss->isNotEmpty())
-			<h2>
-				{{ $group->name }}
-				@if($group->city!='')
-					- <i style="font-weight: normal; font-size: 16px;">{{$group->get_location()}}</i>
-				@endif
-			</h2>
-		@endif
 		@if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
 			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg?{{$group->photo_counter}}" style="max-width: 50%;"></p>
 		@endif
