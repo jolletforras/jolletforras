@@ -58,6 +58,11 @@ class GroupNewsController extends Controller
     {
         $news = News::findOrFail($news_id);
 
+        //ha nem lépett be és nem nyilvános a csoport vagy a hír, akkor bejelentkezés oldalra irányít
+        if(Auth::guest() && (!$news->group->public || $news->visibility=='portal')) {
+            return redirect('/login');
+        }
+
         return view('groupnews.show', compact('news'));
     }
 	
