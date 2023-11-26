@@ -166,7 +166,7 @@ class User extends Authenticatable
             $this->skill_tags->count()==0;
     }
 
-    public function isAuthor() {
+    public function myProfile() {
         return Auth::check() && Auth::user()->id==$this->id;
     }
 
