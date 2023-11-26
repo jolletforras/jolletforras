@@ -38,9 +38,9 @@
         }
         ?>
         <div class="inner_box" style="background-color: #fbfbfb">
-            <p><a href="{!! $commendation->url !!}" target="_blank">{!! $title !!}</a></p>
+            <p><a href="{{ $commendation->url }}" target="_blank">{{ $title }}</a></p>
             <p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$image}}" height="300px;" style="display: block; margin-left: auto; margin-right: auto;"></a></p>
-            <p>{!! mb_substr($description,0,300) !!} ...</p>
+            <p>@if(strlen($description)>300){{ mb_substr($description,0,300) }} ... @else {{ $description }} @endif</p>
         </div>
 
         @endif
