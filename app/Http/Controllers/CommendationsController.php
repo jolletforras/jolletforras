@@ -75,13 +75,34 @@ class CommendationsController extends Controller
      */
     public function store(CommendationRequest $request)
     {
+        libxml_use_internal_errors(true);
+        $dom_obj = new \DOMDocument();
+        $page_content = file_get_contents($request->get('url'));
+        $dom_obj->loadHTML($page_content);
+        $image = $title = $description = $site_name = null;
+        $xpath = new \DOMXPath($dom_obj);
+        $query = '//*/meta[starts-with(@property, \'og:\')]';
+        $metas = $xpath->query($query);
+        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
+        foreach ($metas as $meta) {
+            $property = $meta->getAttribute('property');
+            $content = $meta->getAttribute('content');
+            if($property=='og:image') $image = $content;
+            if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+            if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+            //if($property=='og:site_name') $site_name = $content;
+        }
+
         $commendation = Auth::user()->commendations()->create([
             'title' => $request->get('title'),
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title')),
             'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0
+            'active' => $request->has('active') ? 1 : 0,
+            'meta_title' =>  $title,
+            'meta_image' =>  $image,
+            'meta_description' =>  $description
         ]);
 
         if(Auth::user()->admin) {
@@ -130,6 +151,24 @@ class CommendationsController extends Controller
      */
     public function update($id, CommendationRequest $request)
     {
+        libxml_use_internal_errors(true);
+        $dom_obj = new \DOMDocument();
+        $page_content = file_get_contents($request->get('url'));
+        $dom_obj->loadHTML($page_content);
+        $image = $title = $description = $site_name = null;
+        $xpath = new \DOMXPath($dom_obj);
+        $query = '//*/meta[starts-with(@property, \'og:\')]';
+        $metas = $xpath->query($query);
+        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
+        foreach ($metas as $meta) {
+            $property = $meta->getAttribute('property');
+            $content = $meta->getAttribute('content');
+            if($property=='og:image') $image = $content;
+            if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+            if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+            //if($property=='og:site_name') $site_name = $content;
+        }
+
         $commendation = Commendation::findOrFail($id);
 
         $commendation->update([
@@ -138,7 +177,10 @@ class CommendationsController extends Controller
             'url' =>  $request->get('url'),
             'slug' => Str::slug($request->get('title')),
             'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0
+            'active' => $request->has('active') ? 1 : 0,
+            'meta_title' =>  $title,
+            'meta_image' =>  $image,
+            'meta_description' =>  $description
         ]);
 
         if(Auth::user()->admin) {

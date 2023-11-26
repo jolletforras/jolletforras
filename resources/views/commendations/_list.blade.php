@@ -1,8 +1,4 @@
-<?php
-    $logged_in = Auth::check();
-    libxml_use_internal_errors(true);
-    $dom_obj = new DOMDocument();
-?>
+<?php $logged_in = Auth::check(); ?>
 @for ($i = 0; $i < $num=$commendations->count(); $i++)
     <?php
         $commendation = $commendations[$i];
@@ -20,27 +16,10 @@
         </p>
         {!! nl2br($commendation->body) !!}<br>
         @if(!empty($commendation->url))
-        <?php
-        $page_content = file_get_contents($commendation->url);
-        $dom_obj->loadHTML($page_content);
-        $image = $title = $description = $site_name = null;
-        $xpath = new DOMXPath($dom_obj);
-        $query = '//*/meta[starts-with(@property, \'og:\')]';
-        $metas = $xpath->query($query);
-        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
-        foreach ($metas as $meta) {
-            $property = $meta->getAttribute('property');
-            $content = $meta->getAttribute('content');
-            if($property=='og:image') $image = $content;
-            if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            if($property=='og:site_name') $site_name = $content;
-        }
-        ?>
         <div class="inner_box" style="background-color: #fbfbfb">
-            <p><a href="{{ $commendation->url }}" target="_blank">{{ $title }}</a></p>
-            <p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
-            <p>@if(strlen($description)>300){{ mb_substr($description,0,300) }} ... @else {{ $description }} @endif</p>
+            <p><a href="{{ $commendation->url }}" target="_blank">{{ $commendation->meta_title }}</a></p>
+            <p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$commendation->meta_image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
+            <p>@if(strlen($commendation->meta_description)>300){{ mb_substr($commendation->meta_description,0,300) }} ... @else {{ $commendation->meta_description }} @endif</p>
         </div>
 
         @endif

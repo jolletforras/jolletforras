@@ -10,7 +10,7 @@ class Commendation extends Model
 {
     use HasFactory;
 
-    protected $fillable = [	'title','body','url','slug','public','active','approved'];
+    protected $fillable = [	'title','body','url','slug','public','active','approved','meta_title','meta_image','meta_description'];
     
     protected $dates=['updated_at']; //így használhatóak a carbon függvényel, pl. $recommand->updated_at->format('Y-m-d');
     
