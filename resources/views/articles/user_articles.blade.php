@@ -6,17 +6,11 @@
 
 @section('content')
 	@include('profiles.partials.profile_menu')
-	@if ($user->isAuthor())
-	<div class="row">
-		<div class="col-sm-9"></div>
-		<div class="col-sm-3 text-right">
-			<a href="#article_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras')}}/uj" type="submit" class="btn btn-default">Új Írás</a>
-		</div>
-	</div>
+	@if ($user->myProfile())
 		@include('articles._new_article_info', ['collapse'=>' collapse'])
 	@endif
 
-	<div class="row">
+	<div class="row" style="margin-top: 6px;">
 		@include('articles._list')
 	</div>
 @endsection
