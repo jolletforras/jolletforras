@@ -27,10 +27,10 @@ class CommendationsController extends Controller
     {
         if(Auth::check())
         {
-            $commendations = Commendation::latest('updated_at')->get();
+            $commendations = Commendation::latest('created_at')->get();
         }
         else {
-            $commendations = Commendation::where('public', 1)->latest('updated_at')->get();
+            $commendations = Commendation::where('public', 1)->latest('created_at')->get();
         }
 
         //dd($commendations);
