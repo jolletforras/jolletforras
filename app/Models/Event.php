@@ -44,7 +44,10 @@ class Event extends Model
 
     public function getTimeAttribute($date)
     {
-        return Carbon::parse($date)->format('Y-m-d H:i');
+        $time = Carbon::parse($date)->format('Y-m-d H:i');
+
+        //return $time!=date("Y-m-d H:i") ? $time : '';
+        return isset($date) ?  Carbon::parse($date)->format('Y-m-d H:i') : '';
     }
 
     public function isEditor() {
