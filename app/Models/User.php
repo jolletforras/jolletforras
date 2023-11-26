@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -163,6 +164,10 @@ class User extends Authenticatable
             strlen($this->city)=='' ||
             strlen($this->introduction)<config('constants.LENGTH_INTRO') ||
             $this->skill_tags->count()==0;
+    }
+
+    public function isAuthor() {
+        return Auth::check() && Auth::user()->id==$this->id;
     }
 
     public function isAdminInGroup() {
