@@ -26,10 +26,10 @@ class EventsController extends Controller
 
         if(Auth::check())
         {
-            $events = Event::latest()->where('expiration_date','>=',date('Y-m-d'))->where('visibility','<>', 'group')->get();
+            $events = Event::where('expiration_date','>=',date('Y-m-d'))->where('visibility','<>', 'group')->orderBy('time', 'ASC')->get();
         }
         else {
-            $events = Event::latest()->where('expiration_date','>=',date('Y-m-d'))->where('visibility','=', 'public')->get();
+            $events = Event::where('expiration_date','>=',date('Y-m-d'))->where('visibility','=', 'public')->orderBy('time', 'ASC')->get();
         }
 
 		return view('events.index', compact('events'));
