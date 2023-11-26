@@ -3,11 +3,8 @@
 function justbr($text,$length)
 {
     $text = strip_tags($text,"<p>");
-    $text = str_replace("<p></p>", "",$text);
-    $text = str_replace("<p>", "",$text);
-    $text = str_replace("</p>", "Ł",$text);
-    $text = mb_substr($text,0,$length);
-    $text = str_replace("Ł", "<br/>",$text);
+    $text = preg_replace("/<p[^>]*?>/", "", $text);
+    $text = str_replace("</p>", "<br/>", $text);
 
     return $text;
 }
