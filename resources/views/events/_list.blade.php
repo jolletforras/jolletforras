@@ -1,6 +1,6 @@
 @for ($i = 0; $i < $num=$events->count(); $i++)
     <?php $event = $events[$i]; ?>
-    <h3 style="display: inline-block;"><a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->title }}</a></h3>
+    <h3 style="display: inline-block;"><a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->title }}</a></h3>  <span style="font-size: 16px; margin-left:10px; margin-right:10px;">{{$event->time}}</span>
     @if(isset($event->group))
         @if (Auth::check())
             <i>/A(z) <b><a href="{{ url('csoport',$event->group->id) }}/{{$event->group->slug}}">{{ $event->group->name }}</a></b> csoport eseménye/</i><br>
