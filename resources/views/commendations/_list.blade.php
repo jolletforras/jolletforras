@@ -1,4 +1,8 @@
-<?php $logged_in = Auth::check(); ?>
+<?php
+    $logged_in = Auth::check();
+    libxml_use_internal_errors(true);
+    $dom_obj = new DOMDocument();
+?>
 @for ($i = 0; $i < $num=$commendations->count(); $i++)
     <?php
         $commendation = $commendations[$i];
@@ -16,7 +20,29 @@
         </p>
         {!! nl2br($commendation->body) !!}<br>
         @if(!empty($commendation->url))
-        <a href="{!! $commendation->url !!}" target="_blank">{!! substr($commendation->url,0,50) !!}</a><br>
+        <?php
+        $page_content = file_get_contents($commendation->url);
+        $dom_obj->loadHTML($page_content);
+        $image = $title = $description = $site_name = null;
+        $xpath = new DOMXPath($dom_obj);
+        $query = '//*/meta[starts-with(@property, \'og:\')]';
+        $metas = $xpath->query($query);
+        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
+        foreach ($metas as $meta) {
+            $property = $meta->getAttribute('property');
+            $content = $meta->getAttribute('content');
+            if($property=='og:image') $image = $content;
+            if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+            if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+            if($property=='og:site_name') $site_name = $content;
+        }
+        ?>
+        <div class="inner_box" style="background-color: #fbfbfb">
+            <p><a href="{!! $commendation->url !!}" target="_blank">{!! $title !!}</a></p>
+            <p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$image}}" height="300px;" style="display: block; margin-left: auto; margin-right: auto;"></a></p>
+            <p>{!! mb_substr($description,0,300) !!} ...</p>
+        </div>
+
         @endif
         <span class="author"><a href="{{ url('profil',$commendation->user->id) }}/{{$commendation->user->slug}}">{{ $commendation->user->name }}</a>,	{{ $commendation->created_at }}</span><br>
         @if ($logged_in)
