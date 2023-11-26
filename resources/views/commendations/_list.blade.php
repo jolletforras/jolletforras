@@ -27,7 +27,7 @@
         @if ($logged_in)
             <a href="{{ url('ajanlo',$commendation->id) }}/{{$commendation->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
             @if( $commendation->counter>0)
-                &nbsp;&nbsp;<a href="{{ url('commendation',$commendation->id) }}/{{$commendation->slug}}">{{ $commendation->counter }} hozzászólás</a>
+                &nbsp;&nbsp;<a href="{{ url('ajanlo',$commendation->id) }}/{{$commendation->slug}}">{{ $commendation->counter }} hozzászólás</a>
             @endif
         @endif
         @if($i!=$num-1)<hr>@endif
