@@ -164,6 +164,7 @@ class EventsController extends Controller
         $event = Auth::user()->events()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
+            'time' => $request->get('time'),
             'expiration_date' => $request->get('expiration_date'),
             'shorted_text' => $shorted_text,
             'body' => $body,
@@ -246,6 +247,7 @@ class EventsController extends Controller
         $event->update([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
+            'time' => $request->get('time'),
             'expiration_date' => $request->get('expiration_date'),
             'shorted_text' => $shorted_text,
             'body' => $body,

@@ -6,6 +6,12 @@
     <script type="text/javascript">
         $('.datepicker-event').datepicker({
             language: 'hu',
+            timepicker: true,
+            timeFormat: 'hh:ii',
+        });
+
+        $('.datepicker-expiration').datepicker({
+            language: 'hu',
         });
     </script>
 @endsection
