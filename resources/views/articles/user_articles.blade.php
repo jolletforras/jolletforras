@@ -7,7 +7,7 @@
 @section('content')
 	@include('profiles.partials.profile_menu')
 	<div class="inner_box narrow-page" style="margin-top:6px;">
-		@if (Auth::check() && Auth::user()->id==$user->id)
+		@if ($user->isAuthor())
 		<div class="row">
 			<div class="col-sm-9"></div>
 			<div class="col-sm-3 text-right">
@@ -16,13 +16,9 @@
 		</div>
 			@include('articles._new_article_info', ['collapse'=>' collapse'])
 		@endif
-		@for ($i = 0; $i < $num=$articles->count(); $i++)
-			<?php $article = $articles[$i]; ?>
-			<h3><a href="/iras/{{$article->id}}/{{$article->slug}}">{{ $article->title }}</a></h3>
-			<article>
-				<div class="body">{!!$article->body !!}</div>
-			</article>
-			@if($i!=$num-1)<hr>@endif
-		@endfor
+
+		<div class="row">
+			@include('articles._list')
+		</div>
 	</div>
 @endsection

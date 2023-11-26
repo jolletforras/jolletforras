@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header"></div>
             <div class="image-box">
-                <div class="image" style="background-image:url('images/posts/{{$article->image}}');"></div>
+                <div class="image" style="background-image:url('/images/posts/{{$article->image}}');"></div>
             </div>
             <div class="card-body">
                 <h3>
@@ -12,7 +12,7 @@
                         <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" class="edit">módosít</a><br>
                     @endif
                 </h3>
-                <p>{!! $article->short_description !!}</p>
+                <p>{!! $article->short_description !!}{!! $article->short_description !!}</p>
             </div>
         </div>
     </div>
