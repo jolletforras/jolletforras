@@ -6,7 +6,7 @@
 
 @section('content')
 	@include('profiles.partials.profile_menu')
-	@if (Auth::check() && Auth::user()->id==$user->id)
+	@if ($user->myProfile())
 	<div class="profil_almenu narrow-page">
 		<a href="{{ url('/profilom') }}/modosit">Adatok</a>
 		<a href="{{ url('/profilom') }}/feltolt_profilkep">Profilkép</a>
@@ -16,7 +16,7 @@
 		@endif
 	</div>
 	@endif
-    <div class="panel panel-default narrow-page">
+    <div class="panel panel-default narrow-page" style="margin-top: 6px;">
         <div class="panel-body introduction">
 			@include('profiles.partials.show_profilephoto')
 			@if (Auth::check())
