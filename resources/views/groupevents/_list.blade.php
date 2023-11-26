@@ -1,6 +1,6 @@
 @for ($i = 0; $i < $num=$events->count(); $i++)
     <?php $event = $events[$i]; ?>
-    <h3><a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->title }}</a></h3>
+    <h3><a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}">{{ $event->title }}</a><span style="font-size: 16px; margin-left:10px; margin-right:10px;">{{$event->time}}</span></h3>
     @if ($event->isEditor() || $group->isAdmin())
         <a href="{{url('esemeny')}}/{{$event->id}}/{{$event->slug}}/modosit" class="btn btn-default">módosít</a>
     @endif
