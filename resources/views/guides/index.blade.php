@@ -4,7 +4,7 @@
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/tudnivalok" />@endsection
 
 @section('content')
-	<div class="row narrow-page">
+	<div class="row">
 		<div class="col-sm-9">
 			<h2>Tudnivalók</h2>
 		</div>
@@ -14,15 +14,7 @@
 		</div>
 		@endif
 	</div>
-	<div class="inner_box narrow-page">
-		<h3><a href="{{ url('tudnivalo',1) }}/{{$main_guide->slug}}">{{ $main_guide->title }}</a></h3>
-		@if (Auth::check() && Auth::user()->admin)
-			<a href="{{url('tudnivalo')}}/1/{{$main_guide->slug}}/modosit">módosít</a>
-		@endif
-		<article>
-			<div class="body">{!! $main_guide->short_description !!}</div>
-		</article>
-		<hr>
+	<div class="row">
 		@include('guides._list')
 	</div>
 @endsection

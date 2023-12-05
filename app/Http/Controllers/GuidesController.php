@@ -20,6 +20,8 @@ class GuidesController extends Controller
 
         $main_guide = Guide::findOrFail(1);
 
+        $guides->prepend($main_guide);
+
 		return view('guides.index', compact('guides','main_guide'));
 	}
 

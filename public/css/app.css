@@ -499,6 +499,38 @@ h3 {
 	color : #ff9b00;
 }
 
+.guide .card .card-header {
+	height: 20px;
+}
+
+.guide .card .card-title {
+	padding: 0px 10px 0px 15px;
+}
+
+.guide .card .card-title h3 {
+	font-size: 20px;
+}
+
+.guide .card a {
+	text-decoration: none;
+	color: #575757;
+}
+
+.guide .card .card-body p {
+	height: 160px;
+}
+
+.guide .card .card-body a {
+	display:inline-block;
+	padding-bottom: 10px;
+	font-size: 14px;
+}
+
+.guide .card .card-title h3 a:hover, .guide .card .card-body a:hover {
+	color : #ff9b00;
+}
+
+
 .footer  {
 	background-color: #03989e;
 	min-height: 30px;
