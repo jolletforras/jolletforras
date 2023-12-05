@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	@include('partials.tinymce_js')
+	@include('partials.tinymce_just_link_js')
 	<h2>{{$title}}</h2>
 	@include('errors.list')
 	<div class="panel panel-default">
