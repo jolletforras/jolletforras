@@ -26,7 +26,7 @@ Route::get('/programok', 'HomeController@events');
 Route::get('/kapcsolat', 'HomeController@connection');
 Route::post('/kepfeltoltes', 'HomeController@uploadimage');
 Route::get('/kozossegimegallapodas', 'HomeController@socialagreement');
-Route::get('/tudnivalok', 'HomeController@aboutsite');
+Route::get('/tudnivalok2', 'HomeController@aboutsite');
 Route::get('/adatkezeles', 'HomeController@datahandling');
 Route::get('/szellemiseg', 'HomeController@spirituality');
 
@@ -177,6 +177,13 @@ Route::get('/hirlevel/uj', 'NewslettersController@create');
 Route::post('/hirlevel/uj', 'NewslettersController@store');
 Route::get('/hirlevel/{id}/{title}/modosit', 'NewslettersController@edit');
 Route::post('/hirlevel/{id}/{title}/modosit', 'NewslettersController@update');
+
+Route::get('/tudnivalok', 'GuidesController@index');
+Route::get('/tudnivalo/{id}/{title}', 'GuidesController@show');
+Route::get('/tudnivalo/uj', 'GuidesController@create');
+Route::post('/tudnivalo/uj', 'GuidesController@store');
+Route::get('/tudnivalo/{id}/{title}/modosit', 'GuidesController@edit');
+Route::post('/tudnivalo/{id}/{title}/modosit', 'GuidesController@update');
 
 Route::get('/forum', 'ForumsController@index');
 Route::get('/forum/{id}/{title}', 'ForumsController@show');
