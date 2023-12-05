@@ -16,7 +16,7 @@ class GuidesController extends Controller
 
 	public function index(Request $request)
 	{
-        $guides = Guide::latest()->get();
+        $guides = Guide::where('id','>',1)->latest()->get();
 
         $main_guide = Guide::findOrFail(1);
 
