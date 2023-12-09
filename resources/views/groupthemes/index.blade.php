@@ -2,6 +2,7 @@
 
 @section('content')
 	@include('groups._group_menu')
+	<?php $isAdmin = $group->isAdmin(); ?>
 	<div class="inner_box narrow-page" style="margin-top:6px;">
 		<div class="row">
 			<div class="col-sm-4">
@@ -12,7 +13,7 @@
 						<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új téma</a>
 					@endif
 				@endif
-				@if ($page=="announcement" && $group->isActive() && $group->isAdmin())
+				@if ($page=="announcement" && $group->isActive() && $isAdmin)
 					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/kozlemeny/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új közlemény</a>
 				@endif
 			</div>
@@ -37,10 +38,10 @@
 				<h3><a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{ $forum->title }}</a></h3>
 				<p>
 					<span class="author"><a href="{{ url('profil',$forum->user->id) }}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>,	{{ $forum->created_at }}</span>
-					@if (Auth::user()->id==$forum->user->id)
+					@if ($page=="conversation" && Auth::user()->id==$forum->user->id || $page=="announcement" && $isAdmin)
 						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{$forum->id}}/{{$forum->slug}}/modosit" class="btn btn-default btn-xs">módosít</a>
 					@endif
-					@if ($group->isAdmin())
+					@if ($isAdmin)
 						@if($forum->active)
 						<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/lezar-beszelgetest/{{ $forum->id }}/{{$forum->slug}}" class="btn btn-default btn-xs">lezár</a>
 						@else
