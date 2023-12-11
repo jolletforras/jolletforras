@@ -13,7 +13,7 @@
                     <form method="POST" action="{{url('meghivo')}}/uj" accept-charset="UTF-8">
                         @csrf
                         <div class="form-group">
-                            <label for="email">Email:</label>
+                            <label for="email">Email:</label> <i>(Amennyiben több email címet adsz meg, egymástól vesszővel válaszd el őket)</i>
                             <input class="form-control" required="required" name="email" type="text" value="{{old('email')}}" id="email">
                         </div>
 

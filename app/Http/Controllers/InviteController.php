@@ -29,8 +29,10 @@ class InviteController extends Controller
             return redirect('meghivo/uj')->withInput()->with('message', 'Ezzel az email címmel már regisztráltak.');
 
         //$data['activation_code']=str_random(10);
-        $data['name']=$user->name;
-        $data['email']=$email;
+        $data['user_name']=$user->name;
+        $data['user_email']=$user->email;
+        $email = str_replace(' ', '', $email);
+        $data['email']=explode(",",$email);
         $data['invite_msg']=$request->get('message');
 
         /*Invite::create([
@@ -43,7 +45,10 @@ class InviteController extends Controller
         {
             $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
             $message->subject("Ismerősöd meghívott a tarsadalmijollet.hu oldalra");
-            $message->to($data['email']);
+            if(count($data['email'])==1)
+                $message->to($data['email']);
+            else
+                $message->bcc($data['email']);
         });
 
         return redirect('tarsak')->with('message', 'A meghívód sikeresen el lett küldve!');
