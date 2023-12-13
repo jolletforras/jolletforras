@@ -133,6 +133,7 @@ class GroupsController extends Controller
             'meta_description' => $request->get('meta_description'),
             'description' => $description,
             'agreement' => $agreement,
+            'aks_motivation' => $request->has('aks_motivation') ? 1 : 0,
             'webpage_name' => $request->get('webpage_name'),
             'webpage_url' => addhttp($request->get('webpage_url')),
             'location' => $request->get('location'),
@@ -175,6 +176,7 @@ class GroupsController extends Controller
 
         $user_visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
 
+        //dd($group);
 
         return view('groups.edit', compact('group', 'members', 'tags', 'selected_tags', 'user_visibility'));
     }
@@ -206,6 +208,7 @@ class GroupsController extends Controller
             'meta_description' => $request->get('meta_description'),
             'description' => $description,
             'agreement' => $agreement,
+            'aks_motivation' => $request->has('ask_motivation') ? 1 : 0,
             'webpage_name' => $request->get('webpage_name'),
             'webpage_url' => addhttp($request->get('webpage_url')),
             'location' => $request->get('location'),

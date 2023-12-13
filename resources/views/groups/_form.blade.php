@@ -21,6 +21,15 @@
 		</div>
 
 		<div class="form-group">
+			<label>
+				<input name="ask_motivation" type="checkbox" value="1" @if(isset($group) && $group->aks_motivation) checked @endif>
+				<span style="padding-top: 10px; font-size: 18px;">A csoporthoz csatlakozni szándékozónak "Miért?" kérdés</span>
+				<a href="#ask_motivation_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+			</label>
+			<div id="ask_motivation_info" class="collapse info">A csoporthoz való csatlakozás feltétele, hogy a csatlakozni szándékozó válaszoljon miért szeretne a csoport tagja lenni, mi az ő személyes motivációja.</div>
+		</div>
+
+		<div class="form-group">
 			<label for="webpage_name">Weboldalad neve:</label>
 			<a href="#webpage_name_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 			<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a portálon regisztráltaknak, írd ide. Ha több oldalad is van, azt az egyet írd ide, amit leginkább ide kapcsolódónak gondolsz.</div>
