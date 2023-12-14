@@ -4,7 +4,7 @@
             Ha szeretnél itt közzétenni írást, kérlek az alábbiakat fontold meg:<br>
             <ul>
                 <li>Az írás hogyan kapcsolódik a társadalmi jólléthez?</li>
-                <li>Lehet az írásod kevésbe közérdekű, inkább személyes blogba illő, ez esetben "csak a profilomnál" megjelenítést állítsd be.</li>
+                <li>Lehet az írásod kevésbé közérdekű, inkább személyes blogba illő, ez esetben "csak a profilomnál" megjelenítést állítsd be.</li>
                 <li>Törekedj a közérthetőségre, olvasható tagolásra és hogy az írás ne legyen túl hosszú. Ajánlott terjedelem: 300-1000 szó.</li>
                 <li>Írásod elsősorban saját kutatáson, véleményen, meglátáson alapuljon. Szükség szerint hivatkozhatsz más forrásokra vagy röviden idézhetsz azokból.</li>
                 <li>Az írás témája, tartalma és hangvétele összhangban legyen a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodásban</a> foglaltakkal.</li>
