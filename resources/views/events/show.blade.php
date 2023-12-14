@@ -29,7 +29,7 @@
 			@endif
 			@if ($event->isGroupEvent() && $event->visibility!='group' && $event->group->isAdmin())
 				<div class="flash-message alert alert-info" style="display:none;"></div>
-				<label for="invited_user">Személyek meghívás az eseményre, akik nem tagjai a csoportnak</label>
+				<label for="invited_user">Személyek meghívása az eseményre, akik nem tagjai a csoportnak</label>
 				<div class="row">
 					<div class="form-group col-sm-4">
 						<select id="invited_user" name="invited_user" class="form-control">
