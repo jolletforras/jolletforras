@@ -1,11 +1,23 @@
-@unless($group->members->isEmpty())
-    <p>
-        <?php $members_html = array(); ?>
-        @foreach($group->members as $member)
-            @if($member->status==3)
-                <?php $members_link[] = '<a href="'.url('profil',$member->id).'/'.$member->slug.'">'.$member->name.'</a>' ?>
-            @endif
-        @endforeach
-        <b>Tagok: </b>{!! implode(', ',$members_link) !!}
-    </p>
-@endunless
+@extends('layouts.app')
+@section('title'){{ $group->name }} csoport tagjai @endsection
+@section('description'){{ $group->meta_description }}@endsection
+@section('url'){{url('csoport')}}/{{$group->id}}/{{$group->slug.'/tagok'}}@endsection
+@section('canonical')<link rel="canonical" href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tagok"  />@endsection
+@section('image'){{ url('/images/groups') }}/{{ $group->id.'.jpg?'.$group->photo_counter}}@endsection
+
+@section('content')
+	@include('groups._group_menu')
+	<div class="narrow-page">
+		@if($group->aks_motivation==0 || Auth::guest())
+			@if($users->isNotEmpty())
+				@include('profiles.partials.members',['type'=>'tab1'])
+			@else
+				<div class="inner_box">
+					Nincs nyilvánosan elérhető csoport tag
+				</div>
+			@endif
+		@else
+			@include('groups._user_motivations')
+		@endif
+	</div>
+@endsection

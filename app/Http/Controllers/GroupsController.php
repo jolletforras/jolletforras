@@ -346,7 +346,7 @@ class GroupsController extends Controller
 
         $page = 'members';
 
-        return view('groups.members', compact('group','page','users'));
+        return view('groups._members', compact('group','page','users'));
     }
 
 
