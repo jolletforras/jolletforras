@@ -235,7 +235,7 @@ class GroupsController extends Controller
      * @param  integer $id The group ID
      * @return Response
      */
-    public function join($id, $name)
+    public function join($id, $name, Request $request)
     {
         $group = Group::findOrFail($id);
 
@@ -245,6 +245,11 @@ class GroupsController extends Controller
             $user_id = Auth::user()->id;
 
             $group->members()->attach($user_id);
+            if($group->ask_motivation) {
+                $motivation = $request->get('motivation');
+                DB::table('group_user')->where('group_id',$id)->where('user_id',$user_id)->update(['motivation' => $motivation]);
+
+            }
 
             //itt abban az esetben ha adott témánál/eseménynél még nem létezik, akkor fel kell venni
             $themes = $group->themes()->pluck('id')->toArray();

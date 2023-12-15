@@ -94,6 +94,14 @@
 			@csrf
 
 			<p><input type="checkbox" name="accept" required style="width:18px;height:18px;"><span style="padding-left: 10px;">Elolvastam és elfogadom a csoport megállapodását.</span></p>
+
+			@if($group->ask_motivation)
+			<p>
+				Kérjük, fogalmazd meg a szándékodat, hogy miért szeretnél a csoport tagja lenni.  Mi az, amit a közösséghez szeretnél-tudsz hozzátenni és mit szeretnél kapni ebben a közösségben?<br>
+				<textarea class="form-control" rows="4" name="motivation" cols="50" required></textarea>
+			</p>
+			@endif
+
 			<p><button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-user"></i>Csatlakozás</button></p>
 		</form>
 	</div>
