@@ -8,7 +8,7 @@
                 <div id="motivation_info" class="collapse info">
                     Kérjük, fogalmazd meg a szándékodat, hogy miért csatlakoztál a csoporthoz.  Mi az, amit a csoporthoz szeretnél-tudsz hozzátenni és mit szeretnél kapni ebben a csoportban?
                 </div>
-                <textarea class="form-control" rows="4" id="motivation" cols="50">@if (isset($my_profile)){{$my_profile->pivot->motivation}}@endif</textarea>
+                <textarea class="form-control" rows="4" id="motivation" cols="50" style="font-size: 18px;">@if (isset($my_profile)){{$my_profile->pivot->motivation}}@endif</textarea>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" onclick="update()">Mentés</button>
