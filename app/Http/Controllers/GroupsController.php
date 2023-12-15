@@ -344,9 +344,13 @@ class GroupsController extends Controller
             $users = $group->members()->where('public', 1)->get();
         }
 
+        if(Auth::check()) {
+            $my_profile = $group->members()->where('user_id',Auth::user()->id)->first();
+        }
+
         $page = 'members';
 
-        return view('groups._members', compact('group','page','users'));
+        return view('groups._members', compact('group','page','users','my_profile'));
     }
 
 
@@ -522,6 +526,20 @@ class GroupsController extends Controller
         $group->save();
 
         return redirect('/csoport/'.$id.'/'.$name)->with('message', 'A csoportképet sikeresen feltöltötted!');
+    }
+
+    public function motivation_update(Request $request)
+    {
+        $group_id = $request->get('group_id');
+        $motivation = $request->get('motivation');
+
+        if(!empty($motivation)) {
+            DB::table('group_user')->where('group_id',$group_id)->where('user_id',Auth::user()->id)->update(['motivation' => $motivation]);
+        }
+
+        $response = array('status' => 'success');
+
+        return \Response::json($response);
     }
 
     public function cron_test()

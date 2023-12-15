@@ -114,6 +114,7 @@ Route::get('/csoport/{group_id}/{group_slug}/megnyit-beszelgetest/{forum_id}/{fo
 Route::get('/csoport/{group_id}/{group_slug}/tema/cimke/{tag_id}/{tag}', 'TagsController@group_theme_show');
 
 Route::get('/csoport/{id}/{slug}/tagok', 'GroupsController@members');
+Route::post('/motivation_update', 'GroupsController@motivation_update');
 
 Route::get('/csoport/{id}/{slug}/esemenyek', 'GroupsController@events');
 Route::get('/csoport/{id}/{slug}/esemeny/uj', 'GroupsController@eventcreate');
