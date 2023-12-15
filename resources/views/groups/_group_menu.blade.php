@@ -8,7 +8,7 @@
 			</h2>
 			<div class="menu">
 				<?php
-					$show_user = Auth::guest() && $group->user_visibility=='public' || Auth::check() && $group->user_visibility=='portal' || $group->isMember();
+					$show_user = Auth::guest() && $group->user_visibility=='public' || Auth::check() && $group->user_visibility!='group' || $group->isMember();
 					$show_news = $group->isMember() || $group->hasNews();
 				?>
 

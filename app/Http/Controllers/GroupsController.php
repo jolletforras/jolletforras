@@ -338,7 +338,7 @@ class GroupsController extends Controller
         $group = Group::findOrFail($id);
 
         //ha nem regisztrált, de nem nyilvánosak a tagok, vagy ha regisztált akkor nem látható portál szinten a tagok és nem csoport tag
-        if(Auth::guest() && $group->user_visibility!='public' || Auth::check() && ($group->user_visibility!='portal' && !$group->isMember())) {
+        if(!(Auth::guest() && $group->user_visibility=='public' || Auth::check() && $group->user_visibility!='group' || $group->isMember())) {
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
