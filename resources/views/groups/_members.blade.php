@@ -8,7 +8,7 @@
 @section('content')
 	@include('groups._group_menu')
 	<div class="narrow-page">
-		@if($group->aks_motivation==0 || Auth::guest())
+		@if($group->ask_motivation==0 || Auth::guest())
 			@if($users->isNotEmpty())
 				@include('profiles.partials.members',['type'=>'tab1'])
 			@else

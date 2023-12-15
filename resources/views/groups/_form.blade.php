@@ -22,7 +22,7 @@
 
 		<div class="form-group">
 			<label>
-				<input name="ask_motivation" type="checkbox" value="1" @if(isset($group) && $group->aks_motivation) checked @endif>
+				<input name="ask_motivation" type="checkbox" value="1" @if(isset($group) && $group->ask_motivation) checked @endif>
 				<span style="padding-top: 10px; font-size: 18px;">A csoporthoz csatlakozni szándékozónak "Miért?" kérdés</span>
 				<a href="#ask_motivation_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 			</label>
