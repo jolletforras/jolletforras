@@ -61,7 +61,7 @@ body {
 }
 
 .oldal_nev a { 	
- 	color : #ff9b00;
+ 	color : #daa520;
     text-decoration: none;
 }
 
@@ -236,7 +236,7 @@ h3 {
 }
 
 #app-navbar-collapse a:hover {	
-	color : #ff9b00;	
+	color : #daa520;	
 }
 
 #profile-menu li a:hover {
@@ -496,7 +496,7 @@ h3 {
 }
 
 .spirituality .card .card-title h3 a:hover, .spirituality .card .card-body a:hover {
-	color : #ff9b00;
+	color : #daa520;
 }
 
 .guide .card .card-header {
@@ -528,7 +528,7 @@ h3 {
 }
 
 .guide .card .card-title h3 a:hover, .guide .card .card-body a:hover {
-	color : #ff9b00;
+	color : #daa520;
 }
 
 
@@ -688,7 +688,7 @@ h3 {
         //background-color: #d1f2d0;
         //background-color: white;
         border-radius: 5px;
-        border-color: #ff9b00;
+        border-color: #daa520;
     }
 
     #profile-menu {
@@ -699,7 +699,7 @@ h3 {
         background-color: #fff5e5;
         border-width: 0.5px;
         border-style: solid;
-        border-color: #ff9b00;
+        border-color: #daa520;
         border-radius: 5px;
     }
 
