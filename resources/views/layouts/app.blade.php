@@ -16,7 +16,7 @@
 	<meta property="og:site_name" content="Társadalmi Jóllét Portál">
 	<meta property="og:image" content="@yield('image','https://tarsadalmijollet.hu/images/tarsadalmijollet.png')">
 
-    <link rel="shortcut icon" href="{{ url('/') }}/favicon.png">
+    <link rel="shortcut icon" href="{{ url('/') }}/favicon.png?2">
     
 
     <title>Társadalmi Jóllét Portál</title>
