@@ -349,6 +349,7 @@ class GroupsController extends Controller
             $users = $group->members()->where('public', 1)->get();
         }
 
+        $my_profile = null;
         if(Auth::check()) {
             $my_profile = $group->members()->where('user_id',Auth::user()->id)->first();
         }
