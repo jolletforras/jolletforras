@@ -33,7 +33,7 @@ class Group extends Model
 
     public function members()
     {
-        return $this->belongsToMany(User::class)->withPivot('motivation')->where('status','=', 3)->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot(['motivation','updated_at'])->where('status','=', 3)->withTimestamps();
     }
 
     public function themes()

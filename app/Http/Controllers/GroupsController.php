@@ -336,18 +336,20 @@ class GroupsController extends Controller
     public function members($id,$slug)
     {
         $group = Group::findOrFail($id);
+        $isMember = $group->isMember();
+
 
         //ha nem regisztrált, de nem nyilvánosak a tagok, vagy ha regisztált akkor nem látható portál szinten a tagok és nem csoport tag
-        if(!(Auth::guest() && $group->user_visibility=='public' || Auth::check() && $group->user_visibility!='group' || $group->isMember())) {
+        if(!(Auth::guest() && $group->user_visibility=='public' || Auth::check() && $group->user_visibility!='group' || $isMember)) {
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
-        if(Auth::check()) {
-            $users = $group->members()->get();
-        }
-        else {
-            $users = $group->members()->where('public', 1)->get();
-        }
+        $users = $group->members();
+        if(Auth::guest())
+            $users = $users->where('public', 1);
+        elseif($isMember && $group->ask_motivation)
+            $users = $users->orderBy('pivot_updated_at', 'desc');
+        $users = $users->get();
 
         $my_profile = null;
         if(Auth::check()) {
