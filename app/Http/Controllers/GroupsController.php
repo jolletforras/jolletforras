@@ -540,7 +540,7 @@ class GroupsController extends Controller
         $motivation = $request->get('motivation');
 
         if(!empty($motivation)) {
-            DB::table('group_user')->where('group_id',$group_id)->where('user_id',Auth::user()->id)->update(['motivation' => $motivation]);
+            DB::table('group_user')->where('group_id',$group_id)->where('user_id',Auth::user()->id)->update(['motivation' => $motivation, 'updated_at' => date("Y-m-d H:i:s")]);
         }
 
         $response = array('status' => 'success');
