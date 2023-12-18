@@ -326,7 +326,9 @@ class GroupsController extends Controller
             //itt minden témánál az email-t 0-ra kell állítani, hogy már ne kapjon levelet
             $themes = $group->themes()->pluck('id')->toArray();
             foreach($themes as $forum_id) {
-                Notice::findBy($forum_id,$user_id,'Forum')->update(['email' => 0]);
+                $notice = Notice::findBy($forum_id,$user_id,'Forum')->first();
+                $notice->timestamps = false; //hogy az update_at ne módosuljon
+                $notice->update(['email' => 0]);
             }
         }
 
