@@ -38,6 +38,9 @@ body {
 	background: #fafafa;;
 }
 
+.form-control {
+	font-size: 18px !important;
+}
 
 .base {
 	width: 1200px;
