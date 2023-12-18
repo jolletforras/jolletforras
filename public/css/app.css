@@ -38,10 +38,6 @@ body {
 	background: #fafafa;;
 }
 
-.form-control {
-	font-size: 18px !important;
-}
-
 .base {
 	width: 1200px;
     margin-left: auto;
@@ -322,7 +318,7 @@ h3 {
 }
 
 .form-control {
-	font-size: 16px;
+	font-size: 18px;
 }
 
 #upload_image {
