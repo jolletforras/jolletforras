@@ -23,13 +23,15 @@
 			</div>
 			<div class="col-sm-1" style="padding-top:4px;">
 			</div>
-			<div class="col-sm-3" style="padding-top:4px;">
-				<select id="city" onchange="CityFilter();" name="city">
+			<div class="col-sm-3">
+				<!--
+				<select id="city" onchange="CityFilter();" name="city" class="form-control">
 					<option value="" selected="selected">Minden település</option>
 					@foreach(constx('CITY') as $key => $val)
 						<option value="{{ $key }}">{{ $val }}</option>
 					@endforeach
 				</select>
+				-->
 			</div>
 			<div class="col-sm-2 text-right">
 				<a href="#create_group_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('csoport')}}/uj" type="submit" class="btn btn-default">Új csoport</a>
