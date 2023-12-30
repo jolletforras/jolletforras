@@ -26,7 +26,7 @@
 	@if(Auth::check())
 		@include('partials.comment_script', [
 			'commentable_type'	=>'Commendation',
-			'commentable_url'	=>'commendation/'.$commendation->id.'/'.$commendation->slug,
+			'commentable_url'	=>'ajanlo/'.$commendation->id.'/'.$commendation->slug,
 			'commentable_id'	=>$commendation->id,
 			'name'				=>$commendation->user->name,
 			'email'				=>$commendation->user->email
