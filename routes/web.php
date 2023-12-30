@@ -132,6 +132,13 @@ Route::get('/email/{code}/esemeny/{id}/{slug}', 'NoticesController@email_event_l
 Route::post('/getNotices', 'NoticesController@get_noticies');
 
 
+Route::get('/profil/{user_id}/{slug}/alkotasok', 'CreationsController@index');
+Route::get('/alkotas/{id}/{title}', 'CreationsController@show');
+Route::get('/alkotas/uj', 'CreationsController@create');
+Route::post('alkotas/uj', 'CreationsController@store');
+Route::get('/alkotas/{id}/{title}/modosit', 'CreationsController@edit');
+Route::post('/alkotas/{id}/{title}/modosit', 'CreationsController@update');
+
 Route::get('/irasok', 'ArticlesController@index');
 Route::get('/profil/{user_id}/{slug}/irasok', 'ArticlesController@show_user_articles');
 Route::get('/iras/{id}/{title}', 'ArticlesController@show');
