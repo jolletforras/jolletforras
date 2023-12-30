@@ -12,7 +12,7 @@
 			<div class="inner_box" style="background-color: #fbfbfb">
 				<p><a href="{{ $commendation->url }}" target="_blank">{{ $commendation->meta_title }}</a></p>
 				<p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$commendation->meta_image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
-				<p>@if(strlen($commendation->meta_description)>300){{ mb_substr($commendation->meta_description,0,300) }} ... @else {{ $commendation->meta_description }} @endif</p>
+				<p>{{ $commendation->meta_description }}</p>
 			</div>
 		@endif
 		@include('partials.author', ['author'=>'','obj'=>$commendation])
