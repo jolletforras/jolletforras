@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="panel panel-default narrow-page">
-		<div class="panel-heading">
-			<h2>{{ $commendation->title }}</h2>
-			@if (Auth::check() && (Auth::user()->id==$commendation->user->id || Auth::user()->admin))
-				<a href="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
-			@endif
-		</div>
-        <div class="panel-body">
-			{!! nl2br($commendation->body) !!}
-			@if(!empty($commendation->url))
-				<br>
-				<a href="{!! $commendation->url !!}" target="_blank">{!! substr($commendation->url,0,50) !!}</a><br>
-			@endif
-			@include('partials.author', ['author'=>'','obj'=>$commendation])
-	    </div>
+	<div class="inner_box narrow-page">
+		<h2>{{ $commendation->title }}</h2>
+		@if (Auth::check() && (Auth::user()->id==$commendation->user->id || Auth::user()->admin))
+			<a href="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+		@endif
+		<br>
+		{!! nl2br($commendation->body) !!}
+		@if(!empty($commendation->url))
+			<div class="inner_box" style="background-color: #fbfbfb">
+				<p><a href="{{ $commendation->url }}" target="_blank">{{ $commendation->meta_title }}</a></p>
+				<p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$commendation->meta_image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
+				<p>@if(strlen($commendation->meta_description)>300){{ mb_substr($commendation->meta_description,0,300) }} ... @else {{ $commendation->meta_description }} @endif</p>
+			</div>
+		@endif
+		@include('partials.author', ['author'=>'','obj'=>$commendation])
     </div>
 	@if(Auth::check())
 		@include('comments._show', ['comments' => $comments] )
