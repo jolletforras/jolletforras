@@ -21,7 +21,7 @@ class CreationsController extends Controller
 	{
         $user = User::findOrFail($user_id);
 
-        $creations = Creation::latest()->get();
+        $creations = $user->creations()->latest()->get();
 
         $tab = "creations";
 
@@ -79,6 +79,9 @@ class CreationsController extends Controller
             'meta_image' =>  $image,
             'meta_description' =>  $description
         ]);
+
+        Auth::user()->has_creation = 1;
+        Auth::user()->save();
 
         $data['id']= $creation->id;
         $data['slug']= $creation->slug;
