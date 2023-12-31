@@ -12,6 +12,7 @@
 		<h2>{{ $article->title }}</h2>
 		@if (Auth::check() && Auth::user()->id==$article->user->id)
 			<a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/irasok"><< Írásaim</a>
 		@endif
 		{!! $article->body !!}
 		@include('partials.author', ['author'=>'','obj'=>$article])
