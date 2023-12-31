@@ -26,7 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'activation_code', 'activated', 'full_name', 'location',
         'city', 'zip_code', 'introduction', 'intention', 'interest', 'slug', 'lat', 'lng',
-        'facebook_url', 'webpage_name', 'webpage_url', 'birth_year', 'public', 'last_login', 'new_post', 'updated_at', 'has_article'
+        'facebook_url', 'webpage_name', 'webpage_url', 'birth_year', 'public', 'last_login', 'new_post', 'updated_at', 'has_article', 'has_creation'
     ];
 
     /**
@@ -105,6 +105,11 @@ class User extends Authenticatable
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function creations()
+    {
+        return $this->hasMany(Creation::class);
     }
 
     public function newsletters()
