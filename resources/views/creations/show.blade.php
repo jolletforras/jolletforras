@@ -6,6 +6,7 @@
 		<h2>{{ $creation->title }}</h2>
 		@if (Auth::check() && Auth::user()->id==$creation->user->id)
 			<a href="{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/alkotasok"><< Alkotások</a>
 		@endif
 		<br>
 		{!! nl2br($creation->body) !!}
