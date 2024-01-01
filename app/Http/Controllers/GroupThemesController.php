@@ -105,11 +105,13 @@ class GroupThemesController extends Controller
             //nézi, hogy kértem-e értesítést ennél a témánál, ha igen, kipipálja
             $askNotice = $notice->ask_notice;
 
-            //nulláza a notice számlálóját és ugyanannyival a user-ét is
+            //a notice számlájóval (new) csökkenta user-ét (new_post), de az 0-nál nem lehet kisebb
             $user_new_post = $user->new_post - $notice->new;
             $user_new_post = $user_new_post < 0 ? 0 : $user_new_post;
             $user->new_post=$user_new_post;
             $user->save();
+            //nulláza a notice számlálóját 0-za, és beállítja, hogy olvasta
+            $notice->timestamps = false; //hogy az updated_at ne módosuljon
             $notice->update(['new'=>0,'read_it'=>1]);
         }
 
