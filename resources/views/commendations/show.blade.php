@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('title'){{ $commendation->title }}@endsection
+@section('description'){{$commendation->user->name}} ajánlója - {{ $commendation->meta_title }}@endsection
+@section('url'){{url('alkotas')}}/{{$commendation->id}}/{{$commendation->slug}}@endsection
+@section('canonical')<link rel="canonical" href="{{url('alkotas')}}/{{$commendation->id}}/{{$commendation->slug}}" />@endsection
+@section('image')@if(!empty($commendation->meta_image)){{$commendation->meta_image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
+@endsection
 
 @section('content')
 	<div class="inner_box narrow-page">
