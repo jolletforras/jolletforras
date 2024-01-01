@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('description'){{$creation->user->name}} alkotása: {{ $creation->title }}@endsection
+@section('url'){{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}@endsection
+@section('canonical')<link rel="canonical" href="{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}" />@endsection
+@section('image')@if(!empty($creation->meta_image)){{$creation->meta_image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
+@endsection
 
 @section('content')
 	<div class="inner_box narrow-page">
