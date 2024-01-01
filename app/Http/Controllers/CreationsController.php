@@ -54,7 +54,7 @@ class CreationsController extends Controller
         $dom_obj = new \DOMDocument();
         $page_content = file_get_contents($request->get('url'));
         $dom_obj->loadHTML($page_content);
-        $image = $title = $description = $site_name = null;
+        $image_src = $og_image = $title = $description = $site_name = null;
         $xpath = new \DOMXPath($dom_obj);
         $query = '//*/meta[starts-with(@property, \'og:\')]';
         $metas = $xpath->query($query);
@@ -62,11 +62,14 @@ class CreationsController extends Controller
         foreach ($metas as $meta) {
             $property = $meta->getAttribute('property');
             $content = $meta->getAttribute('content');
-            if($property=='og:image') $image = $content;
+            if($property=='image_src') $image_src = $content;
+            if($property=='og:image') $og_image = $content;
             if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
             if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
             //if($property=='og:site_name') $site_name = $content;
         }
+
+        $image = empty($image_src) ? $og_image : $image_src;
 
         $creation = Auth::user()->creations()->create([
             'title' => $request->get('title'),
@@ -125,19 +128,29 @@ class CreationsController extends Controller
         $dom_obj = new \DOMDocument();
         $page_content = file_get_contents($request->get('url'));
         $dom_obj->loadHTML($page_content);
-        $image = $title = $description = $site_name = null;
+        $image_src = $og_image = $title = $description = $site_name = null;
         $xpath = new \DOMXPath($dom_obj);
         $query = '//*/meta[starts-with(@property, \'og:\')]';
         $metas = $xpath->query($query);
         //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
+
         foreach ($metas as $meta) {
             $property = $meta->getAttribute('property');
             $content = $meta->getAttribute('content');
-            if ($property == 'og:image') $image = $content;
+            if($property=='og:image') $og_image = $content;
             if ($property == 'og:title') $title = is_numeric(strpos($content, 'Ã')) ? utf8_decode($content) : $content;
             if ($property == 'og:description') $description = is_numeric(strpos($content, 'Ã')) ? utf8_decode($content) : $content;
             //if($property=='og:site_name') $site_name = $content;
         }
+
+        $metas = $xpath->query('//*/link[starts-with(@rel, \'image_src\')]');
+        foreach ($metas as $meta) {
+            $rel = $meta->getAttribute('rel');
+            $href = $meta->getAttribute('href');
+            if($rel=='image_src') $image_src = $href;
+        }
+
+        $image = empty($image_src) ? $og_image : $image_src;
 
         $creation = Creation::findOrFail($id);
 
