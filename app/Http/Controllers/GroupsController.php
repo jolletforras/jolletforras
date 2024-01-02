@@ -251,12 +251,21 @@ class GroupsController extends Controller
 
             }
 
-            //itt abban az esetben ha adott témánál/eseménynél még nem létezik, akkor fel kell venni
+            //itt abban az esetben ha adott témánál még nem létezik, akkor fel kell venni
             $themes = $group->themes()->pluck('id')->toArray();
             foreach($themes as $forum_id) {
                 $notice = Notice::findBy($forum_id,$user_id,'Forum')->first();
                 if(is_null($notice)) {
                     Notice::create(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
+                }
+            }
+
+            //itt abban az esetben ha adott eseménynél még nem létezik, akkor fel kell venni
+            $events = $group->events()->pluck('id')->toArray();
+            foreach($events as $event_id) {
+                $notice = Notice::findBy($event_id,$user_id,'Event')->first();
+                if(is_null($notice)) {
+                    Notice::create(['notifiable_id' => $event_id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
                 }
             }
 

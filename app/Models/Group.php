@@ -41,6 +41,11 @@ class Group extends Model
         return $this->hasMany(Forum::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Forum::class);
+    }
+
     public function newss()
     {
         return $this->hasMany(News::class);
