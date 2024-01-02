@@ -69,7 +69,9 @@ class NoticesController extends Controller
 
             if ($notice->type == "Event") {
                 if ($event = Event::find($notice->notifiable_id)) {
-                    $url = '<a href="'.url('/').'/esemeny/' . $event->id . '/' . $event->slug . '">' . $event->group->name . ' - "' . $event->title . '" esemény' . $new . '</a>';
+                    if(isset($event->group->name)){
+                        $url = '<a href="'.url('/').'/esemeny/' . $event->id . '/' . $event->slug . '">' . $event->group->name . ' - "' . $event->title . '" esemény' . $new . '</a>';
+                    }
                 }
             }
             if($url!='') {
