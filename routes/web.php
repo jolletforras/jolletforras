@@ -77,6 +77,9 @@ Route::get('meghivo/aktival/{code}', 'InviteController@activate');
 //az éles adatbázisban a hiányzó notice-ok felvétele
 //Route::get('/add_notice', 'GroupsController@add_notice');
 
+//az éles adatbázisban a hiányzó notice-ok felvétele
+Route::get('/add_group_id_to_notice', 'GroupsController@add_group_id_to_notice');
+
 Route::get('/csoportok', 'GroupsController@index');
 Route::get('/csoport/cimke/{id}/{tag}', 'TagsController@group_show');
 Route::post('/group/filter', 'GroupsController@filter');
