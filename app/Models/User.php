@@ -229,6 +229,30 @@ class User extends Authenticatable
         })
         ->update( ['users.new_post' => DB::raw('users.new_post + 1')]);
 
+
+        /*
+        'UPDATE users AS u
+        INNER JOIN group_user AS gu ON gu.user_id = u.id
+        INNER JOIN forums AS f ON f.group_id = gu.group_id
+        INNER JOIN notices AS n ON n.user_id = u.id
+        SET u.new_post = u.new_post+1
+        WHERE f.id=93 AND u.id<>1 AND n.notifiable_id=93 AND n.type="Forum" AND (n.`new`=0 OR n.updated_at<'2023.12.19');
+         */
+
         return true;
+    }
+
+    public function adjustNewPost() {
+        DB::table('users')->update(['new_post' => 0]);
+
+        $query = "
+            UPDATE users AS u
+            INNER JOIN (
+                        SELECT user_id, count(*) AS new_post
+                FROM notices
+                WHERE updated_at>CURDATE() - INTERVAL 14 DAY AND new>0
+                GROUP BY user_id) AS n ON n.user_id=u.id
+            SET u.new_post = n.new_post";
+        DB::statement($query);
     }
 }
