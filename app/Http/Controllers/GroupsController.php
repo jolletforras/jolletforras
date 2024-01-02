@@ -256,7 +256,7 @@ class GroupsController extends Controller
             foreach($themes as $forum_id) {
                 $notice = Notice::findBy($forum_id,$user_id,'Forum')->first();
                 if(is_null($notice)) {
-                    Notice::create(['notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
+                    Notice::create(['group_id' => $id,'notifiable_id' => $forum_id,'user_id' =>$user_id,'type' => 'Forum','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
                 }
             }
 
@@ -265,7 +265,7 @@ class GroupsController extends Controller
             foreach($events as $event_id) {
                 $notice = Notice::findBy($event_id,$user_id,'Event')->first();
                 if(is_null($notice)) {
-                    Notice::create(['notifiable_id' => $event_id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
+                    Notice::create(['group_id' => $id,'notifiable_id' => $event_id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
                 }
             }
 
@@ -305,12 +305,29 @@ class GroupsController extends Controller
                 foreach($themes as $forum_id) {
                     $notice = Notice::findBy($forum_id,$user->id,'Forum')->first();
                     if(is_null($notice)) {
-                        Notice::create(['notifiable_id' => $forum_id,'user_id' =>$user->id,'type' => 'Forum','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
+                        Notice::create(['group_id'=> $group->id,'notifiable_id' => $forum_id,'user_id' =>$user->id,'type' => 'Forum','comment_id'=>0,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
                     }
                 }
             }
         }
         echo 'Sikeresen fel lettek véve a notice-ok!';
+    }
+
+    //éles adatbázisban felveszi a group_id-kat a notices táblába
+    public function add_group_id_to_notice()
+    {
+        $notices = Notice::get();
+
+        foreach ($notices as $notice) {
+            $class = "\\App\Models\\".$notice->type;
+            $post = $class::findOrFail($notice->notifiable_id);
+
+            $notice->timestamps = false;
+            $notice->update(['group_id'=> $post->group_id]);
+
+            //echo $i.'. '.$post->group_id.'<br>';
+        }
+        echo 'Sikeresen fel lettek véve a group_id-k a notices táblába!';
     }
 
 
@@ -332,13 +349,18 @@ class GroupsController extends Controller
 
             $group->members()->detach($user_id);
 
+            //törölni kell az adott csoport bejegyzéseire a user-t notice-ból, hogy csoport harangocska értesítőben már ne jelenjen meg
+            Notice::where('user_id',$user_id)->where('group_id',$id)->delete();
+            User::adjustOneUserNewPost($user_id);
+
+            /*
             //itt minden témánál az email-t 0-ra kell állítani, hogy már ne kapjon levelet
             $themes = $group->themes()->pluck('id')->toArray();
             foreach($themes as $forum_id) {
                 $notice = Notice::findBy($forum_id,$user_id,'Forum')->first();
                 $notice->timestamps = false; //hogy az update_at ne módosuljon
                 $notice->update(['email' => 0]);
-            }
+            }*/
         }
 
         return redirect('csoport/'.$id.'/'.$name)->with('message', 'A csoportból sikeresen kiléptél!');
