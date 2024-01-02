@@ -242,13 +242,14 @@ class User extends Authenticatable
         return true;
     }
 
+    //beállítja a new_post értéket aszerint hogy hány olyan csoport téma/esemény van, ahol még nem olvasta el a bejegyzést vagy a legújabb hozzászólásokat
     public function adjustNewPost() {
         DB::table('users')->update(['new_post' => 0]);
 
         $query = "
             UPDATE users AS u
             INNER JOIN (
-                        SELECT user_id, count(*) AS new_post
+                SELECT user_id, count(*) AS new_post
                 FROM notices
                 WHERE updated_at>CURDATE() - INTERVAL 14 DAY AND new>0
                 GROUP BY user_id) AS n ON n.user_id=u.id

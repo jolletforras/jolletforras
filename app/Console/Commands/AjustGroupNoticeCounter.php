@@ -31,6 +31,7 @@ class AjustGroupNoticeCounter extends Command
      */
     public function handle()
     {
+        //beállítja a new_post értéket aszerint hogy hány olyan csoport téma/esemény van, ahol még nem olvasta el a bejegyzést vagy a legújabb hozzászólásokat
         User::adjustNewPost();
     }
 }
