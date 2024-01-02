@@ -91,11 +91,14 @@ class CommentsController extends Controller
             }
 
             if($c_type=="GroupTheme" || ($c_type=="Event" && $commentable->group_id>0)) {
+                //növeli a csoporthoz tartozó userek new_post számlálóját 1-el, kivétel a hozzászóló; de a többieknél is csak azoknál, akik több mint két hete nem nézték meg a bejegyzést vagy csak ez a hozzászólás amit még nem látott
+                User::incNewPost($commentable_id,$c_class,$commenter->id);
+
                 //megnövelem a számlálóm 1-el mindenkinek a hozzászóló kivételével
                 Notice::where('notifiable_id',$commentable_id)->where('type',$c_class)->where('user_id','<>',$commenter->id)->increment('new', 1);
 
                 //növeli a csoporthoz tartozó userek új számlálóját 1-el, kivétel a hozzászóló
-                $commentable->group->members()->where('users.id','<>',$commenter_id)->increment('new_post', 1);
+                //$commentable->group->members()->where('users.id','<>',$commenter_id)->increment('new_post', 1);
             }
 
             //ez egyelőre csak a csoport beszélgetésnél, mivel csoport eseménynél csak új esemény létrehozásakor küld ki értesítést (amennyiben kért)

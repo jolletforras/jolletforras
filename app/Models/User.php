@@ -209,4 +209,26 @@ class User extends Authenticatable
 
         return $location;
     }
+
+    public function incNewPost($notifiable_id,$type,$commenter_id) {
+
+        $table = $type=='Forum' ? 'forums' : 'events';
+        $two_weeks_before = date( 'Y-m-d', strtotime('-2 weeks'));
+
+        DB::table('users')
+        ->join('group_user', 'group_user.user_id', '=', 'users.id')
+        ->join($table, $table.'.group_id', '=', 'group_user.group_id')
+        ->join('notices', 'notices.user_id', '=', 'users.id')
+        ->where($table.'.id', $notifiable_id)
+        ->where('users.id','<>', $commenter_id)
+        ->where('notices.notifiable_id', $notifiable_id)
+        ->where('notices.type',$type)
+        ->where(function($query) use($two_weeks_before) {
+            $query->where('notices.new',0)
+                ->orWhere('notices.updated_at','<',$two_weeks_before);
+        })
+        ->update( ['users.new_post' => DB::raw('users.new_post + 1')]);
+
+        return true;
+    }
 }
