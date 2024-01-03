@@ -267,10 +267,10 @@ class User extends Authenticatable
             INNER JOIN (
                 SELECT user_id, count(*) AS new_post
                 FROM notices
-                WHERE updated_at>CURDATE() - INTERVAL 14 DAY AND new>0 AND user_id=".$user_id."
+                WHERE updated_at>CURDATE() - INTERVAL 14 DAY AND new>0 AND user_id=?
                 GROUP BY user_id
             ) AS n ON n.user_id=u.id
             SET u.new_post = n.new_post";
-        DB::statement($query);
+        DB::update($query,[$user_id]);
     }
 }
