@@ -132,7 +132,7 @@ Route::post('/hir/{id}/{title}/modosit', 'GroupNewsController@update');
 
 Route::get('/email/{code}/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'NoticesController@email_theme_login');
 Route::get('/email/{code}/esemeny/{id}/{slug}', 'NoticesController@email_event_login');
-Route::post('/getNotices', 'NoticesController@get_noticies');
+Route::post('/getGroupNotices', 'NoticesController@get_group_noticies');
 
 
 Route::get('/profil/{user_id}/{slug}/alkotasok', 'CreationsController@index');

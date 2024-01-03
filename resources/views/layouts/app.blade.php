@@ -45,7 +45,16 @@
 		<div class="oldal_nev">
 	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
 		</div>
-		@if( Auth::check())<div id="notice" data-toggle="modal" data-target="#notice-modal"><i class="fa fa-bell-o" aria-hidden="true"></i>@if( Auth::user()->new_post>0)<span>{{ Auth::user()->new_post }}</span>@endif </div>@endif
+		@if( Auth::check())
+			<div class="notice group" data-toggle="modal" data-target="#notice-group-modal" id="notice-group">
+				<i class="fa fa-users" aria-hidden="true"></i><i class="fa fa-bell-o" aria-hidden="true"></i>
+				@if( Auth::user()->new_post>0)<span>{{ Auth::user()->new_post }}</span>@endif
+			</div>
+		<!--	<div class="notice user" data-toggle="modal" data-target="#notice-user-modal" id="notice-user">
+				<i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-bell-o" aria-hidden="true"></i>
+				<span>3</span>
+			</div> -->
+		@endif
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
@@ -150,17 +159,32 @@
 			@endif
 
 			@if( Auth::check())
-			<div class="modal fade" id="notice-modal" role="dialog">
+			<div class="modal fade notice-modal" id="notice-user-modal" role="dialog">
 				<div class="modal-dialog">
 
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Friss történések a csoportodban</h4>
+							<h4 class="modal-title">Az elmúlt 2 hét történései a portál tagjainál</h4>
 						</div>
-						<div class="modal-body" id="notice-content"> ... hamarosan megjelenik</div>
-						<div class="modal-footer"><input type="hidden" name="notice-loaded" id="notice-loaded" value="0"></div>
+						<div class="modal-body" id="notice-user-content"> ... hamarosan megjelenik</div>
+						<div class="modal-footer"><input type="hidden" name="notice-user-loaded" id="notice-user-loaded" value="0"></div>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal fade notice-modal" id="notice-group-modal" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Az elmúlt 2 hét történései a csoportodban</h4>
+						</div>
+						<div class="modal-body" id="notice-group-content"> ... hamarosan megjelenik</div>
+						<div class="modal-footer"><input type="hidden" name="notice-group-loaded" id="notice-group-loaded" value="0"></div>
 					</div>
 
 				</div>
@@ -191,22 +215,22 @@
 
 
 	<script>
-		$(document).on('click','#notice',function(){
+		$(document).on('click','#notice-group',function(){
 
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-			if($("#notice-loaded").val()==0) {
+			if($("#notice-group-loaded").val()==0) {
 
 				$.ajax({
 					type: "POST",
-					url: '{{ url('getNotices') }}',
+					url: '{{ url('getGroupNotices') }}',
 					data: {
 						_token: CSRF_TOKEN,
 					},
 					success: function(data) {
 						if(data['status']=='success') {
-							$("#notice-content").html(data.content_html);
-							$("#notice-loaded").val(1);
+							$("#notice-group-content").html(data.content_html);
+							$("#notice-group-loaded").val(1);
 						}
 					},
 					error: function(error){

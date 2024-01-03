@@ -53,7 +53,7 @@ class NoticesController extends Controller
         }
     }
 
-    public function get_noticies()
+    public function get_group_noticies()
     {
         $content_html = "";
         $notices = Notice::findNew()->get();

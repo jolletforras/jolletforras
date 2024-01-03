@@ -64,21 +64,27 @@ body {
     text-decoration: none;
 }
 
-#notice {
+.notice {
 	float: right;
 	margin-top: 15px;
 	margin-right: 25px;
-	color: #337ab7;
 	text-shadow: none;
 	font-size: 18px;
 	cursor:pointer;
 }
 
-#notice span, #notice-modal span {
+.notice.group {
+	color: #337ab7;
+}
+
+.notice.user {
+	color: #0b8e33;
+}
+
+.notice span, .notice-modal span {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	background-color: #0b8e33;
 	color: #FFF;
 	line-height: 16px;
 	font-size: 10px;
@@ -89,14 +95,24 @@ body {
 	vertical-align: top;
 }
 
-#notice-modal .modal{
+.notice span, .notice-modal span {
+	background-color: #daa520;
+}
+
+/*
+.notice.profile span{
+	background-color: #0b8e33;
+}
+*/
+
+.notice-modal .modal{
 	display: block !important;
 }
 
-#notice-modal .modal-dialog{
+.notice-modal .modal-dialog{
 	overflow-y: initial !important
 }
-#notice-modal .modal-body{
+.notice-modal .modal-body{
 	height: 80vh;
 	overflow-y: auto;
 }
@@ -735,7 +751,7 @@ h3 {
 		padding: 10px;
 	}
 
-	#notice {
+	.notice {
 		margin-right: 5%;
 	}
 }
