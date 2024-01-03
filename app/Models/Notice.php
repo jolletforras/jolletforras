@@ -8,8 +8,6 @@ use Auth;
 
 class Notice extends Model
 {
-    const UPDATED_AT = null;
-
     use HasFactory;
 
     /**
