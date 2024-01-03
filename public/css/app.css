@@ -89,7 +89,7 @@ body {
 	line-height: 16px;
 	font-size: 10px;
 	text-align: center;
-	margin-left: 2px;
+	margin-left: -5px;
 	padding-top: 1px;
 	display: inline-block;
 	vertical-align: top;
@@ -100,8 +100,8 @@ body {
 }
 
 /*
-.notice.profile span{
-	background-color: #0b8e33;
+.notice.user span{
+	border: 1px solid #0b8e33;
 }
 */
 
