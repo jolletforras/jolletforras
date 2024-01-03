@@ -86,6 +86,8 @@ class CreationsController extends Controller
         Auth::user()->has_creation = 1;
         Auth::user()->save();
 
+        User::members()->where('id','<>',Auth::user()->id)->increment('new_user_events', 1);
+
         $data['id']= $creation->id;
         $data['slug']= $creation->slug;
         $data['title']= $creation->title;

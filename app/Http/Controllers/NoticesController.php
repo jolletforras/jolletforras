@@ -64,7 +64,7 @@ class NoticesController extends Controller
         if($articles->isNotEmpty()) {
             $content_html .= "<b>Írások</b><br>";
             foreach ($articles as $article) {
-                $content_html .= '<a href="'.url('/').'/iras/' . $article->id . '/' . $article->slug.'">' . $article->user->name . ' - "' . $article->title .'</a><br>';
+                $content_html .= '<a href="'.url('/').'/iras/' . $article->id . '/' . $article->slug.'">' . $article->user->name . ' - ' . $article->title .'</a><br>';
             }
             $content_html .='<hr>';
         }
@@ -73,9 +73,12 @@ class NoticesController extends Controller
         if($creations->isNotEmpty()) {
             $content_html .= "<b>Alkotások</b><br>";
             foreach ($creations as $creation) {
-                $content_html .= '<a href="'.url('/').'/alkotas/' . $creation->id . '/' . $creation->slug.'">' . $creation->user->name . ' - "' . $creation->title .'</a><br>';
+                $content_html .= '<a href="'.url('/').'/alkotas/' . $creation->id . '/' . $creation->slug.'">' . $creation->user->name . ' - ' . $creation->title .'</a><br>';
             }
         }
+
+        Auth::user()->new_user_events = 0;
+        Auth::user()->save();
 
         $response = array(
             'status' => 'success',

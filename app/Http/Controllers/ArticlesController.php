@@ -74,6 +74,8 @@ class ArticlesController extends Controller
         Auth::user()->has_article = 1;
         Auth::user()->save();
 
+        User::members()->where('id','<>',Auth::user()->id)->increment('new_user_events', 1);
+
         if($request->get('show')=='portal_too') {
             return redirect('irasok');
         }
