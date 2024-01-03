@@ -233,7 +233,7 @@ class ProfilesController extends Controller
 			'name' => $name,
 			'full_name' => $request->get('full_name'),
 			'location' => $request->get('location'),
-			'zip_code' => $zip_code,
+			'zip_code' => is_numeric($zip_code) ? $zip_code : NULL,
 			'lat' => $coordinates['lat'],
 			'lng' => $coordinates['lng'],
 			'city' => $request->get('city'),
