@@ -50,10 +50,10 @@
 				<i class="fa fa-users" aria-hidden="true"></i><i class="fa fa-bell-o" aria-hidden="true"></i>
 				@if( Auth::user()->new_post>0)<span>{{ Auth::user()->new_post }}</span>@endif
 			</div>
-		<!--	<div class="notice user" data-toggle="modal" data-target="#notice-user-modal" id="notice-user">
+			<div class="notice user" data-toggle="modal" data-target="#notice-user-modal" id="notice-user">
 				<i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-bell-o" aria-hidden="true"></i>
-				<span>3</span>
-			</div> -->
+				@if( Auth::user()->new_user_events>0)<span>{{ Auth::user()->new_user_events }}</span>@endif
+			</div>
 		@endif
 		<nav class="navbar navbar-default">
 			<div class="container">
@@ -215,6 +215,32 @@
 
 
 	<script>
+		$(document).on('click','#notice-user',function(){
+
+			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+			if($("#notice-user-loaded").val()==0) {
+
+				$.ajax({
+					type: "POST",
+					url: '{{ url('getUserNotices') }}',
+					data: {
+						_token: CSRF_TOKEN,
+					},
+					success: function(data) {
+						if(data['status']=='success') {
+							$("#notice-user-content").html(data.content_html);
+							$("#notice-user-loaded").val(1);
+						}
+					},
+					error: function(error){
+						console.log(error.responseText);
+					}
+				});
+			}
+		});
+
+
 		$(document).on('click','#notice-group',function(){
 
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

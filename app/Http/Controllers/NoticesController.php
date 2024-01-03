@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Models\Forum;
 use App\Models\Event;
+use App\Models\Creation;
+use App\Models\Article;
 use Auth;
 
 class NoticesController extends Controller
@@ -52,6 +54,36 @@ class NoticesController extends Controller
             return  redirect('/esemeny/ '. $id . '/' . $slug);
         }
     }
+
+    public function get_user_noticies()
+    {
+        $two_weeks_before = date( 'Y-m-d', strtotime('-2 weeks'));
+        $content_html = "";
+
+        $articles = Article::where('updated_at','>',$two_weeks_before)->orderBy('updated_at', 'DESC')->get();
+        if($articles->isNotEmpty()) {
+            $content_html .= "<b>Írások</b><br>";
+            foreach ($articles as $article) {
+                $content_html .= '<a href="'.url('/').'/iras/' . $article->id . '/' . $article->slug.'">' . $article->user->name . ' - "' . $article->title .'</a><br>';
+            }
+            $content_html .='<hr>';
+        }
+
+        $creations = Creation::where('updated_at','>',$two_weeks_before)->orderBy('updated_at', 'DESC')->get();
+        if($creations->isNotEmpty()) {
+            $content_html .= "<b>Alkotások</b><br>";
+            foreach ($creations as $creation) {
+                $content_html .= '<a href="'.url('/').'/alkotas/' . $creation->id . '/' . $creation->slug.'">' . $creation->user->name . ' - "' . $creation->title .'</a><br>';
+            }
+        }
+
+        $response = array(
+            'status' => 'success',
+            'content_html' => $content_html,
+        );
+        return \Response::json($response);
+    }
+
 
     public function get_group_noticies()
     {
