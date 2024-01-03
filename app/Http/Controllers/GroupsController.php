@@ -267,6 +267,8 @@ class GroupsController extends Controller
                 }
             }
 
+            Notice::setNullUpdatedAt($group->id,$user_id);
+
             //értesítés az kezelőknek
             $admins = $group->admins()->get();
 

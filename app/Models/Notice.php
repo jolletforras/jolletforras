@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class Notice extends Model
 {
@@ -35,5 +36,13 @@ class Notice extends Model
         $two_weeks_before = date( 'Y-m-d', strtotime('-2 weeks'));
 
         $query->where('user_id',Auth::user()->id)->where('updated_at','>',$two_weeks_before)->orderBy('updated_at', 'DESC');
+    }
+
+    public function setNullUpdatedAt($group_id,$user_id) {
+        $query = "
+          UPDATE notices 
+          SET updated_at=NULL 
+          WHERE group_id=? AND user_id=?";
+        DB::update($query,[$group_id,$user_id]);
     }
 }
