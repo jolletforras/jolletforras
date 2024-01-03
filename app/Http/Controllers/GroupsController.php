@@ -144,8 +144,7 @@ class GroupsController extends Controller
             'slug' => Str::slug($request->get('name')),
             'public' => $request->has('public') ? 1 : 0,
             'user_visibility' => $request->get('user_visibility'),
-            'counter' => 0,
-            'create_at' => date("Y-m-d H:i:s", strtotime('now'))
+            'counter' => 0
         ]);
 
         $group->tags()->attach($tag_list);
@@ -219,8 +218,7 @@ class GroupsController extends Controller
             'slug' => Str::slug($request->get('name')),
             'public' => $request->has('public') ? 1 : 0,
             'user_visibility' => $request->get('user_visibility'),
-            'status' => $request->has('inactive') ? 'inactive' : 'active',
-            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+            'status' => $request->has('inactive') ? 'inactive' : 'active'
         ]);
 
         $group->tags()->sync($tag_list);
