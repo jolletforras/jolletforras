@@ -27,7 +27,7 @@
 				@if($participants) Ott lesznek: {!! $participants !!}<br>@endif
 				<br>
 			@endif
-			@if ($event->isGroupEvent() && $event->visibility!='group')
+			@if (Auth::check() && $event->isGroupEvent() && $event->visibility!='group')
 				<div class="flash-message alert alert-info" style="display:none;"></div>
 				<label for="invited_user">Személyek meghívása az eseményre, akik nem tagjai a csoportnak</label>
 				<div class="row">
