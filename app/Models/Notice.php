@@ -8,6 +8,8 @@ use Auth;
 
 class Notice extends Model
 {
+    const UPDATED_AT = null;
+
     use HasFactory;
 
     /**
@@ -18,6 +20,7 @@ class Notice extends Model
     protected $fillable = [
         'group_id', 'notifiable_id', 'user_id', 'type', 'comment_id', 'new', 'email', 'email_sent', 'ask_notice', 'read_it', 'login_code'
     ];
+
 
     public function user()
     {
