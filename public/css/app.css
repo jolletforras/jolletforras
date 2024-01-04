@@ -874,6 +874,10 @@ h3 {
 	#user_filter.collapse.in {
 		display: inline-block;
 	}
+
+	h1 {
+		font-size: 130%;
+	}
 }
 
 @media all and (max-width:400px) {
@@ -902,6 +906,7 @@ h3 {
 
 	h1 {
 		margin-left: 3px;
+		font-size: 120%;
 	}
 
 	.base {
