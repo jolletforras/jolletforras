@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\Usernotice;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -46,6 +47,18 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $comments = Comment::where('commentable_type', 'App\Models\Article')->where('commentable_id', $id)->get();
 
+        if(Auth::check()) {
+            $user = Auth()->user();
+            $user_id = $user->id;
+            $notice = Usernotice::findBy($user_id,$id,'Article')->first();
+            if(is_null($notice)) {
+                Usernotice::create(['user_id' => $user_id, 'post_id' => $id, 'type' => 'Article', 'post_created_at' => $article->created_at]);
+                $user_new_post = $user->user_new_post - 1;
+                $user->user_new_post = $user_new_post>0 ? $user_new_post : 0;
+                $user->save();
+            }
+        }
+
         return view('articles.show', compact('article','comments'));
     }
 
@@ -74,7 +87,7 @@ class ArticlesController extends Controller
         Auth::user()->has_article = 1;
         Auth::user()->save();
 
-        User::members()->where('id','<>',Auth::user()->id)->increment('new_user_events', 1);
+        User::members()->where('id','<>',Auth::user()->id)->increment('user_new_post', 1);
 
         if($request->get('show')=='portal_too') {
             return redirect('irasok');

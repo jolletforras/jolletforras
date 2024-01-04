@@ -8,6 +8,7 @@ use App\Models\Forum;
 use App\Models\Event;
 use App\Models\Creation;
 use App\Models\Article;
+use App\Models\Usernotice;
 use Auth;
 
 class NoticesController extends Controller
@@ -57,28 +58,35 @@ class NoticesController extends Controller
 
     public function get_user_noticies()
     {
+        $user_id = Auth()->user()->id;
+
         $two_weeks_before = date( 'Y-m-d', strtotime('-2 weeks'));
         $content_html = "";
 
-        $articles = Article::where('updated_at','>',$two_weeks_before)->orderBy('updated_at', 'DESC')->get();
+        $read_it_articles = Usernotice::where('user_id',$user_id)->where('type','Article')->pluck('post_id')->all();
+
+        $articles = Article::where('updated_at','>',$two_weeks_before)->where('user_id','<>',$user_id)->orderBy('updated_at', 'DESC')->get();
         if($articles->isNotEmpty()) {
             $content_html .= "<b>Írások</b><br>";
             foreach ($articles as $article) {
-                $content_html .= '<a href="'.url('/').'/iras/' . $article->id . '/' . $article->slug.'">' . $article->user->name . ' - ' . $article->title .'</a><br>';
+                $url = '<a href="'.url('/').'/iras/' . $article->id . '/' . $article->slug.'">' . $article->user->name . ' - ' . $article->title .'</a><br>';
+                $content_html .= in_array($article->id,$read_it_articles) ? $url : '<b>' . $url . '</b>' ;
             }
             $content_html .='<hr>';
         }
 
-        $creations = Creation::where('updated_at','>',$two_weeks_before)->orderBy('updated_at', 'DESC')->get();
+        //------------------------------------------
+
+        $read_it_creations = Usernotice::where('user_id',$user_id)->where('type','Creation')->pluck('post_id')->all();
+
+        $creations = Creation::where('updated_at','>',$two_weeks_before)->where('user_id','<>',$user_id)->orderBy('updated_at', 'DESC')->get();
         if($creations->isNotEmpty()) {
             $content_html .= "<b>Alkotások</b><br>";
             foreach ($creations as $creation) {
-                $content_html .= '<a href="'.url('/').'/alkotas/' . $creation->id . '/' . $creation->slug.'">' . $creation->user->name . ' - ' . $creation->title .'</a><br>';
+                $url = '<a href="'.url('/').'/alkotas/' . $creation->id . '/' . $creation->slug.'">' . $creation->user->name . ' - ' . $creation->title .'</a><br>';
+                $content_html .= in_array($creation->id,$read_it_creations) ? $url : '<b>' . $url . '</b>' ;
             }
         }
-
-        Auth::user()->new_user_events = 0;
-        Auth::user()->save();
 
         $response = array(
             'status' => 'success',
