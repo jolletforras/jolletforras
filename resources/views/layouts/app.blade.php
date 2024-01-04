@@ -52,7 +52,7 @@
 			</div>
 			<div class="notice user" data-toggle="modal" data-target="#notice-user-modal" id="notice-user">
 				<i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-bell-o" aria-hidden="true"></i>
-				<span id="new_user_events" @if( Auth::user()->new_user_events==0) style="display: none;"@endif>{{ Auth::user()->new_user_events }}</span>
+				<span id="user_new_post" @if( Auth::user()->user_new_post==0) style="display: none;"@endif>{{ Auth::user()->user_new_post }}</span>
 			</div>
 		@endif
 		<nav class="navbar navbar-default">
@@ -231,7 +231,7 @@
 						if(data['status']=='success') {
 							$("#notice-user-content").html(data.content_html);
 							$("#notice-user-loaded").val(1);
-							$("#new_user_events").hide();
+							$("#user_new_post").hide();
 						}
 					},
 					error: function(error){
