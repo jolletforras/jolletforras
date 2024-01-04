@@ -123,6 +123,10 @@ body {
 
 }
 
+.list_profile_image {
+	display: none;
+}
+
 h1 {
 	font-size: 160%;
     font-family: "Times New Roman", Times, serif;	
@@ -804,6 +808,16 @@ h3 {
 
 	.img_column {
 		display: none;
+	}
+
+	.list_profile_image {
+		display: inline-block;
+		width: 30px;
+		margin-right: 5px;
+	}
+
+	.list_profile_image img {
+		width: 100%;
 	}
 
 	.profile_image {

@@ -24,23 +24,19 @@
             <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <td width="60px">
-                        @if(file_exists(public_path('images/profiles/k_'.$user->id.'.jpg')))
-                            <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">
-                                <img src="{{ url('/images/profiles') }}/k_{{ $user->id}}.jpg?{{ $user->photo_counter}}">
-                            </a>
-                        @elseif (Auth::check() && Auth::user()->id==$user->id)
-                            <a href="{{ url('/profilom') }}/feltolt_profilkep">
-                                <img src="{{ url('/images/profiles') }}/k_feltolt_nincs_kep.png">
-                            </a>
-                        @else
-                            <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">
-                                <img src="{{ url('/images/profiles') }}/k_nincs_kep.jpg">
-                            </a>
-                        @endif
+                    <?php
+                    $html_image = '';
+                    if(file_exists(public_path('images/profiles/k_'.$user->id.'.jpg'))) {
+                        $html_image = '<img src="'.url('/images/profiles').'/k_'.$user->id.'.jpg?'.$user->photo_counter.'">';
+                    }
+                    ?>
+                    <td width="60px" class="img_column">
+                        <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">
+                            {!! $html_image  !!}
+                        </a>
                     </td>
                     <td>
-                        <a href="{{ url('profil',$user->id) }}/{{$user->slug}}">{{ $user->name }}</a>
+                        <a href="{{ url('profil',$user->id) }}/{{$user->slug}}"><span class="list_profile_image">{!!$html_image!!}</span>{{ $user->name }}</a>
                         {{ $user->full_location }}
                         <br>
                         {{$user->pivot->motivation}}
