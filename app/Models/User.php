@@ -243,7 +243,7 @@ class User extends Authenticatable
     }
 
     //beállítja a new_post értéket aszerint hogy hány olyan csoport téma/esemény van, ahol még nem olvasta el a bejegyzést vagy a legújabb hozzászólásokat
-    public function adjustAllUsersNewPost() {
+    public function adjustGroupNewPostAll() {
         DB::table('users')->update(['new_post' => 0]);
 
         $query = "
@@ -259,7 +259,7 @@ class User extends Authenticatable
     }
 
     //beállítja a new_post értéket aszerint hogy hány olyan csoport téma/esemény van, ahol még nem olvasta el a bejegyzést vagy a legújabb hozzászólásokat
-    public function adjustOneUserNewPost($user_id) {
+    public function adjustGroupNewPost($user_id) {
         DB::table('users')->where('id',$user_id)->update(['new_post' => 0]);
 
         $query = "
@@ -272,5 +272,25 @@ class User extends Authenticatable
             ) AS n ON n.user_id=u.id
             SET u.new_post = n.new_post";
         DB::update($query,[$user_id]);
+    }
+
+
+    //beállítja a user_new_post értéket aszerint hogy hány olyan írás, alkotás van, ahol még nem olvasta el a bejegyzést és nem a sajátja
+    public function adjustUserNewPostAll($num_new_posts,$two_weeks_before) {
+        $query = "
+            UPDATE users AS u
+            LEFT JOIN (
+                SELECT user_id, count(id) AS read_it
+                FROM usernotices
+                GROUP BY user_id
+            ) AS un ON un.user_id=u.id
+            LEFT JOIN (
+                SELECT user_id, count(id) AS post FROM articles WHERE created_at>='".$two_weeks_before."' GROUP BY user_id
+            ) AS a ON a.user_id=u.id
+            LEFT JOIN (
+                SELECT user_id, count(id) AS post FROM creations WHERE created_at>='".$two_weeks_before."' GROUP BY user_id
+            ) AS c ON c.user_id=u.id
+            SET u.user_new_post = $num_new_posts-IFNULL(un.read_it,0)-IFNULL(a.post,0)-IFNULL(c.post,0)";
+        DB::update($query);
     }
 }
