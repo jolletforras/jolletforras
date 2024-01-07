@@ -351,7 +351,7 @@ class GroupsController extends Controller
 
             //törölni kell az adott csoport bejegyzéseire a user-t notice-ból, hogy csoport harangocska értesítőben már ne jelenjen meg
             Notice::where('user_id',$user_id)->where('group_id',$id)->delete();
-            User::adjustOneUserNewPost($user_id);
+            User::adjustGroupNewPost($user_id);
 
             /*
             //itt minden témánál az email-t 0-ra kell állítani, hogy már ne kapjon levelet
