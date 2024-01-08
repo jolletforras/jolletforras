@@ -1,18 +1,18 @@
         @csrf
 
 		<div class="form-group">
-			<label for="title">Cím:</label>
-			<input class="form-control" required="required" name="title" type="text" maxlength="80" value="@if(isset($creation)) {{$creation->title}} @endif" id="title">
+			<label for="title">Cím*:</label>
+			<input class="form-control" required="required" name="title" type="text" maxlength="80" value="@if(isset($creation)){{old('title',$creation->title)}}@else{{old('title')}}@endif" id="title">
 		</div>
 
 		<div class="form-group">
-			<label for="body">Miről szól az alkotásod és miért osztod meg itt?</label>
-			<textarea class="form-control" required="required" rows="10" name="body" cols="50">@if(isset($creation)) {{$creation->body}} @endif</textarea>
+			<label for="body">Miről szól az alkotásod és miért osztod meg itt?*</label>
+			<textarea class="form-control" required="required" rows="10" name="body" cols="50">@if(isset($creation)){{old('body',$creation->body)}}@else{{old('body')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">
-			<label for="url">Itt add meg a hivatkozást, ahol elérhető az alkotásod:</label>
-			<input class="form-control" name="url" type="text" maxlength="255" value="@if(isset($creation)) {{$creation->url}} @endif" id="url">
+			<label for="url">Itt add meg a hivatkozást, ahol elérhető az alkotásod*:</label>
+			<input class="form-control" required="required" name="url" type="text" maxlength="255" value="@if(isset($creation)){{old('url',$creation->url)}}@else{{old('url')}}@endif" id="url">
 		</div>
 
     	<div class="form-group">

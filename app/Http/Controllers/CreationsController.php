@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Usernotice;
 use App\Models\Comment;
+use App\Http\Requests\CreationRequest;
 use Mail;
 
 class CreationsController extends Controller
@@ -61,11 +62,14 @@ class CreationsController extends Controller
     	return view('creations.create');
 	}
 	
-	public function store(Request $request)
+	public function store(CreationRequest $request)
 	{
         libxml_use_internal_errors(true);
         $dom_obj = new \DOMDocument();
-        $page_content = file_get_contents($request->get('url'));
+        $page_content = @file_get_contents($request->get('url'));
+        if($page_content===FALSE) {
+            return redirect()->back()->withInput($request->input())->withErrors(['msg' => 'A megadott hivatkozás nem megfelelő! Ha nem boldogulsz, küld el a hivatkozásod a tarsadalmi.jollet@gmail.com címre és mi ellenőrízzük.']);
+        }
         $dom_obj->loadHTML($page_content);
         $image_src = $og_image = $title = $description = $site_name = null;
         $xpath = new \DOMXPath($dom_obj);
@@ -112,6 +116,7 @@ class CreationsController extends Controller
         });
 
         return redirect('alkotas/'.$creation->id.'/'.$creation->slug)->with('message', 'Az új alkotást sikeresen felvetted.');
+
 	}
 
 	/**
@@ -137,11 +142,16 @@ class CreationsController extends Controller
 	 * @param  integer $id The creation ID
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, CreationRequest $request)
     {
         libxml_use_internal_errors(true);
         $dom_obj = new \DOMDocument();
-        $page_content = file_get_contents($request->get('url'));
+
+        $page_content = @file_get_contents($request->get('url'));
+        if($page_content===FALSE) {
+            return redirect()->back()->withInput($request->input())->withErrors(['msg' => 'A megadott hivatkozás nem megfelelő! Ha nem boldogulsz, küld el a hivatkozásod a tarsadalmi.jollet@gmail.com címre és mi ellenőrízzük.']);
+        }
+
         $dom_obj->loadHTML($page_content);
         $image_src = $og_image = $title = $description = $site_name = null;
         $xpath = new \DOMXPath($dom_obj);
