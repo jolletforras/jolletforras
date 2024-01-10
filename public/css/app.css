@@ -924,5 +924,9 @@ h3 {
 		padding: 5px 3px 0px 3px;
 		line-height: 150%;
 	}
+
+	.notice.user {
+		margin-right: 10px;
+	}
 }
 
