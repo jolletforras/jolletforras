@@ -878,6 +878,10 @@ h3 {
 	h1 {
 		font-size: 130%;
 	}
+
+	.notice.group {
+		margin-right: 5px;
+	}
 }
 
 @media all and (max-width:400px) {
@@ -906,7 +910,7 @@ h3 {
 
 	h1 {
 		margin-left: 3px;
-		font-size: 120%;
+		font-size: 110%;
 	}
 
 	.base {
