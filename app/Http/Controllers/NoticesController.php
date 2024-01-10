@@ -65,7 +65,7 @@ class NoticesController extends Controller
 
         $read_it_articles = Usernotice::where('user_id',$user_id)->where('type','Article')->pluck('post_id')->all();
 
-        $articles = Article::where('updated_at','>',$two_weeks_before)->where('user_id','<>',$user_id)->orderBy('updated_at', 'DESC')->get();
+        $articles = Article::where('created_at','>',$two_weeks_before)->where('user_id','<>',$user_id)->orderBy('updated_at', 'DESC')->get();
         if($articles->isNotEmpty()) {
             $content_html .= "<b>Írások</b><br>";
             foreach ($articles as $article) {
@@ -79,7 +79,7 @@ class NoticesController extends Controller
 
         $read_it_creations = Usernotice::where('user_id',$user_id)->where('type','Creation')->pluck('post_id')->all();
 
-        $creations = Creation::where('updated_at','>',$two_weeks_before)->where('user_id','<>',$user_id)->orderBy('updated_at', 'DESC')->get();
+        $creations = Creation::where('created_at','>',$two_weeks_before)->where('user_id','<>',$user_id)->orderBy('updated_at', 'DESC')->get();
         if($creations->isNotEmpty()) {
             $content_html .= "<b>Alkotások</b><br>";
             foreach ($creations as $creation) {
