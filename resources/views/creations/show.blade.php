@@ -10,7 +10,8 @@
 		<h2>{{ $creation->title }}</h2>
 		@if (Auth::check() && Auth::user()->id==$creation->user->id)
 			<a href="{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
-			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/alkotasok"><< Alkotásaim</a>
+			<button class="btn btn-default" type="button" onclick="delete_creation()">Töröl</button>
+			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/alkotasok"> << Alkotásaim</a>
 		@endif
 		<br>
 		{!! nl2br($creation->body) !!}
@@ -38,4 +39,12 @@
 			'email'				=>$creation->user->email
 		] )
 	@endif
+
+	<script type="text/javascript">
+		function delete_creation() {
+			if (confirm("Biztosan törölni szeretné az alkotást?") == true) {
+				window.location.href = "{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}/torol";
+			}
+		}
+	</script>
 @endsection

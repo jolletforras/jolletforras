@@ -193,5 +193,20 @@ class CreationsController extends Controller
         ]);
 
         return redirect('alkotas/'.$id.'/'.$slug)->with('message', 'Az alkotást sikeresen módosítottad!');
-    }    
+    }
+
+
+    public function delete($id) {
+        $creation = Creation::findOrFail($id);
+        $user = $creation->user;
+        if(Auth::check() && Auth::user()->id==$user->id) {
+            Usernotice::where('post_id',$creation->id)->where('type','Creation')->delete();
+            Comment::where('commentable_id',$creation->id)->where('commentable_type','App\Models\Creation')->delete();
+            $creation->delete();
+
+            return redirect('/profil/'.$user->id.'/'.$user->slug.'/alkotasok/')->with('message', 'Az alkotást sikeresen törölted.');
+        }
+
+        return redirect('/');
+    }
 }
