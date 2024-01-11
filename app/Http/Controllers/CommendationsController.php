@@ -12,6 +12,8 @@ use Mail;
 
 class CommendationsController extends Controller
 {
+    private $url_error_msg = 'A megadott hivatkozás nem megfelelő! Ha nem boldogulsz, küld el a hivatkozásod a tarsadalmi.jollet@gmail.com címre és mi ellenőrizzük.';
+
     public function __construct() {
         //$this->middleware('auth');
         $this->middleware('auth', ['except' => ['index','show']]);
@@ -77,7 +79,10 @@ class CommendationsController extends Controller
     {
         libxml_use_internal_errors(true);
         $dom_obj = new \DOMDocument();
-        $page_content = file_get_contents($request->get('url'));
+        $page_content = @file_get_contents($request->get('url'));
+        if($page_content===FALSE) {
+            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->url_error_msg]);
+        }
         $dom_obj->loadHTML($page_content);
         $image = $title = $description = $site_name = null;
         $xpath = new \DOMXPath($dom_obj);
@@ -153,7 +158,10 @@ class CommendationsController extends Controller
     {
         libxml_use_internal_errors(true);
         $dom_obj = new \DOMDocument();
-        $page_content = file_get_contents($request->get('url'));
+        $page_content = @file_get_contents($request->get('url'));
+        if($page_content===FALSE) {
+            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->url_error_msg]);
+        }
         $dom_obj->loadHTML($page_content);
         $image = $title = $description = $site_name = null;
         $xpath = new \DOMXPath($dom_obj);
