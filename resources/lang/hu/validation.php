@@ -126,7 +126,7 @@ return [
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
     'unique' => 'Ez a(z) :attribute már foglalt.',
-    'uploaded' => 'The :attribute failed to upload.',
+    'uploaded' => 'A képet nem sikerült feltölteni.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
     'recaptcha' => 'Robot ellenőrzés kötelező.',
