@@ -26,6 +26,7 @@ class CreationRequest extends FormRequest
         $rules =  [
 				'title' => 'required|max:80',
 				'body' => 'required',
+                'image' => 'mimes:jpg,png,gif|max:8000'
 		];
 
         return $rules;
@@ -42,6 +43,8 @@ class CreationRequest extends FormRequest
 				'title.required' => 'Kérlek add meg az alkotás címét',
 				'title.max'  => 'A cím legfeljebb :max karakter lehet',
 				'body.required' => 'Kérlek add meg az ajánló szövegét',
+                'image.mimes' => 'A kép fájltípusa .jpg, .png, .gif kell legyen',
+                'image.max' => 'A kép nem lehet nagyobb mint :max KB',
     	];
     }
 }

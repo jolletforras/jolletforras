@@ -70,6 +70,8 @@ class CreationsController extends Controller
 	{
 
 	    $data = $this->getData($request);
+        if(isset($data['error_msg']))
+            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $data['error_msg']]);
 
         $creation = Auth::user()->creations($data)->create($data);
 
@@ -123,12 +125,10 @@ class CreationsController extends Controller
         $data = $this->getData($request,$creation);
         if(isset($data['error_msg']))
             return redirect()->back()->withInput($request->input())->withErrors(['msg' => $data['error_msg']]);
-        if(isset($data['validator']))
-            return redirect()->back()->withInput($request->input())->withErrors($data['validator']);
 
         $creation->update($data);
 
-        return redirect('alkotas/'.$id.'/'.$data['slug'])->with('message', 'Az alkotást sikeresen módosítottad!');
+        return redirect('alkotas/'.$id.'/'.$creation->slug)->with('message', 'Az alkotást sikeresen módosítottad!');
     }
 
 
@@ -198,23 +198,6 @@ class CreationsController extends Controller
         $slug = Str::slug($request->get('title'));
 
         if(!empty($image)) {
-            $rules = [
-                'image' => 'mimes:jpg,png,gif|max:2048'
-            ];
-
-            $messages = [
-                'image.mimes' => 'A kép fájltípusa .jpg, .png, .gif kell legyen',
-                'image.max' => 'A kép nem lehet nagyobb mint :max KB',
-            ];
-
-            $validator = Validator::make($request->all(), $rules, $messages);
-
-            if ($validator->fails()) {
-                //return redirect()->back()->withInput($request->input())->withErrors($validator);
-                $data['validator'] = $validator;
-                return $data;
-            }
-
             $imagename=$slug;
             $base_path=base_path().'/public/images/creations/';
             $tmpimagename = 'tmp_'.$imagename.'.'.$image->getClientOriginalExtension();
