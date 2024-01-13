@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Validator;
 use App\Models\Creation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -16,6 +17,7 @@ use Mail;
 class CreationsController extends Controller
 {
     private $url_error_msg = 'A megadott hivatkozás nem megfelelő! Ha nem boldogulsz, küld el a hivatkozásod a tarsadalmi.jollet@gmail.com címre és mi ellenőrizzük.';
+    private $source_error_msg = 'Hivatkozást vagy képet szükséges megadnod az alkotásodról.';
 
     public function __construct() {
 		$this->middleware('auth', ['except'=>['index','show']]);
@@ -66,44 +68,15 @@ class CreationsController extends Controller
 	
 	public function store(CreationRequest $request)
 	{
-        libxml_use_internal_errors(true);
-        $dom_obj = new \DOMDocument();
-        $page_content = @file_get_contents($request->get('url'));
-        if($page_content===FALSE) {
-            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->url_error_msg]);
-        }
-        $dom_obj->loadHTML($page_content);
-        $image_src = $og_image = $title = $description = $site_name = null;
-        $xpath = new \DOMXPath($dom_obj);
-        $query = '//*/meta[starts-with(@property, \'og:\')]';
-        $metas = $xpath->query($query);
-        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
-        foreach ($metas as $meta) {
-            $property = $meta->getAttribute('property');
-            $content = $meta->getAttribute('content');
-            if($property=='image_src') $image_src = $content;
-            if($property=='og:image') $og_image = $content;
-            if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            //if($property=='og:site_name') $site_name = $content;
-        }
 
-        $image = empty($image_src) ? $og_image : $image_src;
+	    $data = $this->getData($request);
 
-        $creation = Auth::user()->creations()->create([
-            'title' => $request->get('title'),
-            'body' =>  $request->get('body'),
-            'url' =>  $request->get('url'),
-            'slug' => Str::slug($request->get('title')),
-            'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0,
-            'meta_title' =>  $title,
-            'meta_image' =>  $image,
-            'meta_description' =>  $description
-        ]);
+        $creation = Auth::user()->creations($data)->create($data);
 
-        Auth::user()->has_creation = 1;
-        Auth::user()->save();
+        $user = Auth::user();
+        $user->has_creation = 1;
+        $user->nr_creation_image++;
+        $user->save();
 
         User::members()->where('id','<>',Auth::user()->id)->increment('user_new_post', 1);
 
@@ -146,53 +119,16 @@ class CreationsController extends Controller
 	 */
 	public function update($id, CreationRequest $request)
     {
-        libxml_use_internal_errors(true);
-        $dom_obj = new \DOMDocument();
-        $page_content = @file_get_contents($request->get('url'));
-        if($page_content===FALSE) {
-            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->url_error_msg]);
-        }
-        $dom_obj->loadHTML($page_content);
-        $image_src = $og_image = $title = $description = $site_name = null;
-        $xpath = new \DOMXPath($dom_obj);
-        $query = '//*/meta[starts-with(@property, \'og:\')]';
-        $metas = $xpath->query($query);
-        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
-
-        foreach ($metas as $meta) {
-            $property = $meta->getAttribute('property');
-            $content = $meta->getAttribute('content');
-            if($property=='og:image') $og_image = $content;
-            if ($property == 'og:title') $title = is_numeric(strpos($content, 'Ã')) ? utf8_decode($content) : $content;
-            if ($property == 'og:description') $description = is_numeric(strpos($content, 'Ã')) ? utf8_decode($content) : $content;
-            //if($property=='og:site_name') $site_name = $content;
-        }
-
-        $metas = $xpath->query('//*/link[starts-with(@rel, \'image_src\')]');
-        foreach ($metas as $meta) {
-            $rel = $meta->getAttribute('rel');
-            $href = $meta->getAttribute('href');
-            if($rel=='image_src') $image_src = $href;
-        }
-
-        $image = empty($image_src) ? $og_image : $image_src;
-
         $creation = Creation::findOrFail($id);
+        $data = $this->getData($request,$creation);
+        if(isset($data['error_msg']))
+            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $data['error_msg']]);
+        if(isset($data['validator']))
+            return redirect()->back()->withInput($request->input())->withErrors($data['validator']);
 
-        $slug = Str::slug($request->get('title'));
-        $creation->update([
-            'title' => $request->get('title'),
-            'body' => $request->get('body'),
-            'url' => $request->get('url'),
-            'slug' => Str::slug($request->get('title')),
-            'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0,
-            'meta_title' => $title,
-            'meta_image' => $image,
-            'meta_description' => $description
-        ]);
+        $creation->update($data);
 
-        return redirect('alkotas/'.$id.'/'.$slug)->with('message', 'Az alkotást sikeresen módosítottad!');
+        return redirect('alkotas/'.$id.'/'.$data['slug'])->with('message', 'Az alkotást sikeresen módosítottad!');
     }
 
 
@@ -208,5 +144,101 @@ class CreationsController extends Controller
         }
 
         return redirect('/');
+    }
+
+    private function getData($request,$creation=null) {
+        $url = $request->get('url');
+        $image = $request->file('image');
+        //akkor is van képe, ha korábban az alkotásnál lett feltöltve kép
+        $has_image = !empty($image) ||  isset($creation->has_image) ? 1 : 0;
+
+        if(empty($url)&&empty($image)) {
+            //return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->source_error_msg]);
+            //csak akkor számít ha nincs megadva kép, ha új alkotás vagy korábban nem lett feltöltve kép
+            if(is_null($creation) || !$creation->has_image) {
+                $data['error_msg'] = $this->source_error_msg;
+                return $data;
+            }
+        }
+
+        $image_src = $og_image = $title = $description = $site_name = null;
+        if(!empty($url)) {
+            libxml_use_internal_errors(true);
+            $dom_obj = new \DOMDocument();
+            $page_content = @file_get_contents($url);
+            if($page_content===FALSE) {
+                //return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->url_error_msg]);
+                $data['error_msg'] = $this->url_error_msg;
+                return $data;
+            }
+            $dom_obj->loadHTML($page_content);
+            $xpath = new \DOMXPath($dom_obj);
+            $query = '//*/meta[starts-with(@property, \'og:\')]';
+            $metas = $xpath->query($query);
+            //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
+            foreach ($metas as $meta) {
+                $property = $meta->getAttribute('property');
+                $content = $meta->getAttribute('content');
+                if($property=='og:image') $og_image = $content;
+                if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+                if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+                //if($property=='og:site_name') $site_name = $content;
+            }
+
+            $metas = $xpath->query('//*/link[starts-with(@rel, \'image_src\')]');
+            foreach ($metas as $meta) {
+                $rel = $meta->getAttribute('rel');
+                $href = $meta->getAttribute('href');
+                if ($rel == 'image_src') $image_src = $href;
+            }
+
+            $image = empty($image_src) ? $og_image : $image_src;
+        }
+
+        $slug = Str::slug($request->get('title'));
+
+        if(!empty($image)) {
+            $rules = [
+                'image' => 'mimes:jpg,png,gif|max:2048'
+            ];
+
+            $messages = [
+                'image.mimes' => 'A kép fájltípusa .jpg, .png, .gif kell legyen',
+                'image.max' => 'A kép nem lehet nagyobb mint :max KB',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                //return redirect()->back()->withInput($request->input())->withErrors($validator);
+                $data['validator'] = $validator;
+                return $data;
+            }
+
+            $imagename=$slug;
+            $base_path=base_path().'/public/images/creations/';
+            $tmpimagename = 'tmp_'.$imagename.'.'.$image->getClientOriginalExtension();
+            $image->move($base_path,$tmpimagename);
+
+            $tmpfile=$base_path.$tmpimagename;
+            //a maximális magassága a képnek 600
+            generateImage($tmpfile, 600, 2, $base_path.$imagename.'.jpg');//1=>width; 2=>height
+            unlink($tmpfile);
+        }
+
+        $data = [
+            'title' => $request->get('title'),
+            'body' =>  $request->get('body'),
+            'url' =>  $url,
+            'has_image' =>  $has_image,
+            'slug' => $slug,
+            'public' => $request->has('public') ? 1 : 0,
+            'active' => $request->has('active') ? 1 : 0,
+            'meta_title' =>  $title,
+            'meta_image' =>  $image,
+            'meta_description' =>  $description
+        ];
+
+        return $data;
     }
 }

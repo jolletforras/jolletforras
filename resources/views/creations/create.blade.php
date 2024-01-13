@@ -6,9 +6,13 @@
 	@include('errors.list')
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form method="POST" action="{{url('alkotas')}}/uj" accept-charset="UTF-8">
+			<form method="POST" action="{{url('alkotas')}}/uj" accept-charset="UTF-8" enctype="multipart/form-data">
 				@include('creations._form', ['submitButtonText'=>'Mentés'])
 			</form>
 		</div>
 	</div>
 @stop
+
+@section('footer')
+	@include('creations._script')
+@endsection

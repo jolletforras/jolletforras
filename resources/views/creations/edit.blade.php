@@ -9,10 +9,13 @@
 		</div>
 		<div class="panel-body">
 
-			<form method="POST" action="{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}/modosit" accept-charset="UTF-8">
+			<form method="POST" action="{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}/modosit" accept-charset="UTF-8" enctype="multipart/form-data">
 				@include('creations._form', ['submitButtonText'=>'Módosít'])
 			</form>
 		</div>
 	</div>
-	
 @stop
+
+@section('footer')
+	@include('creations._script')
+@endsection

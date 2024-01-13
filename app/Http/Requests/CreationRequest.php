@@ -26,7 +26,6 @@ class CreationRequest extends FormRequest
         $rules =  [
 				'title' => 'required|max:80',
 				'body' => 'required',
-                'url' => 'required',
 		];
 
         return $rules;
@@ -43,7 +42,6 @@ class CreationRequest extends FormRequest
 				'title.required' => 'Kérlek add meg az alkotás címét',
 				'title.max'  => 'A cím legfeljebb :max karakter lehet',
 				'body.required' => 'Kérlek add meg az ajánló szövegét',
-                'url.required' => 'Kérlek add meg a hivatkozást, ahol az alkotásod bemutatod',
     	];
     }
 }

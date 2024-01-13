@@ -14,6 +14,9 @@
 			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/alkotasok"> << Alkotásaim</a>
 		@endif
 		<br>
+		@if($creation->has_image)
+			<p style="text-align: center;"><img src="{{ url('/images/creations') }}/{{ $creation->slug}}.jpg?{{$creation->photo_counter}}" style="max-width: 50%;max-height: 400px;"></p>
+		@endif
 		{!! nl2br($creation->body) !!}
 		@if(!empty($creation->url))
 			<div class="inner_box" style="background-color: #fbfbfb">
