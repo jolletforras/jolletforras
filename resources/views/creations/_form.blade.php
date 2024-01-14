@@ -13,7 +13,7 @@
         <div class="form-group">
           <input type="radio" id="url" name="source" value="url" onchange="source_change('url')" @if(!isset($creation) || isset($creation) && !empty($creation->url))checked @endif>
           <label for="url">Alkotásomról hivatkozást adok meg</label><br>
-          <input type="radio" id="image" name="source" value="image" onchange="source_change('image')" @if(!isset($creation) || isset($creation) && $creation->has_image)checked @endif>
+          <input type="radio" id="image" name="source" value="image" onchange="source_change('image')" @if(isset($creation) && $creation->has_image)checked @endif>
           <label for="image">Képet töltök fel ({{Auth()->user()->nr_creation_image}}/5)
                 <a href="#image_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label><br>
           <div id="image_info" class="collapse info">Összesen 5 alkotás esetében van lehetőség kép feltöltésére</div>
