@@ -122,13 +122,22 @@ class CreationsController extends Controller
 	public function update($id, CreationRequest $request)
     {
         $creation = Creation::findOrFail($id);
+
+        $prev_slug = $creation->slug;
+
         $data = $this->getData($request,$creation);
         if(isset($data['error_msg']))
             return redirect()->back()->withInput($request->input())->withErrors(['msg' => $data['error_msg']]);
 
         $creation->update($data);
 
-        return redirect('alkotas/'.$id.'/'.$creation->slug)->with('message', 'Az alkotást sikeresen módosítottad!');
+        $slug = $creation->slug;
+        if($slug!=$prev_slug) {
+            $base_path=base_path().'/public/images/creations/';
+            rename($base_path.$prev_slug.'.jpg',$base_path.$slug.'.jpg');
+        }
+
+        return redirect('alkotas/'.$id.'/'.$slug)->with('message', 'Az alkotást sikeresen módosítottad!');
     }
 
 
