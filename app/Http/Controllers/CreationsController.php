@@ -124,6 +124,7 @@ class CreationsController extends Controller
         $creation = Creation::findOrFail($id);
 
         $prev_slug = $creation->slug;
+        $prev_has_image = $creation->has_image;
 
         $data = $this->getData($request,$creation);
         if(isset($data['error_msg']))
@@ -131,10 +132,19 @@ class CreationsController extends Controller
 
         $creation->update($data);
 
+        //ha módosítom az alkotás címét, akkor a kép neve is átíródik annak megfelelően
         $slug = $creation->slug;
         if($slug!=$prev_slug) {
             $base_path=base_path().'/public/images/creations/';
             rename($base_path.$prev_slug.'.jpg',$base_path.$slug.'.jpg');
+        }
+
+        //ha korábban kép volt és hivatkozás most, akkor a képet törli és a számlálót csökkenti
+        if($prev_has_image && $request->source=='url') {
+            $base_path=base_path().'/public/images/creations/';
+            unlink($base_path.$prev_slug.'.jpg');
+            Auth::user()->nr_creation_image--;
+            Auth::user()->save();
         }
 
         return redirect('alkotas/'.$id.'/'.$slug)->with('message', 'Az alkotást sikeresen módosítottad!');
@@ -156,18 +166,17 @@ class CreationsController extends Controller
     }
 
     private function getData($request,$creation=null) {
-        $url = $request->get('url');
-        $image = $request->file('image');
-        //akkor is van képe, ha korábban az alkotásnál lett feltöltve kép
-        $has_image = !empty($image) ||  isset($creation->has_image) ? 1 : 0;
 
-        if(empty($url)&&empty($image)) {
+        $url = $request->get('url');
+        $image_file = $request->file('image');
+        //akkor van képe, ha a kép kiválasztásánál van és most adott meg képet vagy korábban adott meg képet
+        $has_image = $request->source=="image" && (!empty($image_file) || isset($creation->has_image)) ? 1 : 0;
+
+        //ha nincs hivatkozás és kép se lesz
+        if(empty($url)&&!$has_image) {
             //return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->source_error_msg]);
-            //csak akkor számít ha nincs megadva kép, ha új alkotás vagy korábban nem lett feltöltve kép
-            if(is_null($creation) || !$creation->has_image) {
-                $data['error_msg'] = $this->source_error_msg;
-                return $data;
-            }
+            $data['error_msg'] = $this->source_error_msg;
+            return $data;
         }
 
         $image_src = $og_image = $title = $description = $site_name = null;
@@ -206,11 +215,11 @@ class CreationsController extends Controller
 
         $slug = Str::slug($request->get('title'));
 
-        if(!empty($image)) {
+        if(!empty($image_file)) {
             $imagename=$slug;
             $base_path=base_path().'/public/images/creations/';
-            $tmpimagename = 'tmp_'.$imagename.'.'.$image->getClientOriginalExtension();
-            $image->move($base_path,$tmpimagename);
+            $tmpimagename = 'tmp_'.$imagename.'.'.$image_file->getClientOriginalExtension();
+            $image_file->move($base_path,$tmpimagename);
 
             $tmpfile=$base_path.$tmpimagename;
             //a maximális magassága a képnek 600
