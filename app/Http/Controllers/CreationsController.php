@@ -147,6 +147,12 @@ class CreationsController extends Controller
             Auth::user()->save();
         }
 
+        //ha korábban hivatkozás volt és most kép lett a számlálót növeli
+        if(!$prev_has_image && $creation->has_image) {
+            Auth::user()->nr_creation_image++;
+            Auth::user()->save();
+        }
+
         return redirect('alkotas/'.$id.'/'.$slug)->with('message', 'Az alkotást sikeresen módosítottad!');
     }
 
@@ -169,8 +175,8 @@ class CreationsController extends Controller
 
         $url = $request->get('url');
         $image_file = $request->file('image');
-        //akkor van képe, ha a kép kiválasztásánál van és most adott meg képet vagy korábban adott meg képet
-        $has_image = $request->source=="image" && (!empty($image_file) || isset($creation->has_image)) ? 1 : 0;
+        //akkor van képe, ha a kép kiválasztásánál van és most adott meg képet vagy módosítás és korábban adott meg képet
+        $has_image = $request->source=="image" && (!empty($image_file) || isset($creation) && $creation->has_image) ? 1 : 0;
 
         //ha nincs hivatkozás és kép se lesz
         if(empty($url)&&!$has_image) {
@@ -179,7 +185,7 @@ class CreationsController extends Controller
             return $data;
         }
 
-        $image_src = $og_image = $title = $description = $site_name = null;
+        $meta_image = $image_src = $og_image = $title = $description = $site_name = null;
         if(!empty($url)) {
             libxml_use_internal_errors(true);
             $dom_obj = new \DOMDocument();
@@ -210,7 +216,7 @@ class CreationsController extends Controller
                 if ($rel == 'image_src') $image_src = $href;
             }
 
-            $image = empty($image_src) ? $og_image : $image_src;
+            $meta_image = empty($image_src) ? $og_image : $image_src;
         }
 
         $slug = Str::slug($request->get('title'));
@@ -236,7 +242,7 @@ class CreationsController extends Controller
             'public' => $request->has('public') ? 1 : 0,
             'active' => $request->has('active') ? 1 : 0,
             'meta_title' =>  $title,
-            'meta_image' =>  $image,
+            'meta_image' =>  $meta_image,
             'meta_description' =>  $description
         ];
 
