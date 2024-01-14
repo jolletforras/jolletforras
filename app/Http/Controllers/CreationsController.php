@@ -77,7 +77,9 @@ class CreationsController extends Controller
 
         $user = Auth::user();
         $user->has_creation = 1;
-        $user->nr_creation_image++;
+        if($creation->has_image) {
+            $user->nr_creation_image++;
+        }
         $user->save();
 
         User::members()->where('id','<>',Auth::user()->id)->increment('user_new_post', 1);
@@ -160,6 +162,16 @@ class CreationsController extends Controller
     public function delete($id) {
         $creation = Creation::findOrFail($id);
         $user = $creation->user;
+
+        //ha töröl képes alkotást, akkor törli a képet és csökkenti a számlálót
+        if($creation->has_image) {
+            $base_path=base_path().'/public/images/creations/';
+            unlink($base_path.$creation->slug.'.jpg');
+
+            $user->nr_creation_image--;
+            $user->save();
+        }
+
         if(Auth::check() && Auth::user()->id==$user->id) {
             Usernotice::where('post_id',$creation->id)->where('type','Creation')->delete();
             Comment::where('commentable_id',$creation->id)->where('commentable_type','App\Models\Creation')->delete();
