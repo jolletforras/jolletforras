@@ -45,7 +45,8 @@ class CreationsController extends Controller
         $creation = Creation::findOrFail($id);
         $comments = Comment::where('commentable_type', 'App\Models\Creation')->where('commentable_id', $id)->get();
 
-        if(Auth::check()) {
+        //ha be van jelentkezve és nem a saját alkotása, akkor jelzi, hogy olvasta azáltal, hogy bejegyzést hoz létre a usernotice táblában (csak akkor jegyzi, ha még nem volt bejegyezve korább)
+        if(Auth::check() && $creation->user_id!=Auth()->user()->id) {
             $user = Auth()->user();
             $user_id = $user->id;
             $notice = Usernotice::findBy($user_id,$id,'Creation')->first();
