@@ -11,15 +11,19 @@
             @if($my_post || $admin)
                 <a href="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit">módosít</a>
                 @if(!$commendation->active) <i>/inaktív/</i>@endif
-                @if(!$commendation->approved) <i>/nincs engedélyezve/</i>@endif
+                @if(!$commendation->approved) <i>/még nincs engedélyezve/</i>@endif
             @endif
         </p>
         {!! nl2br($commendation->body) !!}<br>
         @if(!empty($commendation->url))
         <div class="inner_box" style="background-color: #fbfbfb">
-            <p><a href="{{ $commendation->url }}" target="_blank">{{ $commendation->meta_title }}</a></p>
+            <p><a href="{{ $commendation->url }}" target="_blank">@if(empty($commendation->meta_title)){{ $commendation->url}}@else{{ $commendation->meta_title }}@endif</a></p>
+            @if(!empty($commendation->meta_image))
             <p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$commendation->meta_image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
+            @endif
+            @if(!empty($commendation->meta_description))
             <p>@if(strlen($commendation->meta_description)>300){{ mb_substr($commendation->meta_description,0,300) }} ... @else {{ $commendation->meta_description }} @endif</p>
+            @endif
         </div>
 
         @endif

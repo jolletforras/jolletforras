@@ -16,9 +16,13 @@
 		{!! nl2br($commendation->body) !!}
 		@if(!empty($commendation->url))
 			<div class="inner_box" style="background-color: #fbfbfb">
-				<p><a href="{{ $commendation->url }}" target="_blank">{{ $commendation->meta_title }}</a></p>
+				<p><a href="{{ $commendation->url }}" target="_blank">@if(empty($commendation->meta_title)){{ $commendation->url}}@else{{ $commendation->meta_title }}@endif</a></p>
+				@if(!empty($commendation->meta_image))
 				<p><a href="{{ $commendation->url }}" target="_blank"><img src="{{$commendation->meta_image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
+				@endif
+				@if(!empty($commendation->meta_description))
 				<p>{{ $commendation->meta_description }}</p>
+				@endif
 			</div>
 		@endif
 		@include('partials.author', ['author'=>'','obj'=>$commendation])
