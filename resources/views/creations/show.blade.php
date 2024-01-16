@@ -20,9 +20,13 @@
 		{!! nl2br($creation->body) !!}
 		@if(!empty($creation->url))
 			<div class="inner_box" style="background-color: #fbfbfb">
-				<p><a href="{{ $creation->url }}" target="_blank">{{ $creation->meta_title }}</a></p>
+				<p><a href="{{ $creation->url }}" target="_blank">@if(empty($creation->meta_title)){{ $creation->url}}@else{{ $creation->meta_title }}@endif</a></p>
+				@if(!empty($creation->meta_image))
 				<p><a href="{{ $creation->url }}" target="_blank"><img src="{{$creation->meta_image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
+				@endif
+				@if(!empty($creation->meta_description))
 				<p>{{ $creation->meta_description }}</p>
+				@endif
 			</div>
 		@endif
 		@include('partials.author', ['author'=>'','obj'=>$creation])
