@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\ProjectSkill;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserSkill;
@@ -43,19 +45,25 @@ class MapController extends Controller
         return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
     }
 
-    public function groups()
+    public function cooperations()
     {
         $groups = Group::whereNotNull('lat')->whereNotNull('lng')->get();
+        $initialMarkers_g = $this->group_markers($groups);
 
-        $initialMarkers = $this->group_markers($groups);
+        $projects = Project::whereNotNull('lat')->whereNotNull('lng')->get();
+        $initialMarkers_p = $this->project_markers($projects);
+
+        $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
 
         $tags =  GroupTag::getTagList();
-
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
-        $map_type = 'csoportok';
+        $tags_ext =  ProjectSkill::get()->pluck('name', 'id')->all();
+        $tags_slug_ext = ProjectSkill::get()->pluck('slug', 'id')->all();
 
-        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
+        $map_type = 'szervezodesek';
+
+        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug', 'tags_ext', 'tags_slug_ext'));
     }
 
     public function group_tag_show($id) {
@@ -67,13 +75,35 @@ class MapController extends Controller
         $initialMarkers = $this->group_markers($groups);
 
         $tags =  GroupTag::getTagList();
-
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
-        $map_type = 'csoportok';
+        $tags_ext =  ProjectSkill::get()->pluck('name', 'id')->all();
+        $tags_slug_ext = ProjectSkill::get()->pluck('slug', 'id')->all();
 
-        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
+        $map_type = 'szervezodesek';
+
+        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug', 'tags_ext', 'tags_slug_ext'));
     }
+
+    public function project_tag_show($id) {
+
+        $tag = ProjectSkill::find($id);
+
+        $projects = $tag->projects()->whereNotNull('lat')->whereNotNull('lng')->get();
+
+        $initialMarkers = $this->project_markers($projects);
+
+        $tags =  GroupTag::getTagList();
+        $tags_slug = GroupTag::pluck('slug', 'id')->all();
+
+        $tags_ext =  ProjectSkill::get()->pluck('name', 'id')->all();
+        $tags_slug_ext = ProjectSkill::get()->pluck('slug', 'id')->all();
+
+        $map_type = 'szervezodesek';
+
+        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug', 'tags_ext', 'tags_slug_ext'));
+    }
+
 
     protected function user_markers($users)
     {
@@ -85,7 +115,8 @@ class MapController extends Controller
                 'position' => [
                     'lat' => $user->lat+random_int(-50,50)/5000,
                     'lng' => $user->lng+random_int(-50,50)/5000
-                ]
+                ],
+                'red' => false
             ];
         }
 
@@ -102,7 +133,26 @@ class MapController extends Controller
                 'position' => [
                     'lat' => $group->lat,
                     'lng' => $group->lng
-                ]
+                ],
+                'red' => false
+            ];
+        }
+
+        return $initialMarkers;
+    }
+
+    protected function project_markers($projects)
+    {
+        $initialMarkers = array();
+
+        foreach($projects as $project) {
+            $initialMarkers[] = [
+                'name' => '<a href="/kezdemenyezes/'.$project->id.'/'.$project->slug.'" style="font-size:12px;">'.$project->title.'</a>',
+                'position' => [
+                    'lat' => $project->lat,
+                    'lng' => $project->lng
+                ],
+                'red' => true
             ];
         }
 
