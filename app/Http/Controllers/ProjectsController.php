@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Http\Controllers\Traits\TagTrait;
+use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\Project;
 use App\Models\ProjectSkill;
 use App\Models\User;
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 class ProjectsController extends Controller
 {
 	use TagTrait;
+    use ZipCodeTrait;
 	
 	public function __construct() {
 		$this->middleware('auth', ['except' => ['index','show']]);
@@ -86,10 +88,18 @@ class ProjectsController extends Controller
 	{
 	    $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
 
+        $zip_code=$request->get('zip_code');
+        $coordinates=$this->getCoordinates($zip_code);
+
 		$project = Auth::user()->projects()->create([
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
+                'location' => $request->get('location'),
+                'zip_code' => $zip_code,
+                'lat' => $coordinates['lat'],
+                'lng' => $coordinates['lng'],
+                'city' => $request->get('city'),
 				'slug' => Str::slug($request->get('title')),
                 'counter' => 0,
                 'public' => $request->has('public') ? 1 : 0
@@ -138,10 +148,18 @@ class ProjectsController extends Controller
 		
 		$project = Project::findOrFail($id);
 
+        $zip_code=$request->get('zip_code');
+        $coordinates=$this->getCoordinates($zip_code);
+
 		$project->update([
 				'title' => $request->get('title'),
 				'body' => $request->get('body'),
 				'looking_for' => $request->get('looking_for'),
+                'location' => $request->get('location'),
+                'zip_code' => $zip_code,
+                'lat' => $coordinates['lat'],
+                'lng' => $coordinates['lng'],
+                'city' => $request->get('city'),
 				'slug' => Str::slug($request->get('title')),
                 'public' => $request->has('public') ? 1 : 0
 		]);

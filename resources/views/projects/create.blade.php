@@ -24,5 +24,6 @@
 
 @section('footer')
 	@include('projects._add_member_script')
+	@include('groups._add_local_data_script')
 	@include('partials.add_tag_script')
 @endsection
