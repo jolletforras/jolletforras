@@ -25,7 +25,7 @@ class Project extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(ProjectSkill::class)->withTimestamps();
+        return $this->belongsToMany(ProjectTag::class)->withTimestamps();
     }
 
     public function members()

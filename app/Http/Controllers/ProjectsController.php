@@ -6,7 +6,7 @@ use Validator;
 use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\Project;
-use App\Models\ProjectSkill;
+use App\Models\ProjectTag;
 use App\Models\User;
 use App\Models\Comment;
 use App\Http\Requests\ProjectRequest;
@@ -40,9 +40,9 @@ class ProjectsController extends Controller
         }
 
 
-		$tags = [''=>''] + ProjectSkill::get()->pluck('name', 'id')->all();
+		$tags = [''=>''] + ProjectTag::get()->pluck('name', 'id')->all();
 
-		$tags_slug = ProjectSkill::get()->pluck('slug', 'id')->all();
+		$tags_slug = ProjectTag::get()->pluck('slug', 'id')->all();
 
 		return view('projects.index', compact('projects', 'tags', 'tags_slug'));
 	}
@@ -72,7 +72,7 @@ class ProjectsController extends Controller
 	 * @return Response
 	 */
 	public function create() {
-		$tags = ProjectSkill::get()->pluck('name', 'id');
+		$tags = ProjectTag::get()->pluck('name', 'id');
 
 		$members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
 
@@ -86,7 +86,7 @@ class ProjectsController extends Controller
 	 */
 	public function store(ProjectRequest $request)
 	{
-	    $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
+	    $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectTag');
 
         $zip_code=$request->get('zip_code');
         $coordinates=$this->getCoordinates($zip_code);
@@ -130,7 +130,8 @@ class ProjectsController extends Controller
 		$members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
         $selected_members = $project->members->pluck('id')->toArray();
 
-		$tags = ProjectSkill::get()->pluck('name', 'id');
+		$tags = ProjectTag::get()->pluck('name', 'id');
+
         $selected_tags = $project->tags->pluck('id')->toArray();
 
 		return view('projects.edit', compact('project', 'members', 'selected_members', 'tags', 'selected_tags'));
@@ -144,7 +145,7 @@ class ProjectsController extends Controller
 	 */
 	public function update($id, ProjectRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectSkill');
+		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectTag');
 		
 		$project = Project::findOrFail($id);
 

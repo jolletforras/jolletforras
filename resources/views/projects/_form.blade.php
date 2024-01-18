@@ -23,7 +23,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="tag_list">Címkék ezekre a képességekre*:</label>
+			<label for="tag_list">Címkék a kezdeményezéssel kapcsolatban*:</label>
 			<select id="tag_list" name="tag_list[]" class="form-control tag-list" multiple>
 				@foreach($tags as $key => $val)
 					<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
