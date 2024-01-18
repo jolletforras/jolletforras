@@ -11,7 +11,7 @@ class GroupTag extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'user_id'
+        'id', 'name', 'slug', 'user_id'
     ];
 
     public function groups()

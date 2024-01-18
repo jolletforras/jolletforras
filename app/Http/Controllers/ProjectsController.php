@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\Project;
 use App\Models\ProjectTag;
+use App\Models\GroupTag;
 use App\Models\User;
 use App\Models\Comment;
 use App\Http\Requests\ProjectRequest;

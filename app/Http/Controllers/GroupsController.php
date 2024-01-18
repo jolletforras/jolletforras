@@ -11,6 +11,7 @@ use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\Group;
 use App\Models\GroupTag;
+use App\Models\ProjectTag;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Notice;
