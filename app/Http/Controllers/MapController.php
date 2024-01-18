@@ -51,7 +51,7 @@ class MapController extends Controller
 
         $initialMarkers = $this->group_markers($groups);
 
-        $tags =  GroupTag::getTagList();
+        $tags = GroupTag::getTagList();
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
@@ -65,7 +65,7 @@ class MapController extends Controller
         $projects = Project::whereNotNull('lat')->whereNotNull('lng')->get();
         $initialMarkers = $this->project_markers($projects);
 
-        $tags =  [''=>''] + ProjectSkill::get()->pluck('name', 'id')->all();
+        $tags = ProjectSkill::getTagList();
         $tags_slug = ProjectSkill::get()->pluck('slug', 'id')->all();
 
         $map_type = 'kezdemenyezesek';
@@ -81,7 +81,7 @@ class MapController extends Controller
 
         $initialMarkers = $this->group_markers($groups);
 
-        $tags =  GroupTag::getTagList();
+        $tags = GroupTag::getTagList();
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
@@ -98,7 +98,7 @@ class MapController extends Controller
 
         $initialMarkers = $this->project_markers($projects);
 
-        $tags =  [''=>''] + ProjectSkill::get()->pluck('name', 'id')->all();
+        $tags = ProjectSkill::getTagList();
         $tags_slug = ProjectSkill::get()->pluck('slug', 'id')->all();
 
         $map_type = 'kezdemenyezesek';
