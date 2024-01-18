@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserSkill;
 use App\Models\Group;
 use App\Models\GroupTag;
+use App\Models\ProjectTag;
 
 class MapController extends Controller
 {
@@ -45,65 +46,48 @@ class MapController extends Controller
         return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
     }
 
-    public function groups()
+    public function cooperations()
     {
         $groups = Group::whereNotNull('lat')->whereNotNull('lng')->get();
+        $initialMarkers_g = $this->group_markers($groups);
 
-        $initialMarkers = $this->group_markers($groups);
+        $projects = Project::whereNotNull('lat')->whereNotNull('lng')->get();
+        $initialMarkers_p = $this->project_markers($projects);
 
-        $tags = GroupTag::getTagList();
+        $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
+
+        $tags_g = GroupTag::getTagList();
+        $tags_p = ProjectTag::getTagList();
+        $tags = [''=>''] +$tags_g+$tags_p;
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
-        $map_type = 'csoportok';
+        $map_type = 'szervezodesek';
 
         return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
     }
 
-    public function projects()
-    {
-        $projects = Project::whereNotNull('lat')->whereNotNull('lng')->get();
-        $initialMarkers = $this->project_markers($projects);
-
-        $tags = ProjectSkill::getTagList();
-        $tags_slug = ProjectSkill::get()->pluck('slug', 'id')->all();
-
-        $map_type = 'kezdemenyezesek';
-
-        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
-    }
-
-    public function group_tag_show($id) {
+    public function cooperation_tag_show($id) {
 
         $tag = GroupTag::find($id);
-
         $groups = $tag->groups()->whereNotNull('lat')->whereNotNull('lng')->get();
+        $initialMarkers_g = $this->group_markers($groups);
 
-        $initialMarkers = $this->group_markers($groups);
+        $tag = ProjectTag::find($id);
+        $projects = $tag->projects()->whereNotNull('lat')->whereNotNull('lng')->get();
+        $initialMarkers_p = $this->project_markers($projects);
 
-        $tags = GroupTag::getTagList();
+        $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
+
+        $tags_g = GroupTag::getTagList();
+        $tags_p = ProjectTag::getTagList();
+        $tags = [''=>''] +$tags_g+$tags_p;
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
-        $map_type = 'csoportok';
+        $map_type = 'szervezodesek';
 
         return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
-    }
-
-    public function project_tag_show($id) {
-
-        $tag = ProjectSkill::find($id);
-
-        $projects = $tag->projects()->whereNotNull('lat')->whereNotNull('lng')->get();
-
-        $initialMarkers = $this->project_markers($projects);
-
-        $tags = ProjectSkill::getTagList();
-        $tags_slug = ProjectSkill::get()->pluck('slug', 'id')->all();
-
-        $map_type = 'kezdemenyezesek';
-
-        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
     }
 
 
@@ -117,7 +101,8 @@ class MapController extends Controller
                 'position' => [
                     'lat' => $user->lat+random_int(-50,50)/5000,
                     'lng' => $user->lng+random_int(-50,50)/5000
-                ]
+                ],
+                'red' => false
             ];
         }
 
@@ -132,9 +117,10 @@ class MapController extends Controller
             $initialMarkers[] = [
                 'name' => '<a href="/csoport/'.$group->id.'/'.$group->slug.'" style="font-size:12px;">'.$group->name.'</a>',
                 'position' => [
-                    'lat' => $group->lat,
-                    'lng' => $group->lng
-                ]
+                    'lat' => $group->lat+random_int(-50,50)/5000,
+                    'lng' => $group->lng+random_int(-50,50)/5000
+                ],
+                'red' => false
             ];
         }
 
@@ -149,9 +135,10 @@ class MapController extends Controller
             $initialMarkers[] = [
                 'name' => '<a href="/kezdemenyezes/'.$project->id.'/'.$project->slug.'" style="font-size:12px;">'.$project->title.'</a>',
                 'position' => [
-                    'lat' => $project->lat,
-                    'lng' => $project->lng
-                ]
+                    'lat' => $project->lat+random_int(-50,50)/5000,
+                    'lng' => $project->lng+random_int(-50,50)/5000
+                ],
+                'red' => true
             ];
         }
 

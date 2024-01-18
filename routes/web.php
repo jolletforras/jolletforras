@@ -39,11 +39,10 @@ Route::post('/podcast/{id}/{title}/modosit', 'PodcastController@update');
 
 Route::get('/terkep', 'MapController@members');
 Route::get('/terkep/tarsak', 'MapController@members');
-Route::get('/terkep/kezdemenyezesek', 'MapController@projects');
-Route::get('/terkep/csoportok', 'MapController@groups');
+Route::get('/terkep/szervezodesek', 'MapController@cooperations');
 Route::get('/terkep/tarsak/cimke/{id}/{tag}', 'MapController@user_skill_show');
-Route::get('/terkep/csoportok/cimke/{id}/{tag}', 'MapController@group_tag_show');
-Route::get('/terkep/kezdemenyezesek/cimke/{id}/{tag}', 'MapController@project_tag_show');
+Route::get('/terkep/szervezodesek/cimke/{id}/{tag}', 'MapController@cooperation_tag_show');
+
 
 Route::get('/tarsak', 'ProfilesController@index');
 Route::post('/user/filter', 'ProfilesController@filter');

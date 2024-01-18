@@ -20,7 +20,7 @@ class GroupTag extends Model
     }
 
     public function getTagList() {
-        $tags =  [''=>''] + DB::table('group_tags')
+        $tags =  DB::table('group_tags')
                 ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
                 ->join('groups', 'groups.id', '=', 'group_group_tag.group_id')
                 ->whereNotNull('groups.lat')->whereNotNull('groups.lng')

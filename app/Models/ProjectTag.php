@@ -20,7 +20,7 @@ class ProjectTag extends Model
     }
 
     public function getTagList() {
-        $tags =  [''=>''] + DB::table('project_tags')
+        $tags =  DB::table('project_tags')
                 ->join('project_project_tag', 'project_project_tag.project_tag_id', '=', 'project_tags.id')
                 ->join('projects', 'projects.id', '=', 'project_project_tag.project_id')
                 ->whereNotNull('projects.lat')->whereNotNull('projects.lng')

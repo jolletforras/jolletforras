@@ -19,8 +19,7 @@
 			<div class="col-sm-2">
 				<select id="map_type" class="form-control" name="map_type">
 					<option value="tarsak" @if($map_type=="tarsak") selected="selected" @endif>társak</option>
-					<option value="kezdemenyezesek" @if($map_type=="kezdemenyezesek") selected="selected" @endif>kezdeményezések</option>
-					<option value="csoportok" @if($map_type=="csoportok") selected="selected" @endif>csoportok</option>
+					<option value="szervezodesek" @if($map_type=="szervezodesek") selected="selected" @endif>szerveződések</option>
 				</select>
 			</div>
 			@if(isset($tags))
@@ -34,6 +33,10 @@
 			@endif
 		</div>
 		<div id="map" style="width: 100%; height: 88vh;"></div>
+
+		<style>
+			img.huechange { filter: hue-rotate(120deg); }
+		</style>
 
 		<script src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' crossorigin=''></script>
 		<script src='https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js'></script>
@@ -68,6 +71,9 @@
 					const marker = generateMarker(data, index);
 					marker.addTo(map).bindPopup(`<b>${data.name}</b>`);
 					//map.panTo(data.position);
+					if(data.red) {
+						marker._icon.classList.add("huechange");
+					}
 					markers.push(marker)
 				}
 			}
