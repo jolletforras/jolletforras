@@ -69,7 +69,7 @@ tags: false
 
 $("#tag").change(function () {
 var id= $("#tag").val();
-location.href="{{ url('kezdemenyezes')}}/ertes/"+id+"/"+tags[id];
+location.href="{{ url('kezdemenyezes')}}/cimke/"+id+"/"+tags[id];
 });
 </script>
 @endsection

@@ -41,7 +41,7 @@ class ProjectsController extends Controller
         }
 
 
-		$tags = [''=>''] + ProjectTag::get()->pluck('name', 'id')->all();
+		$tags = [''=>'']  + ProjectTag::getTagList();
 
 		$tags_slug = ProjectTag::get()->pluck('slug', 'id')->all();
 
