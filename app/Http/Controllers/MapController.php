@@ -45,25 +45,32 @@ class MapController extends Controller
         return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
     }
 
-    public function cooperations()
+    public function groups()
     {
         $groups = Group::whereNotNull('lat')->whereNotNull('lng')->get();
-        $initialMarkers_g = $this->group_markers($groups);
 
-        $projects = Project::whereNotNull('lat')->whereNotNull('lng')->get();
-        $initialMarkers_p = $this->project_markers($projects);
-
-        $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
+        $initialMarkers = $this->group_markers($groups);
 
         $tags =  GroupTag::getTagList();
+
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
-        $tags_ext =  ProjectSkill::get()->pluck('name', 'id')->all();
-        $tags_slug_ext = ProjectSkill::get()->pluck('slug', 'id')->all();
+        $map_type = 'csoportok';
 
-        $map_type = 'szervezodesek';
+        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
+    }
 
-        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug', 'tags_ext', 'tags_slug_ext'));
+    public function projects()
+    {
+        $projects = Project::whereNotNull('lat')->whereNotNull('lng')->get();
+        $initialMarkers = $this->project_markers($projects);
+
+        $tags =  [''=>''] + ProjectSkill::get()->pluck('name', 'id')->all();
+        $tags_slug = ProjectSkill::get()->pluck('slug', 'id')->all();
+
+        $map_type = 'kezdemenyezesek';
+
+        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
     }
 
     public function group_tag_show($id) {
@@ -75,14 +82,12 @@ class MapController extends Controller
         $initialMarkers = $this->group_markers($groups);
 
         $tags =  GroupTag::getTagList();
+
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
 
-        $tags_ext =  ProjectSkill::get()->pluck('name', 'id')->all();
-        $tags_slug_ext = ProjectSkill::get()->pluck('slug', 'id')->all();
+        $map_type = 'csoportok';
 
-        $map_type = 'szervezodesek';
-
-        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug', 'tags_ext', 'tags_slug_ext'));
+        return view('map', compact('initialMarkers', 'map_type', 'tags', 'tags_slug'));
     }
 
     public function project_tag_show($id) {
@@ -93,15 +98,12 @@ class MapController extends Controller
 
         $initialMarkers = $this->project_markers($projects);
 
-        $tags =  GroupTag::getTagList();
-        $tags_slug = GroupTag::pluck('slug', 'id')->all();
+        $tags =  [''=>''] + ProjectSkill::get()->pluck('name', 'id')->all();
+        $tags_slug = ProjectSkill::get()->pluck('slug', 'id')->all();
 
-        $tags_ext =  ProjectSkill::get()->pluck('name', 'id')->all();
-        $tags_slug_ext = ProjectSkill::get()->pluck('slug', 'id')->all();
+        $map_type = 'kezdemenyezesek';
 
-        $map_type = 'szervezodesek';
-
-        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug', 'tags_ext', 'tags_slug_ext'));
+        return view('map', compact('initialMarkers','map_type', 'tags', 'tags_slug'));
     }
 
 
@@ -115,8 +117,7 @@ class MapController extends Controller
                 'position' => [
                     'lat' => $user->lat+random_int(-50,50)/5000,
                     'lng' => $user->lng+random_int(-50,50)/5000
-                ],
-                'red' => false
+                ]
             ];
         }
 
@@ -133,8 +134,7 @@ class MapController extends Controller
                 'position' => [
                     'lat' => $group->lat,
                     'lng' => $group->lng
-                ],
-                'red' => false
+                ]
             ];
         }
 
@@ -151,8 +151,7 @@ class MapController extends Controller
                 'position' => [
                     'lat' => $project->lat,
                     'lng' => $project->lng
-                ],
-                'red' => true
+                ]
             ];
         }
 

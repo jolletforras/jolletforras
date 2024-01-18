@@ -19,7 +19,8 @@
 			<div class="col-sm-2">
 				<select id="map_type" class="form-control" name="map_type">
 					<option value="tarsak" @if($map_type=="tarsak") selected="selected" @endif>társak</option>
-					<option value="szervezodesek" @if($map_type=="szervezodesek") selected="selected" @endif>szerveződések</option>
+					<option value="kezdemenyezesek" @if($map_type=="kezdemenyezesek") selected="selected" @endif>kezdeményezések</option>
+					<option value="csoportok" @if($map_type=="csoportok") selected="selected" @endif>csoportok</option>
 				</select>
 			</div>
 			@if(isset($tags))
@@ -28,20 +29,11 @@
 					@foreach($tags as $key => $val)
 						<option value="{{ $key }}">{{ $val }}</option>
 					@endforeach
-					@if($map_type=="szervezodesek")
-						@foreach($tags_ext as $key => $val)
-							<option value="p{{ $key }}">{{ $val }}</option>
-						@endforeach
-					@endif
 				</select>
 			</div>
 			@endif
 		</div>
 		<div id="map" style="width: 100%; height: 88vh;"></div>
-
-		<style>
-			img.huechange { filter: hue-rotate(120deg); }
-		</style>
 
 		<script src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' crossorigin=''></script>
 		<script src='https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js'></script>
@@ -76,9 +68,6 @@
 					const marker = generateMarker(data, index);
 					marker.addTo(map).bindPopup(`<b>${data.name}</b>`);
 					//map.panTo(data.position);
-					if(data.red) {
-						marker._icon.classList.add("huechange");
-					}
 					markers.push(marker)
 				}
 			}
@@ -132,28 +121,13 @@
 			@foreach ($tags_slug as $id => $slug)
 			{{$id}}:"{{$slug}}",
 			@endforeach
-			@if($map_type=="szervezodesek")
-				@foreach($tags_slug_ext  as $id => $slug)
-					p{{$id}}:"{{$slug}}",
-				@endforeach
-			@endif
 			};
 
 
 			$("#tag").change(function () {
 				var id= $("#tag").val();
 				var map_type= $("#map_type").val();
-				if(map_type=='tarsak') {
-					location.href="{{ url('terkep')}}/"+map_type+"/cimke/"+id+"/"+tags[id];
-				}
-				else {
-					if(id.charAt(0)=="p") {
-						location.href="{{ url('terkep')}}/kezdemenyezesek/cimke/"+id.substr(1)+"/"+tags[id];
-					}
-					else {
-						location.href="{{ url('terkep')}}/csoportok/cimke/"+id+"/"+tags[id];
-					}
-				}
+				location.href="{{ url('terkep')}}/"+map_type+"/cimke/"+id+"/"+tags[id];
 			});
 		@endif
 	</script>
