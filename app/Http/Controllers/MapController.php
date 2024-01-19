@@ -56,8 +56,8 @@ class MapController extends Controller
 
         $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
 
-        $tags_g = GroupTag::getTagList();
-        $tags_p = ProjectTag::getTagList();
+        $tags_g = GroupTag::getLocalTagList();
+        $tags_p = ProjectTag::getLocalTagList();
         $tags = [''=>''] +$tags_g+$tags_p;
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
@@ -79,8 +79,8 @@ class MapController extends Controller
 
         $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
 
-        $tags_g = GroupTag::getTagList();
-        $tags_p = ProjectTag::getTagList();
+        $tags_g = GroupTag::getLocalTagList();
+        $tags_p = ProjectTag::getLocalTagList();
         $tags = [''=>''] +$tags_g+$tags_p;
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();

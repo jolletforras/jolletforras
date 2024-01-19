@@ -19,12 +19,21 @@ class ProjectTag extends Model
         return $this->belongsToMany(Project::class)->withTimestamps();
     }
 
-    public function getTagList() {
+    public function getLocalTagList() {
         $tags =  DB::table('project_tags')
                 ->join('project_project_tag', 'project_project_tag.project_tag_id', '=', 'project_tags.id')
                 ->join('projects', 'projects.id', '=', 'project_project_tag.project_id')
                 ->whereNotNull('projects.lat')->whereNotNull('projects.lng')
                 ->pluck('project_tags.name', 'project_tags.id')->all();
+
+        return $tags;
+    }
+
+    public function getTagList() {
+        $tags =  DB::table('project_tags')
+            ->join('project_project_tag', 'project_project_tag.project_tag_id', '=', 'project_tags.id')
+            ->join('projects', 'projects.id', '=', 'project_project_tag.project_id')
+            ->pluck('project_tags.name', 'project_tags.id')->all();
 
         return $tags;
     }
