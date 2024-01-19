@@ -1,6 +1,6 @@
 @unless($project->tags->isEmpty())
 <p>
-<b>Keresünk: </b>
+<b>Címkék: </b>
 @for ($i = 0; $i < $last=count($project->tags)-1; $i++)
 <a href="{{ url('kezdemenyezes')}}/ertes/{{$project->tags[$i]->id }}/{{$project->tags[$i]->slug}}">{{ $project->tags[$i]->name }}</a>,
 @endfor
