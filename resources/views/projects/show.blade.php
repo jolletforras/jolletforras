@@ -3,7 +3,12 @@
 @section('content')
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
-			<h2>{{ $project->title }}</h2>
+			<h2>
+				{{ $project->title }}
+				@if($project->city!='')
+					- <i style="font-weight: normal; font-size: 16px;">{{$project->get_location()}}</i>
+				@endif
+			</h2>
 			@if(Auth::check())
 				@if (Auth::user()->id==$project->user->id || $is_admin)
 					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>

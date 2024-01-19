@@ -73,4 +73,27 @@ class Project extends Model
     {
         return $this->tags->lists('id')->all();
     }
+
+    public function get_location() {
+        $location = "";
+
+        if($this->city=="Budapest") {
+            if ($this->location != '') {
+                $location .= $this->location;
+                if (!is_numeric(stripos($this->location, "Budapest"))) {  //nincs benne a Budapest szó
+                    $location .= ", Budapest";
+                }
+            } else {
+                $location .= "Budapest";
+            }
+        }
+        else {
+            if($this->location!='' && $this->location!=$this->city) {
+                $location .= $this->location.", ";
+            }
+            $location .= $this->city;
+        }
+
+        return $location;
+    }
 }

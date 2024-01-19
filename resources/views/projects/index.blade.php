@@ -24,7 +24,12 @@
 		<div class="panel-body">
 			@foreach ($projects as $project)
 				@if(isset($project->user->id))
-					<h3><a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">{{ $project->title }}</a></h3>
+					<h3>
+						<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">{{ $project->title }}</a>
+						@if($project->city!='')
+							- <i style="font-weight: normal; font-size: 16px;">{{$project->get_location()}}</i>
+						@endif
+					</h3>
 					<p>
 						<a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}
 						@if (Auth::check() && Auth::user()->id==$project->user->id)
