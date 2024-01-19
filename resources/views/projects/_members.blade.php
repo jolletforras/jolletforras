@@ -1,6 +1,6 @@
 @unless($project->members->isEmpty())
     <p>
-        <b>Társak: </b>
+        <b>Résztvevők: </b>
         @for ($i = 0; $i < $last=count($project->members)-1; $i++)
             <a href="{{ url('profil',$project->members[$i]->id) }}/{{$project->members[$i]->slug}}">
                 {{$project->members[$i]->name}}</a>,&nbsp;

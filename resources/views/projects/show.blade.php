@@ -19,15 +19,15 @@
 			@endif
 		</div>
         <div class="panel-body">
-        	<p><b>{{ $project->user->name }}, {{ $project->updated_at }}</b></p>
 			<p>{!! nl2br($project->body) !!}</p>
 			@if(Auth::check())
 				<p>{!! nl2br($project->looking_for) !!}</p>
+				@include('projects._admins')
 				@include('projects._members')
 				@include('projects._tags')
 				@if (Auth::user()->id == $project->user->id)
 					<div class="flash-message alert alert-info" style="display:none;"></div>
-					<label for="admin_list">Szerkesztők felvétele, módosítása</label>
+					<label for="admin_list">Kezelők felvétele, módosítása</label>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<select id="admin_list" name="admin_list[]" class="form-control" multiple>
@@ -39,6 +39,19 @@
 						<div class="form-group col-sm-3">
 							<button type="button" class="btn btn-default" onclick="saveAdmin()">Ment</button>
 						</div>
+					</div>
+				@endif
+
+				@if (!$project->isMember())
+					<div class="inner_box" style="margin-top:6px;">
+						<p>Amennyiben résztvevője vagy a kezdeményezésnek, kattints a "Résztvevő vagyok" gombra. Ha szeretnél részt venni a kezdeményezésben, vedd fel a kapcsolatot a kezdeményezés kezelőivel.</p>
+
+
+						<form class="form-horizontal" role="form" method="POST" action="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/resztvevo_vagyok">
+							@csrf
+
+							<p><button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-user"></i>Résztvevő vagyok</button></p>
+						</form>
 					</div>
 				@endif
 			@endif

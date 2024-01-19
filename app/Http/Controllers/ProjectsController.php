@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Mail;
 
 class ProjectsController extends Controller
 {
@@ -224,5 +225,45 @@ class ProjectsController extends Controller
         $response = array('status' => 'success');
 
         return \Response::json($response);
+    }
+
+    /**
+     * User join to a project
+     *
+     * @param  integer $id The project ID
+     * @return Response
+     */
+    public function join($id, $name, Request $request)
+    {
+        $project = Project::findOrFail($id);
+
+        if(!$project->isMember()) {
+            $user_id = Auth::user()->id;
+
+            $project->members()->attach($user_id);
+
+            //értesítés az kezelőknek
+            $admins = $project->admins()->get();
+
+            $data['user_url'] = 'profil/' . $user_id . '/' . Auth::user()->slug;
+            $data['user_name'] = Auth::user()->name;
+
+            $data['project_url'] = 'kezdemenyezes/' . $project->id . '/' . $project->slug;
+            $data['project_name'] = $project->title;
+            $data['subject'] = $project->title." - új tag";
+
+            foreach($admins as $admin) {
+                $data['email'] = $admin->email;
+                $data['admin_name'] = $admin->name;
+
+                Mail::send('projects.emails.new_member_email', $data, function ($message) use ($data) {
+                    $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+                    $message->subject($data['subject']);
+                    $message->to($data['email']);
+                });
+            }
+        }
+
+        return redirect('kezdemenyezes/'.$id.'/'.$project->slug)->with('message', 'Innentől a kezdeményezés résztvevőjeként jelensz meg!');
     }
 }

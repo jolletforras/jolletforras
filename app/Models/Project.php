@@ -44,10 +44,6 @@ class Project extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function isMember() {
-        return $this->members->contains('id', Auth::user()->id);
-    }
-
     public function getAdminListAttribute()
     {
         return $this->admins->pluck('id')->all();
@@ -72,6 +68,10 @@ class Project extends Model
     public function getTagListAttribute()
     {
         return $this->tags->lists('id')->all();
+    }
+
+    public function isMember() {
+        return Auth::check() && $this->members->contains('id', Auth::user()->id);
     }
 
     public function get_location() {
