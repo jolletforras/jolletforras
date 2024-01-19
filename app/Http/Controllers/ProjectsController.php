@@ -107,8 +107,6 @@ class ProjectsController extends Controller
                 'public' => $request->has('public') ? 1 : 0
 		]);
 
-		$project->members()->attach($request->input('member_list'));
-
 		$project->tags()->attach($tag_list);
 		
 		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen felvetted!');
@@ -167,8 +165,6 @@ class ProjectsController extends Controller
                 'public' => $request->has('public') ? 1 : 0
 		]);
 
-		$project->members()->sync($request->input('member_list'));
-	
 		$project->tags()->sync($tag_list);
 	
 		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen módosítottad!');

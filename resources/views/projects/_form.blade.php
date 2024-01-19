@@ -9,15 +9,6 @@
 		</div>
 
 		<div class="form-group">
-			<label for="member_list">Kik a tagjai a kezdeményezésnek a portálról?</label>
-			<select id="member_list" name="member_list[]" class="form-control" multiple>
-				@foreach($members as $key => $val)
-					<option value="{{ $key }}" @if(isset($selected_members) && in_array($key,$selected_members)) selected @endif>{{ $val }}</option>
-				@endforeach
-			</select>
-		</div>
-
-		<div class="form-group">
 			<label for="looking_for">Milyen tudású/képességű emberek hiányoznak*?</label>
 			<textarea class="form-control" required="required" rows="6" name="looking_for">@if(isset($project)) {{$project->looking_for}} @endif</textarea>
 		</div>
