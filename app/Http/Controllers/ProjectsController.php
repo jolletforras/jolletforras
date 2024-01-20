@@ -107,6 +107,9 @@ class ProjectsController extends Controller
                 'public' => $request->has('public') ? 1 : 0
 		]);
 
+        //a létrehozó automatikusan résztvevő és kezelő lesz
+        $project->members()->attach(Auth::user()->id, ['admin'=>1]);
+
 		$project->tags()->attach($tag_list);
 		
 		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen felvetted!');
@@ -225,7 +228,8 @@ class ProjectsController extends Controller
 
     public function saveAdmin($id, Request $request)
     {
-        DB::table('project_user')->where('project_id',$id)->update(['admin' => 0]);
+        //a létrehozó mindig kezelő marad
+        DB::table('project_user')->where('project_id',$id)->where('user_id','<>',Auth::user()->id)->update(['admin' => 0]);
 
         if(!empty($request->input('admin_list'))) {
             DB::table('project_user')->where('project_id', $id)->whereIn('user_id', $request->input('admin_list'))->update(['admin' => 1]);
