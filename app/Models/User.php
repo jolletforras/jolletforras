@@ -82,6 +82,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class);
     }
 
+    //ezen kezdemenyezesek tagjai
+    public function member_of_projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
     public function skill_tags()
     {
         return $this->belongsToMany(UserSkill::class)->withTimestamps();

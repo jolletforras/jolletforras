@@ -185,7 +185,11 @@ class ProfilesController extends Controller
             }
         }
 
-		return view('profiles.show', compact('user', 'myprofile','tab','groups'));
+        foreach($user->member_of_projects as $project) {
+                $projects[] = '<a href="'.url('kezdemenyezes',$project->id).'/'.$project->slug.'" target="_blank"'.$style.'>'.$project->title.'</a>';
+        }
+
+		return view('profiles.show', compact('user', 'myprofile','tab','groups','projects'));
 	}
 	
 	/**
