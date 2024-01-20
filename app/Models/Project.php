@@ -83,6 +83,11 @@ class Project extends Model
         return Auth::check() && $this->admins->contains('id', Auth::user()->id);
     }
 
+    public function isOwner() {
+        return Auth::check() && $this->user->id==Auth::user()->id;
+    }
+
+
     public function get_location() {
         $location = "";
 

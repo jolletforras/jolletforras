@@ -3,7 +3,7 @@
 @section('content')
 	<?php
 			$is_admin = $project->isAdmin();
-			$is_owner = Auth::user()->id==$project->user->id;
+			$is_owner = $project->isOwner();
 	?>
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
