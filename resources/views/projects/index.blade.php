@@ -30,12 +30,9 @@
 							- <i style="font-weight: normal; font-size: 16px;">{{$project->get_location()}}</i>
 						@endif
 					</h3>
-					<p>
-						<a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}
-						@if (Auth::check() && Auth::user()->id==$project->user->id)
-							<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a>
-						@endif
-					</p>
+					@if ($project->isAdmin())
+					<p><a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a></p>
+					@endif
 					<p>
 						@if(strlen($project->body)>800)
 							{!! nl2br(mb_substr($project->body,0,800)) !!}
@@ -45,6 +42,7 @@
 						@endif
 					</p>
 					@if (Auth::check())
+						<p><b>Felvette: </b><a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}</p>
 						@include('projects._members')
 						@include('projects._tags')
 						<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>

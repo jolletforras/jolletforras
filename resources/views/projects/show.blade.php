@@ -26,6 +26,7 @@
 			<p>{!! nl2br($project->body) !!}</p>
 			@if(Auth::check())
 				<p>{!! nl2br($project->looking_for) !!}</p>
+				<p><b>Felvette: </b><a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}</p>
 				@include('projects._admins')
 				@include('projects._members')
 				@include('projects._tags')
