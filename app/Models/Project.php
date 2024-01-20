@@ -33,6 +33,11 @@ class Project extends Model
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
+    public function noadmins()
+    {
+        return $this->belongsToMany(User::class)->wherePivot('admin',0)->withTimestamps();
+    }
+
     public function admins()
     {
         return $this->belongsToMany(User::class)->wherePivot('admin',1)->withTimestamps();
@@ -54,7 +59,6 @@ class Project extends Model
         return Carbon::parse($date)->format('Y-m-d');
     }
 
-
     public function getUpdatedAtAttribute($date)
     {
         return Carbon::parse($date)->format('Y-m-d H:i');
@@ -70,8 +74,13 @@ class Project extends Model
         return $this->tags->lists('id')->all();
     }
 
+
     public function isMember() {
         return Auth::check() && $this->members->contains('id', Auth::user()->id);
+    }
+
+    public function isAdmin() {
+        return Auth::check() && $this->admins->contains('id', Auth::user()->id);
     }
 
     public function get_location() {

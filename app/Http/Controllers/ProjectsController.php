@@ -61,11 +61,11 @@ class ProjectsController extends Controller
 
         $members = $project->members()->orderBy('name', 'ASC')->pluck('name', 'user_id');
         $admins = $project->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
-        $is_admin = Auth::check() && in_array(Auth::user()->id, $project->admin_list);
+        $noadmins = $project->noadmins()->orderBy('name', 'ASC')->pluck('name', 'user_id');
 
         $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
 
-		return view('projects.show', compact('project','members','admins','is_admin','comments'));
+		return view('projects.show', compact('project','members','admins','noadmins','comments'));
 	}
 	
 	/**
@@ -208,6 +208,19 @@ class ProjectsController extends Controller
         $project->members()->detach($user_id);
 
         return redirect('kezdemenyezesek')->with('message', 'A kezdeményezésből sikeresen kiléptél!');
+    }
+
+    public function removeMember($id, Request $request)
+    {
+        $project = Project::findOrFail($id);
+
+        $project->members()->detach($request->input('remove_member'));
+
+        $response = array(
+            'status' => 'success',
+        );
+
+        return \Response::json($response);
     }
 
     public function saveAdmin($id, Request $request)

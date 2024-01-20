@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+	<?php
+			$is_admin = $project->isAdmin();
+			$is_owner = Auth::user()->id==$project->user->id;
+	?>
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
 			<h2>
@@ -10,7 +14,7 @@
 				@endif
 			</h2>
 			@if(Auth::check())
-				@if (Auth::user()->id==$project->user->id || $is_admin)
+				@if ($is_owner || $is_admin)
 					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 				@endif
 				@if(Auth::user()->id!=$project->user->id && $project->isMember())
@@ -25,19 +29,36 @@
 				@include('projects._admins')
 				@include('projects._members')
 				@include('projects._tags')
-				@if (Auth::user()->id == $project->user->id)
+				@if ($is_owner)
 					<div class="flash-message alert alert-info" style="display:none;"></div>
 					<label for="admin_list">Kezelők felvétele, módosítása</label>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<select id="admin_list" name="admin_list[]" class="form-control" multiple>
 								@foreach($members as $key => $val)
-									<option value="{{ $key }}" @if(isset($admins) && in_array($key,$admins)) selected @endif>{{ $val }}</option>
+									<option value="{{ $key }}" @if(isset($admins) && in_array($key,$admins) && $key!=Auth()->user()->id) selected @endif>{{ $val }}</option>
 								@endforeach
 							</select>
 						</div>
 						<div class="form-group col-sm-3">
 							<button type="button" class="btn btn-default" onclick="saveAdmin()">Ment</button>
+						</div>
+					</div>
+				@endif
+
+				@if ($is_admin)
+					<label for="remove_member">Résztvevő kiléptetés</label>
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<select id="remove_member" name="remove_member" class="form-control">
+								<option value=""></option>
+								@foreach($noadmins as $key => $val)
+									<option value="{{ $key }}">{{ $val }}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group col-sm-3">
+							<button type="button" class="btn btn-default" onclick="removeMember()">Kiléptet</button>
 						</div>
 					</div>
 				@endif
@@ -82,6 +103,28 @@
 					}
 				}
 			});
+
+			function removeMember(){
+
+				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+				$.ajax({
+					type: "POST",
+					url: '{{url('kezdemenyezes')}}/{{$project->id}}/removemember',
+					data: {
+						_token: CSRF_TOKEN,
+						remove_member: $('#remove_member').val()
+					},
+					success: function(data) {
+						if(data['status']=='success') {
+							location.reload();
+						}
+					},
+					error: function(error){
+						console.log(error.responseText);
+					}
+				});
+			}
 
 			function saveAdmin(){
 

@@ -184,6 +184,7 @@ Route::get('/kezdemenyezes/{id}/{title}/torol', 'ProjectsController@delete');
 Route::get('/kezdemenyezes/{id}/{title}/kilep', 'ProjectsController@leave');
 Route::post('/kezdemenyezes/{id}/saveadmin', 'ProjectsController@saveAdmin');
 Route::post('/kezdemenyezes/{id}/{name}/resztvevo_vagyok', 'ProjectsController@join');
+Route::post('/kezdemenyezes/{id}/removemember', 'ProjectsController@removeMember');
 Route::get('/kezdemenyezes/cimke/{id}/{tag}', 'TagsController@projects_show');
 
 Route::get('/hirlevelek', 'NewslettersController@index');
