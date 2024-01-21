@@ -21,7 +21,7 @@
 					
 						<div class="form-group">
                             <input class="btn btn-primary" type="submit" value="Feltölt">
-							<a href="{{url('profil')}}/{{Auth::user()->id}}/{{Auth::user()->slug}}" type="submit" class="btn btn-primary">Mégse</a>
+							<a href="{{url('csoport')}}/{{$id}}/{{$name}}" type="submit" class="btn btn-primary">Mégse</a>
 						</div>
                     </form>
                 </div>
