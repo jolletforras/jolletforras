@@ -59,13 +59,22 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
-        $members = $project->members()->orderBy('name', 'ASC')->pluck('name', 'user_id');
-        $admins = $project->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
-        $noadmins = $project->noadmins()->orderBy('name', 'ASC')->pluck('name', 'user_id');
+        if(Auth::check()) {
+            $members = $project->members()->orderBy('name', 'ASC')->pluck('name', 'user_id');
+            $admins = $project->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
+            $noadmins = $project->noadmins()->orderBy('name', 'ASC')->pluck('name', 'user_id');
 
-        $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
+            $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
 
-		return view('projects.show', compact('project','members','admins','noadmins','comments'));
+            return view('projects.show', compact('project','members','admins','noadmins','comments'));
+        }
+        else {
+            if(!$project->public) {                    //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános csoportot akar megnyitni
+                return redirect('/login');
+            }
+
+            return view('projects.show_public', compact('project'));
+        }
 	}
 	
 	/**
