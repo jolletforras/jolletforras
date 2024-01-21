@@ -31,7 +31,10 @@
 						@endif
 					</h3>
 					@if ($project->isAdmin())
-					<p><a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a></p>
+						<p><a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a></p>
+					@endif
+					@if(file_exists(public_path('images/projects/'.$project->id.'.jpg')))
+						<p style="text-align: center;"><img src="{{ url('/images/projects') }}/{{ $project->id}}.jpg?{{$project->photo_counter}}" style="max-width: 50%;"></p>
 					@endif
 					<p>
 						@if(strlen($project->body)>800)

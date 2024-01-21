@@ -279,4 +279,56 @@ class ProjectsController extends Controller
 
         return redirect('kezdemenyezes/'.$id.'/'.$project->slug)->with('message', 'Innentől a kezdeményezés résztvevőjeként jelensz meg!');
     }
+
+    /**
+     * Upload project image
+     *
+     * @return Response
+     */
+    public function uploadImage($id,$name)
+    {
+        return view('projects.upload_image', compact('id','name'));
+    }
+
+    /**
+     * Save project image
+     *
+     * @return Response
+     */
+    public function saveImage($id,$name,Request $request)
+    {
+        $rules = [
+            'image' => 'required|mimes:jpeg,png,gif|max:3072'
+        ];
+
+        $messages = [
+            'image.required' => 'Képfájl kiválasztása szükséges',
+            'image.mimes' => 'A kép fájltípusa .jpg, .png, .gif kell legyen',
+            'image.max' => 'A kép nem lehet nagyobb mint :max KB',
+        ];
+
+        //dd($request);
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect('kezdemenyezes/'.$id.'/'.$name.'/kepfeltoltes')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $imagename=$id;
+        $base_path=base_path().'/public/images/projects/';
+        $tmpimagename = 'tmp_'.$imagename.'.'.$request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move($base_path,$tmpimagename);
+
+        $tmpfile=$base_path.$tmpimagename;
+        generateImage($tmpfile, 400, 1, $base_path.$imagename.'.jpg');//1=>width
+        unlink($tmpfile);
+
+        $project = Project::findOrFail($id);
+        $project->photo_counter++;
+        $project->save();
+
+        return redirect('/kezdemenyezes/'.$id.'/'.$name)->with('message', 'A kezdeményezés képét sikeresen feltöltötted!');
+    }
 }

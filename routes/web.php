@@ -187,6 +187,10 @@ Route::post('/kezdemenyezes/{id}/{name}/resztvevo_vagyok', 'ProjectsController@j
 Route::post('/kezdemenyezes/{id}/removemember', 'ProjectsController@removeMember');
 Route::get('/kezdemenyezes/cimke/{id}/{tag}', 'TagsController@projects_show');
 
+Route::get('/kezdemenyezes/{id}/{name}/kepfeltoltes', 'ProjectsController@uploadimage');
+Route::post('/kezdemenyezes/{id}/{name}/kepfeltoltes', 'ProjectsController@saveimage');
+
+
 Route::get('/hirlevelek', 'NewslettersController@index');
 Route::get('/hirlevel/{id}/{title}', 'NewslettersController@show');
 Route::get('/hirlevel/uj', 'NewslettersController@create');
