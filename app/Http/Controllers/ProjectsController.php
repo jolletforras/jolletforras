@@ -69,7 +69,7 @@ class ProjectsController extends Controller
             return view('projects.show', compact('project','members','admins','noadmins','comments'));
         }
         else {
-            if(!$project->public) {                    //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános csoportot akar megnyitni
+            if(!$project->public) {                    //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános kezdeményezést akar megnyitni
                 return redirect('/login');
             }
 
