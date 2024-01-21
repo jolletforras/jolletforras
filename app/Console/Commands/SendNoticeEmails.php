@@ -69,19 +69,19 @@ class SendNoticeEmails extends Command
 
             $data['email'] = $notice->user->email;
             $data['user_id'] = $notice->user->id;
-            $data['type'] = $notice->type=="Forum" ? "téma" :"esemény";
-            $data['type_txt1'] = $notice->type=="Forum" ? "témát" :"eseményt";
-            $data['type_txt2'] = $notice->type=="Forum" ? "beszélgetésnél" :"eseménynél";
-
+            $data['type'] = $notice->type=="Event" ? "esemény" : ($notifiable->announcement ? "közlemény" :"téma");
+            $data['type_txt1'] = $notice->type=="Event" ? "eseményt" : ($notifiable->announcement ? "közleményt" : "témát");
+            $data['type_txt2'] = $notice->type=="Event" ? "eseménynél" : ($notifiable->announcement ? "közleménynél" : "beszélgetésnél");
+            $data['new_post_subject_txt'] = $notice->type=="Forum" && $notifiable->announcement ? "Közlemény" : "Új ".$data['type'];
             //ezt már nem küldi ki újból
             $notice->update(['email_sent' => 1]);
 
-            if($notice->comment_id==0) {     //új téma
+            if($notice->comment_id==0) {     //új téma, közlemény, esemény
                 $data['author_name'] = $notifiable->user->name;
                 $post = preg_replace("/<img[^>]+\>/i", "", $notifiable->body);
                 $data['post'] = $this->get_shorter($post,$data['post_url'],400);
                 $email_template = 'groups.emails.new_post_email';
-                $data['subject'] = "Új ".$data['type']." a(z) '". $group->name."' csoportodban";
+                $data['subject'] = $data['new_post_subject_txt']." a(z) '". $group->name."' csoportodban";
             }
             else {                           //hozzászólás értesítés
                 $comment = Comment::find($notice->comment_id);
@@ -92,7 +92,7 @@ class SendNoticeEmails extends Command
                 $data['post_url'] .= "#".$notice->comment_id;
                 $data['author_name'] = $comment->commenter->name;
                 $data['comment'] = $this->get_shorter($comment->body,$data['post_url'],400);
-                $data['subject'] = "Új hozzászólás a(z) '".$notifiable->title."' beszélgetésben";
+                $data['subject'] = "Új hozzászólás a(z) '".$notifiable->title."' ".$data['type_txt2'];
                 $email_template = 'groups.emails.new_comment_email';
             }
 
