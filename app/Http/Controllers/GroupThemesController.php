@@ -220,7 +220,7 @@ class GroupThemesController extends Controller
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/kozlemenyek')->with('message', 'A csoport közleményt sikeresen felvetted!');
         }
         else {
-            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen felvetted!');
+            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetést sikeresen felvetted!');
         }
     }
 
