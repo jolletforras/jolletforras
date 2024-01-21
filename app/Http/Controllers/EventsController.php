@@ -193,8 +193,8 @@ class EventsController extends Controller
 
                 $notice = Notice::create(['group_id' => $event->group_id,'notifiable_id' => $event->id,'user_id' =>$user_id,'type' => 'Event','comment_id'=>0,'new'=>$new,'email' => 0,'email_sent' =>0,'ask_notice' => 0]);
 
-                //ha új eseményre értesítést kér, akkor beállítódik az email kiküldés (kivéve a létrehozót)
-                if ($user_id != Auth::user()->id && in_array($user_id, $group->member_list_with_new_post_notice)) {
+                //beállítódik az email kiküldés minden csoport tagra(kivéve a létrehozót)
+                if ($user_id != Auth::user()->id) {
                     $notice->update(['email' => 1, 'login_code' => Str::random(10)]);
                 }
             }
