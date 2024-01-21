@@ -1,8 +1,9 @@
 <div class="narrow-page">
+    @if(!$comments->isEmpty())
+    <hr>
     <div class="form-group">
-    @if(!$comments->isEmpty())<b>Hozzászólások:</b><br/>@endif
-        <hr>
         <div class="comments">
+            <p><b>Hozzászólások:</b></p>
         @foreach ($comments as $comment)
                 <?php
                 $lev1_comment_id = empty($comment->to_user_id) ? $comment->id : $lev1_comment_id;
@@ -36,6 +37,7 @@
         @endforeach
         </div>
     </div>
+    @endif
     @if(!isset($can_comment) || $can_comment)
     <hr>
     <a name="hozzaszol"></a>
