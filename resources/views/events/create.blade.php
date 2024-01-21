@@ -22,6 +22,7 @@
 					<li>Ha az eseményre regisztrálni kell, add meg a regisztrációs oldal linkjét vagy azt a kapcsolati pontot, ahol jelentkezhetnek azok, akik szeretnének részt venni.</li>
 					<li>Ha az eseménynek van részvételi díja vagy elfogadtok adományt, felajánlást, azt is írd meg pontosan.</li>
 				</ul>
+				@if(isset($group))Az eseményről minden csoporttag kap emailben értesítést.<br/>@endif
 			</div>
 		</div>
 	</div>
