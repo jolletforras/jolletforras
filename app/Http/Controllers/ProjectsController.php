@@ -116,6 +116,10 @@ class ProjectsController extends Controller
                 'public' => $request->has('public') ? 1 : 0
 		]);
 
+        if($project->public) {
+            $project->update(['meta_description' => $request->get('meta_description')]);
+        }
+
         //a létrehozó automatikusan résztvevő és kezelő lesz
         $project->members()->attach(Auth::user()->id, ['admin'=>1]);
 
@@ -176,6 +180,10 @@ class ProjectsController extends Controller
 				'slug' => Str::slug($request->get('title')),
                 'public' => $request->has('public') ? 1 : 0
 		]);
+
+        if($project->public) {
+            $project->update(['meta_description' => $request->get('meta_description')]);
+        }
 
 		$project->tags()->sync($tag_list);
 	

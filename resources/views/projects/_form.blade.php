@@ -60,9 +60,15 @@
 		</div>
 
 		<div class="form-group">
-			<input name="public" type="checkbox" value="1" @if(isset($project) && $project->public)  checked @endif>
+			<input name="public" id="public" type="checkbox" value="1" @if(isset($project) && $project->public)  checked @endif>
 			<span style="padding-top: 10px; font-size: 18px;">Nyilvános</span>
 			<a href="#public_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
 			<div id="public_info" class="collapse info">Ha nyilvános a kezdeményezésed, akkor nem regisztráltak számára is láthatóvá válik.</div>
 		</div>
+
+		<div class="form-group" id="meta-description-block" style="display: @if(isset($project) && $project->public) block @else none @endif">
+			<label for="meta_description">Meta leírás:</label>
+			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($project)){{old('meta_description',$project->meta_description)}}@else{{old('meta_description')}}@endif">
+		</div>
+
 
