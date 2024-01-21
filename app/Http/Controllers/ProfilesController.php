@@ -465,10 +465,10 @@ class ProfilesController extends Controller
             $new_post_notice = empty($request->get('new_post_notice')) ? 0 : 1;
             if($user->new_post_notice != $new_post_notice) {
                 if ($new_post_notice) {
-                    $message_r[]='Ismét fogsz kapni levélben értesítést, ha valamelyik csoportodban létrehoznak egy témát vagy eseményt.';
+                    $message_r[]='Ismét fogsz kapni levélben értesítést, ha valamelyik csoportodban létrehoznak egy témát.';
                 }
                 else {
-                    $message_r[]='A továbbiakban nem fogsz levélben értesítést kapni, ha valamelyik csoportodban létrehoznak egy témát vagy eseményt.';
+                    $message_r[]='A továbbiakban nem fogsz levélben értesítést kapni, ha valamelyik csoportodban létrehoznak egy témát.';
                 }
                 $user->new_post_notice=$new_post_notice;
                 $user->save();
