@@ -83,6 +83,16 @@
 				</div>
 			@endif
 		@endif
+		@guest
+			<p>
+			@if($project->user->public)
+				<b>Felvette: </b><a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}
+			@else
+				<hr>
+				Ha szeretnéd felvenni a kapcsolatot a kezdeményezővel, <a href="{{ url('login') }}">lépj be</a> vagy írj a tarsadalmi.jollet@gmal.com címre és mi összekapcsolunk a kezdeményezővel.
+			@endif
+			</p>
+		@endguest
 	</div>
 	@if(Auth::check())
 		@include('comments._show', ['comments' => $comments] )
