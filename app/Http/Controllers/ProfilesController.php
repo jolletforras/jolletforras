@@ -175,9 +175,8 @@ class ProfilesController extends Controller
 
         $tab = "introduction";
 
+        //megmutatja az összes csoportot, amelyben benne van
         $groups = array();
-
-        //saját profilnál megmutatja az összes csoportot, amelyben benne van
         foreach($user->member_of_groups as $group) {
             if($group->isActive() || $myprofile) {
                 $style = $group->isActive() ? '' : ' style="color: grey;"';
@@ -185,6 +184,8 @@ class ProfilesController extends Controller
             }
         }
 
+        //megmutatja az összes projektet, amelyben benne van
+        $projects  = array();
         foreach($user->member_of_projects as $project) {
                 $projects[] = '<a href="'.url('kezdemenyezes',$project->id).'/'.$project->slug.'" target="_blank"'.$style.'>'.$project->title.'</a>';
         }
