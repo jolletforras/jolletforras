@@ -21,7 +21,7 @@
 
                         <div class="form-group" style="padding-left: 10px;">
                             <input name="new_post_notice" type="checkbox" value="1" @if($user->new_post_notice) checked @endif>
-                            ha valamelyik csoportomban témát vagy eseményt hoznak létre
+                            ha valamelyik csoportomban témát hoznak létre *
                         </div>
 
                         <div class="form-group" style="padding-left: 10px;">
@@ -33,7 +33,8 @@
                             <input name="deactivate" type="checkbox" value="1" @if($deactivate) checked @endif>
                             deaktiválom a profilom <i>(mások számára a profilom nem látható)</i>
                         </div>
-
+                        <hr>
+                        * Csoport esemény, közlemény létrehozáskor minden csoporttag kap emailben értesítést.<br/>
                         <br/>
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit" value="Mentés">
