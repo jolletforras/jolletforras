@@ -15,6 +15,16 @@
 		</div>
 		@endif
 	</div>
+	@guest
+	<div class="inner_box">
+			Itt a Portál tagjainak saját írásait találod. Ez lehet gondolat, tapasztalat-megosztás, kutatási összefoglaló.<br>
+			Arról, hogyan hozhatsz létre új írást és hogyan tudsz mások írásaihoz hozzászólni, <a href="{{url('tudnivalo')}}/11/irasok">ITT</a> találsz részletes tudnivalókat.<br>
+			<br>
+			Szeretnél értesülni új írásokról?<br>
+			- Ha van kedved, regisztrálj a Portálon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
+			- Ha még csak távolabbról ismerkednél, iratkozz fel a hírlevelünkre <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a>.<br>
+	</div>
+	@endguest
 	@include('articles._new_article_info', ['collapse'=>' collapse'])
 	<div class="row">
 		@include('articles._list')
