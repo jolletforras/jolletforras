@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Forum;
 use App\Models\Group;
 use Illuminate\Support\Facades\DB;
+use App\Models\Sendemail;
 
 class SendNoticeEmails extends Command
 {
@@ -35,6 +36,10 @@ class SendNoticeEmails extends Command
      */
     public function handle()
     {
+        //addig nem küld ki levelet, amíg a sendemails táblában van kiküldendő levél
+        $sendemails = Sendemail::get();
+        if($sendemails->isNotEmpty()) exit;
+
         $notices = Notice::where('email', 1)->where('email_sent', 0)->oldest('updated_at')->get();
 
         $nr = 1;
