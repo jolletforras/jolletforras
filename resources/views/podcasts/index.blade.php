@@ -33,7 +33,7 @@
 					<li>Szervező társként</li>
 					<li>Támogatóként anyagi vagy egyéb felajánlással</li>
 				</ul>
-				Ha szeretnél frissiben értesülni az eseményekről és programokról, a levelezőcsoportunkra itt iratkozhatsz fel: <span style="display: inline-block;">az-uj-vilag-hangjai@googlegroups.com</span><br>
+				Ha szeretnél frissiben értesülni az eseményekről és programokról, a levelezőcsoportunkra <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a> iratkozhatsz fel.<br>
 				<br>
 				A következő elérhetőségeken tudsz kapcsolatba lépni a program szervezőivel: tarsadalmi.jollet@gmail.com | +36302897830 (Pataki Andrea)<br>
 				<br>
