@@ -15,11 +15,9 @@
 			@endif
 		</div>
 	</div>
-	@if (Auth::check())
 	<div class="inner_box collapse narrow-page" id="events_info">
 			Ezen az oldalon találod a regisztrált tagok és a csoportok nyilvános eseményeit.
 	</div>
-	@endif
 	@guest
 	<div class="inner_box narrow-page">
 		A Társadalmi Jóllét Portálon létrehozhatod és kommunikálhatod az eseményedet, magánszemélyként vagy egy csoport eseményeként.<br>
