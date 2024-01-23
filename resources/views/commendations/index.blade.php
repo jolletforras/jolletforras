@@ -26,6 +26,16 @@
 			</div>
 		</div>
 	</div>
+	@guest
+	<div class="inner_box narrow-page">
+		Az ajánló egy olyan lehetőség, ahol a Portál tagjai olyasmit tudnak megmutatni, ami szerintük érték az új világ építői számára. Lehet ez olvasni, nézni, hallgatni való tartalom.
+		Arról, hogyan hozhatsz létre új ajánlót, <a href="{{url('tudnivalo')}}/8/ajanlo">ITT</a> találsz erről részletes tudnivalókat.<br>
+		<br>
+		Szeretnél értesülni új ajánlókról?<br>
+		- Ha van kedved, regisztrálj a Portálon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
+		- Ha még csak távolabbról ismerkednél, iratkozz fel a hírlevelünkre <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a>.<br>
+	</div>
+	@endguest
 	<div class="inner_box narrow-page" style="margin-top:6px;">
 		@include('commendations._list')
 	</div>
