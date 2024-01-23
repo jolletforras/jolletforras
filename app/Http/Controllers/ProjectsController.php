@@ -10,6 +10,7 @@ use App\Models\ProjectTag;
 use App\Models\GroupTag;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Sendemail;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -286,11 +287,13 @@ class ProjectsController extends Controller
                 $data['email'] = $admin->email;
                 $data['admin_name'] = $admin->name;
 
-                Mail::send('projects.emails.new_member_email', $data, function ($message) use ($data) {
-                    $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-                    $message->subject($data['subject']);
-                    $message->to($data['email']);
-                });
+                $body = view('projects.emails.new_member_email',$data)->render();
+
+                Sendemail::create([
+                    'to_email' => $data['email'],
+                    'subject' => $data['subject'],
+                    'body' => $body
+                ]);
             }
         }
 
