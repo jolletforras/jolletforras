@@ -74,10 +74,10 @@ class SendNoticeEmails extends Command
 
             $data['email'] = $notice->user->email;
             $data['user_id'] = $notice->user->id;
-            $data['type'] = $notice->type=="Event" ? "esemény" : ($notifiable->announcement ? "közlemény" :"téma");
-            $data['type_txt1'] = $notice->type=="Event" ? "eseményt" : ($notifiable->announcement ? "közleményt" : "témát");
-            $data['type_txt2'] = $notice->type=="Event" ? "eseménynél" : ($notifiable->announcement ? "közleménynél" : "beszélgetésnél");
-            $data['new_post_subject_txt'] = $notice->type=="Forum" && $notifiable->announcement ? "Közlemény" : "Új ".$data['type'];
+            $data['type'] = $notice->type=="Event" ? "esemény" : ($notifiable->type=='announcement' ? "közlemény" :"téma");
+            $data['type_txt1'] = $notice->type=="Event" ? "eseményt" : ($notifiable->type=='announcement' ? "közleményt" : "témát");
+            $data['type_txt2'] = $notice->type=="Event" ? "eseménynél" : ($notifiable->type=='announcement' ? "közleménynél" : "beszélgetésnél");
+            $data['new_post_subject_txt'] = $notice->type=="Forum" && $notifiable->type=='announcement' ? "Közlemény" : "Új ".$data['type'];
             //ezt már nem küldi ki újból
             $notice->update(['email_sent' => 1]);
 

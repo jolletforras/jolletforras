@@ -31,7 +31,7 @@ class GroupThemesController extends Controller
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
-        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->latest('updated_at')->get();
+        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->whereIN('type', ['conversation','announcement'])->latest('updated_at')->get();
 
         $tags = [''=>''] + ForumTag::where('group_id', $id)->pluck('name', 'id')->all();
 
@@ -52,7 +52,7 @@ class GroupThemesController extends Controller
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
-        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->where('announcement', 1)->latest('updated_at')->get();
+        $forums = Forum::with('user', 'tags')->where('group_id', $group->id)->where('active', 1)->where('type', 'announcement')->latest('updated_at')->get();
 
         $page = 'announcement';
         $status='active';
@@ -141,9 +141,9 @@ class GroupThemesController extends Controller
         $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
 
         $title = "Új téma";
-        $announcement = NULL;
+        $type='conversation';
 
-        return view('groupthemes.create', compact('tags','group_id','group','title','announcement'));
+        return view('groupthemes.create', compact('tags','group_id','group','title','type'));
     }
 
     /**
@@ -155,13 +155,19 @@ class GroupThemesController extends Controller
 
         $group = Group::findOrFail($group_id);
 
+        //ha nem csoport kezelő akkor a csoport főoldalára irányít
+        if(!$group->isAdmin()) {
+            return  redirect('csoport/'.$group->id.'/'.$group->slug);
+        }
+
+
         $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
 
         $title = "Új közlemény";
 
-        $announcement = true;
+        $type='announcement';
 
-        return view('groupthemes.create', compact('tags','group_id','group','title','announcement'));
+        return view('groupthemes.create', compact('tags','group_id','group','title','type'));
     }
 
 
@@ -181,6 +187,7 @@ class GroupThemesController extends Controller
         $shorted_text = strlen($body)>600 ? $this->get_shorted_text($text,500) : null;
 
         $forum = Auth::user()->forums()->create([
+            'type' => $request->get('type'),
             'title' => $request->get('title'),
             'shorted_text' => $shorted_text,
             'body' => $body,
@@ -192,10 +199,7 @@ class GroupThemesController extends Controller
 
         $group = Group::findOrFail($forum->group_id);
 
-        $is_announcement = $group->isAdmin() && $request->get('announcement');
-        if($is_announcement) {
-            $forum->update(['announcement' => 1]);
-        }
+        $is_announcement = $group->isAdmin() && $request->get('type')=='announcement';
 
         //Téma felvételkor notices táblában a forum_id-val felvevődik az összes user_id, a comment_id = 0, a new=1 lesz.
         foreach($group->members as $user) {
@@ -277,11 +281,11 @@ class GroupThemesController extends Controller
 
         $group = Group::findOrFail($forum->group_id);
 
-        if($forum->announcement) {
+        if($forum->type=='announcement') {
             return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/kozlemenyek')->with('message', 'A csoport közleményt sikeresen módosítottad!');
         }
         else {
-            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés témát sikeresen módosítottad!');
+            return redirect('csoport/'.$forum->group_id.'/'.$group->slug.'/beszelgetesek')->with('message', 'A csoport beszélgetés sikeresen módosítottad!');
         }
     }
 

@@ -12,8 +12,8 @@
 			<textarea class="form-control" required="required" rows="20" name="body" cols="50">@if(isset($forum)) {{$forum->body}} @endif</textarea>
 		</div>
 
-		@if($group->isAdmin() && isset($announcement))
-			<input type="hidden" name="announcement" value="1">
+		@if($operation=='create')
+		<input type="hidden" name="type" value="{{$type}}">
 		@endif
 
 		<div class="form-group">
