@@ -83,6 +83,7 @@
 	</div>
 	@if (!$is_member)
 	<div class="inner_box narrow-page" style="margin-top:6px;">
+		@if($group->id!=1)
 		<p>Amennyiben szeretnél te is tagja lenni a csoportnak, először olvasd el a csoport megállapodását és ha azokat el tudod fogadodni kattints a csatlakozás gombra.</p>
 		<p>
 			<b>Csoport megállapodás:</b><br>
@@ -104,6 +105,10 @@
 
 			<p><button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-user"></i>Csatlakozás</button></p>
 		</form>
+		@endif
+		@if($group->id==1)
+			<p>Amennyiben szeretnél a Társadalmi Jóllét Mag csoporthoz csatlakozni, vedd fel a kapcsolatot velünk: tarsadalmi.jollet@gmail.com</p>
+		@endif
 	</div>
 	@endif
 @endsection
