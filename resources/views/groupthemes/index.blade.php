@@ -16,6 +16,9 @@
 				@if ($page=="announcement" && $group->isActive() && $isAdmin)
 					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/kozlemeny/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új közlemény</a>
 				@endif
+				@if ($page=="knowledge" && $group->isActive())
+					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tudastar/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új tudás</a>
+				@endif
 			</div>
 			<div class="col-sm-3" style="padding-top:4px;">
 				@if ($page!="announcement")

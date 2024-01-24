@@ -32,6 +32,10 @@
 				@if($group->isMember())
 					<a class="@if ($page=="announcement") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/kozlemenyek">Közlemények</a>
 				@endif
+
+				@if(Auth::check() && $group->knowledge_tab)
+					<a class="@if ($page=="knowledge") current @endif" href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tudastar">Tudástár</a>
+				@endif
 			</div>
 			<hr style="margin-top:10px;margin-bottom:5px;">
 		</div>

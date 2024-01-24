@@ -4,7 +4,7 @@
 	@include('partials.tinymce_just_link_js')
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h2>Csoport témám szerkesztése</h2>
+			<h2>Csoport {{$title_txt[$forum->type]}} szerkesztése</h2>
 
 			@include('errors.list')
 		</div>
