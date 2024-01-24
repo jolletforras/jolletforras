@@ -151,35 +151,40 @@ class GroupThemesController extends Controller
     }
 
 
+    public function createConversation($group_id,$slug) {
+        $title = "Új téma";
+        $type='conversation';
+        return $this->create($group_id,$title,$type);
+    }
+
+    public function createAnnouncement($group_id,$slug) {
+        $title = "Új közlemény";
+        $type='announcement';
+        return $this->create($group_id,$title,$type);
+    }
+
+    public function createKnowledge($group_id,$slug) {
+        $title = "Új tudás";
+        $type='knowledge';
+        return $this->create($group_id,$title,$type);
+    }
+
+
     /**
      * Create a group theme
      *
      * @return Response
      */
-    public function create($group_id,$slug, $tab) {
+    private function create($group_id,$title,$type) {
 
         $group = Group::findOrFail($group_id);
 
         //közleménynél ha nem csoport kezelő akkor a csoport főoldalára irányít
-        if($tab=='kozlemeny' && !$group->isAdmin()) {
+        if($type=='announcement' && !$group->isAdmin()) {
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
 
         $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
-
-        $title = "Új téma";
-        $type='conversation';
-
-        if($tab=='kozlemeny') {
-            $title = "Új közlemény";
-            $type='announcement';
-        }
-
-        if($tab=='tudastar') {
-            $title = "Új tudás";
-            $type='knowledge';
-        }
-
 
         return view('groupthemes.create', compact('tags','group_id','group','title','type'));
     }

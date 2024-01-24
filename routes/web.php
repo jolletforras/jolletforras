@@ -108,7 +108,9 @@ Route::get('/csoport/{group_id}/{group_slug}/tudastar', 'GroupThemesController@k
 Route::get('/csoport/{group_id}/{group_slug}/lezart-beszelgetesek', 'GroupThemesController@closedthemes');
 
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}', 'GroupThemesController@show');
-Route::get('/csoport/{group_id}/{group_slug}/{tab}/uj', 'GroupThemesController@create');
+Route::get('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@createConversation');
+Route::get('/csoport/{group_id}/{group_slug}/kozlemeny/uj', 'GroupThemesController@createAnnouncement');
+Route::get('/csoport/{group_id}/{group_slug}/tudastar/uj', 'GroupThemesController@createKnowledge');
 Route::post('/csoport/{group_id}/{group_slug}/tema/uj', 'GroupThemesController@store');
 Route::get('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}/modosit', 'GroupThemesController@edit');
 Route::post('/csoport/{group_id}/{group_slug}/tema/{forum_id}/{forum_slug}/modosit', 'GroupThemesController@update');
