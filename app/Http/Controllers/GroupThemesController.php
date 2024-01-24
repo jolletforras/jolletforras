@@ -167,10 +167,8 @@ class GroupThemesController extends Controller
 
         $tags = ForumTag::where('group_id', $group_id)->pluck('name', 'id');
 
-        if($tab=='tema') {
-            $title = "Új téma";
-            $type='conversation';
-        }
+        $title = "Új téma";
+        $type='conversation';
 
         if($tab=='kozlemeny') {
             $title = "Új közlemény";
