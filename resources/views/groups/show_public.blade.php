@@ -22,6 +22,8 @@
 			</p>
 		@endif
 		<p><i>Létrehozva: {{ $group->created_at }}, módosítva:  {{ $group->updated_at }}</i></p>
+		@if($group->id!=1)
 		<p style="color: #337ab7; font-weight: bold;">A csoport csatlakozáshoz lépj be vagy regisztrálj az oldalon!</p>
+		@endif
 	</div>
 @endsection
