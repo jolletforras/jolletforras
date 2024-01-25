@@ -10,6 +10,7 @@ use App\Models\Group;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Notice;
+use App\Models\Sendemail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
@@ -304,12 +305,14 @@ class EventsController extends Controller
             $data['invited_name']=$invitedUser->name;
             $data['email']=$invitedUser->email;
 
-            Mail::send('events.invite_email', $data, function($message) use ($data)
-            {
-                $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-                $message->subject("Meghívás a(z) ".$data['group_name']." - ".$data['event_name']." eseményre");
-                $message->to($data['email']);
-            });
+            $body = view('events.invite_email',$data)->render();
+
+            Sendemail::create([
+                'to_email' => $data['email'],
+                'subject' => "Meghívás a(z) ".$data['group_name']." - ".$data['event_name']." eseményre",
+                'body' => $body
+            ]);
+
 
         }
 

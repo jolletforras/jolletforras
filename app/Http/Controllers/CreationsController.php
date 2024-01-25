@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Usernotice;
 use App\Models\Comment;
+use App\Models\Sendemail;
 use App\Http\Requests\CreationRequest;
 use Mail;
 
@@ -88,12 +89,14 @@ class CreationsController extends Controller
         $data['id']= $creation->id;
         $data['slug']= $creation->slug;
         $data['title']= $creation->title;
-        Mail::send('creations.email', $data, function($message) use ($data)
-        {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-            $message->subject("új alkotás");
-            $message->to('tarsadalmi.jollet@gmail.com');
-        });
+
+        $body = view('creations.email',$data)->render();
+
+        Sendemail::create([
+            'to_email' => 'tarsadalmi.jollet@gmail.com',
+            'subject' => "Új alkotás",
+            'body' => $body
+        ]);
 
         return redirect('alkotas/'.$creation->id.'/'.$creation->slug)->with('message', 'Az új alkotást sikeresen felvetted.');
 

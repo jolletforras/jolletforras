@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Notice;
 use App\Models\News;
+use App\Models\Sendemail;
 use App\Http\Requests\GroupRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -284,11 +285,13 @@ class GroupsController extends Controller
                 $data['email'] = $admin->email;
                 $data['admin_name'] = $admin->name;
 
-                Mail::send('groups.emails.new_member_email', $data, function ($message) use ($data) {
-                    $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-                    $message->subject($data['subject']);
-                    $message->to($data['email']);
-                });
+                $body = view('groups.emails.new_member_email',$data)->render();
+
+                Sendemail::create([
+                    'to_email' => $data['email'],
+                    'subject' => $data['subject'],
+                    'body' => $body
+                ]);
             }
         }
 
@@ -482,12 +485,13 @@ class GroupsController extends Controller
             $data['invited_name']=$invitedUser->name;
             $data['email']=$invitedUser->email;
 
-            Mail::send('groups.emails.invite_email', $data, function($message) use ($data)
-            {
-                $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-                $message->subject("Meghívás a(z) ".$data['group_name']." csoportba");
-                $message->to($data['email']);
-            });
+            $body = view('groups.emails.invite_email',$data)->render();
+
+            Sendemail::create([
+                'to_email' => $data['email'],
+                'subject' => "Meghívás a(z) ".$data['group_name']." csoportba",
+                'body' => $body
+            ]);
 
         }
 

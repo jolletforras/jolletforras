@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Commendation;
 use App\Models\Comment;
+use App\Models\Sendemail;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommendationRequest;
 use Illuminate\Support\Str;
@@ -119,12 +120,15 @@ class CommendationsController extends Controller
             $data['id']= $commendation->id;
             $data['slug']= $commendation->slug;
             $data['title']= $commendation->title;
-            Mail::send('commendations.email', $data, function($message) use ($data)
-            {
-                $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-                $message->subject("új ajánló");
-                $message->to('tarsadalmi.jollet@gmail.com');
-            });
+
+            $body = view('commendations.email',$data)->render();
+
+            Sendemail::create([
+                'to_email' => 'tarsadalmi.jollet@gmail.com',
+                'subject' => "Új ajánló",
+                'body' => $body
+            ]);
+
             $message = 'Az új ajánlót sikeresen felvetted, jóváhagyásra vár.';
         }
 
