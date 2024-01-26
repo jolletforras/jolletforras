@@ -63,7 +63,6 @@
             'name'				=>$event->user->name,
             'email'				=>$event->user->email
         ] )
-	@endif
 
 	<script>
 		$('#invited_user').select2({
@@ -130,4 +129,5 @@
 			});
 		}
 	</script>
+	@endif
 @endsection
