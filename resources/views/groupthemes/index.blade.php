@@ -37,7 +37,7 @@
 		</div>
 		<hr style="margin-top:2px;">
 		@foreach ($forums as $forum)
-			@if(isset($forum->user->id))
+			@if(isset($forum->user->id) && $forum->user->status==3)
 				<h3><a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/tema/{{ $forum->id }}/{{$forum->slug}}">{{ $forum->title }}</a></h3>
 				<p>
 					<span class="author"><a href="{{ url('profil',$forum->user->id) }}/{{$forum->user->slug}}">{{ $forum->user->name }}</a>,	{{ $forum->created_at }}</span>
