@@ -2,7 +2,7 @@
 @section('title'){{ $guide->title }}@endsection
 @section('description'){{ $guide->meta_description }}@endsection
 @section('url'){{url('tudnivalo')}}/{{$guide->id}}/{{$guide->slug}}@endsection
-@section('canonical')<link rel="canonical" href="{{url('iras')}}/{{$guide->id}}/{{$guide->slug}}" />@endsection
+@section('canonical')<link rel="canonical" href="{{url('tudnivalo')}}/{{$guide->id}}/{{$guide->slug}}" />@endsection
 @section('image')@if(!empty($guide->image)){{url('/')}}/images/posts/{{$guide->image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
 @endsection
 
