@@ -64,6 +64,7 @@
 @endsection
 
 @section('footer')
+	@if(Auth::check())
 	<script type="text/javascript">
 		function send(){
 			var message = $("#message").val();
@@ -97,4 +98,5 @@
 			}
 		}
 	</script>
+	@endif
 @endsection
