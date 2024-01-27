@@ -24,7 +24,8 @@
 			@if($event->isGroupEvent() && Auth::check() && $event->group->isMember())
 				<input name="participate" id="participate" type="checkbox" onchange="check()"  value="1" @if($participate) checked @endif>
 				Részt veszek<br>
-				@if($participants) Ott lesznek: {!! $participants !!}<br>@endif
+				<div id="participants-with-me" style="display:<?=$participate?'block':'none'?>;">Ott lesznek: {!! $participants_with_me !!}</div>
+				<div id="participants" style="display:<?=$participate?'none':'block'?>;"><?=$participants?'Ott lesznek: '.$participants:''?></div>
 				<br>
 			@endif
 			@if (Auth::check() && $event->isGroupEvent() && $event->visibility!='group')
@@ -111,6 +112,15 @@
 			var participate = 0;
 			if($("#participate").is(':checked')) participate=1;
 
+			if(participate) {
+				$("#participants-with-me").show();
+				$("#participants").hide();
+			}
+			else {
+				$("#participants-with-me").hide();
+				$("#participants").show();
+			}
+
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 			$.ajax({
@@ -121,7 +131,7 @@
 					participate: participate
 				},
 				success: function(data) {
-					if(data['status']=='success') {}
+					if(data['status']=='success') {	}
 				},
 				error: function(error){
 					console.log(error.responseText);
