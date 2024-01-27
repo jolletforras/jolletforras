@@ -200,9 +200,9 @@ class CommentsController extends Controller
             $c = Comment::findOrFail($comment_id);
 
             $comment_length = strlen($comment);
-            $comment = htmlspecialchars($comment); //kivesszi az összes tagget, csak a sima szöveg marad
+            $comment = htmlspecialchars($comment);
             $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-            $comment = preg_replace($url, '<a href="$0" target="_blank">!-!$0</a>', $comment);
+            $comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
             $c->shorted_text = $comment_length>600 ? $this->subtext_keep_link($comment,600) : null;
             $c->body = $comment;
             $c->save();
