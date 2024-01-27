@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Notice;
+use App\Models\Sendemail;
 use Mail;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -83,12 +84,14 @@ class CommentsController extends Controller
                 $data['commenter_name']=$commenter->name;
                 $data['comment']=$comment;
 
-                Mail::send('comments.email', $data, function($message) use ($data)
-                {
-                    $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-                    $message->subject("Új hozzászólás - '".$data['title']."' ".$data['subject_extra']);
-                    $message->to($data['email']);
-                });
+                $body = view('comments.email',$data)->render();
+
+                Sendemail::create([
+                    'to_email' => $data['email'],
+                    'subject' => "Új hozzászólás - '".$data['title']."' ".$data['subject_extra'],
+                    'body' => $body
+                ]);
+
             }
 
             if($c_type=="GroupTheme" || ($c_type=="Event" && $commentable->group_id>0)) {
