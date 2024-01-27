@@ -223,8 +223,8 @@ class CommentsController extends Controller
             $parts["host"] = str_replace("www.", "", $parts["host"]);
             array_shift($parts); // remove the scheme
             $shortURL = implode("", $parts);
-            $shortenedURL = substr($shortURL, 0, 30);
-            if (strlen($shortURL) > 30) $shortenedURL .= "...";
+            $shortenedURL = substr($shortURL, 0, 40);
+            if (strlen($shortURL) > 40) $shortenedURL .= "...";
             return "<a href=\"".$url."\">".$shortenedURL."</a>";
             var_dump($parts);
         }, $text);
