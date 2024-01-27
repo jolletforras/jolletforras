@@ -38,8 +38,9 @@ class CommentsController extends Controller
 
             $c = new Comment();
             $comment = htmlspecialchars($comment);
-            $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-            $comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
+            //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
+            //$comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
+            $comment = $this->get_text_with_shorted_url($comment);
             $c->shorted_text = $comment_length>600 ? $this->subtext_keep_link($comment,600) : null;
             $c->body = $comment;
             $c->commenter_id = $commenter_id;
@@ -201,8 +202,9 @@ class CommentsController extends Controller
 
             $comment_length = strlen($comment);
             $comment = htmlspecialchars($comment);
-            $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-            $comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
+            //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
+            //$comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
+            $comment = $this->get_text_with_shorted_url($comment);
             $c->shorted_text = $comment_length>600 ? $this->subtext_keep_link($comment,600) : null;
             $c->body = $comment;
             $c->save();
@@ -213,6 +215,22 @@ class CommentsController extends Controller
         return \Response::json($response);
     }
 
+
+    private function get_text_with_shorted_url($text) {
+        $new_text = preg_replace_callback("/([\w]+\:\/\/[\w\-?&;#~=\.\/\@]+[\w\/])/", function ($m) {
+            $url = $m[0];
+            $parts = parse_url($url);
+            $parts["host"] = str_replace("www.", "", $parts["host"]);
+            array_shift($parts); // remove the scheme
+            $shortURL = implode("", $parts);
+            $shortenedURL = substr($shortURL, 0, 30);
+            if (strlen($shortURL) > 30) $shortenedURL .= "...";
+            return "<a href=\"".$url."\">".$shortenedURL."</a>";
+            var_dump($parts);
+        }, $text);
+
+        return $new_text;
+    }
 
 /*
     public function set_shorted_text() {
