@@ -128,9 +128,11 @@ class EventsController extends Controller
                 }
             }
             $participants = implode(", ",$participants_r);
+            $participants_r[] = '<a href="'.url('profil').'/'.Auth::user()->id.'/'.Auth::user()->slug.'">'.Auth::user()->name.'</a>';
+            $participants_with_me = implode(", ",$participants_r);
         }
 
-        return view('events.show', compact('event','has_access', 'comments', 'users_read_it','participate','participants'));
+        return view('events.show', compact('event','has_access', 'comments', 'users_read_it','participate','participants','participants_with_me'));
     }
 
 
