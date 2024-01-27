@@ -213,7 +213,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 
-
+	@if( Auth::check())
 	<script>
 		$(document).on('click','#notice-user',function(){
 
@@ -268,6 +268,7 @@
 		});
 
 	</script>
+	@endif
 
 
     @yield('footer')
