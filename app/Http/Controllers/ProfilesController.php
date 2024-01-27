@@ -11,6 +11,7 @@ use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\User;
 use App\Models\UserSkill;
 use App\Models\UserInterest;
+use App\Models\Sendemail;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -508,6 +509,15 @@ class ProfilesController extends Controller
                         $user->deleted_at = Carbon::now();
                         $message_r[] = 'Sikeresen deaktiváltad magad. Amennyiben újból szeretnéd használni az oldalt, vedd ki a pipát a deaktiválásnál.';
                         $user->save();
+
+                        $data['user_id'] = $user->id;
+                        $data['user_name'] = $user->name;
+                        $body = view('profiles.emails.deactivation',$data)->render();
+                        Sendemail::create([
+                            'to_email' => 'tarsadalmi.jollet@gmail.com',
+                            'subject' => "Deaktiválta magát egy felhasználó",
+                            'body' => $body
+                        ]);
                     }
 				} else {
 					$user->status = 3;
