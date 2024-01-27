@@ -113,7 +113,7 @@ class EventsController extends Controller
             $has_access = $event->isEditor();
         }
 
-        $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->get();
+        $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->orderBy('lev1_comment_id', 'ASC')->orderBy('created_at', 'ASC')->get();
 
         $participate = false;
         $participants = '';
