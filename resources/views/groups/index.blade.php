@@ -93,6 +93,7 @@
 @endsection
 
 @section('footer')
+	@if( Auth::check())
 	@include('partials.search_tag_script',['url'=>'csoport'])
 	<script>
 		function CityFilter() {
@@ -114,6 +115,6 @@
 				}
 			});
 		}
-
 	</script>
+	@endif
 @endsection
