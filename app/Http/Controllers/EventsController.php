@@ -117,6 +117,7 @@ class EventsController extends Controller
 
         $participate = false;
         $participants = '';
+        $participants_with_me = '';
         if(Auth::check()) {
             $participants_r = array();
             foreach($event->participants as $user) {
