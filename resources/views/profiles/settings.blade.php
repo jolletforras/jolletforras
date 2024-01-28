@@ -16,17 +16,17 @@
                         Kérek emailben értesítést:
                         <div class="form-group" style="padding-left: 10px;">
                             <input name="my_post_comment_notice" type="checkbox" value="1" @if($user->my_post_comment_notice) checked @endif>
-                            ha hozzászólnak valamelyik bejegyzésemhez <i>(írásom, csoport témám, kezdeményezésem)</i>
+                            ha hozzászólnak valamelyik bejegyzésemhez <i>(írás, alkotás, csoport téma, esemény, kezdeményezés, ajánló)</i>
                         </div>
 
                         <div class="form-group" style="padding-left: 10px;">
                             <input name="new_post_notice" type="checkbox" value="1" @if($user->new_post_notice) checked @endif>
-                            ha valamelyik csoportomban témát hoznak létre *
+                            ha valamelyik csoportomban új beszélgetést/tudástárt hoznak létre*
                         </div>
 
                         <div class="form-group" style="padding-left: 10px;">
                             <input name="theme_comment_notice" type="checkbox" value="1" @if($user->theme_comment_notice) checked @endif>
-                            azoknál a csoport beszélgetéseknél, amelyekhez innentől hozzászólok és utána új hozzászólás érkezik
+                            azoknál a csoport témáknál <i>(beszélgetés, közlemény, tudástár)</i>, amelyekhez innentől hozzászólok és utána új hozzászólás érkezik
                         </div>
 
                         <div class="form-group">
