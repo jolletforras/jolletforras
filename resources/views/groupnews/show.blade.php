@@ -9,7 +9,7 @@
 @section('content')
 	<div class="inner_box">
 		<h2>{{ $news->title }}</h2>
-		@if ($news->group->isAdmin() || Auth::user()->admin)
+		@if ($news->group->isAdmin() || Auth::check() && Auth::user()->admin)
 			<a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 		@endif
 		{!! $news->body !!}
