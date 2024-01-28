@@ -95,6 +95,8 @@ class GroupNewsController extends Controller
             'visibility' => $request->get('visibility')
         ]);
 
+        $news->group->update(['last_news_at' => date('Y-m-d')]);
+
         if(!empty($request->input('tag_list'))) {
             $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\NewsTag');
             $news->tags()->attach($tag_list);

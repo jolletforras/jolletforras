@@ -7,7 +7,7 @@
 
 		<div class="form-group">
 			<label for="meta_description">Meta leírás:</label>
-			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($group)) {{$group->meta_description}} @endif" id="meta_description">
+			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($group)) {{old('meta_description',$group->meta_description)}}@else{{old('description')}} @endif" id="meta_description">
 		</div>
 
 		<div class="form-group">

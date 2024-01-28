@@ -41,12 +41,14 @@ class GroupsController extends Controller
      */
     public function index()
     {
+
+        $groups = Group::with('user', 'members', 'tags')->where('status','active')->orderBy('last_news_at','DESC');
         if(Auth::check())
         {
-            $groups = Group::with('user', 'members', 'tags')->where('status','active')->orderBy('name')->get();
+            $groups = $groups->get();
         }
         else {
-            $groups = Group::with('user', 'members', 'tags')->where('status','active')->orderBy('name')->where('public','=', 1)->get();
+            $groups = $groups->where('public','=', 1)->get();
         }
 
         $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
@@ -146,6 +148,7 @@ class GroupsController extends Controller
             'slug' => Str::slug($request->get('name')),
             'public' => $request->has('public') ? 1 : 0,
             'user_visibility' => $request->get('user_visibility'),
+            'last_news_at' => date('Y-m-d'),
             'counter' => 0
         ]);
 
