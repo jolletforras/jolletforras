@@ -296,7 +296,7 @@ class User extends Authenticatable
             LEFT JOIN (
                 SELECT user_id, count(id) AS post FROM creations WHERE created_at>='".$two_weeks_before."' GROUP BY user_id
             ) AS c ON c.user_id=u.id
-            SET u.user_new_post = $num_new_posts-IFNULL(un.read_it,0)-IFNULL(a.post,0)-IFNULL(c.post,0)";
+            SET u.user_new_post = GREATEST($num_new_posts-IFNULL(un.read_it,0)-IFNULL(a.post,0)-IFNULL(c.post,0),0)";
         DB::update($query);
     }
 }
