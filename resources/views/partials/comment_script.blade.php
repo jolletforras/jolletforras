@@ -65,10 +65,30 @@
     }
 
     function edit(comment_id) {
-        $("#update_comment_id").val(comment_id);
-        $("#comment").val($("#edit-"+comment_id).text());
+        $("#update_comment_id").val(comment_id); // a módosítás mentéséhez kell
         $("#update_comment_btn").show();
         $("#add_comment_btn").hide();
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: "POST",
+            url: '{{ url('comment_edit') }}',
+            data: {
+                _token: CSRF_TOKEN,
+                comment_id: comment_id,
+            },
+            success: function(data) {
+                if(data['status']=='success') {
+                    $("#comment").val(data['comment']);
+                }
+            },
+            error: function(error){
+                console.log(error.responseText);
+            }
+        });
+
+        $("#comment").val($("#edit-"+comment_id).text());
     }
 
     function update(comment_id) {

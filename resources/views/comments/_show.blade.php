@@ -26,13 +26,7 @@
             @if(isset($comment->shorted_text))
                 <div id="shorted-{{$comment->id}}" style="display: inline-block;">{!! nl2br($comment->shorted_text) !!} <a class="more" data-value="{{$comment->id}}">... tovább</a> </div>
             @endif
-                <?php
-                    $body = preg_replace('#(">).*?(</a>)#', '' , $comment->body);
-                    $body = str_replace('<a href="','',$body);
-                $body = str_replace('" target="_blank','',$body);
-                ?>
                 <div id="full-{{$comment->id}}"{!! $display_full_comment !!}>{!! nl2br($comment->body) !!}</div>
-                <div id="edit-{{$comment->id}}" style="display: none;">{!! $body !!}</div>
             </div>
             <div class="answer" style="margin-left: {{$space_left}}px;">
                 @if(!isset($can_comment) || $can_comment)

@@ -195,6 +195,24 @@ class CommentsController extends Controller
         return \Response::json($response);
     }
 
+    public function comment_edit(Request $request)
+    {
+        $comment_id = $request->get('comment_id');
+
+        $comment = Comment::findOrFail($comment_id);
+
+        $body = preg_replace('#(">).*?(</a>)#', '' , $comment->body);
+        $body = str_replace('<a href="','',$body);
+        $body = str_replace('" target="_blank','',$body);
+
+        $response = array(
+            'status' => 'success',
+            'comment' => $body
+        );
+
+        return \Response::json($response);
+    }
+
     public function comment_update(Request $request)
     {
         $comment_id = $request->get('comment_id');
