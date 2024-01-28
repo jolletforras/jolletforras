@@ -11,7 +11,7 @@
 		<div class="panel-heading">
 			<h2>{{ $event->title }}</h2>
 			@if($event->isGroupEvent())&nbsp;&nbsp;&nbsp;&nbsp;
-				@if( Auth::check())	 <a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}/esemenyek"> << {{$event->group->name}}</a>
+				@if( Auth::check())	 <a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}/esemenyek"> << {{$event->group->name}} - események</a>
 				@else 	<a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}"> << {{$event->group->name}}</a>@endif
 			@endif
 		</div>

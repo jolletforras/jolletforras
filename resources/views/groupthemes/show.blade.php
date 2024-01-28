@@ -3,7 +3,7 @@
 @section('content')
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
-			<h2>{{ $forum->title }}</h2>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/beszelgetesek"> << {{$group->name}}</a>
+			<h2>{{ $forum->title }}</h2>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/{{$url[$forum->type]}}"> << {{$group->name}} - {{$tab_name[$forum->type]}}</a>
 		</div>
         <div class="panel-body">
 			<div class="form-group">

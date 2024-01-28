@@ -147,7 +147,10 @@ class GroupThemesController extends Controller
         $users_read_it = implode(", ",$users_read_it_r);
         $num_user_read_it = count($users_read_it_r);
 
-        return view('groupthemes.show', compact('group','forum','comments','askNotice','users_read_it','num_user_read_it'));
+        $url = ['conversation'=>'beszelgetesek','announcement'=>'kozlemenyek','knowledge'=>'tudastar'];
+        $tab_name = ['conversation'=>'beszélgetések','announcement'=>'közlemények','knowledge'=>'tudástár'];
+
+        return view('groupthemes.show', compact('group','forum','comments','askNotice','users_read_it','num_user_read_it','url','tab_name'));
     }
 
 
