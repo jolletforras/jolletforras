@@ -26,7 +26,7 @@
 
                         <div class="form-group" style="padding-left: 10px;">
                             <input name="theme_comment_notice" type="checkbox" value="1" @if($user->theme_comment_notice) checked @endif>
-                            azoknál a csoport témáknál <i>(beszélgetés, közlemény, tudástár)</i>, amelyekhez innentől hozzászólok és utána új hozzászólás érkezik
+                            azoknál a csoport témáknál <i>(beszélgetés, közlemény, tudástár)</i> és csoport eseményeknél, amelyekhez hozzászóltam és utána új hozzászólás érkezett
                         </div>
 
                         <div class="form-group">

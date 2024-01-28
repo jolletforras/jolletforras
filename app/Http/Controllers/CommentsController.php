@@ -105,23 +105,23 @@ class CommentsController extends Controller
                 //$commentable->group->members()->where('users.id','<>',$commenter_id)->increment('new_post', 1);
             }
 
-            //ez egyelőre csak a csoport beszélgetésnél, mivel csoport eseménynél csak új esemény létrehozásakor küld ki értesítést (amennyiben kért)
-            if($c_type=="GroupTheme") {
+            //csak csoport témánál és eseménynél
+            if($c_type=="GroupTheme" || $c_type=="Event") {
                 //adott forum_id-nál minden usernek beállítódik a legutolsó comment_id
-                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->update(['comment_id'=>$c->id]);
+                Notice::where('notifiable_id',$commentable_id)->where('type',$c_class)->update(['comment_id'=>$c->id]);
 
-                //adott forum_id-nál minden usernek aki kér értesítést beállítódik az email_sent=0-ra állítja (csak azoknak kellene aki mindenképp vagy saját után kérnek értesítést)
-                Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->where('email',1)->update(['email_sent' => 0]);
+                //minden usernek aki kér értesítést beállítódik az email_sent=0-ra állítja (csak azoknak aki mindenképp /ez csak csoport témánál/ kérnek vagy ott ahol hozzászóltak)
+                Notice::where('notifiable_id',$commentable_id)->where('type',$c_class)->where('email',1)->update(['email_sent' => 0]);
 
                 //minden user kap új login_code-ot, mivel ez egyedi mindenkinek, ezért egyenként kell megadni
-                $notices = Notice::where('notifiable_id',$commentable_id)->where('type','Forum')->get();
+                $notices = Notice::where('notifiable_id',$commentable_id)->where('type',$c_class)->get();
                 foreach($notices as $n) {
                     $n->update(['login_code' => Str::random(10)]);
                 }
 
-                //amennyiben kér értesítést arra az esetre ha hozzászólnak az általa hozzászólt témához => beállítódik a levél küldés, de most még nem kap értesítést
+                //amennyiben kér értesítést arra az esetre ha hozzászólnak az általa hozzászólt témához/eseményhez => beállítódik a levél küldés, de most még nem kap értesítést
                 if($commenter->theme_comment_notice) {
-                    Notice::findBy($commentable_id, $commenter->id, 'Forum')->update(['email' => 1, 'email_sent' => 1]);
+                    Notice::findBy($commentable_id, $commenter->id, $c_class)->update(['email' => 1, 'email_sent' => 1]);
                 }
             }
 
