@@ -116,7 +116,8 @@ class GroupNewsController extends Controller
 	{
 	    $news = News::findOrFail($id);
 
-        if (!($news->group->isAdmin())) return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'Csak a csoport kezelői tudják módosítani a híreket!');
+        //csoport kezelői vagy portál admin
+        if (!($news->group->isAdmin() || Auth::user()->admin)) return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'Csak a csoport kezelői tudják módosítani a híreket!');
 
         $tags = NewsTag::pluck('name', 'id');
         $selected_tags = $news->tags->pluck('id')->toArray();
