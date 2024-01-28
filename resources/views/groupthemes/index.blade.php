@@ -6,18 +6,12 @@
 	<div class="inner_box narrow-page" style="margin-top:6px;">
 		<div class="row">
 			<div class="col-sm-4">
-				@if ($page=="conversation")
-					@if($status=='closed')
-						<h3>Lezárt beszélgetések</h3>
-					@elseif($group->isActive())
-						<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tema/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új téma</a>
-					@endif
+				@if ($page=="conversation" && $status=='closed')
+					<h3>Lezárt beszélgetések</h3>
 				@endif
-				@if ($page=="announcement" && $group->isActive() && $isAdmin)
-					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/kozlemeny/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új közlemény</a>
-				@endif
-				@if ($page=="knowledge" && $group->isActive())
-					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/tudastar/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új tudás</a>
+				@if ($group->isActive() && ($page=="conversation" && $status!='closed' || $page=="announcement" && $isAdmin || $page=="knowledge"))
+					<?php $url = ['conversation'=>'beszelgetes','announcement'=>'kozlemeny','knowledge'=>'tudastar']; ?>
+					<a href="{{ url('csoport',$group->id) }}/{{$group->slug}}/{{$url[$page]}}/uj" type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i>Új téma</a>
 				@endif
 			</div>
 			<div class="col-sm-3" style="padding-top:4px;">

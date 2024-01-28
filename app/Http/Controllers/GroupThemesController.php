@@ -155,7 +155,7 @@ class GroupThemesController extends Controller
 
 
     public function createConversation($group_id,$slug) {
-        $title = "Új téma";
+        $title = "Új beszélgetés";
         $type='conversation';
         return $this->create($group_id,$title,$type);
     }
