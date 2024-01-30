@@ -197,21 +197,16 @@ class GroupsController extends Controller
 
         $group = Group::findOrFail($id);
 
-        $description = $request->get('description');
-        $agreement = $request->get('agreement');
-        $member_info = $request->get('member_info');
-        $admin_info = $request->get('admin_info');
-
         $zip_code=$request->get('zip_code');
         $coordinates=$this->getCoordinates($zip_code);
 
         $group->update([
             'name' => $request->get('name'),
             'meta_description' => $request->get('meta_description'),
-            'description' => $description,
-            'agreement' => $agreement,
-            'member_info' => $member_info,
-            'admin_info' => $admin_info,
+            'description' => $request->get('description'),
+            'agreement' => $request->get('agreement'),
+            'member_info' => $request->get('member_info'),
+            'admin_info' => $request->get('admin_info'),
             'ask_motivation' => $request->has('ask_motivation') ? 1 : 0,
             'webpage_name' => $request->get('webpage_name'),
             'webpage_url' => addhttp($request->get('webpage_url')),
@@ -225,6 +220,10 @@ class GroupsController extends Controller
             'user_visibility' => $request->get('user_visibility'),
             'status' => $request->has('inactive') ? 'inactive' : 'active'
         ]);
+
+        if($group->knowledge_tab) {
+            $group->update(['knowledge_info' => $request->get('knowledge_info') ]);
+        }
 
         $group->tags()->sync($tag_list);
 

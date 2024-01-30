@@ -5,12 +5,14 @@
 	<h2>{{$title}}</h2>
 	@if($type=='announcement')
 		<a href="#create_anoucement_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a>
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="inner_box collapse" id="create_anoucement_info" style="font-size: 18px">
-					Közlemény létrehozáskor minden csoporttag kap emailben értesítést.<br/>
-				</div>
-			</div>
+		<div class="inner_box collapse" id="create_anoucement_info" style="font-size: 18px">
+			Közlemény létrehozáskor minden csoporttag kap emailben értesítést.<br/>
+		</div>
+	@endif
+	@if($type=="knowledge" && !empty($group->knowledge_info))
+		<div class="inner_box">
+			<b>Így jár el a tudástár bejegyzés felvételekor:</b>
+			{!! $group->knowledge_info  !!}
 		</div>
 	@endif
 	@include('errors.list')
