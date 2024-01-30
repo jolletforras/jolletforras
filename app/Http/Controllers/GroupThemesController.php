@@ -263,7 +263,7 @@ class GroupThemesController extends Controller
         $forum = Forum::findOrFail($forum_id);
 
         //nem szerkesztheti a beszélgetés, ha annak ha nem a szerzője, vagy közlemény esetén nem csoportkezelő
-        if(!(Auth::user()->id == $forum->user->id || $forum->announcement && $group->isAdmin())) {
+        if(!(Auth::user()->id == $forum->user->id || $forum->type="announcement" && $group->isAdmin())) {
             return redirect('/');
         }
 
