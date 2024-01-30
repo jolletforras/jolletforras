@@ -11,7 +11,7 @@
 	@endif
 	@if($type=="knowledge" && !empty($group->knowledge_info))
 		<div class="inner_box">
-			<b>Így jár el a tudástár bejegyzés felvételekor:</b>
+			<b>Így járj el a tudástár bejegyzés felvételekor:</b>
 			{!! $group->knowledge_info  !!}
 		</div>
 	@endif
