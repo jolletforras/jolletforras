@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('partials.tinymce_just_link_js')
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h2>Csoport szerkesztése</h2>

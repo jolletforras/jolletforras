@@ -12,12 +12,23 @@
 		@if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
 			<p style="text-align: center;"><img src="{{ url('/images/groups') }}/{{ $group->id}}.jpg?{{$group->photo_counter}}" style="max-width: 50%;"></p>
 		@endif
-		<p>{!! nl2br($group->description) !!}</p>
+		@if ($is_admin && !empty($group->admin_info))
+			<b>Csoportkezelők megállapodása:</b>
+			{!! $group->admin_info !!}
+			<hr>
+		@endif
+		@if ($is_member && !empty($group->member_info))
+		<b>Csoporttagok számára tájékoztató:</b>
+		{!! $group->member_info !!}
+		<hr>
+		@endif
+		<b>A csoport bemutatása, célja:</b>
+		{!! $group->description !!}
+		<hr>
 		@if ($is_member)
-		<p>
-			<b>Csoport megállapodás:</b><br>
-			{!! nl2br($group->agreement) !!}
-		</p>
+		<b>Csoport megállapodás:</b>
+		{!! $group->agreement !!}
+		<hr>
 		@endif
 		@if($group->webpage_url!='')
 			<p><b>Weboldal:</b> <a href="{{$group->webpage_url}}" target="_blank">{{$group->webpage_name}}</a></p>

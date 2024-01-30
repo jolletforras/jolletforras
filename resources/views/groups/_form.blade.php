@@ -7,7 +7,7 @@
 
 		<div class="form-group">
 			<label for="meta_description">Meta leírás:</label>
-			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($group)) {{old('meta_description',$group->meta_description)}}@else{{old('description')}} @endif" id="meta_description">
+			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($group)) {{old('meta_description',$group->meta_description)}}@else{{old('meta_description')}} @endif" id="meta_description">
 		</div>
 
 		<div class="form-group">
@@ -18,6 +18,16 @@
 		<div class="form-group">
 			<label for="agreement">Csoport megállapodás*:</label>
 			<textarea name="agreement" class="form-control" required="required" rows="4">@if(isset($group)){{old('agreement',htmlspecialchars_decode($group->agreement))}}@else{{old('agreement')}}@endif</textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="member_info">Csoporttagok számára tájékoztató:</label>
+			<textarea name="member_info" class="form-control" rows="4">@if(isset($group)){{old('member_info',htmlspecialchars_decode($group->member_info))}}@else{{old('member_info')}}@endif</textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="admin_info">Csoportkezelők megállapodása:</label>
+			<textarea name="admin_info" class="form-control" rows="4">@if(isset($group)){{old('admin_info',htmlspecialchars_decode($group->admin_info))}}@else{{old('admin_info')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">

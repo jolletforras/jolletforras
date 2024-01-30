@@ -122,12 +122,10 @@ class GroupsController extends Controller
     {
         $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\GroupTag');
 
-        //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-        $description = htmlspecialchars($request->get('description'));
-        //$description = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $description);
-
-        $agreement = htmlspecialchars($request->get('agreement'));
-        //$agreement = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $agreement);
+        $description = $request->get('description');
+        $agreement = $request->get('agreement');
+        $member_info = $request->get('member_info');
+        $admin_info = $request->get('admin_info');
 
         $zip_code=$request->get('zip_code');
         $coordinates=$this->getCoordinates($zip_code);
@@ -137,6 +135,8 @@ class GroupsController extends Controller
             'meta_description' => $request->get('meta_description'),
             'description' => $description,
             'agreement' => $agreement,
+            'member_info' => $member_info,
+            'admin_info' => $admin_info,
             'ask_motivation' => $request->has('ask_motivation') ? 1 : 0,
             'webpage_name' => $request->get('webpage_name'),
             'webpage_url' => addhttp($request->get('webpage_url')),
@@ -197,12 +197,10 @@ class GroupsController extends Controller
 
         $group = Group::findOrFail($id);
 
-        //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
-        $description = htmlspecialchars($request->get('description'));
-        //$description = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $description);
-
-        $agreement = htmlspecialchars($request->get('agreement'));
-        //$agreement = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $agreement);
+        $description = $request->get('description');
+        $agreement = $request->get('agreement');
+        $member_info = $request->get('member_info');
+        $admin_info = $request->get('admin_info');
 
         $zip_code=$request->get('zip_code');
         $coordinates=$this->getCoordinates($zip_code);
@@ -212,6 +210,8 @@ class GroupsController extends Controller
             'meta_description' => $request->get('meta_description'),
             'description' => $description,
             'agreement' => $agreement,
+            'member_info' => $member_info,
+            'admin_info' => $admin_info,
             'ask_motivation' => $request->has('ask_motivation') ? 1 : 0,
             'webpage_name' => $request->get('webpage_name'),
             'webpage_url' => addhttp($request->get('webpage_url')),

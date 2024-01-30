@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+	@include('partials.tinymce_just_link_js')
 	<h2>Csoport felvétele</h2>
 	<div class="row">
 		<div class="col-sm-12">
