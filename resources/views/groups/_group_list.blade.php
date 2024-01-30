@@ -21,12 +21,13 @@
             </div>
             <div class="card-body">
             @if(isset($group->user->id))
+                <?php $description = strip_tags($group->description);?>
                 <p>
-                @if(strlen($group->description)>800)
-                    {!! nl2br(mb_substr($group->description,0,800)) !!}
+                @if(strlen($description)>800)
+                    {!! mb_substr($group->description,0,800) !!}
                     <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">... tovább</a>
                 @else
-                    {!! nl2br($group->description) !!}
+                    {!! $description !!}
                 @endif
                 </p>
                 @if (Auth::check())
