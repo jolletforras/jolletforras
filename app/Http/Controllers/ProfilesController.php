@@ -497,6 +497,18 @@ class ProfilesController extends Controller
                 }
             }
 
+            $can_login_with_code = empty($request->get('can_login_with_code')) ? 0 : 1;
+            if($user->can_login_with_code != $can_login_with_code) {
+                if ($can_login_with_code) {
+                    $message_r[]='Ismét 1 napig a levélből a bejegyzést előzetes bejelentkezés nélkül is meg tudod nyitni.';
+                }
+                else {
+                    $message_r[]='Innetől a levélből a bejegyzésed csak akkor fogod tudni megnyitni, ha előzetesen be vagy jelentkezve.';
+                }
+                $user->can_login_with_code=$can_login_with_code;
+                $user->save();
+            }
+
     		$deactivate_prev = $user->status==4 ? 1 : 0;
 			$deactivate = empty($request->get('deactivate')) ? 0 : 1;
 			if($deactivate!=$deactivate_prev) {

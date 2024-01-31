@@ -66,10 +66,14 @@ class SendNoticeEmails extends Command
             $data['group_name'] = $group->name;
             $data['post_title'] = $notifiable->title;
             if($notice->type=="Forum") {
-                $data['post_url'] = 'email/'.$notice->login_code.'/csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
+                $data['post_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
             }
             else {
-                $data['post_url'] = 'email/'.$notice->login_code.'/esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
+                $data['post_url'] = 'esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
+            }
+
+            if($notice->user->can_login_with_code) {
+                $data['post_url'] = 'email/'.$notice->login_code.'/'.$data['post_url'];
             }
 
             $data['email'] = $notice->user->email;
@@ -94,6 +98,8 @@ class SendNoticeEmails extends Command
                 if(is_null($comment)) {
                     continue;
                 }
+
+                $data['can_login_with_code'] = $notice->user->can_login_with_code;
                 $data['post_url'] .= "#".$notice->comment_id;
                 $data['author_name'] = $comment->commenter->name;
                 $data['comment'] = $this->get_shorter($comment->body,$data['post_url'],400);

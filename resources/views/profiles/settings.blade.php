@@ -30,6 +30,13 @@
                         </div>
 
                         <div class="form-group">
+                            <input name="can_login_with_code" type="checkbox" value="1" @if($user->can_login_with_code) checked @endif>
+                            kérem, hogy egy napig a levélből a bejegyzést előzetes bejelentkezés nélkül is meg tudjam nyitni
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
                             <input name="deactivate" type="checkbox" value="1" @if($deactivate) checked @endif>
                             deaktiválom a profilom <i>(mások számára a profilom nem látható)</i>
                         </div>
