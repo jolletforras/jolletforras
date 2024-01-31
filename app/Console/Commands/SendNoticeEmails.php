@@ -36,7 +36,7 @@ class SendNoticeEmails extends Command
      */
     public function handle()
     {
-        //addig nem küld ki levelet, amíg a sendemails táblában van kiküldendő levél
+        //!!!!!!addig nem küld ki levelet, amíg a sendemails táblában van kiküldendő levél!!!!!!!!!!
         $sendemails = Sendemail::get();
         if($sendemails->isNotEmpty()) exit;
 
@@ -66,10 +66,10 @@ class SendNoticeEmails extends Command
             $data['group_name'] = $group->name;
             $data['post_title'] = $notifiable->title;
             if($notice->type=="Forum") {
-                $data['post_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
+                $data['post_url'] = 'email/'.$notice->login_code.'/csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
             }
             else {
-                $data['post_url'] = 'esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
+                $data['post_url'] = 'email/'.$notice->login_code.'/esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
             }
 
             $data['email'] = $notice->user->email;
