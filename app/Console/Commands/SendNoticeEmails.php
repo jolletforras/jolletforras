@@ -85,6 +85,8 @@ class SendNoticeEmails extends Command
             //ezt már nem küldi ki újból
             $notice->update(['email_sent' => 1]);
 
+            $data['can_login_with_code'] = $notice->user->can_login_with_code;
+
             if($notice->comment_id==0) {     //új téma, közlemény, esemény
                 $data['author_name'] = $notifiable->user->name;
                 $post = preg_replace("/<img[^>]+\>/i", "", $notifiable->body);
@@ -99,7 +101,6 @@ class SendNoticeEmails extends Command
                     continue;
                 }
 
-                $data['can_login_with_code'] = $notice->user->can_login_with_code;
                 $data['post_url'] .= "#".$notice->comment_id;
                 $data['author_name'] = $comment->commenter->name;
                 $data['comment'] = $this->get_shorter($comment->body,$data['post_url'],400);
