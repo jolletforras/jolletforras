@@ -221,6 +221,7 @@ Route::get('/ajanlo/uj', 'CommendationsController@create');
 Route::post('ajanlo/uj', 'CommendationsController@store');
 Route::get('/ajanlo/{id}/{title}/modosit', 'CommendationsController@edit');
 Route::post('/ajanlo/{id}/{title}/modosit', 'CommendationsController@update');
+Route::get('/ajanlo/cimke/{id}/{tag}', 'TagsController@commendation_show');
 
 Route::post('/comment', 'CommentsController@comment');
 Route::post('/comment_delete', 'CommentsController@comment_delete');

@@ -15,6 +15,15 @@
 			<input class="form-control" name="url" type="text" maxlength="255" value="@if(isset($commendation)){{old('url',$commendation->url)}}@else{{old('url')}}@endif" id="url">
 		</div>
 
+		<div class="form-group">
+			<label for="tag_list">Címkék az ajánlóval kapcsolatban*:</label>
+			<select id="tag_list" name="tag_list[]" class="form-control tag-list" multiple>
+				@foreach($tags as $key => $val)
+					<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
+				@endforeach
+			</select>
+		</div>
+
     	<div class="form-group">
 			<input name="active" type="checkbox" value="1" @if(isset($commendation) && $commendation->active) checked @endif>
 			<span style="padding-top: 10px; font-size: 18px;">Aktív</span>

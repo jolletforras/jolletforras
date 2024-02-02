@@ -13,6 +13,7 @@ use App\Models\IdeaSkill;
 use App\Models\ProjectTag;
 use App\Models\Group;
 use App\Models\GroupTheme;
+use App\Models\CommendationTag;
 
 class TagsController extends Controller
 {
@@ -97,5 +98,17 @@ class TagsController extends Controller
          $tags_slug = $news_tags->pluck('slug', 'id')->all();
 
         return view('news.index', compact('newss', 'tags', 'tags_slug'));
+    }
+
+    public function commendation_show($id) {
+        $tag = CommendationTag::findOrFail($id);
+
+        $commendations=$tag->commendations()->latest('updated_at')->get();
+
+        $tags = [''=>''] + CommendationTag::getTagList();
+
+        $tags_slug = CommendationTag::pluck('slug', 'id')->all();
+
+        return view('commendations.index', compact('commendations', 'tags', 'tags_slug'));
     }
 }

@@ -6,12 +6,19 @@
 
 @section('content')
 	<div class="row narrow-page">
-		<div class="col-sm-3">
+		<div class="col-sm-5">
 			<h2>Ajánló</h2>
 		</div>
 		<div class="col-sm-3" style="padding-top:4px;">
+			@if(Auth::check())
+				<select id="tag" name="tag" class="form-control">
+					@foreach($tags as $key => $val)
+						<option value="{{ $key }}">{{ $val }}</option>
+					@endforeach
+				</select>
+			@endif
 		</div>
-		<div class="col-sm-6 text-right">
+		<div class="col-sm-4 text-right">
 			@if (Auth::check())
 			<a href="#commendation_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('ajanlo')}}/uj" type="submit" class="btn btn-default">Új ajánló</a>
 			@endif
@@ -41,3 +48,6 @@
 	</div>
 @endsection
 
+@section('footer')
+	@include('partials.search_tag_script',['url'=>'ajanlo'])
+@endsection

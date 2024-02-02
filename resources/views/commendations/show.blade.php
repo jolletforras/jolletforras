@@ -26,6 +26,9 @@
 			</div>
 		@endif
 		@include('partials.author', ['author'=>'','obj'=>$commendation])
+		@if(Auth::check())
+			@include('commendations._tags')
+		@endif
     </div>
 	@if(Auth::check())
 		@include('comments._show', ['comments' => $comments] )

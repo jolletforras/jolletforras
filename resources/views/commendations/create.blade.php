@@ -19,3 +19,7 @@
 		</div>
 	</div>
 @stop
+
+@section('footer')
+	@include('partials.add_tag_script')
+@endsection

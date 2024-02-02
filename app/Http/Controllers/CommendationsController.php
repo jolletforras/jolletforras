@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\TagTrait;
 use Illuminate\Http\Request;
 use App\Models\Commendation;
+use App\Models\CommendationTag;
 use App\Models\Comment;
 use App\Models\Sendemail;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +15,8 @@ use Mail;
 
 class CommendationsController extends Controller
 {
+    use TagTrait;
+
     private $url_error_msg = ' A hivatkozott oldal bemutató adatait nem sikerült elmenteni! Ennek oka, hogy vagy nincs ilyen adat, vagy nem megfelelő a hivatkozás.';
 
     public function __construct() {
@@ -36,9 +40,10 @@ class CommendationsController extends Controller
             $commendations = Commendation::where('public', 1)->latest('created_at')->get();
         }
 
-        //dd($commendations);
+        $tags = [''=>'']  + CommendationTag::getTagList();
+        $tags_slug = CommendationTag::get()->pluck('slug', 'id')->all();
 
-        return view('commendations.index', compact('commendations'));
+        return view('commendations.index', compact('commendations', 'tags', 'tags_slug'));
     }
 
     /**
@@ -68,7 +73,9 @@ class CommendationsController extends Controller
      * @return Response
      */
     public function create() {
-        return view('commendations.create');
+        $tags = CommendationTag::get()->pluck('name', 'id');
+
+        return view('commendations.create', compact('tags'));
     }
 
     /**
@@ -78,6 +85,8 @@ class CommendationsController extends Controller
      */
     public function store(CommendationRequest $request)
     {
+        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\CommendationTag');
+
         $title=$image=$description=NULL;
         $extra_msg = '';
 
@@ -139,6 +148,8 @@ class CommendationsController extends Controller
             $message = 'Az új ajánlót sikeresen felvetted, jóváhagyásra vár.'.$extra_msg;
         }
 
+        $commendation->tags()->attach($tag_list);
+
         return redirect('ajanlo')->with('message', $message);
     }
 
@@ -156,7 +167,10 @@ class CommendationsController extends Controller
             return redirect('/');
         }
 
-        return view('commendations.edit', compact('commendation'));
+        $tags = CommendationTag::get()->pluck('name', 'id');
+        $selected_tags = $commendation->tags->pluck('id')->toArray();
+
+        return view('commendations.edit', compact('commendation','tags','selected_tags'));
     }
 
     /**
@@ -167,6 +181,8 @@ class CommendationsController extends Controller
      */
     public function update($id, CommendationRequest $request)
     {
+        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\CommendationTag');
+
         $title=$image=$description=NULL;
         $extra_msg = '';
 
@@ -214,6 +230,7 @@ class CommendationsController extends Controller
             $commendation->update(['approved' => $approved]);
         }
 
+        $commendation->tags()->sync($tag_list);
 
         return redirect('ajanlo')->with('message', 'Az ajánlót sikeresen módosítottad!'.$extra_msg);
     }
