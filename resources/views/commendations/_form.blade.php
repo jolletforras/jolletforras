@@ -11,8 +11,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="url">Itt add meg, ha van hozzá hivatkozás*:</label>
-			<input class="form-control" required="required" name="url" type="text" maxlength="255" value="@if(isset($commendation)){{old('url',$commendation->url)}}@else{{old('url')}}@endif" id="url">
+			<label for="url">Itt add meg, ha van hozzá hivatkozás:</label>
+			<input class="form-control" name="url" type="text" maxlength="255" value="@if(isset($commendation)){{old('url',$commendation->url)}}@else{{old('url')}}@endif" id="url">
 		</div>
 
     	<div class="form-group">
