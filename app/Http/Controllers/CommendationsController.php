@@ -13,7 +13,7 @@ use Mail;
 
 class CommendationsController extends Controller
 {
-    private $url_error_msg = 'A megadott hivatkozás nem megfelelő! Ha nem boldogulsz, küld el a hivatkozásod a tarsadalmi.jollet@gmail.com címre és mi ellenőrizzük.';
+    private $url_error_msg = ' A hivatkozott oldal bemutató adatait nem sikerült elmenteni! Ennek oka, hogy vagy nincs ilyen adat, vagy nem megfelelő a hivatkozás.';
 
     public function __construct() {
         //$this->middleware('auth');
@@ -78,25 +78,32 @@ class CommendationsController extends Controller
      */
     public function store(CommendationRequest $request)
     {
-        libxml_use_internal_errors(true);
-        $dom_obj = new \DOMDocument();
-        $page_content = @file_get_contents($request->get('url'));
-        if($page_content===FALSE) {
-            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->url_error_msg]);
-        }
-        $dom_obj->loadHTML($page_content);
-        $image = $title = $description = $site_name = null;
-        $xpath = new \DOMXPath($dom_obj);
-        $query = '//*/meta[starts-with(@property, \'og:\')]';
-        $metas = $xpath->query($query);
-        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
-        foreach ($metas as $meta) {
-            $property = $meta->getAttribute('property');
-            $content = $meta->getAttribute('content');
-            if($property=='og:image') $image = $content;
-            if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            //if($property=='og:site_name') $site_name = $content;
+        $title=$image=$description=NULL;
+        $extra_msg = '';
+
+        if(!empty($request->get('url'))) {
+            libxml_use_internal_errors(true);
+            $dom_obj = new \DOMDocument();
+            $page_content = @file_get_contents($request->get('url'));
+            if($page_content!==FALSE) {
+                $dom_obj->loadHTML($page_content);
+                $image = $title = $description = $site_name = null;
+                $xpath = new \DOMXPath($dom_obj);
+                $query = '//*/meta[starts-with(@property, \'og:\')]';
+                $metas = $xpath->query($query);
+                //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
+                foreach ($metas as $meta) {
+                    $property = $meta->getAttribute('property');
+                    $content = $meta->getAttribute('content');
+                    if($property=='og:image') $image = $content;
+                    if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+                    if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+                    //if($property=='og:site_name') $site_name = $content;
+                }
+            }
+            else {
+                $extra_msg = $this->url_error_msg;
+            }
         }
 
         $commendation = Auth::user()->commendations()->create([
@@ -129,7 +136,7 @@ class CommendationsController extends Controller
                 'body' => $body
             ]);
 
-            $message = 'Az új ajánlót sikeresen felvetted, jóváhagyásra vár.';
+            $message = 'Az új ajánlót sikeresen felvetted, jóváhagyásra vár.'.$extra_msg;
         }
 
         return redirect('ajanlo')->with('message', $message);
@@ -160,25 +167,32 @@ class CommendationsController extends Controller
      */
     public function update($id, CommendationRequest $request)
     {
-        libxml_use_internal_errors(true);
-        $dom_obj = new \DOMDocument();
-        $page_content = @file_get_contents($request->get('url'));
-        if($page_content===FALSE) {
-            return redirect()->back()->withInput($request->input())->withErrors(['msg' => $this->url_error_msg]);
-        }
-        $dom_obj->loadHTML($page_content);
-        $image = $title = $description = $site_name = null;
-        $xpath = new \DOMXPath($dom_obj);
-        $query = '//*/meta[starts-with(@property, \'og:\')]';
-        $metas = $xpath->query($query);
-        //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
-        foreach ($metas as $meta) {
-            $property = $meta->getAttribute('property');
-            $content = $meta->getAttribute('content');
-            if($property=='og:image') $image = $content;
-            if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
-            //if($property=='og:site_name') $site_name = $content;
+        $title=$image=$description=NULL;
+        $extra_msg = '';
+
+        if(!empty($request->get('url'))) {
+            libxml_use_internal_errors(true);
+            $dom_obj = new \DOMDocument();
+            $page_content = @file_get_contents($request->get('url'));
+            if($page_content!==FALSE) {
+                $dom_obj->loadHTML($page_content);
+                $image = $title = $description = $site_name = null;
+                $xpath = new \DOMXPath($dom_obj);
+                $query = '//*/meta[starts-with(@property, \'og:\')]';
+                $metas = $xpath->query($query);
+                //foreach($dom_obj->getElementsByTagName('meta') as $meta) {
+                foreach ($metas as $meta) {
+                    $property = $meta->getAttribute('property');
+                    $content = $meta->getAttribute('content');
+                    if($property=='og:image') $image = $content;
+                    if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+                    if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
+                    //if($property=='og:site_name') $site_name = $content;
+                }
+            }
+            else {
+                $extra_msg = $this->url_error_msg;
+            }
         }
 
         $commendation = Commendation::findOrFail($id);
@@ -201,6 +215,6 @@ class CommendationsController extends Controller
         }
 
 
-        return redirect('ajanlo')->with('message', 'Az ajánlót sikeresen módosítottad!');
+        return redirect('ajanlo')->with('message', 'Az ajánlót sikeresen módosítottad!'.$extra_msg);
     }
 }
