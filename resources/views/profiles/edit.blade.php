@@ -38,7 +38,11 @@
 							@endif
 
 							@if(count($user->skill_tags)==0)
-								<li>Legalább egy jártasság, tudás címke (válassz egyet a felsoroltak közül vagy vegyél fel újat, ha a felsorolásban nem szerepel)</li>
+								<li>Legalább egy címke azzal kapcsolatban amiben jártasságod, tudásod, tapasztalatod van, amivel mások szolgálatára lehetsz (válassz egyet a felsoroltak közül vagy vegyél fel újat, ha a felsorolásban nem szerepel)</li>
+							@endif
+
+							@if(count($user->interest_tags)==0)
+								<li>Legalább egy címke azzal kapcsolatban ami érdekel, amiben fejlődni szeretnél (válassz egyet a felsoroltak közül vagy vegyél fel újat, ha a felsorolásban nem szerepel)</li>
 							@endif
 						</ul>
 						@endif
