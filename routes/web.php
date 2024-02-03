@@ -47,6 +47,7 @@ Route::get('/terkep/szervezodesek/cimke/{id}/{tag}', 'MapController@cooperation_
 Route::get('/tarsak', 'ProfilesController@index');
 Route::post('/user/filter', 'ProfilesController@filter');
 Route::get('/profil/{id}/{name?}', ['as' => 'profile.show', 'uses' => 'ProfilesController@show']);
+Route::get('/email/{code}/profil/{id}/{slug}', 'ProfilesController@email_message_login');
 
 Route::get('/profilom/modosit', ['as' => 'profil.edit', 'uses' => 'ProfilesController@edit']);
 Route::post('/profil/{id}/modosit', ['as' => 'profil.update', 'uses' => 'ProfilesController@update']);

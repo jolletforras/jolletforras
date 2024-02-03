@@ -27,7 +27,7 @@ class ProfilesController extends Controller
 	
 	public function __construct() {
 		//$this->middleware('auth');
-        $this->middleware('auth', ['except' => ['index','show']]);
+        $this->middleware('auth', ['except' => ['index','show','email_message_login']]);
 	}
 	
 	public function index()
@@ -193,6 +193,25 @@ class ProfilesController extends Controller
 
 		return view('profiles.show', compact('user', 'myprofile','tab','groups','projects'));
 	}
+
+    public function email_message_login($code,$id,$slug) {
+
+        //ha be van jelentkezve, akkor automatikusan mehet az oldalra
+        if(Auth::check()) {
+            return  redirect('/profil/ '. $id . '/' . $slug);
+        }
+
+        $user = User::where('login_code', $code)->first();
+        if($user) {
+            $expiration_time = strtotime($user->email_sent_at)+86400;
+            if(time()>$expiration_time) {
+                return redirect('/login');
+            }
+
+            Auth::login($user);
+            return  redirect('/profil/ '. $id . '/' . $slug);
+        }
+    }
 	
 	/**
 	 * Edit a specific user profile
