@@ -25,6 +25,7 @@ class GroupTag extends Model
             ->select('group_tags.id','group_tags.name','group_tags.slug')
             ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
             ->join('groups', 'groups.id', '=', 'group_group_tag.group_id')
+            ->where('groups.status','active')
             ->get();
 
         return $result;
