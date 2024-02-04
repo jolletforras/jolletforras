@@ -32,7 +32,6 @@ class NewsController extends Controller
         $news_tags = GroupTag::getUsed();
 
         $tags = [''=>''] +$news_tags->pluck('name', 'id')->all();
-
         $tags_slug = $news_tags->pluck('slug', 'id')->all();
 
 		return view('news.index', compact('newss', 'tags', 'tags_slug'));

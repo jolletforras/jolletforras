@@ -33,23 +33,9 @@
 		</div>
 
 		<div class="form-group">
-			<label for="tag_list">Címkék:</label>
-			<a href="#tag_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
-			<div id="tag_info" class="collapse info">Ha a láthatósága a hírnek "portál" vagy "nyilvános", akkor érdemes címkét beállítani, hogy a portál Hírek oldalon címke alapján rá lehessen keresni. A csoport neve lehet egy fontos címke, mivel az alapján a csoport összes hírére rá tudnak találni a címke megadásával.</div>
-			<select id="tag_list" name="tag_list[]" class="form-control tag-list" multiple>
-				@foreach($tags as $key => $val)
-					<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
-				@endforeach
-			</select>
-		</div>
-
-		<div class="form-group">
 			<input class="btn btn-primary" type="submit" value="{{$submitButtonText}}">
 		</div>
 
-		@section('footer')
-			@include('partials.add_tag_script')
-		@endsection
 	</div>
 </div>		
 		

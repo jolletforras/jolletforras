@@ -82,7 +82,6 @@ class GroupNewsController extends Controller
 	
 	public function store(Request $request)
 	{
-
         $news_text = $request->get('body');
 
         $news = Auth::user()->news()->create([
@@ -97,12 +96,6 @@ class GroupNewsController extends Controller
 
         $news->group->update(['last_news_at' => date('Y-m-d')]);
 
-        if(!empty($request->input('tag_list'))) {
-            $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\NewsTag');
-            $news->tags()->attach($tag_list);
-        }
-
-		//return redirect('hirek');
         return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'A csoport híreket sikeresen felvetted!');
 	}
 
@@ -135,11 +128,7 @@ class GroupNewsController extends Controller
 	 */
 	public function update($id, Request $request)
 	{
-        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\NewsTag');
-
 	    $news = News::findOrFail($id);
-
-        //$nws->update($request->all());
 
         $news_text = $request->get('body');
 
@@ -151,10 +140,6 @@ class GroupNewsController extends Controller
             'slug' => Str::slug($request->get('title')),
             'visibility' => $request->get('visibility')
         ]);
-
-        $news->tags()->sync($tag_list);
-
-        //$group = Group::findOrFail($news->group_id);
 
         return redirect('csoport/'.$news->group_id.'/'.$news->group->slug.'/hirek')->with('message', 'A csoport híreket sikeresen módosítottad!');
 	}
