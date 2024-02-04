@@ -29,10 +29,10 @@ class NewsController extends Controller
             $newss = News::where('visibility','public')->latest()->get();
         }
 
-        $news_tags = GroupTag::getUsed();
+        $group_tags = GroupTag::getNewsUsed();
 
-        $tags = [''=>''] +$news_tags->pluck('name', 'id')->all();
-        $tags_slug = $news_tags->pluck('slug', 'id')->all();
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
 		return view('news.index', compact('newss', 'tags', 'tags_slug'));
 	}
