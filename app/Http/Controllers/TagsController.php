@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\ForumTag;
 use App\Models\GroupTag;
+use App\Models\News;
 use App\Models\NewsTag;
 use App\Models\IdeaSkill;
 use App\Models\ProjectTag;
@@ -87,15 +88,21 @@ class TagsController extends Controller
     }
 
     public function news_show($id) {
-        $tag = NewsTag::findOrFail($id);
+
+       /* $tag = NewsTag::findOrFail($id);
 
         $newss=$tag->news()->latest('created_at')->get();
 
-        $news_tags = NewsTag::getTagsOfPublicNews();
+        dd($newss);*/
+
+        $newss=News::getNewsByGroupTagId($id);
+
+        //dd($newss);
+
+        $news_tags = GroupTag::getUsed();
 
         $tags = [''=>''] + $news_tags->pluck('name', 'id')->all();
-
-         $tags_slug = $news_tags->pluck('slug', 'id')->all();
+        $tags_slug = $news_tags->pluck('slug', 'id')->all();
 
         return view('news.index', compact('newss', 'tags', 'tags_slug'));
     }
