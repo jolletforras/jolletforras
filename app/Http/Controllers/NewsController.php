@@ -10,7 +10,7 @@ use App\Http\Controllers\Traits\TagTrait;
 use App\Models\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use App\Models\NewsTag;
+use App\Models\GroupTag;
 
 class NewsController extends Controller
 {
@@ -29,7 +29,7 @@ class NewsController extends Controller
             $newss = News::where('visibility','public')->latest()->get();
         }
 
-        $news_tags = NewsTag::getTagsOfPublicNews();
+        $news_tags = GroupTag::getUsed();
 
         $tags = [''=>''] +$news_tags->pluck('name', 'id')->all();
 

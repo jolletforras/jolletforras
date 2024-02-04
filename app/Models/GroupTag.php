@@ -19,6 +19,17 @@ class GroupTag extends Model
         return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
+    public function getUsed()
+    {
+        $result = DB::table('group_tags')
+            ->select('group_tags.id','group_tags.name','group_tags.slug')
+            ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
+            ->join('groups', 'groups.id', '=', 'group_group_tag.group_id')
+            ->get();
+
+        return $result;
+   }
+
     public function getLocalTagList() {
         $tags =  DB::table('group_tags')
                 ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
