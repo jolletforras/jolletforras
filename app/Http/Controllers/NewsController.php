@@ -85,7 +85,7 @@ class NewsController extends Controller
 			return redirect('/');
 		}
 
-		return view('news.edit', compact('news', 'tags', 'selected_tags'));
+		return view('news.edit', compact('news'));
 	}
 
 	/**
