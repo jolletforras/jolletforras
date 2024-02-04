@@ -2,7 +2,7 @@
     <?php $news = $newss[$i]; ?>
     <h3>
         <a href="/hir/{{$news->id}}/{{$news->slug}}">{{ $news->title }}</a> -
-        <i>@if (Auth::check() || $news->group_is_public)<a href="{{ url('csoport',$news->group_id) }}/{{$news->group_slug}}">{{ $news->group_name }}</a>@else{{$news->group_name}}@endif</i>
+        <i>@if (Auth::check() || $news->group->public)<a href="{{ url('csoport',$news->group->id) }}/{{$news->group->slug}}">{{ $news->group->name }}</a>@else{{$news->group->name}}@endif</i>
     </h3>
     <br>
     @if ($news->group->isAdmin())
