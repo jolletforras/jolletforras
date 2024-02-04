@@ -21,7 +21,7 @@ class Commendation extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(CommendationTag::class)->withTimestamps();
+        return $this->belongsToMany(GroupTag::class)->withTimestamps();
     }
 
     public function comments()

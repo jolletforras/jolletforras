@@ -92,21 +92,21 @@ class TagsController extends Controller
 
         $newss=News::whereIN('group_id',$group_ids)->latest('created_at')->get();
 
-        $news_tags = GroupTag::getUsed();
-        $tags = [''=>''] + $news_tags->pluck('name', 'id')->all();
-        $tags_slug = $news_tags->pluck('slug', 'id')->all();
+        $group_tags = GroupTag::getNewsUsed();
+        $tags = [''=>''] + $group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
         return view('news.index', compact('newss', 'tags', 'tags_slug'));
     }
 
     public function commendation_show($id) {
-        $tag = CommendationTag::findOrFail($id);
+        $tag = GroupTag::findOrFail($id);
 
         $commendations=$tag->commendations()->latest('updated_at')->get();
 
-        $tags = [''=>''] + CommendationTag::getTagList();
-
-        $tags_slug = CommendationTag::pluck('slug', 'id')->all();
+        $group_tags = GroupTag::getCommendationUsed();
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
         return view('commendations.index', compact('commendations', 'tags', 'tags_slug'));
     }

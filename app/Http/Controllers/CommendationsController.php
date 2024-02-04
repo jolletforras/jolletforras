@@ -6,6 +6,7 @@ use App\Http\Controllers\Traits\TagTrait;
 use Illuminate\Http\Request;
 use App\Models\Commendation;
 use App\Models\CommendationTag;
+use App\Models\GroupTag;
 use App\Models\Comment;
 use App\Models\Sendemail;
 use Illuminate\Support\Facades\Auth;
@@ -40,8 +41,10 @@ class CommendationsController extends Controller
             $commendations = Commendation::where('public', 1)->latest('created_at')->get();
         }
 
-        $tags = [''=>'']  + CommendationTag::getTagList();
-        $tags_slug = CommendationTag::get()->pluck('slug', 'id')->all();
+        $group_tags = GroupTag::getCommendationUsed();
+
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
         return view('commendations.index', compact('commendations', 'tags', 'tags_slug'));
     }
@@ -73,7 +76,7 @@ class CommendationsController extends Controller
      * @return Response
      */
     public function create() {
-        $tags = CommendationTag::get()->pluck('name', 'id');
+        $tags = GroupTag::get()->pluck('name', 'id');
 
         return view('commendations.create', compact('tags'));
     }
@@ -167,7 +170,7 @@ class CommendationsController extends Controller
             return redirect('/');
         }
 
-        $tags = CommendationTag::get()->pluck('name', 'id');
+        $tags = GroupTag::get()->pluck('name', 'id');
         $selected_tags = $commendation->tags->pluck('id')->toArray();
 
         return view('commendations.edit', compact('commendation','tags','selected_tags'));

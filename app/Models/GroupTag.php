@@ -19,7 +19,25 @@ class GroupTag extends Model
         return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
+    public function commendations()
+    {
+        return $this->belongsToMany(Commendation::class)->withTimestamps();
+    }
+
+
     public function getUsed()
+    {
+        $result = DB::table('group_tags')
+            ->select('group_tags.id','group_tags.name','group_tags.slug')
+            ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
+            ->join('groups', 'groups.id', '=', 'group_group_tag.group_id')
+            ->where('groups.status','active')
+            ->get();
+
+        return $result;
+    }
+
+    public function getNewsUsed()
     {
         $result = DB::table('group_tags')
             ->select('group_tags.id','group_tags.name','group_tags.slug')
@@ -31,6 +49,19 @@ class GroupTag extends Model
 
         return $result;
    }
+
+    public function getCommendationUsed()
+    {
+        $result = DB::table('group_tags')
+            ->select('group_tags.id','group_tags.name','group_tags.slug')
+            ->join('commendation_group_tag', 'commendation_group_tag.group_tag_id', '=', 'group_tags.id')
+            ->join('commendations', 'commendations.id', '=', 'commendation_group_tag.commendation_id')
+            ->where('commendations.active',1)
+            ->where('commendations.approved',1)
+            ->get();
+
+        return $result;
+    }
 
     public function getLocalTagList() {
         $tags =  DB::table('group_tags')
