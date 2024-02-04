@@ -53,27 +53,20 @@ class NewsController extends Controller
 	
 	public function create(Request $request) 
 	{
-
-        $tags = NewsTag::pluck('name', 'id');
-
-		return view('news.create', compact('tags'));
+		return view('news.create');
 	}
 	
 	public function store(Request $request)
 	{
-        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\NewsTag');
-
         $news_text = $request->get('body');
 
-        $news = Auth::user()->news()->create([
+        Auth::user()->news()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'body' => $news_text,
             'image' => getfirstimage($news_text),
             'slug' => Str::slug($request->get('title'))
         ]);
-
-        $news->tags()->attach($tag_list);
 
 		return redirect('hirek');
 	}
@@ -92,9 +85,6 @@ class NewsController extends Controller
 			return redirect('/');
 		}
 
-        $tags = NewsTag::pluck('name', 'id');
-        $selected_tags = $news->tags->pluck('id')->toArray();
-
 		return view('news.edit', compact('news', 'tags', 'selected_tags'));
 	}
 
@@ -106,8 +96,6 @@ class NewsController extends Controller
 	 */
 	public function update($id, Request $request)
 	{
-        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\NewsTag');
-
 	    $news = News::findOrFail($id);
 
         //$nws->update($request->all());
@@ -121,8 +109,6 @@ class NewsController extends Controller
             'image' => getfirstimage($news_text),
             'slug' => Str::slug($request->get('title'))
         ]);
-
-        $news->tags()->sync($tag_list);
 
 		return redirect('hirek');
 	}

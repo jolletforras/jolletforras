@@ -72,12 +72,9 @@ class GroupNewsController extends Controller
 	
 	public function create($group_id)
 	{
-
-        $tags = NewsTag::pluck('name', 'id');
-
         $visibility_options = $this->visibility_options;
 
-		return view('groupnews.create', compact('tags','group_id','visibility_options'));
+		return view('groupnews.create', compact('group_id','visibility_options'));
 	}
 	
 	public function store(Request $request)
@@ -112,12 +109,9 @@ class GroupNewsController extends Controller
         //csoport kezelői vagy portál admin
         if (!($news->group->isAdmin() || Auth::check() && Auth::user()->admin)) return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'Csak a csoport kezelői tudják módosítani a híreket!');
 
-        $tags = NewsTag::pluck('name', 'id');
-        $selected_tags = $news->tags->pluck('id')->toArray();
-
         $visibility_options = $this->visibility_options;
 
-		return view('groupnews.edit', compact('news', 'tags', 'selected_tags','visibility_options'));
+		return view('groupnews.edit', compact('news', 'visibility_options'));
 	}
 
 	/**
