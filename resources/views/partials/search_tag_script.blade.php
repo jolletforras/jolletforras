@@ -5,8 +5,13 @@
 	@endforeach
 	};
 
+	var placeholder = 'Keresés címke szerint';
+    if('{{$url}}'=='hir') {
+        placeholder = 'Keresés csoport címke szerint';
+    }
+
 	$('#tag').select2({
-		placeholder: 'Keresés címke szerint',
+		placeholder: placeholder,
         "language": {
             "noResults": function(){
                 return "Nincs találat";
