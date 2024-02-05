@@ -12,7 +12,16 @@
 			<a href="{{url('podcast')}}/{{$podcast->id}}/{{$podcast->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 		@endif
 		<iframe class="podcast-iframe" src="{{$podcast->url}}" style="height:100%;width:100%;" frameborder="0" scrolling="no"></iframe>
-		Kapcsolódó tematikus beszélgetés: <a href="{{ url('esemeny',$podcast->event->id) }}/{{$podcast->event->slug}}" target="_blank">{{ $podcast->event->title }}</a><br>
+		<?php
+			$event = $podcast->event;
+			$group = $podcast->group;
+		?>
+		@if(isset($event))
+		Kapcsolódó tematikus beszélgetés: <a href="{{ url('esemeny',$event->id) }}/{{$event->slug}}" target="_blank">{{ $event->title }}</a><br>
+		@endif
+		@if(isset($group))
+			Kapcsolódó csoport: <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}" target="_blank">{{ $group->name }}</a><br>
+		@endif
 	</div>
 @endsection
 
