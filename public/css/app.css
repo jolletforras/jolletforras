@@ -458,7 +458,7 @@ h3 {
 	display: inline-block;
 }
 
-.card .card-body p {
+.card .card-body div {
 	height: 180px;
 	line-height: 20px;
 	font-size: 18px;
