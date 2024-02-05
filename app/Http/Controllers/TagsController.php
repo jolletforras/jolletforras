@@ -10,10 +10,8 @@ use App\Models\ForumTag;
 use App\Models\GroupTag;
 use App\Models\News;
 use App\Models\IdeaSkill;
-use App\Models\ProjectTag;
 use App\Models\Group;
 use App\Models\GroupTheme;
-use App\Models\CommendationTag;
 
 class TagsController extends Controller
 {
@@ -31,13 +29,14 @@ class TagsController extends Controller
     }
 
     public function projects_show($id) {
-        $tag = ProjectTag::findOrFail($id);
+
+        $tag = GroupTag::findOrFail($id);
 
         $projects=$tag->projects()->latest('updated_at')->get();
 
-        $tags = [''=>''] + ProjectTag::getTagList();
-
-        $tags_slug = ProjectTag::pluck('slug', 'id')->all();
+        $group_tags = GroupTag::getProjectUsed();
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
         return view('projects.index', compact('projects', 'tags', 'tags_slug'));
     }

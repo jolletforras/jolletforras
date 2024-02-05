@@ -24,6 +24,11 @@ class GroupTag extends Model
         return $this->belongsToMany(Commendation::class)->withTimestamps();
     }
 
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class)->withTimestamps();
+    }
+
 
     public function getUsed()
     {
@@ -58,6 +63,17 @@ class GroupTag extends Model
             ->join('commendations', 'commendations.id', '=', 'commendation_group_tag.commendation_id')
             ->where('commendations.active',1)
             ->where('commendations.approved',1)
+            ->get();
+
+        return $result;
+    }
+
+    public function getProjectUsed()
+    {
+        $result = DB::table('group_tags')
+            ->select('group_tags.id','group_tags.name','group_tags.slug')
+            ->join('group_tag_project', 'group_tag_project.group_tag_id', '=', 'group_tags.id')
+            ->join('projects', 'projects.id', '=', 'group_tag_project.project_id')
             ->get();
 
         return $result;

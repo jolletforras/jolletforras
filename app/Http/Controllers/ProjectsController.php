@@ -6,7 +6,6 @@ use Validator;
 use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\Project;
-use App\Models\ProjectTag;
 use App\Models\GroupTag;
 use App\Models\User;
 use App\Models\Comment;
@@ -36,18 +35,18 @@ class ProjectsController extends Controller
 	public function index()
 	{
         if(Auth::check()) {
-            $projects = Project::with('user', 'members', 'tags')->latest('created_at')->get();
+            $projects = Project::latest('created_at')->get();
         }
         else {
-            $projects = Project::with('user', 'members', 'tags')->latest('created_at')->where('public','=', 1)->get();
+            $projects = Project::where('public', 1)->latest('created_at')->get();
         }
 
+        $group_tags = GroupTag::getProjectUsed();
 
-		$tags = [''=>'']  + ProjectTag::getTagList();
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-		$tags_slug = ProjectTag::get()->pluck('slug', 'id')->all();
-
-		return view('projects.index', compact('projects', 'tags', 'tags_slug'));
+        return view('projects.index', compact('projects', 'tags', 'tags_slug'));
 	}
 	
 	/**
@@ -84,7 +83,7 @@ class ProjectsController extends Controller
 	 * @return Response
 	 */
 	public function create() {
-		$tags = ProjectTag::get()->pluck('name', 'id');
+		$tags = GroupTag::get()->pluck('name', 'id');
 
 		$members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
 
@@ -147,7 +146,7 @@ class ProjectsController extends Controller
 		$members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
         $selected_members = $project->members->pluck('id')->toArray();
 
-		$tags = ProjectTag::get()->pluck('name', 'id');
+		$tags = GroupTag::get()->pluck('name', 'id');
 
         $selected_tags = $project->tags->pluck('id')->toArray();
 

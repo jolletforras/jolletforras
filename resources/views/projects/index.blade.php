@@ -53,11 +53,11 @@
 							&nbsp;&nbsp;<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">{{ $project->counter }} hozzászólás</a>
 						@endif
 					@endif
-        <hr/>
-    @endif
-@endforeach
-</div>
-</div>
+        			<hr/>
+    			@endif
+			@endforeach
+		</div>
+	</div>
 @endsection
 
 @section('footer')

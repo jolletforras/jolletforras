@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,8 @@ use Auth;
 class Project extends Model
 {
     use SoftDeletes;
+
+    use HasFactory;
 
     protected $fillable = [
         'title', 'meta_description', 'body', 'looking_for', 'slug', 'counter', 'public', 'location',
@@ -25,7 +28,7 @@ class Project extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(ProjectTag::class)->withTimestamps();
+        return $this->belongsToMany(GroupTag::class)->withTimestamps();
     }
 
     public function members()

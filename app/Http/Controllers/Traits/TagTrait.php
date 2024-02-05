@@ -24,12 +24,6 @@ trait TagTrait {
                     $data += ['group_id' => $group_id];
                 }
 				$tag = $tag_class::create($data);
-                if($tag_class=='App\Models\GroupTag' || $tag_class=='App\Models\ProjectTag') {
-                    $tag_class_sync = $tag_class=='App\Models\GroupTag' ? 'App\Models\ProjectTag' : 'App\Models\GroupTag';
-                    //echo $tag_class_sync; exit;
-                    $data += ['id' => $tag->id];
-                    $tag_class_sync::create($data);
-                }
 				//echo $tag_list[$i];
 				$tag_list[$i]=(string)$tag->id;
 			}
