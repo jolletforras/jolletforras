@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Validator;
-use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\Project;
 use App\Models\GroupTag;
@@ -19,7 +18,6 @@ use Mail;
 
 class ProjectsController extends Controller
 {
-	use TagTrait;
     use ZipCodeTrait;
 	
 	public function __construct() {
@@ -97,8 +95,6 @@ class ProjectsController extends Controller
 	 */
 	public function store(ProjectRequest $request)
 	{
-	    $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectTag');
-
         $zip_code=$request->get('zip_code');
         $coordinates=$this->getCoordinates($zip_code);
 
@@ -123,6 +119,7 @@ class ProjectsController extends Controller
         //a létrehozó automatikusan résztvevő és kezelő lesz
         $project->members()->attach(Auth::user()->id, ['admin'=>1]);
 
+        $tag_list=$request->input('tag_list');
 		$project->tags()->attach($tag_list);
 		
 		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen felvetted!');
@@ -161,8 +158,6 @@ class ProjectsController extends Controller
 	 */
 	public function update($id, ProjectRequest $request)
 	{
-		$tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ProjectTag');
-		
 		$project = Project::findOrFail($id);
 
         $zip_code=$request->get('zip_code');
@@ -185,6 +180,7 @@ class ProjectsController extends Controller
             $project->update(['meta_description' => $request->get('meta_description')]);
         }
 
+        $tag_list=$request->input('tag_list');
 		$project->tags()->sync($tag_list);
 	
 		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen módosítottad!');
