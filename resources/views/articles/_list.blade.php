@@ -12,7 +12,7 @@
                         <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" class="edit">módosít</a><br>
                     @endif
                 </h3>
-                <p>{!! $article->short_description !!}{!! $article->short_description !!}</p>
+                <div>{!! $article->short_description !!}{!! $article->short_description !!}</div>
             </div>
         </div>
     </div>
