@@ -5,12 +5,12 @@
 	
 		<div class="form-group">
 			<label for="body">Leírás*:</label>
-			<textarea name="body" class="form-control" required="required" rows="6">@if(isset($project)) {{$project->body}} @endif</textarea>
+			<textarea name="body" class="form-control" required="required" rows="6">@if(isset($project)) {{$project->body}} @else {{old('body')}} @endif</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="looking_for">Milyen tudású/képességű emberek hiányoznak*?</label>
-			<textarea class="form-control" required="required" rows="6" name="looking_for">@if(isset($project)) {{$project->looking_for}} @endif</textarea>
+			<textarea class="form-control" required="required" rows="6" name="looking_for">@if(isset($project)) {{$project->looking_for}} @else {{old('looking_for')}}  @endif</textarea>
 		</div>
 
 		<div class="form-group">
@@ -68,7 +68,7 @@
 
 		<div class="form-group" id="meta-description-block" style="display: @if(isset($project) && $project->public) block @else none @endif">
 			<label for="meta_description">Meta leírás:</label>
-			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($project)){{old('meta_description',$project->meta_description)}}@else{{old('meta_description')}}@endif">
+			<input class="form-control" name="meta_description" type="text" maxlength="160" value="@if(isset($project)){{old('meta_description',$project->meta_description)}}@else{{old('meta_description')}}@endif">
 		</div>
 
 
