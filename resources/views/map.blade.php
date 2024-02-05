@@ -120,6 +120,11 @@
 		@if (isset($tags))
 			$('#tag').select2({
 				placeholder: 'Keresés címke szerint',
+				"language": {
+					"noResults": function(){
+						return "Nincs találat";
+					}
+				},
 				tags: false
 			});
 
