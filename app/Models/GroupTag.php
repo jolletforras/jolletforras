@@ -79,12 +79,22 @@ class GroupTag extends Model
         return $result;
     }
 
-    public function getLocalTagList() {
+    public function getLocalGroupTagList() {
         $tags =  DB::table('group_tags')
                 ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
                 ->join('groups', 'groups.id', '=', 'group_group_tag.group_id')
                 ->whereNotNull('groups.lat')->whereNotNull('groups.lng')
                 ->pluck('group_tags.name', 'group_tags.id')->all();
+
+        return $tags;
+    }
+
+    public function getLocalProjectTagList() {
+        $tags =  DB::table('group_tags')
+            ->join('group_tag_project', 'group_tag_project.group_tag_id', '=', 'group_tags.id')
+            ->join('projects', 'projects.id', '=', 'group_tag_project.project_id')
+            ->whereNotNull('projects.lat')->whereNotNull('projects.lng')
+            ->pluck('group_tags.name', 'group_tags.id')->all();
 
         return $tags;
     }

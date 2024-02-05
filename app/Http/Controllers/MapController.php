@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\UserSkill;
 use App\Models\Group;
 use App\Models\GroupTag;
-use App\Models\ProjectTag;
 
 class MapController extends Controller
 {
@@ -56,8 +55,8 @@ class MapController extends Controller
 
         $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
 
-        $tags_g = GroupTag::getLocalTagList();
-        $tags_p = ProjectTag::getLocalTagList();
+        $tags_g = GroupTag::getLocalGroupTagList();
+        $tags_p = GroupTag::getLocalProjectTagList();
         $tags = [''=>''] +$tags_g+$tags_p;
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
@@ -70,17 +69,17 @@ class MapController extends Controller
     public function cooperation_tag_show($id) {
 
         $tag = GroupTag::find($id);
+
         $groups = $tag->groups()->whereNotNull('lat')->whereNotNull('lng')->get();
         $initialMarkers_g = $this->group_markers($groups);
 
-        $tag = ProjectTag::find($id);
         $projects = $tag->projects()->whereNotNull('lat')->whereNotNull('lng')->get();
         $initialMarkers_p = $this->project_markers($projects);
 
         $initialMarkers = array_merge($initialMarkers_g,$initialMarkers_p);
 
-        $tags_g = GroupTag::getLocalTagList();
-        $tags_p = ProjectTag::getLocalTagList();
+        $tags_g = GroupTag::getLocalGroupTagList();
+        $tags_p = GroupTag::getLocalProjectTagList();
         $tags = [''=>''] +$tags_g+$tags_p;
 
         $tags_slug = GroupTag::pluck('slug', 'id')->all();
