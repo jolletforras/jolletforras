@@ -24,10 +24,10 @@
                 <?php $description = strip_tags($group->description);?>
                 <div>
                 @if(strlen($description)>800)
-                    {!! mb_substr($group->description,0,800) !!}
+                    {!! mb_substr($description,0,800) !!}
                     <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">... tovább</a>
                 @else
-                    {!! $description !!}
+                    {!! $group->description !!}
                 @endif
                 </div>
                 @if (Auth::check())
