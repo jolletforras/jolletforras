@@ -30,5 +30,5 @@
 
 @section('footer')
 	@include('projects._script')
-	@include('partials.add_tag_script')
+	@include('partials.add_tag_no_new_script')
 @endsection
