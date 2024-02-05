@@ -21,5 +21,5 @@
 @stop
 
 @section('footer')
-	@include('partials.add_tag_script')
+	@include('partials.add_tag_no_new_script')
 @endsection
