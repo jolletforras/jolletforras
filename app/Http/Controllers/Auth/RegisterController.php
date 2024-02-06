@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Models\Sendemail;
 use Mail;
 use App\Rules\ReCaptcha;
 
@@ -93,19 +94,19 @@ class RegisterController extends Controller
 
         //send verification mail to user
         //--------------------------------------------------------------------------------------------------------------
-        Mail::send('auth.emails.welcome', $data, function($message) use ($data)
-        {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-            $message->subject("email cím megerősítése");
-            $message->to($data['email']);
-        });
+        $body = view('auth.emails.welcome',$data)->render();
+        Sendemail::create([
+            'to_email' => $data['email'],
+            'subject' => "email cím megerősítése",
+            'body' => $body
+        ]);
 
-        Mail::send('auth.emails.new_user', $data, function($message) use ($data)
-        {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-            $message->subject("új regisztráló");
-            $message->to('tarsadalmi.jollet@gmail.com');
-        });
+        $body = view('auth.emails.new_user',$data)->render();
+        Sendemail::create([
+            'to_email' => "tarsadalmi.jollet@gmail.com",
+            'subject' => "új regisztráló",
+            'body' => $body
+        ]);
 
         return $user;
     }
