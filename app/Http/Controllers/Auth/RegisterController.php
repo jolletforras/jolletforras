@@ -94,12 +94,12 @@ class RegisterController extends Controller
 
         //send verification mail to user
         //--------------------------------------------------------------------------------------------------------------
-        $body = view('auth.emails.confirm',$data)->render();
-        Sendemail::create([
-            'to_email' => $data['email'],
-            'subject' => "email cím megerősítése",
-            'body' => $body
-        ]);
+        Mail::send('auth.emails.confirm', $data, function($message) use ($data)
+        {
+            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->subject("email cím megerősítése");
+            $message->to($data['email']);
+        });
 
         $body = view('auth.emails.new_user',$data)->render();
         Sendemail::create([
