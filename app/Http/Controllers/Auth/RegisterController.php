@@ -94,7 +94,7 @@ class RegisterController extends Controller
 
         //send verification mail to user
         //--------------------------------------------------------------------------------------------------------------
-        $body = view('auth.emails.welcome',$data)->render();
+        $body = view('auth.emails.confirm',$data)->render();
         Sendemail::create([
             'to_email' => $data['email'],
             'subject' => "email cím megerősítése",
@@ -130,6 +130,16 @@ class RegisterController extends Controller
                 $user->status = 3;
             }
             $user->save();
+
+            $data['email'] = $user->email;
+            $data['name'] = $user->name;
+
+            $body = view('auth.emails.welcome',$data)->render();
+            Sendemail::create([
+                'to_email' => $data['email'],
+                'subject' => "Köszöntünk a Portálon! A következő lépés",
+                'body' => $body
+            ]);
 
             $message="Sikeresen megerősítetted az email címed! Most már be tudsz jelentkezni.";
             return redirect('login')->with('message', $message);
