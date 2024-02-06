@@ -6,7 +6,7 @@
             <p><b>Hozzászólások:</b></p>
         @foreach ($comments as $comment)
                 <?php
-                $lev1_comment_id = empty($comment->to_user_id) ? $comment->id : $lev1_comment_id;
+                $lev1_comment_id = empty($comment->to_user_id) ? $comment->id : $comment->lev1_comment_id;
                 $level2_comment = empty($comment->to_user_id) ? false : true;
                 $class_comment = $level2_comment ? "comment level2" : "comment";
                 $to_user = $level2_comment ? '<a href="'.url('profil').'/'.$comment->to_user->id.'/'.$comment->to_user->slug.'">'.$comment->to_user->name.'</a>, ':'';
