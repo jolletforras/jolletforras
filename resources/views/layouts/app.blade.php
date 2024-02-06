@@ -77,7 +77,9 @@
 								<ul>
 									<li><a href="{{ url('tortenesek') }}">Elmúlt 1 hónapban</a></li>
 									<li><a href="{{ url('esemenyek') }}">Események</a></li>
+								@guest
 									<li><a href="{{ url('hirlevelek') }}">Portál Hírlevél</a></li>
+								@endif
 									<li><a href="{{ url('hirek') }}">Csoportok hírei</a></li>
 								</ul>
 							<li>
