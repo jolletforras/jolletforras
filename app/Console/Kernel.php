@@ -17,11 +17,15 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
+        //!!!addig nem működik a send-notice-emails míg a sendemails táblában bejegyzés van !!!!!!!!!!
+
         //$schedule->command('send-email-new-group-theme')->cron('* * * * *');
-        //$schedule->command('send-notice-emails')->everyMinute()->withoutOverlapping();
+        //egyszerre kell a kettőt bekapcsolni!!!!
+        /*$schedule->command('send-stored-emails')->everyMinute()->withoutOverlapping();
+        $schedule->command('send-notice-emails')->everyMinute()->withoutOverlapping();*/
+
         //$schedule->command('adjust-user-notice-counter')->everyMinute()->withoutOverlapping();
         //$schedule->command('adjust-group-notice-counter')->everyMinute()->withoutOverlapping();
-        //$schedule->command('send-stored-emails')->everyMinute()->withoutOverlapping();
 
         $schedule->command('send-notice-emails')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('send-stored-emails')->everyTenMinutes()->withoutOverlapping();
