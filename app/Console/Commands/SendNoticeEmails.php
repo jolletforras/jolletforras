@@ -69,7 +69,7 @@ class SendNoticeEmails extends Command
                 $data['post_url'] = 'csoport/' . $group->id . '/' . $group->slug . '/tema/' . $notifiable->id . '/' . $notifiable->slug;
             }
             else {
-                $data['post_url'] = 'esemeny/ '. $notifiable->id . '/' . $notifiable->slug;
+                $data['post_url'] = 'esemeny/'. $notifiable->id . '/' . $notifiable->slug;
             }
 
             if($notice->user->can_login_with_code) {
