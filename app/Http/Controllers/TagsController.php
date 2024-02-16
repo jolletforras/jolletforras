@@ -85,17 +85,17 @@ class TagsController extends Controller
         return view('groupthemes.index', compact('group','page','status','forums','tags','tags_slug'));
     }
 
-    public function news_show($id) {
+    public function groupnews_show($id) {
         $tag = GroupTag::findOrFail($id);
         $group_ids = $tag->groups()->get()->pluck('id')->all();
 
-        $newss=News::whereIN('group_id',$group_ids)->latest('created_at')->get();
+        $newss=News::where('type', 'group')->whereIN('group_id',$group_ids)->latest('created_at')->get();
 
         $group_tags = GroupTag::getNewsUsed();
         $tags = [''=>''] + $group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-        return view('news.index', compact('newss', 'tags', 'tags_slug'));
+        return view('news.groupnews', compact('newss', 'tags', 'tags_slug'));
     }
 
     public function commendation_show($id) {

@@ -1,13 +1,13 @@
 @extends('layouts.app')
-@section('description', 'Hírek a Társadalmi Jóllét Portálon. Építő közösségek híreit, információit olvashatod. Csatlakozz hozzánk és adj hírt Te is a saját közösségedről! Várunk!')
-@section('url', 'https://tarsadalmijollet.hu/hirek')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/hirek" />
+@section('description', 'Csoportok hírei a Társadalmi Jóllét Portálon. Építő közösségek híreit, információit olvashatod. Csatlakozz hozzánk és adj hírt Te is a saját közösségedről! Várunk!')
+@section('url', 'https://tarsadalmijollet.hu/csoport/hirek')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/csoport/hirek" />
 @endsection
 
 @section('content')
 	<div class="row narrow-page">
 		<div class="col-sm-3">
-			<h2>Hírek</h2><a href="#news_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
+			<h2>Csoport hírek</h2><a href="#news_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 4px;"></i></a>
 		</div>
 		@if (Auth::check())
 		<div class="col-sm-3" style="padding-top:4px;">
@@ -33,5 +33,5 @@
 @endsection
 
 @section('footer')
-	@include('partials.search_tag_script',['url'=>'hir'])
+	@include('partials.search_tag_script',['url'=>'csoport/hir'])
 @endsection

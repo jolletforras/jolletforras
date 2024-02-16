@@ -20,13 +20,13 @@ class NewsController extends Controller
 		$this->middleware('auth', ['except'=>['index','show']]);
 	}
 //
-	public function index()
+	public function groupnews()
 	{
         if(Auth::check()) {
-            $newss = News::latest()->get();
+            $newss = News::where('type', 'group')->latest()->get();
         }
         else {
-            $newss = News::where('visibility','public')->latest()->get();
+            $newss = News::where('type', 'group')->where('visibility','public')->latest()->get();
         }
 
         $group_tags = GroupTag::getNewsUsed();
@@ -34,7 +34,7 @@ class NewsController extends Controller
         $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-		return view('news.index', compact('newss', 'tags', 'tags_slug'));
+		return view('news.groupnews', compact('newss', 'tags', 'tags_slug'));
 	}
 
     /**
@@ -50,12 +50,14 @@ class NewsController extends Controller
         return view('news.show', compact('news'));
     }
 	
-	
+/*
 	public function create(Request $request) 
 	{
 		return view('news.create');
 	}
-	
+*/
+
+/*
 	public function store(Request $request)
 	{
         $news_text = $request->get('body');
@@ -70,14 +72,14 @@ class NewsController extends Controller
 
 		return redirect('hirek');
 	}
-
+*/
 	/**
 	 * Edit a specific news
 	 *
 	 * @param  integer $id The forum ID
 	 * @return Response
 	 */
-	public function edit($id, Request $request)
+/*	public function edit($id, Request $request)
 	{
 	    $news = News::findOrFail($id);
 
@@ -87,14 +89,14 @@ class NewsController extends Controller
 
 		return view('news.edit', compact('news'));
 	}
-
+*/
 	/**
 	 * Update a specific news/event
 	 *
 	 * @param  integer $id The forum ID
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+/*	public function update($id, Request $request)
 	{
 	    $news = News::findOrFail($id);
 
@@ -112,4 +114,6 @@ class NewsController extends Controller
 
 		return redirect('hirek');
 	}
+*/
 }
+

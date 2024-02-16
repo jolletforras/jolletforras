@@ -80,7 +80,8 @@
 								@guest
 									<li><a href="{{ url('hirlevelek') }}">Portál Hírlevél</a></li>
 								@endif
-									<li><a href="{{ url('hirek') }}">Csoportok hírei</a></li>
+									<li><a href="{{ url('csoport') }}/hirek">Csoport hírek</a></li>
+									<li><a href="{{ url('kezdemenyezes') }}/hirek">Kezdeményezés hírek</a></li>
 								</ul>
 							<li>
 							<li class="width-narrow"><a href="{{ url('tortenesek') }}">Történések</a></li>
@@ -100,7 +101,8 @@
 							<li class="width-narrow"><a href="{{ url('az-uj-vilag-hangjai') }}">Az új világ hangjai</a></li>
 							<li class="width-narrow"><a href="{{ url('irasok') }}">Írások</a></li>
 							<li class="width-narrow"><a href="{{ url('hirlevelek') }}">Hírlevél</a></li>
-							<li class="width-narrow"><a href="{{ url('hirek') }}">Csoport hírek</a></li>
+							<li class="width-narrow"><a href="{{ url('csoport') }}/hirek">Csoport hírek</a></li>
+							<li class="width-narrow"><a href="{{ url('kezdemenyezes') }}/hirek">Kezdeményezés hírek</a></li>
 							<li class="width-narrow"><a href="{{ url('ajanlo') }}">Ajánló</a></li>
 
 							@if(false && Auth::check() && Auth::user()->admin)
