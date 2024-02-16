@@ -42,18 +42,33 @@ class GroupTag extends Model
         return $result;
     }
 
-    public function getNewsUsed()
+    public function getGroupNewsUsed()
     {
         $result = DB::table('group_tags')
             ->select('group_tags.id','group_tags.name','group_tags.slug')
             ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
             ->join('groups', 'groups.id', '=', 'group_group_tag.group_id')
-            ->join('news', 'news.group_id', '=', 'groups.id')
+            ->join('groupnews', 'groupnews.group_id', '=', 'groups.id')
             ->where('groups.status','active')
+            ->distinct()
             ->get();
 
         return $result;
    }
+
+    public function getProjectNewsUsed()
+    {
+        $result = DB::table('group_tags')
+            ->select('group_tags.id','group_tags.name','group_tags.slug')
+            ->join('group_tag_project', 'group_tag_project.group_tag_id', '=', 'group_tags.id')
+            ->join('projects', 'projects.id', '=', 'group_tag_project.project_id')
+            ->join('projectnews', 'projectnews.project_id', '=', 'projects.id')
+            ->where('projects.status','active')
+            ->distinct()
+            ->get();
+
+        return $result;
+    }
 
     public function getCommendationUsed()
     {

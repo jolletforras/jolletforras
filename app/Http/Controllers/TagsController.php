@@ -8,9 +8,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\ForumTag;
 use App\Models\GroupTag;
-use App\Models\News;
+use App\Models\Groupnews;
+use App\Models\Projectnews;
 use App\Models\IdeaSkill;
-use App\Models\Group;
+use App\Models\project;
 use App\Models\GroupTheme;
 
 class TagsController extends Controller
@@ -85,17 +86,30 @@ class TagsController extends Controller
         return view('groupthemes.index', compact('group','page','status','forums','tags','tags_slug'));
     }
 
-    public function groupnews_show($id) {
+    public function group_news_show($id) {
         $tag = GroupTag::findOrFail($id);
         $group_ids = $tag->groups()->get()->pluck('id')->all();
 
-        $newss=News::where('type', 'group')->whereIN('group_id',$group_ids)->latest('created_at')->get();
+        $newss=Groupnews::whereIN('group_id',$group_ids)->latest('created_at')->get();
 
-        $group_tags = GroupTag::getNewsUsed();
+        $group_tags = GroupTag::getGroupNewsUsed();
         $tags = [''=>''] + $group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-        return view('news.groupnews', compact('newss', 'tags', 'tags_slug'));
+        return view('news.group.index', compact('newss', 'tags', 'tags_slug'));
+    }
+
+    public function project_news_show($id) {
+        $tag = GroupTag::findOrFail($id);
+        $project_ids = $tag->projects()->get()->pluck('id')->all();
+
+        $newss=Projectnews::whereIN('project_id',$project_ids)->latest('created_at')->get();
+
+        $group_tags = GroupTag::getProjectNewsUsed();
+        $tags = [''=>''] + $group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
+
+        return view('news.project.index', compact('newss', 'tags', 'tags_slug'));
     }
 
     public function commendation_show($id) {

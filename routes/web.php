@@ -142,7 +142,10 @@ Route::get('/kezdemenyezes/hir/{id}/{title}/modosit', 'ProjectsController@edit')
 Route::post('/kezdemenyezes/hir/{id}/{title}/modosit', 'ProjectsController@update');
 
 Route::get('/csoport/hirek', 'NewsController@groupnews');
-Route::get('/csoport/hir/cimke/{id}/{tag}', 'TagsController@groupnews_show');
+Route::get('/csoport/hir/cimke/{id}/{tag}', 'TagsController@group_news_show');
+
+Route::get('/kezdemenyezes/hirek', 'NewsController@projectnews');
+Route::get('/kezdemenyezes/hir/cimke/{id}/{tag}', 'TagsController@project_news_show');
 
 Route::get('/hir/{id}/{title}', 'NewsController@show');
 //Route::get('/hir/uj', 'NewsController@create');

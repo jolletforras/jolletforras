@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\TagTrait;
-use App\Models\News;
+use App\Models\Groupnews;
+use App\Models\Projectnews;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\GroupTag;
@@ -23,19 +24,36 @@ class NewsController extends Controller
 	public function groupnews()
 	{
         if(Auth::check()) {
-            $newss = News::where('type', 'group')->latest()->get();
+            $newss = Groupnews::latest()->get();
         }
         else {
-            $newss = News::where('type', 'group')->where('visibility','public')->latest()->get();
+            $newss = Groupnews::where('visibility','public')->latest()->get();
         }
 
-        $group_tags = GroupTag::getNewsUsed();
+        $group_tags = GroupTag::getGroupNewsUsed();
 
         $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-		return view('news.groupnews', compact('newss', 'tags', 'tags_slug'));
+		return view('news.group.index', compact('newss', 'tags', 'tags_slug'));
 	}
+
+    public function projectnews()
+    {
+        if(Auth::check()) {
+            $newss = Projectnews::latest()->get();
+        }
+        else {
+            $newss = Projectnews::where('visibility','public')->latest()->get();
+        }
+
+        $group_tags = GroupTag::getProjectNewsUsed();
+
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
+
+        return view('news.project.index', compact('newss', 'tags', 'tags_slug'));
+    }
 
     /**
      * Displays a specific article
