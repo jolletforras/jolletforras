@@ -11,6 +11,7 @@ use App\Models\Podcast;
 use App\Models\Article;
 use App\Models\Newsletter;
 use App\Models\Groupnews;
+use App\Models\Projectnews;
 use App\Models\Commendation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -115,6 +116,7 @@ class HomeController extends Controller
             $events = Event::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->latest()->get();
             $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
+            $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
         }
         else {
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
@@ -122,13 +124,14 @@ class HomeController extends Controller
             $events = Event::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->where('public',1)->latest()->get();
             $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
+            $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
         }
 
         $podcasts = Podcast::latest()->where('created_at','>',$date)->get();
         $articles = Article::latest()->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
 
-        return view('lastweeks',compact('users','groups','events','podcasts','articles','newsletters','commendations','groupnewss'));
+        return view('lastweeks',compact('users','groups','events','podcasts','articles','newsletters','commendations','groupnewss','projectnewss'));
     }
 
 

@@ -78,6 +78,11 @@
         @include('news.group._list')
         <hr>
     @endif
+    @if($projectnewss->isNotEmpty())
+        <h3>Új kezdeményezés hírek</h3>
+        @include('news.project._list')
+        <hr>
+    @endif
     @if($newsletters->isNotEmpty())
         <h3>Új hírlevelek</h3>
         @include('newsletters._list')

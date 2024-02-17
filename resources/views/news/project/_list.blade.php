@@ -1,3 +1,4 @@
+<?php $newss = $projectnewss; ?>
 @for ($i = 0; $i < $num=$newss->count(); $i++)
     <?php $news = $newss[$i]; ?>
     <h3>
