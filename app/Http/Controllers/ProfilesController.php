@@ -180,7 +180,7 @@ class ProfilesController extends Controller
         $groups = array();
         foreach($user->member_of_groups as $group) {
             if($group->isActive() || $myprofile) {
-                $style = $group->isActive() ? '' : ' style="color: grey;"';
+                $style = $group->isActive() ? '' : ' style="color: gray;"';
                 $groups[] = '<a href="'.url('csoport',$group->id).'/'.$group->slug.'" target="_blank"'.$style.'>'.$group->name.'</a>';
             }
         }
@@ -188,7 +188,10 @@ class ProfilesController extends Controller
         //megmutatja az összes projektet, amelyben benne van
         $projects  = array();
         foreach($user->member_of_projects as $project) {
+            if($project->isActive() || $myprofile) {
+                $style = $project->isActive() ? '' : ' style="color: gray;"';
                 $projects[] = '<a href="'.url('kezdemenyezes',$project->id).'/'.$project->slug.'" target="_blank"'.$style.'>'.$project->title.'</a>';
+            }
         }
 
 		return view('profiles.show', compact('user', 'myprofile','tab','groups','projects'));
