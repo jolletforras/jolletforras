@@ -47,7 +47,8 @@ class TagsController extends Controller
 
         $groups=$tag->groups()->where('status','active')->orderBy('name')->get();
 
-        $tags = [''=>''] + GroupTag::pluck('name', 'id')->all();
+        $group_tags = GroupTag::getUsed();
+        $tags = [''=>'']+$group_tags->pluck('name', 'id')->all();
 
         $city=NULL;
 
