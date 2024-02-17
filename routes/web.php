@@ -134,12 +134,12 @@ Route::get('/csoport/hir/{id}/{title}/modosit', 'GroupNewsController@edit');
 Route::post('/csoport/hir/{id}/{title}/modosit', 'GroupNewsController@update');
 
 
-Route::get('/kezdemenyezes/{id}/{title}/hirek', 'ProjectsController@index');
-Route::get('/kezdemenyezes/{group_id}/{title}/hir/{news_id}/{news_slug}', 'ProjectsController@show');
-Route::get('/kezdemenyezes/{group_id}/{title}/hir/uj', 'ProjectsController@create');
-Route::post('/kezdemenyezes/hir/uj', 'ProjectsController@store');
-Route::get('/kezdemenyezes/hir/{id}/{title}/modosit', 'ProjectsController@edit');
-Route::post('/kezdemenyezes/hir/{id}/{title}/modosit', 'ProjectsController@update');
+Route::get('/kezdemenyezes/{id}/{title}/hirek', 'ProjectNewsController@index');
+Route::get('/kezdemenyezes/{group_id}/{title}/hir/{news_id}/{news_slug}', 'ProjectNewsController@show');
+Route::get('/kezdemenyezes/{group_id}/{title}/hir/uj', 'ProjectNewsController@create');
+Route::post('/kezdemenyezes/hir/uj', 'ProjectNewsController@store');
+Route::get('/kezdemenyezes/hir/{id}/{title}/modosit', 'ProjectNewsController@edit');
+Route::post('/kezdemenyezes/hir/{id}/{title}/modosit', 'ProjectNewsController@update');
 
 Route::get('/csoport/hirek', 'NewsController@groupnews');
 Route::get('/csoport/hir/cimke/{id}/{tag}', 'TagsController@group_news_show');

@@ -127,6 +127,11 @@ class User extends Authenticatable
         return $this->hasMany(Groupnews::class);
     }
 
+    public function projectnews()
+    {
+        return $this->hasMany(Projectnews::class);
+    }
+
     public function notices()
     {
         return $this->hasMany(Notice::class);

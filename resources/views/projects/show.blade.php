@@ -20,6 +20,7 @@
 				@if ($is_owner || $is_admin)
 					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit" type="submit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"> </i>Módosít</a>
 					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/kepfeltoltes" type="submit" class="btn btn-default">Képfeltöltés</a>
+					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/hir/uj" type="submit" class="btn btn-default">Új hír</a>
 				@endif
 				@if($is_member && !$is_owner)
 					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/kilep" type="submit" class="btn btn-default">Kilépek</a>
