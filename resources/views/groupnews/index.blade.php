@@ -30,7 +30,7 @@
 			<?php $news = $newss[$i]; ?>
 			<h3><a href="{{url('csoport')}}/{{$group->id}}/{{$group->slug}}/hir/{{$news->id}}/{{$news->slug}}">{{ $news->title }}</a></h3>
 			@if ($news->group->isAdmin())
-				<a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" class="btn btn-default">módosít</a>
+				<a href="{{url('csoport')}}/hir/{{$news->id}}/{{$news->slug}}/modosit" class="btn btn-default">módosít</a>
 			@endif
 			<article>
 				<div class="body">{!!$news->body !!}</div>

@@ -122,9 +122,9 @@ class User extends Authenticatable
         return $this->hasMany(Newsletter::class);
     }
 
-    public function news()
+    public function groupnews()
     {
-        return $this->hasMany(News::class);
+        return $this->hasMany(Groupnews::class);
     }
 
     public function notices()

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\TagTrait;
-use App\Models\News;
+use App\Models\Groupnews;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\NewsTag;
@@ -27,24 +27,15 @@ class GroupNewsController extends Controller
 	{
         $group = Group::findOrFail($id);
 
-        //ha nem csoport tag akkor a csoport főoldalára irányít
-       /* if(!$group->isMember()) {
-            return  redirect('csoport/'.$group->id.'/'.$group->slug);
-        }*/
-
         if(Auth::check()) {
-            $newss = News::where('group_id', $group->id)->latest()->get();
+            $newss = Groupnews::where('group_id', $group->id)->latest()->get();
         }
         elseif ($group->public){
-            $newss = News::where('group_id', $group->id)->where('visibility','public')->latest()->get();
+            $newss = Groupnews::where('group_id', $group->id)->where('visibility','public')->latest()->get();
         }
         else {                              //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános csoport híreit akarja megnyitni
             return redirect('/login');
         }
-
-        //$tags = [''=>''] + NewsTag::pluck('name', 'id')->all();
-
-        //$tags_slug = NewsTag::pluck('slug', 'id')->all();
 
         $page = 'news';
 
@@ -59,7 +50,7 @@ class GroupNewsController extends Controller
      */
     public function show($group_id,$group_slug,$news_id,$news_slug)
     {
-        $news = News::findOrFail($news_id);
+        $news = Groupnews::findOrFail($news_id);
 
         //ha nem lépett be és nem nyilvános a csoport vagy a hír, akkor bejelentkezés oldalra irányít
         if(Auth::guest() && (!$news->group->public || $news->visibility=='portal')) {
@@ -81,7 +72,7 @@ class GroupNewsController extends Controller
 	{
         $news_text = $request->get('body');
 
-        $news = Auth::user()->news()->create([
+        $news = Auth::user()->groupnews()->create([
             'title' => $request->get('title'),
             'meta_description' => $request->get('meta_description'),
             'body' => $news_text,
@@ -104,7 +95,7 @@ class GroupNewsController extends Controller
 	 */
 	public function edit($id, Request $request)
 	{
-	    $news = News::findOrFail($id);
+	    $news = Groupnews::findOrFail($id);
 
         //csoport kezelői vagy portál admin
         if (!($news->group->isAdmin() || Auth::check() && Auth::user()->admin)) return redirect('csoport/'.$news->group->id.'/'.$news->group->slug.'/hirek')->with('message', 'Csak a csoport kezelői tudják módosítani a híreket!');
@@ -122,7 +113,7 @@ class GroupNewsController extends Controller
 	 */
 	public function update($id, Request $request)
 	{
-	    $news = News::findOrFail($id);
+	    $news = Groupnews::findOrFail($id);
 
         $news_text = $request->get('body');
 

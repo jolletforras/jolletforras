@@ -7,7 +7,7 @@
 	@include('errors.list')
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form method="POST" action="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" accept-charset="UTF-8">
+			<form method="POST" action="{{url('csoport')}}/hir/{{$news->id}}/{{$news->slug}}/modosit" accept-charset="UTF-8">
 				@include('groupnews._form', ['submitButtonText'=>'Módosít'])
 			</form>
 		</div>
