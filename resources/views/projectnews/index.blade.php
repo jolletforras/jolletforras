@@ -6,6 +6,7 @@
 @section('image'){{ url('/images/projects') }}/{{ $project->id.'.jpg'}}@endsection
 
 @section('content')
+	@include('projects._project_menu')
 	<div class="inner_box narrow-page" style="margin-top:6px;">
 		@if($project->isAdmin())
 		<div class="row">

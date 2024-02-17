@@ -57,6 +57,8 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
+        $page = 'description';
+
         if(Auth::check()) {
             $members = $project->members()->orderBy('name', 'ASC')->pluck('name', 'user_id');
             $admins = $project->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
@@ -64,14 +66,14 @@ class ProjectsController extends Controller
 
             $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
 
-            return view('projects.show', compact('project','members','admins','noadmins','comments'));
+            return view('projects.show', compact('project','members','admins','noadmins','comments','page'));
         }
         else {
             if(!$project->public) {                    //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános kezdeményezést akar megnyitni
                 return redirect('/login');
             }
 
-            return view('projects.show_public', compact('project'));
+            return view('projects.show_public', compact('project','page'));
         }
 	}
 	

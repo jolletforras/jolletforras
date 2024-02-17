@@ -6,27 +6,17 @@
 			$is_admin = $project->isAdmin();
 			$is_owner = $project->isOwner();
 	?>
-	<div class="row narrow-page">
-		<h2>
-			{{ $project->title }}
-			@if($project->city!='')
-				- <i style="font-weight: normal; font-size: 16px;">{{$project->get_location()}}</i>
-			@endif
-		</h2>
-	</div>
+	@include('projects._project_menu')
 	<div class="inner_box narrow-page" style="margin-top:6px;">
-		@if($is_member)
-			<p>
-				@if ($is_owner || $is_admin)
-					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit" type="submit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"> </i>Módosít</a>
-					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/kepfeltoltes" type="submit" class="btn btn-default">Képfeltöltés</a>
-					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/hir/uj" type="submit" class="btn btn-default">Új hír</a>
-				@endif
-				@if($is_member && !$is_owner)
-					<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/kilep" type="submit" class="btn btn-default">Kilépek</a>
-				@endif
-			</p>
-		@endif
+		<p>
+			@if ($is_owner || $is_admin)
+				<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit" type="submit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"> </i>Módosít</a>
+				<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/kepfeltoltes" type="submit" class="btn btn-default">Képfeltöltés</a>
+			@endif
+			@if($is_member && !$is_owner)
+				<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/kilep" type="submit" class="btn btn-default">Kilépek</a>
+			@endif
+		</p>
 		@if(file_exists(public_path('images/projects/'.$project->id.'.jpg')))
 			<p style="text-align: center;"><img src="{{ url('/images/projects') }}/{{ $project->id}}.jpg?{{$project->photo_counter}}" style="max-width: 50%;"></p>
 		@endif

@@ -6,14 +6,7 @@
 @section('image')@if(file_exists(public_path('images/projects/'.$project->id.'.jpg'))){{ url('/images/projects') }}/{{ $project->id.'.jpg?'.$project->photo_counter}}@else{{url('/images/tarsadalmijollet.png')}}@endif @endsection
 
 @section('content')
-	<div class="row narrow-page">
-		<h2>
-			{{ $project->title }}
-	@if($project->city!='')
-			- <i style="font-weight: normal; font-size: 16px;">{{$project->get_location()}}</i>
-	@endif
-		</h2>
-	</div>
+	@include('projects._project_menu')
 	<div class="inner_box narrow-page" style="margin-top:6px;">
 	@if(file_exists(public_path('images/projects/'.$project->id.'.jpg')))
 		<p style="text-align: center;"><img src="{{ url('/images/projects') }}/{{ $project->id}}.jpg?{{$project->photo_counter}}" style="max-width: 50%;"></p>

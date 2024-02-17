@@ -36,6 +36,11 @@ class Project extends Model
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
+    public function newss()
+    {
+        return $this->hasMany(Projectnews::class);
+    }
+
     public function noadmins()
     {
         return $this->belongsToMany(User::class)->wherePivot('admin',0)->withTimestamps();
@@ -90,6 +95,16 @@ class Project extends Model
         return Auth::check() && $this->user->id==Auth::user()->id;
     }
 
+    public function hasNews() {
+        if(Auth::check()) {
+            $newss = $this->newss()->get();
+        }
+        else {
+            $newss = $this->newss()->where('visibility','public')->get();
+        }
+
+        return $newss->isNotEmpty();
+    }
 
     public function get_location() {
         $location = "";
