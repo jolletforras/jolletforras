@@ -5,7 +5,7 @@
         <i>@if (Auth::check() || $news->group->public)<a href="{{ url('csoport',$news->group->id) }}/{{$news->group->slug}}">{{ $news->group->name }}</a>@else{{$news->group->name}}@endif</i>
     </h3>
     @if ($news->group->isAdmin())
-        <a href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}/modosit" class="btn btn-default">módosít</a>
+        <a href="{{url('csoport')}}/hir/{{$news->id}}/{{$news->slug}}/modosit" class="btn btn-default">módosít</a>
     @endif
     <article>
         <div class="body">{!!$news->body !!}</div>
