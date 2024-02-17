@@ -48,7 +48,7 @@ class Group extends Model
 
     public function newss()
     {
-        return $this->hasMany(News::class);
+        return $this->hasMany(Groupnews::class);
     }
 
     public function noadmins()
