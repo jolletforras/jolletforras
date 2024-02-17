@@ -38,7 +38,7 @@ class ProjectsController extends Controller
             $projects = $projects->get();
         }
         else {
-            $projects = $projects::where('public', 1)->get();
+            $projects = $projects->where('public', 1)->get();
         }
 
         $group_tags = GroupTag::getProjectUsed();
