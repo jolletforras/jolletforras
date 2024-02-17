@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="row narrow-page">
+	<div class="row">
 		<div class="col-sm-5">
 			<h2>Kezdeményezések</h2>
 		</div>
@@ -20,43 +20,51 @@
 			@endif
 		</div>
 	</div>
-	<div class="panel panel-default narrow-page">
-		<div class="panel-body">
-			@foreach ($projects as $project)
-				@if(isset($project->user->id))
+	<hr style="margin-top:6px;">
+	<div class="row">
+		<?php $i=1; ?>
+	@foreach ($projects as $project)
+		<div class="col-12 col-sm-6 col-md-4 group">
+			<div class="card">
+				<div class="card-header"></div>
+				<div class="card-title">
 					<h3>
 						<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">{{ $project->title }}</a>
 						@if($project->city!='')
 							- <i style="font-weight: normal; font-size: 16px;">{{$project->get_location()}}</i>
 						@endif
 					</h3>
-					@if ($project->isAdmin())
-						<p><a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a></p>
-					@endif
+				</div>
+				<div class="image-box">
 					@if(file_exists(public_path('images/projects/'.$project->id.'.jpg')))
-						<p style="text-align: center;"><img src="{{ url('/images/projects') }}/{{ $project->id}}.jpg?{{$project->photo_counter}}" style="max-width: 50%;"></p>
+						<div class="image" style="background-image:url('{{url('images')}}/projects/{{$project->id}}.jpg?{{$project->photo_counter}}');"></div>
+					@else
+						<div class="image" style="background-image:url('{{url('images')}}/tarsadalmijollet.png');"></div>
 					@endif
-					<p>
+				</div>
+				<div class="card-body">
+				@if(isset($project->user->id))
+					<div>
 						@if(strlen($project->body)>800)
 							{!! nl2br(mb_substr($project->body,0,800)) !!}
 							<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">... tovább</a>
 						@else
 							{!! nl2br($project->body) !!}
 						@endif
-					</p>
+					</div>
 					@if (Auth::check())
-						<p><b>Felvette: </b><a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}</p>
-						@include('projects._members')
 						@include('projects._tags')
-						<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}" type="submit" class="btn btn-default">Hozzászólok</a>
-						@if( $project->counter>0)
-							&nbsp;&nbsp;<a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">{{ $project->counter }} hozzászólás</a>
-						@endif
 					@endif
-        			<hr/>
-    			@endif
-			@endforeach
+				@endif
+				</div>
+			</div>
 		</div>
+		@if($i%3==0)
+	</div>
+	<div class="row">
+		@endif
+		<?php $i++ ?>
+	@endforeach
 	</div>
 @endsection
 
