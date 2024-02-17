@@ -95,6 +95,10 @@ class Project extends Model
         return Auth::check() && $this->user->id==Auth::user()->id;
     }
 
+    public function isActive() {
+        return $this->status=='active';
+    }
+
     public function hasNews() {
         if(Auth::check()) {
             $newss = $this->newss()->get();
