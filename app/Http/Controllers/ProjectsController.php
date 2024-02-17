@@ -103,18 +103,18 @@ class ProjectsController extends Controller
         $coordinates=$this->getCoordinates($zip_code);
 
 		$project = Auth::user()->projects()->create([
-				'title' => $request->get('title'),
-				'body' => $request->get('body'),
-				'looking_for' => $request->get('looking_for'),
-                'location' => $request->get('location'),
-                'zip_code' => $zip_code,
-                'lat' => $coordinates['lat'],
-                'lng' => $coordinates['lng'],
-                'city' => $request->get('city'),
-				'slug' => Str::slug($request->get('title')),
-                'last_news_at' => date('Y-m-d'),
-                'counter' => 0,
-                'public' => $request->has('public') ? 1 : 0
+			'title' => $request->get('title'),
+			'body' => $request->get('body'),
+			'looking_for' => $request->get('looking_for'),
+            'location' => $request->get('location'),
+            'zip_code' => $zip_code,
+            'lat' => $coordinates['lat'],
+            'lng' => $coordinates['lng'],
+            'city' => $request->get('city'),
+			'slug' => Str::slug($request->get('title')),
+            'last_news_at' => date('Y-m-d'),
+            'counter' => 0,
+            'public' => $request->has('public') ? 1 : 0
 		]);
 
         if($project->public) {
@@ -169,16 +169,17 @@ class ProjectsController extends Controller
         $coordinates=$this->getCoordinates($zip_code);
 
 		$project->update([
-				'title' => $request->get('title'),
-				'body' => $request->get('body'),
-				'looking_for' => $request->get('looking_for'),
-                'location' => $request->get('location'),
-                'zip_code' => $zip_code,
-                'lat' => $coordinates['lat'],
-                'lng' => $coordinates['lng'],
-                'city' => $request->get('city'),
-				'slug' => Str::slug($request->get('title')),
-                'public' => $request->has('public') ? 1 : 0
+			'title' => $request->get('title'),
+			'body' => $request->get('body'),
+			'looking_for' => $request->get('looking_for'),
+            'location' => $request->get('location'),
+            'zip_code' => $zip_code,
+            'lat' => $coordinates['lat'],
+            'lng' => $coordinates['lng'],
+            'city' => $request->get('city'),
+			'slug' => Str::slug($request->get('title')),
+            'public' => $request->has('public') ? 1 : 0,
+            'status' => $request->has('inactive') ? 'inactive' : 'active'
 		]);
 
         if($project->public) {
