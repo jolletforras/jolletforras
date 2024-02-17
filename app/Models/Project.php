@@ -16,7 +16,7 @@ class Project extends Model
 
     protected $fillable = [
         'title', 'meta_description', 'body', 'looking_for', 'slug', 'counter', 'public', 'location',
-        'city', 'zip_code', 'lat', 'lng', 'admin'
+        'city', 'zip_code', 'lat', 'lng', 'admin', 'last_news_at'
     ];
 
     protected $dates=['updated_at', 'deleted_at'];

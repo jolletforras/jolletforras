@@ -32,11 +32,13 @@ class ProjectsController extends Controller
 	 */
 	public function index()
 	{
+        $projects = Project::where('status','active')->orderBy('last_news_at','DESC');
+
         if(Auth::check()) {
-            $projects = Project::latest('created_at')->get();
+            $projects = $projects->get();
         }
         else {
-            $projects = Project::where('public', 1)->latest('created_at')->get();
+            $projects = $projects::where('public', 1)->get();
         }
 
         $group_tags = GroupTag::getProjectUsed();
@@ -110,6 +112,7 @@ class ProjectsController extends Controller
                 'lng' => $coordinates['lng'],
                 'city' => $request->get('city'),
 				'slug' => Str::slug($request->get('title')),
+                'last_news_at' => date('Y-m-d'),
                 'counter' => 0,
                 'public' => $request->has('public') ? 1 : 0
 		]);
