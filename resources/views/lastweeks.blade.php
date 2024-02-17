@@ -73,9 +73,9 @@
         @endforeach
          <hr>
     @endif
-    @if($newsletters->isNotEmpty())
+    @if($groupnewss->isNotEmpty())
         <h3>Új csoport hírek</h3>
-        @include('news._list')
+        @include('news.group._list')
         <hr>
     @endif
     @if($newsletters->isNotEmpty())
