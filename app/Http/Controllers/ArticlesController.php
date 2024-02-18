@@ -11,6 +11,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Usernotice;
 use App\Models\GroupTag;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -162,4 +163,33 @@ class ArticlesController extends Controller
             return redirect('profil/'.Auth::user()->id.'/'.Auth::user()->slug.'/irasok')->with('message', 'Az írást sikeresen módosítottad! - '.$request->get('title'));
         }
 	}
+
+    public function delete($id) {
+        $article = Article::findOrFail($id);
+        $user = $article->user;
+
+        if(Auth::check() && Auth::user()->id==$user->id) {
+            //töröl mindent a user notice-ban ezzel az írással kapcsolatban
+            Usernotice::where('post_id',$article->id)->where('type','Article')->delete();
+
+            //töröl minden ezzel az írással kapcsolatos hozzászólást
+            Comment::where('commentable_id',$article->id)->where('commentable_type','App\Models\Article')->delete();
+
+            //törli a képet is ha van
+            if(!empty($article->image)) {
+                $base_path=base_path().'/public/images/posts/';
+                unlink($base_path.$article->image);
+            }
+
+            //törli az írással kapcsolatos címkézést
+            DB::table('article_group_tag')->where('article_id',$id)->delete();
+
+            //törli az írást
+            $article->delete();
+
+            return redirect('/profil/'.$user->id.'/'.$user->slug.'/irasok/')->with('message', 'Az írást sikeresen törölted.');
+        }
+
+        return redirect('/');
+    }
 }

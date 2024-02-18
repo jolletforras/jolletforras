@@ -12,6 +12,7 @@
 		<h2>{{ $article->title }}</h2>
 		@if (Auth::check() && Auth::user()->id==$article->user->id)
 			<a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
+			<button class="btn btn-default" type="button" onclick="delete_article()">Töröl</button>
 			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/irasok"><< Írásaim</a>
 		@endif
 		{!! $article->body !!}
@@ -35,6 +36,14 @@
             'name'				=>$article->user->name,
             'email'				=>$article->user->email
         ] )
+
+		<script type="text/javascript">
+			function delete_article() {
+				if (confirm("Biztosan törölni szeretné az írást?") == true) {
+					window.location.href = "{{url('iras')}}/{{$article->id}}/{{$article->slug}}/torol";
+				}
+			}
+		</script>
 	@endif
 @endsection
 
