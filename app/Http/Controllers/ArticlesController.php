@@ -21,7 +21,7 @@ class ArticlesController extends Controller
 
 	public function index(Request $request)
 	{
-		$articles = Article::where('show', 'portal_too')->latest()->get();
+		$articles = Article::where('show', 'portal_too')->where('status', 'active')->latest()->get();
 
 		return view('articles.index', compact('articles'));
 	}
@@ -29,7 +29,7 @@ class ArticlesController extends Controller
     public function show_user_articles($user_id)
     {
         $user = User::findOrFail($user_id);
-        $articles = $user->articles()->latest()->get();
+        $articles = $user->articles()->where('status', 'active')->latest()->get();
         $tab = "articles";
 
         return view('articles.user_articles', compact('user','articles','tab'));
@@ -136,7 +136,8 @@ class ArticlesController extends Controller
             'short_description' => justbr($description,700),
             'image' => getfirstimage($description),
             'slug' => Str::slug($request->get('title')),
-            'show' => $request->get('show')
+            'show' => $request->get('show'),
+            'status' => $request->has('inactive') ? 'inactive' : 'active'
         ]);
 
         if($request->get('show')=='portal_too') {

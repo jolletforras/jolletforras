@@ -10,7 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','meta_description','body','short_description','image','slug','show'];
+    protected $fillable = ['title','meta_description','body','short_description','image','slug','show','status'];
 
 
     public function user()
@@ -36,5 +36,9 @@ class Article extends Model
     public function getCreatedAtAttribute($date)
     {
         return Carbon::parse($date)->format('Y-m-d');
+    }
+
+    public function isActive() {
+        return $this->status=='active';
     }
 }

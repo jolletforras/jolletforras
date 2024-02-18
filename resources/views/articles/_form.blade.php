@@ -31,6 +31,15 @@
 					</div>
 				</div>
 
+				<div class="form-group">
+					<label>
+						<input name="inactive" type="checkbox" value="1" @if(isset($article) && $article->status=='inactive') checked @endif>
+						<span style="padding-top: 10px; font-size: 18px;">Inaktív</span>
+						<a href="#inactive_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+					</label>
+					<div id="inactive_info" class="collapse info">Ha inaktív az írás, akkor nem elérhető a portálon.</div>
+				</div>
+
 
 				<div class="form-group">
 					<input class="btn btn-primary" type="submit" value="Mentés">

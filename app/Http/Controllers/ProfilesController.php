@@ -176,6 +176,14 @@ class ProfilesController extends Controller
 
         $tab = "introduction";
 
+        $articles = array();
+        foreach($user->articles as $article) {
+            if($article->isActive() || $myprofile) {
+                $style = $article->isActive() ? '' : ' style="color: gray;"';
+                $articles[] = '<a href="'.url('iras',$article->id).'/'.$article->slug.'" target="_blank"'.$style.'>'.$article->title.'</a>';
+            }
+        }
+
         //megmutatja az összes csoportot, amelyben benne van
         $groups = array();
         foreach($user->member_of_groups as $group) {
@@ -194,7 +202,7 @@ class ProfilesController extends Controller
             }
         }
 
-		return view('profiles.show', compact('user', 'myprofile','tab','groups','projects'));
+		return view('profiles.show', compact('user', 'myprofile','tab','articles','groups','projects'));
 	}
 
     public function email_message_login($code,$id,$slug) {

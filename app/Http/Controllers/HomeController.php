@@ -121,14 +121,14 @@ class HomeController extends Controller
         else {
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
             $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
-            $events = Event::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
+            $events = Event::where('created_at','>',$date)->where('visibility','public')->latest()->get();
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->where('public',1)->latest()->get();
-            $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
-            $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','=', 'public')->latest()->get();
+            $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','public')->latest()->get();
+            $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','public')->latest()->get();
         }
 
         $podcasts = Podcast::latest()->where('created_at','>',$date)->get();
-        $articles = Article::latest()->where('created_at','>',$date)->get();
+        $articles = Article::latest()->where('status', 'active')->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
 
         return view('lastweeks',compact('users','groups','events','podcasts','articles','newsletters','commendations','groupnewss','projectnewss'));
