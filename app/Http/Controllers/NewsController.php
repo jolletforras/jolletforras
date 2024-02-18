@@ -24,10 +24,10 @@ class NewsController extends Controller
 	public function groupnews()
 	{
         if(Auth::check()) {
-            $newss = Groupnews::latest()->get();
+            $groupnewss = Groupnews::latest()->get();
         }
         else {
-            $newss = Groupnews::where('visibility','public')->latest()->get();
+            $groupnewss = Groupnews::where('visibility','public')->latest()->get();
         }
 
         $group_tags = GroupTag::getGroupNewsUsed();
@@ -35,16 +35,16 @@ class NewsController extends Controller
         $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-		return view('news.group.index', compact('newss', 'tags', 'tags_slug'));
+		return view('news.group.index', compact('groupnewss', 'tags', 'tags_slug'));
 	}
 
     public function projectnews()
     {
         if(Auth::check()) {
-            $newss = Projectnews::latest()->get();
+            $projectnewss = Projectnews::latest()->get();
         }
         else {
-            $newss = Projectnews::where('visibility','public')->latest()->get();
+            $projectnewss = Projectnews::where('visibility','public')->latest()->get();
         }
 
         $group_tags = GroupTag::getProjectNewsUsed();
@@ -52,7 +52,7 @@ class NewsController extends Controller
         $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-        return view('news.project.index', compact('newss', 'tags', 'tags_slug'));
+        return view('news.project.index', compact('projectnewss', 'tags', 'tags_slug'));
     }
 
     /**
