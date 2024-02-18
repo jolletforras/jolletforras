@@ -88,7 +88,7 @@
 	</div>
 	<div class="row" id="result">
 		<hr style="margin-top:0px;">
-		@include('groups._group_list')
+		@include('groups._card_list')
 	</div>
 @endsection
 
