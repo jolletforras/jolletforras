@@ -62,6 +62,10 @@
         @include('events._list')
         <hr>
     @endif
+    @if($projects->isNotEmpty())
+        <h3>Új kezdeményezések</h3>
+        @include('projects._list')
+    @endif
     @if($commendations->isNotEmpty())
         <h3>Új ajánlók</h3>
         @include('commendations._list')

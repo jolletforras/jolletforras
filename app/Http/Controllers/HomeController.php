@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\Forum;
 use App\Models\Event;
+use App\Models\Project;
 use App\Models\Podcast;
 use App\Models\Article;
 use App\Models\Newsletter;
@@ -114,6 +115,7 @@ class HomeController extends Controller
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->latest('updated_at')->get();
             $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->latest('updated_at')->get();
             $events = Event::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
+            $projects = Project::where('created_at','>',$date)->where('status','active')->latest()->get();
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->latest()->get();
             $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
             $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
@@ -122,6 +124,7 @@ class HomeController extends Controller
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
             $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
             $events = Event::where('created_at','>',$date)->where('visibility','public')->latest()->get();
+            $projects = Project::where('created_at','>',$date)->where('status','active')->where('public', 1)->latest()->get();
             $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->where('public',1)->latest()->get();
             $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','public')->latest()->get();
             $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','public')->latest()->get();
@@ -131,7 +134,7 @@ class HomeController extends Controller
         $articles = Article::latest()->where('status', 'active')->where('created_at','>',$date)->get();
         $newsletters = Newsletter::latest()->where('created_at','>',$date)->get();
 
-        return view('lastweeks',compact('users','groups','events','podcasts','articles','newsletters','commendations','groupnewss','projectnewss'));
+        return view('lastweeks',compact('users','groups','events','projects','podcasts','articles','newsletters','commendations','groupnewss','projectnewss'));
     }
 
 
