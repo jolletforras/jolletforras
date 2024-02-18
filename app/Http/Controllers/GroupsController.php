@@ -514,7 +514,7 @@ class GroupsController extends Controller
 
         $groups=$query->get();
 
-        $returnHTML = view('groups._group_list', compact('groups'))->render();
+        $returnHTML = view('groups._card_list', compact('groups'))->render();
 
         //dd($returnHTML);
 
