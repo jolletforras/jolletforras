@@ -167,18 +167,20 @@ class CreationsController extends Controller
         $creation = Creation::findOrFail($id);
         $user = $creation->user;
 
-        //ha töröl képes alkotást, akkor törli a képet és csökkenti a számlálót
-        if($creation->has_image) {
-            $base_path=base_path().'/public/images/creations/';
-            unlink($base_path.$creation->slug.'.jpg');
-
-            $user->nr_creation_image--;
-            $user->save();
-        }
-
         if(Auth::check() && Auth::user()->id==$user->id) {
             Usernotice::where('post_id',$creation->id)->where('type','Creation')->delete();
+
             Comment::where('commentable_id',$creation->id)->where('commentable_type','App\Models\Creation')->delete();
+
+            //ha töröl képes alkotást, akkor törli a képet és csökkenti a számlálót
+            if($creation->has_image) {
+                $base_path=base_path().'/public/images/creations/';
+                unlink($base_path.$creation->slug.'.jpg');
+
+                $user->nr_creation_image--;
+                $user->save();
+            }
+
             $creation->delete();
 
             return redirect('/profil/'.$user->id.'/'.$user->slug.'/alkotasok/')->with('message', 'Az alkotást sikeresen törölted.');
