@@ -2,7 +2,7 @@
 @for ($i = 0; $i < $num=$newss->count(); $i++)
     <?php $news = $newss[$i]; ?>
     <h3>
-        <a href="/hir/{{$news->id}}/{{$news->slug}}">{{ $news->title }}</a> -
+        <a href="{{url('csoport')}}/hir/{{$news->id}}/{{$news->slug}}">{{ $news->title }}</a> -
         <i>@if (Auth::check() || $news->group->public)<a href="{{ url('csoport',$news->group->id) }}/{{$news->group->slug}}">{{ $news->group->name }}</a>@else{{$news->group->name}}@endif</i>
     </h3>
     @if ($news->group->isAdmin())

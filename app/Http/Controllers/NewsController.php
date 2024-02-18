@@ -56,14 +56,28 @@ class NewsController extends Controller
     }
 
     /**
-     * Displays a specific article
+     * Displays a specific group news
      *
      * @param  integer $id The article ID
      * @return Response
      */
-    public function show($id)
+    public function groupshow($id)
     {
-        $news = News::findOrFail($id);
+        $news = Groupnews::findOrFail($id);
+
+        return view('news.show', compact('news'));
+    }
+
+
+    /**
+     * Displays a specific project news
+     *
+     * @param  integer $id The article ID
+     * @return Response
+     */
+    public function projectshow($id)
+    {
+        $news = Projectnews::findOrFail($id);
 
         return view('news.show', compact('news'));
     }
