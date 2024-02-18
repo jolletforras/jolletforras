@@ -16,6 +16,9 @@
 		@endif
 		{!! $article->body !!}
 		@include('partials.author', ['author'=>'','obj'=>$article])
+		@if(Auth::check())
+			@include('articles._tags')
+		@endif
 		<p><a href="{{url('irasok')}}"><< Írások</a></p>
     </div>
 	@if(Auth::check())
