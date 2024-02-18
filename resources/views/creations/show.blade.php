@@ -45,13 +45,13 @@
 			'name'				=>$creation->user->name,
 			'email'				=>$creation->user->email
 		] )
-	@endif
 
-	<script type="text/javascript">
-		function delete_creation() {
-			if (confirm("Biztosan törölni szeretné az alkotást?") == true) {
-				window.location.href = "{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}/torol";
+		<script type="text/javascript">
+			function delete_creation() {
+				if (confirm("Biztosan törölni szeretné az alkotást?") == true) {
+					window.location.href = "{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}/torol";
+				}
 			}
-		}
-	</script>
+		</script>
+	@endif
 @endsection
