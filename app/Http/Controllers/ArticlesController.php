@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Requests;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Usernotice;
+use App\Models\GroupTag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ArticlesController extends Controller
 {
+    use TagTrait;
+
 	public function __construct() {
 		$this->middleware('auth', ['except'=>['index','show','show_user_articles']]);
         $this->show_options = ['just_profile'=>'csak a profilomnál','portal_too'=>'az Írások menüben is'];
@@ -67,7 +71,9 @@ class ArticlesController extends Controller
 	{
         $show_options = $this->show_options;
 
-		return view('articles.create',compact('show_options'));
+        $tags = GroupTag::get()->pluck('name', 'id');
+
+		return view('articles.create',compact('show_options','tags'));
 	}
 	
 	public function store(Request $request)
@@ -88,6 +94,9 @@ class ArticlesController extends Controller
         Auth::user()->save();
 
         User::members()->where('id','<>',Auth::user()->id)->increment('user_new_post', 1);
+
+        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ArticleTag');
+        $article->tags()->attach($tag_list);
 
         if($request->get('show')=='portal_too') {
             return redirect('irasok');
@@ -114,7 +123,10 @@ class ArticlesController extends Controller
 
         $show_options = $this->show_options;
 
-		return view('articles.edit', compact('article','show_options'));
+        $tags = GroupTag::get()->pluck('name', 'id');
+        $selected_tags = $article->tags->pluck('id')->toArray();
+
+		return view('articles.edit', compact('article','show_options','tags','selected_tags'));
 	}
 
 	/**
@@ -139,6 +151,9 @@ class ArticlesController extends Controller
             'show' => $request->get('show'),
             'status' => $request->has('inactive') ? 'inactive' : 'active'
         ]);
+
+        $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ArticleTag');
+        $article->tags()->sync($tag_list);
 
         if($request->get('show')=='portal_too') {
             return redirect('irasok')->with('message', 'Az írást sikeresen módosítottad! - '.$request->get('title'));

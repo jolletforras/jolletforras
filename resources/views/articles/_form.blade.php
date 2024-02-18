@@ -17,6 +17,15 @@
 				</div>
 
 				<div class="form-group">
+					<label for="tag_list">Címkék az írással kapcsolatban*:</label>
+					<select id="tag_list" name="tag_list[]" class="form-control tag-list" multiple>
+						@foreach($tags as $key => $val)
+							<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
 					<label for="show">Hol jelenjen meg?</label>
 					<select name="show">
 						@foreach($show_options as $key => $val)
