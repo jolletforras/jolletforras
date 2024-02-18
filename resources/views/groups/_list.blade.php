@@ -13,18 +13,16 @@
                 <img src="{{ url('/images') }}/tarsadalmijollet.png" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;" class="img-responsive">
             @endif
         </p>
-        @if(isset($group->user->id))
-            <p>
-                @if(strlen($group->description)>800)
-                    {!! nl2br(mb_substr($group->description,0,800)) !!}
-                    <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">... tovább</a>
-                @else
-                    {!! nl2br($group->description) !!}
-                @endif
-            </p>
-            @if (Auth::check())
-                @include('partials.tags',['url'=>'csoport','obj'=>$group])
+        <p>
+            @if(strlen($group->description)>800)
+                {!! nl2br(mb_substr($group->description,0,800)) !!}
+                <a href="{{ url('csoport',$group->id) }}/{{$group->slug}}">... tovább</a>
+            @else
+                {!! nl2br($group->description) !!}
             @endif
+        </p>
+        @if (Auth::check())
+            @include('partials.tags',['url'=>'csoport','obj'=>$group])
         @endif
     </div>
     <hr>
