@@ -31,15 +31,16 @@
 					</div>
 				</div>
 
+				@if(isset($article) && $article->created_at<date("Y-m-d",strtotime("-2 week")))
 				<div class="form-group">
 					<label>
 						<input name="inactive" type="checkbox" value="1" @if(isset($article) && $article->status=='inactive') checked @endif>
 						<span style="padding-top: 10px; font-size: 18px;">Inaktív</span>
 						<a href="#inactive_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 					</label>
-					<div id="inactive_info" class="collapse info">Ha inaktív az írás, akkor nem elérhető a portálon.</div>
+					<div id="inactive_info" class="collapse info">A két hétnél régebbi írások inaktívba rakhatóak. Ilyenkor nem jelenik meg az írás a portálon, csak a hivatkozás ismeretében érhető el.</div>
 				</div>
-
+				@endif
 
 				<div class="form-group">
 					<input class="btn btn-primary" type="submit" value="Mentés">
