@@ -176,6 +176,7 @@ Route::get('/iras/uj', 'ArticlesController@create');
 Route::post('/iras/uj', 'ArticlesController@store');
 Route::get('/iras/{id}/{title}/modosit', 'ArticlesController@edit');
 Route::post('/iras/{id}/{title}/modosit', 'ArticlesController@update');
+Route::get('/iras/cimke/{id}/{tag}', 'TagsController@article_show');
 
 Route::get('/esemenyek', 'EventsController@index');
 Route::get('/esemeny/{id}/{title}', 'EventsController@show');

@@ -29,6 +29,10 @@ class GroupTag extends Model
         return $this->belongsToMany(Project::class)->withTimestamps();
     }
 
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class)->withTimestamps();
+    }
 
     public function getUsed()
     {

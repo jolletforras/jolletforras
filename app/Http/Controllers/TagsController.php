@@ -124,4 +124,20 @@ class TagsController extends Controller
 
         return view('commendations.index', compact('commendations', 'tags', 'tags_slug'));
     }
+
+    public function article_show($id) {
+        $tag = GroupTag::findOrFail($id);
+
+        $articles=$tag->articles()->latest('updated_at')->get();
+
+        return view('articles.index', compact('articles'));
+
+        /*
+        $group_tags = GroupTag::getArticleUsed();
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
+
+        return view('articles.index', compact('articles', 'tags', 'tags_slug'));
+        */
+    }
 }
