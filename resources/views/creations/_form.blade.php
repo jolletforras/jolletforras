@@ -42,17 +42,23 @@
             <input id="upload_image" class="form-control" name="image" type="file">
         </div>
 
-    	<div class="form-group">
-			<input name="active" type="checkbox" value="1" @if(isset($creation) && $creation->active) checked @endif>
-			<span style="padding-top: 10px; font-size: 18px;">Aktív</span>
-			<a href="#active_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
-			<div id="active_info" class="collapse info">Ha aktív, akkor láthatóvá válik az oldalon.</div>
-		</div>
+		@if(isset($creation) && $creation->created_at<date("Y-m-d",strtotime("-2 week")))
+			<div class="form-group">
+				<label>
+					<input name="inactive" type="checkbox" value="1" @if(isset($creation) && !$creation->active) checked @endif>
+					<span style="padding-top: 10px; font-size: 18px;">Inaktív</span>
+					<a href="#inactive_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+				</label>
+				<div id="inactive_info" class="collapse info">A két hétnél régebbi írások inaktívba rakhatóak. Ilyenkor nem jelenik meg az írás a portálon, csak a hivatkozás ismeretében érhető el.</div>
+			</div>
+		@endif
 
 		<div class="form-group">
-			<input name="public" type="checkbox" value="1" @if(isset($creation) && $creation->public) checked @endif>
-			<span style="padding-top: 10px; font-size: 18px;">Nyilvános</span>
-			<a href="#public_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<label>
+				<input name="public" type="checkbox" value="1" @if(isset($creation) && $creation->public) checked @endif>
+				<span style="padding-top: 10px; font-size: 18px;">Nyilvános</span>
+				<a href="#public_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			</label>
 			<div id="public_info" class="collapse info">Ha nyilvános az alkotás, akkor nem regisztráltak számára is láthatóvá válik.</div>
 		</div>
 

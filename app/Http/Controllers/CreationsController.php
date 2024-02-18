@@ -256,7 +256,7 @@ class CreationsController extends Controller
             'has_image' =>  $has_image,
             'slug' => $slug,
             'public' => $request->has('public') ? 1 : 0,
-            'active' => $request->has('active') ? 1 : 0,
+            'active' => $request->has('inactive') ? 0 : 1,
             'meta_title' =>  $title,
             'meta_image' =>  $meta_image,
             'meta_description' =>  $description
