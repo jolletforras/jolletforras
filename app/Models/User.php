@@ -305,17 +305,14 @@ class User extends Authenticatable
     }
 
     public function isGroupAdmin() {
-        $result = false;
 
-        if(Auth::check()) {
-            $db_result = DB::table('group_user')
-                ->select('*')
-                ->where('user_id',$this->id)
-                ->where('admin',1)
-                ->get();
+        $db_result = DB::table('group_user')
+            ->select('*')
+            ->where('user_id',$this->id)
+            ->where('admin',1)
+            ->get();
 
-            $result = $db_result->isNotEmpty();
-        }
+        $result = $db_result->isNotEmpty();
 
         return $result;
     }
