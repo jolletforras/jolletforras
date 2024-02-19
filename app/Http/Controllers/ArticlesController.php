@@ -52,6 +52,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $comments = Comment::where('commentable_type', 'App\Models\Article')->where('commentable_id', $id)->get();
 
+        $group_where_admin_have_article_url = array();
         if(Auth::check()) {
             $user = Auth()->user();
             $user_id = $user->id;
@@ -191,5 +192,56 @@ class ArticlesController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function get_group_admin_block($id)
+    {
+        $article = Article::findOrFail($id);
+
+        //ezekben a csoportokban van az írás
+        $article_groups = $article->groups()->where('status','active')->get();
+        $article_group_ids =  $article_groups->pluck('id')->toArray();
+
+        //ebben a csoportokban admin
+        $qroups_where_admin = Auth()->user()->member_of_groups()->where('status','active')->where('group_user.admin',1);
+
+        //ebben a csoportokban van az írás, ahol admin
+        $qroups_where_admin_have_article = $qroups_where_admin->whereIn('groups.id',$article_group_ids)->get();
+        $qroup_where_admin_have_article_ids = $qroups_where_admin_have_article->pluck('id')->toArray();
+
+        $delete_groups = $qroups_where_admin_have_article->pluck('name', 'id')->all();
+
+        $group_where_admin_have_article_url = array();
+        foreach($qroups_where_admin_have_article as $group) {
+            $group_where_admin_have_article_url[] = '<a href="'.url('csoport',$group->id).'/'.$group->slug.'" target="_blank">'.$group->name.'</a>';
+        }
+
+        //ebben a csoportokban nincs az írás, ahol admin
+        $qroups_where_admin_have_not_article =  Auth()->user()->member_of_groups()->where('status','active')->where('group_user.admin',1)->whereNotIn('groups.id', $qroup_where_admin_have_article_ids)->get();
+
+        $add_groups = $qroups_where_admin_have_not_article->pluck('name', 'id')->all();
+
+        $returnHTML = view('articles._group_admin_block', compact('group_where_admin_have_article_url','delete_groups','add_groups'))->render();
+
+        $response = array(
+            'status' => 'success',
+            'html' => $returnHTML,
+        );
+        return \Response::json($response);
+    }
+
+    public function delete_article_from_group($id, Request $request)
+    {
+        $group_id = $request->get('group_id');
+        DB::table('article_group')->where('article_id',$id)->where('group_id',$group_id)->delete();
+        return $this->get_group_admin_block($id);
+    }
+
+    public function add_article_to_group($id, Request $request)
+    {
+        $group_id = $request->get('group_id');
+        DB::table('article_group')->insert(['article_id' => $id, 'group_id' => $group_id]);
+
+        return $this->get_group_admin_block($id);
     }
 }

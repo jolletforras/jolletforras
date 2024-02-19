@@ -162,7 +162,6 @@ Route::get('/email/{code}/esemeny/{id}/{slug}', 'NoticesController@email_event_l
 Route::post('/getUserNotices', 'NoticesController@get_user_noticies');
 Route::post('/getGroupNotices', 'NoticesController@get_group_noticies');
 
-
 Route::get('/profil/{user_id}/{slug}/alkotasok', 'CreationsController@index');
 Route::get('/alkotas/{id}/{title}', 'CreationsController@show');
 Route::get('/alkotas/uj', 'CreationsController@create');
@@ -180,6 +179,10 @@ Route::get('/iras/{id}/{title}/modosit', 'ArticlesController@edit');
 Route::post('/iras/{id}/{title}/modosit', 'ArticlesController@update');
 Route::get('/iras/{id}/{title}/torol', 'ArticlesController@delete');
 Route::get('/iras/cimke/{id}/{tag}', 'TagsController@article_show');
+
+Route::post('/getArticleGroupAdminBlock/{id}', 'ArticlesController@get_group_admin_block');
+Route::post('/deleteArticleFromGroup/{id}', 'ArticlesController@delete_article_from_group');
+Route::post('/addArticleToGroup/{id}', 'ArticlesController@add_article_to_group');
 
 Route::get('/esemenyek', 'EventsController@index');
 Route::get('/esemeny/{id}/{title}', 'EventsController@show');

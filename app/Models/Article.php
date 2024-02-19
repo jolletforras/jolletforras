@@ -24,9 +24,9 @@ class Article extends Model
     }
 
 
-    public function tags()
+    public function groups()
     {
-        return $this->belongsToMany(GroupTag::class)->withTimestamps();
+        return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
     public function comments()
