@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\Group;
 use App\Models\Usernotice;
 use App\Models\GroupTag;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,17 @@ class ArticlesController extends Controller
 
 		return view('articles.index', compact('articles'));
 	}
+
+
+    public function show_group_articles($group_id)
+    {
+        $group = Group::findOrFail($group_id);
+        $articles = $group->articles()->where('status', 'active')->latest()->get();
+        $tab = "articles";
+
+        return view('articles.index', compact('articles'));
+    }
+
 
     public function show_user_articles($user_id)
     {
@@ -240,7 +252,7 @@ class ArticlesController extends Controller
     public function add_article_to_group($id, Request $request)
     {
         $group_id = $request->get('group_id');
-        DB::table('article_group')->insert(['article_id' => $id, 'group_id' => $group_id]);
+        DB::table('article_group')->insert(['article_id' => $id, 'group_id' => $group_id, 'created_at' => date('Y-m-d H:i:s')]);
 
         return $this->get_group_admin_block($id);
     }

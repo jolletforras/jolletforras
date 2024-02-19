@@ -183,6 +183,7 @@ Route::get('/iras/cimke/{id}/{tag}', 'TagsController@article_show');
 Route::post('/getArticleGroupAdminBlock/{id}', 'ArticlesController@get_group_admin_block');
 Route::post('/deleteArticleFromGroup/{id}', 'ArticlesController@delete_article_from_group');
 Route::post('/addArticleToGroup/{id}', 'ArticlesController@add_article_to_group');
+Route::get('/csoport/{group_id}/{slug}/irasok', 'ArticlesController@show_group_articles');
 
 Route::get('/esemenyek', 'EventsController@index');
 Route::get('/esemeny/{id}/{title}', 'EventsController@show');
