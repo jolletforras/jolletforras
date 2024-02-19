@@ -138,7 +138,10 @@ class ArticlesController extends Controller
         $show_options = $this->show_options;
 
         $tags = GroupTag::get()->pluck('name', 'id');
-        $selected_tags = $article->tags->pluck('id')->toArray();
+
+        $selected_tags = null;
+        if(isset($article->tags))
+            $selected_tags = $article->tags->pluck('id')->toArray();
 
 		return view('articles.edit', compact('article','show_options','tags','selected_tags'));
 	}
