@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title'){{ $news->title }}@endsection
 @section('description'){{ $news->meta_description }}@endsection
-@section('url'){{{{url('csoport')}}/hir/{{$news->id}}/{{$news->slug}}@endsection
+@section('url'){{url('csoport')}}/hir/{{$news->id}}/{{$news->slug}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('csoport')}}/hir/{{$news->id}}/{{$news->slug}}" />@endsection
 @section('image')@if(!empty($news->image)){{url('/')}}/images/posts/{{$news->image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
 @endsection
