@@ -18,7 +18,7 @@ class NewsController extends Controller
     use TagTrait;
 
     public function __construct() {
-		$this->middleware('auth', ['except'=>['index','show']]);
+		$this->middleware('auth', ['except'=>['groupnews','projectnews','show']]);
 	}
 //
 	public function groupnews()
