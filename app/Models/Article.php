@@ -23,6 +23,10 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(GroupTag::class)->withTimestamps();
+    }
 
     public function groups()
     {
