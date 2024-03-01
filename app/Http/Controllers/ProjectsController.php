@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Http\Controllers\Traits\ZipCodeTrait;
 use App\Models\Project;
+use App\Models\Group;
 use App\Models\GroupTag;
 use App\Models\User;
 use App\Models\Comment;
@@ -48,7 +49,21 @@ class ProjectsController extends Controller
 
         return view('projects.index', compact('projects', 'tags', 'tags_slug'));
 	}
-	
+
+
+    public function show_group_projects($group_id)
+    {
+        $group = Group::findOrFail($group_id);
+        $projects = $group->projects()->where('status', 'active')->latest()->get();
+
+        $group_tags = GroupTag::getProjectUsed();
+
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
+
+        return view('projects.index', compact('projects', 'tags', 'tags_slug'));
+    }
+
 	/**
 	 * Displays a specific project
 	 *

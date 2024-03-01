@@ -31,6 +31,11 @@ class Project extends Model
         return $this->belongsToMany(GroupTag::class)->withTimestamps();
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class)->withTimestamps();
+    }
+
     public function members()
     {
         return $this->belongsToMany(User::class)->withTimestamps();

@@ -41,6 +41,11 @@ class Group extends Model
         return $this->belongsToMany(Commendation::class)->withTimestamps();
     }
 
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class)->withTimestamps();
+    }
+
     public function members()
     {
         return $this->belongsToMany(User::class)->withPivot(['motivation','updated_at'])->where('status','=', 3)->withTimestamps();

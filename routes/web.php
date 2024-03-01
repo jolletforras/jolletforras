@@ -207,6 +207,7 @@ Route::get('/kezdemenyezes/{id}/{title}/kilep', 'ProjectsController@leave');
 Route::post('/kezdemenyezes/{id}/saveadmin', 'ProjectsController@saveAdmin');
 Route::post('/kezdemenyezes/{id}/{name}/resztvevo_vagyok', 'ProjectsController@join');
 Route::post('/kezdemenyezes/{id}/removemember', 'ProjectsController@removeMember');
+Route::get('/csoport/{group_id}/{slug}/kezdemenyezesek', 'ProjectsController@show_group_projects');
 Route::get('/kezdemenyezes/cimke/{id}/{tag}', 'TagsController@projects_show');
 
 Route::get('/kezdemenyezes/{id}/{name}/kepfeltoltes', 'ProjectsController@uploadimage');

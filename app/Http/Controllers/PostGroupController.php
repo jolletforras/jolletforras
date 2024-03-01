@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Article;
 use App\Models\Commendation;
+use App\Models\Project;
 use App\Models\User;
 use App\Models\Group;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class PostGroupController extends Controller
 
     public function get_group_admin_block($post_type, $post_id)
     {
-        $classes = ['article'=>'Article', 'commendation'=>'Commendation'];
+        $classes = ['article'=>'Article', 'commendation'=>'Commendation', 'project'=>'Project'];
         $class = "\\App\Models\\".$classes[$post_type];
 
         $post = $class::findOrFail($post_id);
@@ -62,7 +63,7 @@ class PostGroupController extends Controller
     {
         $group_id = $request->get('group_id');
         $post_type = $request->get('post_type');
-        DB::table($post_type.'_group')->where($post_type.'_id',$post_id)->where('group_id',$group_id)->delete();
+        DB::table('group_'.$post_type)->where($post_type.'_id',$post_id)->where('group_id',$group_id)->delete();
         return $this->get_group_admin_block($post_type, $post_id);
     }
 
@@ -70,7 +71,7 @@ class PostGroupController extends Controller
     {
         $group_id = $request->get('group_id');
         $post_type = $request->get('post_type');
-        DB::table($post_type.'_group')->insert([$post_type.'_id' => $post_id, 'group_id' => $group_id, 'created_at' => date('Y-m-d H:i:s')]);
+        DB::table('group_'.$post_type)->insert([$post_type.'_id' => $post_id, 'group_id' => $group_id, 'created_at' => date('Y-m-d H:i:s')]);
 
         return $this->get_group_admin_block($post_type, $post_id);
     }
