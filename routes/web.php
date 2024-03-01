@@ -178,12 +178,13 @@ Route::post('/iras/uj', 'ArticlesController@store');
 Route::get('/iras/{id}/{title}/modosit', 'ArticlesController@edit');
 Route::post('/iras/{id}/{title}/modosit', 'ArticlesController@update');
 Route::get('/iras/{id}/{title}/torol', 'ArticlesController@delete');
+Route::get('/csoport/{group_id}/{slug}/irasok', 'ArticlesController@show_group_articles');
 Route::get('/iras/cimke/{id}/{tag}', 'TagsController@article_show');
 
-Route::post('/getArticleGroupAdminBlock/{id}', 'ArticlesController@get_group_admin_block');
-Route::post('/deleteArticleFromGroup/{id}', 'ArticlesController@delete_article_from_group');
-Route::post('/addArticleToGroup/{id}', 'ArticlesController@add_article_to_group');
-Route::get('/csoport/{group_id}/{slug}/irasok', 'ArticlesController@show_group_articles');
+Route::post('/getPostGroupAdminBlock/{type}/{id}', 'PostGroupController@get_group_admin_block');
+Route::post('/deletePostFromGroup/{id}', 'PostGroupController@delete_post_from_group');
+Route::post('/addPostToGroup/{id}', 'PostGroupController@add_post_to_group');
+
 
 Route::get('/esemenyek', 'EventsController@index');
 Route::get('/esemeny/{id}/{title}', 'EventsController@show');

@@ -57,9 +57,9 @@
 
 				$.ajax({
 					type: "POST",
-					url: '{{ url('getArticleGroupAdminBlock') }}/{{$article->id}}',
+					url: '{{ url('getPostGroupAdminBlock') }}/article/{{$article->id}}',
 					data: {
-						_token: CSRF_TOKEN,
+						_token: CSRF_TOKEN
 					},
 					success: function(data) {
 						if(data['status']=='success') {
@@ -72,17 +72,18 @@
 				});
 			}
 
-			function delete_article_from_group() {
+			function delete_post_from_group() {
 
 				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 				var group_id = $('#delete_from_group').val();
 
 				$.ajax({
 					type: "POST",
-					url: '{{ url('deleteArticleFromGroup') }}/{{$article->id}}',
+					url: '{{ url('deletePostFromGroup') }}/{{$article->id}}',
 					data: {
 						_token: CSRF_TOKEN,
-						group_id: group_id
+						group_id: group_id,
+						post_type: 'article'
 					},
 					success: function(data) {
 						if(data['status']=='success') {
@@ -95,17 +96,18 @@
 				});
 			}
 
-			function add_article_to_group() {
+			function add_post_to_group() {
 
 				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 				var group_id = $('#add_to_group').val();
 
 				$.ajax({
 					type: "POST",
-					url: '{{ url('addArticleToGroup') }}/{{$article->id}}',
+					url: '{{ url('addPostToGroup') }}/{{$article->id}}',
 					data: {
 						_token: CSRF_TOKEN,
-						group_id: group_id
+						group_id: group_id,
+						post_type: 'article'
 					},
 					success: function(data) {
 						if(data['status']=='success') {
