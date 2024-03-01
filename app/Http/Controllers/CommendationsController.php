@@ -60,7 +60,7 @@ class CommendationsController extends Controller
         $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-        return view('commendations.index', compact('commendations', 'tags', 'tags_slug'));
+        return view('commendations.index', compact('commendations', 'tags', 'tags_slug', 'group'));
     }
 
     /**
