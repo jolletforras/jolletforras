@@ -42,82 +42,16 @@
             'email'				=>$article->user->email
         ] )
 
+		@include('partials.post_group_script', [
+			'post_type'	=>'article',
+			'post_id'	=>$article->id,
+		] )
+
 		<script type="text/javascript">
 			function delete_article() {
 				if (confirm("Biztosan törölni szeretné az írást?") == true) {
 					window.location.href = "{{url('iras')}}/{{$article->id}}/{{$article->slug}}/torol";
 				}
-			}
-
-			function get_group_admin_block() {
-
-				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-				$('#btn_group_admin_block').hide();
-				$('#group_admin_block').show();
-
-				$.ajax({
-					type: "POST",
-					url: '{{ url('getPostGroupAdminBlock') }}/article/{{$article->id}}',
-					data: {
-						_token: CSRF_TOKEN
-					},
-					success: function(data) {
-						if(data['status']=='success') {
-							$("#group_admin_block").html(data.html);
-						}
-					},
-					error: function(error){
-						console.log(error.responseText);
-					}
-				});
-			}
-
-			function delete_post_from_group() {
-
-				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-				var group_id = $('#delete_from_group').val();
-
-				$.ajax({
-					type: "POST",
-					url: '{{ url('deletePostFromGroup') }}/{{$article->id}}',
-					data: {
-						_token: CSRF_TOKEN,
-						group_id: group_id,
-						post_type: 'article'
-					},
-					success: function(data) {
-						if(data['status']=='success') {
-							$("#group_admin_block").html(data.html);
-						}
-					},
-					error: function(error){
-						console.log(error.responseText);
-					}
-				});
-			}
-
-			function add_post_to_group() {
-
-				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-				var group_id = $('#add_to_group').val();
-
-				$.ajax({
-					type: "POST",
-					url: '{{ url('addPostToGroup') }}/{{$article->id}}',
-					data: {
-						_token: CSRF_TOKEN,
-						group_id: group_id,
-						post_type: 'article'
-					},
-					success: function(data) {
-						if(data['status']=='success') {
-							$("#group_admin_block").html(data.html);
-						}
-					},
-					error: function(error){
-						console.log(error.responseText);
-					}
-				});
 			}
 		</script>
 	@endif
