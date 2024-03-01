@@ -61,7 +61,7 @@ class ProjectsController extends Controller
         $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
         $tags_slug = $group_tags->pluck('slug', 'id')->all();
 
-        return view('projects.index', compact('projects', 'tags', 'tags_slug'));
+        return view('projects.index', compact('projects', 'tags', 'tags_slug', 'group'));
     }
 
 	/**

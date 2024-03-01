@@ -3,7 +3,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-sm-5">
-			<h2>Kezdeményezések</h2>
+			<h2>Kezdeményezések @if(isset($group))- {{$group->name}}@endif</h2>
 		</div>
 		<div class="col-sm-3" style="padding-top:4px;">
 			@if(Auth::check())
