@@ -37,9 +37,8 @@ class ArticlesController extends Controller
     {
         $group = Group::findOrFail($group_id);
         $articles = $group->articles()->where('status', 'active')->latest()->get();
-        $tab = "articles";
 
-        return view('articles.index', compact('articles'));
+        return view('articles.index', compact('articles','group'));
     }
 
 

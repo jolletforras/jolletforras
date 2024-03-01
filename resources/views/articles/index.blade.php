@@ -7,7 +7,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-sm-9">
-			<h2>Írások</h2>
+			<h2>Írások @if(isset($group))- {{$group->name}}@endif</h2>
 		</div>
 		@if (Auth::check())
 		<div class="col-sm-3 text-right">
