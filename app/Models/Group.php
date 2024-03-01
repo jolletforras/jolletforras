@@ -36,6 +36,11 @@ class Group extends Model
         return $this->belongsToMany(Article::class)->withTimestamps();
     }
 
+    public function commendations()
+    {
+        return $this->belongsToMany(Commendation::class)->withTimestamps();
+    }
+
     public function members()
     {
         return $this->belongsToMany(User::class)->withPivot(['motivation','updated_at'])->where('status','=', 3)->withTimestamps();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Traits\TagTrait;
 use Illuminate\Http\Request;
 use App\Models\Commendation;
 use App\Models\CommendationTag;
+use App\Models\Group;
 use App\Models\GroupTag;
 use App\Models\Comment;
 use App\Models\Sendemail;
@@ -40,6 +41,19 @@ class CommendationsController extends Controller
         else {
             $commendations = Commendation::where('public', 1)->latest('created_at')->get();
         }
+
+        $group_tags = GroupTag::getCommendationUsed();
+
+        $tags = [''=>''] +$group_tags->pluck('name', 'id')->all();
+        $tags_slug = $group_tags->pluck('slug', 'id')->all();
+
+        return view('commendations.index', compact('commendations', 'tags', 'tags_slug'));
+    }
+
+    public function show_group_commendations($group_id)
+    {
+        $group = Group::findOrFail($group_id);
+        $commendations = $group->commendations()->where('active', 1)->latest()->get();
 
         $group_tags = GroupTag::getCommendationUsed();
 
