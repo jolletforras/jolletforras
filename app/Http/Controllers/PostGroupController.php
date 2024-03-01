@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Traits\TagTrait;
 use App\Http\Requests;
 use App\Models\Article;
-use App\Models\Comment;
+use App\Models\Commendation;
 use App\Models\User;
 use App\Models\Group;
-use App\Models\Usernotice;
-use App\Models\GroupTag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -29,14 +26,14 @@ class PostGroupController extends Controller
 
         $post = $class::findOrFail($post_id);
 
-        //ezekben a csoportokban van az írás
+        //ezekben a csoportokban van a bejegyzés (írás, ajánló, kezdeményezés)
         $post_groups = $post->groups()->where('status','active')->get();
         $post_group_ids =  $post_groups->pluck('id')->toArray();
 
         //ebben a csoportokban admin
         $qroups_where_admin = Auth()->user()->member_of_groups()->where('status','active')->where('group_user.admin',1);
 
-        //ebben a csoportokban van az írás, ahol admin
+        //ebben a csoportokban van a bejegyzés, ahol admin
         $qroups_where_admin_have_post = $qroups_where_admin->whereIn('groups.id',$post_group_ids)->get();
         $qroup_where_admin_have_post_ids = $qroups_where_admin_have_post->pluck('id')->toArray();
 

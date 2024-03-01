@@ -24,6 +24,11 @@ class Commendation extends Model
         return $this->belongsToMany(GroupTag::class)->withTimestamps();
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class)->withTimestamps();
+    }
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
