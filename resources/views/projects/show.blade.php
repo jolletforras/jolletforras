@@ -59,6 +59,21 @@
 					<button type="button" class="btn btn-default" onclick="removeMember()">Kiléptet</button>
 				</div>
 			</div>
+
+			<label for="invited_user">Meghívás a kezdeményezésbe</label>
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<select id="invited_user" name="invited_user" class="form-control">
+						<option value=""></option>
+						@foreach($nomembers as $key => $val)
+							<option value="{{ $key }}">{{ $val }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="form-group col-sm-3">
+					<button type="button" id="invite_btn" class="btn btn-default" onclick="invite()">Meghív</button><span id="message_is_sending" style="display: none; font-style: italic;"> ... folyamatban</span>
+				</div>
+			</div>
 		@endif
 
 		@if (!$project->isMember())
@@ -76,8 +91,8 @@
 	</div>
 
 	@if(Auth::user()->isGroupAdmin())
-	<p class="narrow-page"><button class="btn btn-default" type="button" onclick="get_group_admin_block()" id="btn_group_admin_block"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Csoporthoz való hozzáadás/törlés</button></p>
-	<div class="inner_box narrow-page" id="group_admin_block" style="display: none;">... hamarosan betölt</div>
+		<p class="narrow-page"><button class="btn btn-default" type="button" onclick="get_group_admin_block()" id="btn_group_admin_block"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Csoporthoz való hozzáadás/törlés</button></p>
+		<div class="inner_box narrow-page" id="group_admin_block" style="display: none;">... hamarosan betölt</div>
 	@endif
 
 	@include('comments._show', ['comments' => $comments] )
@@ -99,7 +114,7 @@
 
 	<script>
 		$('#admin_list').select2({
-			placeholder: 'Írd be ide a szerkesztők nevét',
+			placeholder: 'Írd be ide a kezelők nevét',
 			admin: true,
 			"language": {
 				"noResults": function(){
@@ -107,6 +122,16 @@
 				}
 			}
 		});
+
+		$('#invited_user').select2({
+			placeholder: 'Írd be a nevet',
+			"language": {
+				"noResults": function(){
+					return "Nincs találat";
+				}
+			}
+		});
+
 
 		function removeMember(){
 
@@ -157,6 +182,39 @@
 					console.log(error.responseText);
 				}
 			});
+		}
+
+		function invite(){
+
+			if( $('#invited_user').val()!=0) {
+				var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+				var name = $( "#invited_user option:selected" ).text();
+
+				$("#invite_btn").prop('disabled', true);
+				$("#message_is_sending").show();
+
+				$.ajax({
+					type: "POST",
+					url: '{{url('kezdemenyezes')}}/{{$project->id}}/invite',
+					data: {
+						_token: CSRF_TOKEN,
+						invited_user: $('#invited_user').val()
+					},
+					success: function(data) {
+						if(data['status']=='success') {
+							$("#message_is_sending").hide();
+							$('div.flash-message').html("Meghívó elküldve: "+name);
+							$('div.flash-message').show();
+							setTimeout(function(){ $('div.flash-message').hide(); }, 4000);
+							$("#invite_btn").prop('disabled', false);
+						}
+					},
+					error: function(error){
+						console.log(error.responseText);
+					}
+				});
+			}
 		}
 	</script>
 @endsection

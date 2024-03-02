@@ -81,9 +81,11 @@ class ProjectsController extends Controller
             $admins = $project->admins()->orderBy('name', 'ASC')->pluck('user_id')->toArray();
             $noadmins = $project->noadmins()->orderBy('name', 'ASC')->pluck('name', 'user_id');
 
+            $nomembers = $project->isAdmin() ? $project->no_members_list: Null;
+
             $comments = Comment::where('commentable_type', 'App\Models\Project')->where('commentable_id', $id)->get();
 
-            return view('projects.show', compact('project','members','admins','noadmins','comments','page'));
+            return view('projects.show', compact('project','members','nomembers','admins','noadmins','comments','page'));
         }
         else {
             if(!$project->public) {                    //belépés oldalra irányít, amennyiben nincs bejelentkezve és nem nyilvános kezdeményezést akar megnyitni
@@ -270,6 +272,44 @@ class ProjectsController extends Controller
         }
 
         $response = array('status' => 'success');
+
+        return \Response::json($response);
+    }
+
+    public function invite($id, Request $request)
+    {
+
+        $user_id = $request->input('invited_user');
+
+        $response = array(
+            'status' => 'success',
+            'msg' => $user_id
+        );
+
+        if($user_id!=0) {
+            $project = Project::findOrFail($id);
+
+            $invitantUser=Auth::user();
+
+            $invitedUser = User::findOrFail($user_id);
+
+            $data['invitant_id']=$invitantUser->id;
+            $data['invitant_name']=$invitantUser->name;
+            $data['project_id']=$project->id;
+            $data['project_name']=$project->title;
+            $data['project_slug']=$project->slug;
+            $data['invited_name']=$invitedUser->name;
+            $data['email']=$invitedUser->email;
+
+            $body = view('projects.emails.invite_email',$data)->render();
+
+            Sendemail::create([
+                'to_email' => $data['email'],
+                'subject' => "Meghívás a(z) ".$data['project_name']." kezdeményezésbe",
+                'body' => $body
+            ]);
+
+        }
 
         return \Response::json($response);
     }

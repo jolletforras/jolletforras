@@ -56,7 +56,6 @@ class Project extends Model
         return $this->belongsToMany(User::class)->wherePivot('admin',1)->withTimestamps();
     }
 
-
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
@@ -79,7 +78,12 @@ class Project extends Model
 
     public function getMemberListAttribute()
     {
-        return $this->members->lists('id')->all();
+        return $this->members->pluck('id')->all();
+    }
+
+    public function getNoMembersListAttribute()
+    {
+        return User::members()->whereNotIn('id', $this->member_list)->orderBy('name', 'ASC')->pluck('name', 'id');
     }
 
     public function getTagListAttribute()
