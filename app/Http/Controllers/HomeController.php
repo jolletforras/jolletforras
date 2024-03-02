@@ -115,8 +115,8 @@ class HomeController extends Controller
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->latest('updated_at')->get();
             $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->latest('updated_at')->get();
             $events = Event::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
-            $projects = Project::where('created_at','>',$date)->where('status','active')->latest()->get();
-            $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->latest()->get();
+            $projects = Project::where('created_at','>',$date)->where('approved', 1)->where('status','active')->latest()->get();
+            $commendations = Commendation::where('created_at','>',$date)->where('approved', 1)->where('active', 1)->latest()->get();
             $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
             $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','<>', 'group')->latest()->get();
         }
@@ -124,8 +124,8 @@ class HomeController extends Controller
             $users = User::with('skill_tags')->members()->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
             $groups = Group::with('user', 'members', 'tags')->where('created_at','>',$date)->where('public',1)->latest('updated_at')->get();
             $events = Event::where('created_at','>',$date)->where('visibility','public')->latest()->get();
-            $projects = Project::where('created_at','>',$date)->where('status','active')->where('public', 1)->latest()->get();
-            $commendations = Commendation::where('approved', 1)->where('active', 1)->where('created_at','>',$date)->where('public',1)->latest()->get();
+            $projects = Project::where('created_at','>',$date)->where('approved', 1)->where('status','active')->where('public', 1)->latest()->get();
+            $commendations = Commendation::where('created_at','>',$date)->where('approved', 1)->where('active', 1)->where('public',1)->latest()->get();
             $groupnewss = Groupnews::where('created_at','>',$date)->where('visibility','public')->latest()->get();
             $projectnewss = Projectnews::where('created_at','>',$date)->where('visibility','public')->latest()->get();
         }
