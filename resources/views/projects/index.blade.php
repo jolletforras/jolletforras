@@ -22,8 +22,17 @@
 	</div>
 	<hr style="margin-top:6px;">
 	<div class="row">
-		<?php $i=1; ?>
+	<?php
+		$i=1;
+		$logged_in = Auth::check();
+	?>
 	@foreach ($projects as $project)
+		<?php
+			$project_admin = $project->isAdmin();
+			$portal_admin = $logged_in && Auth::user()->admin;
+			$show = $project->isActive() && $project->approved || $project_admin || $portal_admin;
+		?>
+		@if($show)
 		<div class="col-12 col-sm-6 col-md-4 group">
 			<div class="card">
 				<div class="card-header"></div>
@@ -34,6 +43,13 @@
 							- <i style="font-weight: normal; font-size: 16px;">{{$project->get_location()}}</i>
 						@endif
 					</h3>
+					<p>
+						@if($project_admin || $portal_admin)
+							<a href="{{url('kezdemenyezes')}}/{{$project->id}}/{{$project->slug}}/modosit">módosít</a>
+							@if(!$project->isActive()) <i>/inaktív/</i>@endif
+							@if(!$project->approved) <i>/engedélyezésre vár/</i>@endif
+						@endif
+					</p>
 				</div>
 				<div class="image-box">
 					@if(file_exists(public_path('images/projects/'.$project->id.'.jpg')))
@@ -59,11 +75,12 @@
 				</div>
 			</div>
 		</div>
+		@endif
 		@if($i%3==0)
 	</div>
 	<div class="row">
 		@endif
-		<?php $i++ ?>
+		<?php if($show) $i++ ?>
 	@endforeach
 	</div>
 @endsection

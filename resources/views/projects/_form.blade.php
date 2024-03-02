@@ -80,4 +80,11 @@
 			<input class="form-control" name="meta_description" type="text" maxlength="160" value="@if(isset($project)){{old('meta_description',$project->meta_description)}}@else{{old('meta_description')}}@endif">
 		</div>
 
+		@if(isset($project) && Auth::user()->admin)
+			<div class="form-group">
+				<input name="approved" type="checkbox" value="1" @if($project->approved) checked @endif>
+				<span style="padding-top: 10px; font-size: 18px;">Engedélyez</span>
+			</div>
+		@endif
+
 

@@ -74,6 +74,11 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
+        //csak akkor jeleníti meg, ha aktív és engedélyezve van vagy bejelentkezés esetén ha saját kezdeményezés, annak kezelője vagy portál admin
+        if(!($project->isActive() && $project->approved || Auth::check() && ($project->isOwner() || $project->isAdmin() || Auth::user()->admin))) {
+            return redirect('/');
+        }
+
         $page = 'description';
 
         if(Auth::check()) {
@@ -138,13 +143,34 @@ class ProjectsController extends Controller
             $project->update(['meta_description' => $request->get('meta_description')]);
         }
 
+        if(Auth::user()->admin) {
+            $project->update(['approved' => 1]);
+            $message = 'Az új kezdeményezést sikeresen felvetted!';
+        }
+        else {
+            $data['id']= $project->id;
+            $data['slug']= $project->slug;
+            $data['title']= $project->title;
+
+            $body = view('projects.emails.new_project_email',$data)->render();
+
+            Sendemail::create([
+                'to_email' => 'tarsadalmi.jollet@gmail.com',
+                'subject' => "Új kezdeményezés",
+                'body' => $body
+            ]);
+
+            $message = 'Az új kezdeményezést sikeresen felvetted, jóváhagyásra vár.';
+        }
+
+
         //a létrehozó automatikusan résztvevő és kezelő lesz
         $project->members()->attach(Auth::user()->id, ['admin'=>1]);
 
         $tag_list=$request->input('tag_list');
 		$project->tags()->attach($tag_list);
-		
-		return redirect('kezdemenyezesek')->with('message', 'A kezdeményezést sikeresen felvetted!');
+
+		return redirect('kezdemenyezesek')->with('message', $message);
 	}
 	
 	/**
@@ -157,8 +183,8 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
-        //ha nem a projekt létrehozója vagy admin
-		if(!(Auth::user()->id == $project->user->id || in_array(Auth::user()->id,$project->admin_list))) {
+        //ha nem a projekt létrehozója vagy projekt kezelő vagy portál admin
+		if(!($project->isOwner() || $project->isAdmin() || Auth::user()->admin)) {
 			return redirect('/');
 		}
 
@@ -201,6 +227,11 @@ class ProjectsController extends Controller
 
         if($project->public) {
             $project->update(['meta_description' => $request->get('meta_description')]);
+        }
+
+        if(Auth::user()->admin) {
+            $approved = $request->has('approved') ? 1 : 0;
+            $project->update(['approved' => $approved]);
         }
 
         $tag_list=$request->input('tag_list');
