@@ -4,7 +4,7 @@
     $project_admin = $project->isAdmin();
     $portal_admin = $logged_in && Auth::user()->admin;
     ?>
-    @if($project->isActive() && $project->approved || $project_admin || $portal_admin))
+    @if($project->isActive() && $project->approved || $project_admin || $portal_admin)
         <h3>
             <a href="{{ url('kezdemenyezes',$project->id) }}/{{$project->slug}}">{{ $project->title }}</a>
             @if($project->city!='')
