@@ -24,14 +24,10 @@
 			@endif
 		</div>
 	</div>
-	<div class="row narrow-page">
-		<div class="col-sm-12">
-			<div class="inner_box collapse" id="commendation_info" style="font-size: 18px">
-				Itt lehetőséged mások figyelmébe ajánlani valamit.<br>
-				Mielőtt megnyitsz egy új ajánlót, tedd fel magadnak a kérdést: Hogyan kapcsolódik ez a Portál céljához és alapértékeihez? Ha nem vagy biztos a dolgodban, inkább olvasd el újra a <a href="{{ url('/') }} " target="_blank">Nyitólapot</a> és
-				a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodást</a>, vagy kérj segítséget a <a href="{{ url('/') }}/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Mag</a> csoporttól.<br>
-			</div>
-		</div>
+	<div class="inner_box narrow-page collapse" id="commendation_info" style="font-size: 18px">
+		Itt lehetőséged mások figyelmébe ajánlani valamit.<br>
+		Mielőtt megnyitsz egy új ajánlót, tedd fel magadnak a kérdést: Hogyan kapcsolódik ez a Portál céljához és alapértékeihez? Ha nem vagy biztos a dolgodban, inkább olvasd el újra a <a href="{{ url('/') }} " target="_blank">Nyitólapot</a> és
+		a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodást</a>, vagy kérj segítséget a <a href="{{ url('/') }}/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Mag</a> csoporttól.<br>
 	</div>
 	@guest
 	<div class="inner_box narrow-page">
