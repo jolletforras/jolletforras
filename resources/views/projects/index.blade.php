@@ -26,7 +26,7 @@
 	</div>
 	@guest
 	<div class="inner_box">
-		Itt a Portál tagjainak saját kezdeményezéseit találod. A kezdeményezésnek lehet:<br>
+		Itt a Portál tagjainak saját kezdeményezéseit találod. A kezdeményezés lehet:<br>
 		<ul>
 			<li> egy ötletet valaki vagy valakik indulásra késznek gondolnak, akár már el is kezdték a megvalósítását vagy előkészítését, ám még társakat várnak ahhoz, hogy a kezdeményezés meg is valósuljon, működjön vagy fenntarthatóan fejlődhessen</li>
 			<li>olyan program, cselekvés, ami már működik és a kezdeményezés tagjai szeretnék ezt megmutatni a Portálon</li>
