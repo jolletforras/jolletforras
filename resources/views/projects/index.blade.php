@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('description', 'Kezdeményezések a Társadalmi Jóllét Portálon. Milyen legyen az új világunk? Ismerd meg a Portál tagjainak kezdeményezéseit, csatlakozz hozzánk, vedjél részt bennük, hozd létre a sajátod. Várunk!')
+@section('url', 'https://tarsadalmijollet.hu/kezdemenyezesek')
+@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/kezdemenyezesek" /> @endsection
+@section('image'){{ url('/images/kezdemenyezesek.jpeg')}}@endsection
 
 @section('content')
 	<div class="row">
