@@ -5,6 +5,7 @@
 @section('image'){{ url('/images/kezdemenyezesek.jpg')}}@endsection
 
 <?php $logged_in = Auth::check(); ?>
+
 @section('content')
 	<div class="row">
 		<div class="col-sm-5">
