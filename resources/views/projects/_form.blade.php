@@ -5,16 +5,21 @@
 	
 		<div class="form-group">
 			<label for="body">Leírás*:</label>
+			<a href="#body_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+			<div id="body_info" class="collapse info">Miért indítod ezt a kezdeményezést? Milyen értékeket hordoz vagy támogat a kezdeményezésed? Hogyan szolgálja az új világ építését? Miről szól a kezdeményezés, mi az elképzelésed, megvalósítási terved?
+			</div>
 			<textarea name="body" class="form-control" required="required" rows="6">@if(isset($project)) {{$project->body}} @else {{old('body')}} @endif</textarea>
 		</div>
 
 		<div class="form-group">
-			<label for="looking_for">Milyen tudású/képességű emberek hiányoznak*?</label>
+			<label for="looking_for">Kiket vársz társakként a kezdeményezésedhez?</label>
 			<textarea class="form-control" required="required" rows="6" name="looking_for">@if(isset($project)) {{$project->looking_for}} @else {{old('looking_for')}}  @endif</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="tag_list">Címkék a kezdeményezéssel kapcsolatban*:</label>
+			<a href="#tag_list_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+			<div id="tag_list_info" class="collapse info">A címkékben a kezdeményezés tárgya, köre szerepeljen.</div>
 			<select id="tag_list" name="tag_list[]" class="form-control tag-list" multiple>
 				@foreach($tags as $key => $val)
 					<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>
