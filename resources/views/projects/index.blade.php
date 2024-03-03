@@ -20,6 +20,21 @@
 			@endif
 		</div>
 	</div>
+	@guest
+	<div class="inner_box">
+		Itt a Portál tagjainak saját kezdeményezéseit találod. A kezdeményezésnek lehet:<br>
+		<ul>
+			<li> egy ötletet valaki vagy valakik indulásra késznek gondolnak, akár már el is kezdték a megvalósítását vagy előkészítését, ám még társakat várnak ahhoz, hogy a kezdeményezés meg is valósuljon, működjön vagy fenntarthatóan fejlődhessen</li>
+			<li>olyan program, cselekvés, ami már működik és a kezdeményezés tagjai szeretnék ezt megmutatni a Portálon</li>
+		</ul>
+
+		Arról, hogyan hozhatsz létre új kezdeményezést és hogyan tudsz kezdeményezésekhez kapcsolódni, <a href="{{url('tudnivalo')}}/12/kezdemenyezesek">ITT</a> találsz részletes tudnivalókat.<br>
+		<br>
+		Szeretnél értesülni új kezdeményezésekről?<br>
+		- Ha van kedved, regisztrálj a Portálon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
+		- Ha még csak távolabbról ismerkednél, iratkozz fel a hírlevelünkre <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a>.<br>
+	</div>
+	@endguest
 	<hr style="margin-top:6px;">
 	<div class="row">
 	<?php
