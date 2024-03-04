@@ -33,7 +33,7 @@ class ProjectsController extends Controller
 	 */
 	public function index()
 	{
-        $projects = Project::where('status','active')->orderBy('last_news_at','DESC');
+        $projects = Project::orderBy('last_news_at','DESC');
 
         if(Auth::check()) {
             $projects = $projects->get();
