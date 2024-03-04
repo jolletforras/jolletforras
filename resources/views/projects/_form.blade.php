@@ -90,6 +90,8 @@
 
 		<div class="form-group" id="meta-description-block" style="display: @if(isset($project) && $project->public) block @else none @endif">
 			<label for="meta_description">Meta leírás:</label>
+			<a href="#meta_description_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<div id="meta_description_info" class="collapse info">Az itt megadott szöveg íródik ki ha egy másik oldalon (pl. facebook) megosztásra kerül a kezdeményezés.</div>
 			<input class="form-control" name="meta_description" type="text" maxlength="160" value="@if(isset($project)){{old('meta_description',$project->meta_description)}}@else{{old('meta_description')}}@endif">
 		</div>
 
