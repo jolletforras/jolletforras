@@ -26,7 +26,7 @@ class ProjectRequest extends FormRequest
         return  [
 				'title' => 'required|max:60',
 				'body' => 'required',
-                'looking_for' => 'required',
+                'my_undertake' => 'required',
         		'tag_list' => 'required',
 		];
     }
@@ -42,7 +42,7 @@ class ProjectRequest extends FormRequest
 				'title.required' => 'Kérlek add meg a vállalkozás megnevezését',
 				'title.max'  => 'A megnevezés legfeljebb :max karakter lehet',
 				'body.required' => 'Kérlek add meg a vállalkozás leírását',
-                'looking_for.required' => 'Kérlek add meg milyen tudású/képességű embereket keresel',
+                'my_undertake.required' => 'Kérlek add meg, hogy te kezdeményezőként mit tudsz beletenni a megvalósításba',
     			'tag_list.required' => 'Kérlek legalább egy területet adjál meg, amelyben keresel embert a vállalkozáshoz',
     	];
     }

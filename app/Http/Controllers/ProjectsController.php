@@ -127,6 +127,7 @@ class ProjectsController extends Controller
 		$project = Auth::user()->projects()->create([
 			'title' => $request->get('title'),
 			'body' => $request->get('body'),
+            'my_undertake' => $request->get('my_undertake'),
 			'looking_for' => $request->get('looking_for'),
             'location' => $request->get('location'),
             'zip_code' => $zip_code,
@@ -214,6 +215,7 @@ class ProjectsController extends Controller
 		$project->update([
 			'title' => $request->get('title'),
 			'body' => $request->get('body'),
+            'my_undertake' => $request->get('my_undertake'),
 			'looking_for' => $request->get('looking_for'),
             'location' => $request->get('location'),
             'zip_code' => $zip_code,

@@ -1,19 +1,25 @@
 		<div class="form-group">
 			<label for="title">Megnevezés*:</label>
-			<input class="form-control" required="required" name="title" type="text" maxlength="60" value="@if(isset($project)) {{old('title',$project->title)}} @else {{old('title')}} @endif" id="title">
+			<input class="form-control" required="required" name="title" type="text" maxlength="60" value="@if(isset($project)){{old('title',$project->title)}}@else{{old('title')}}@endif" id="title">
 		</div>
 	
 		<div class="form-group">
-			<label for="body">Leírás*:</label>
+			<label for="body">Mutasd be a kezdeményezésed*:</label>
 			<a href="#body_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-			<div id="body_info" class="collapse info">Miért indítod ezt a kezdeményezést? Milyen értékeket hordoz vagy támogat a kezdeményezésed? Hogyan szolgálja az új világ építését? Miről szól a kezdeményezés, mi az elképzelésed, megvalósítási terved?
-			</div>
-			<textarea name="body" class="form-control" required="required" rows="6">@if(isset($project)) {{$project->body}} @else {{old('body')}} @endif</textarea>
+			<div id="body_info" class="collapse info">Miért indítod ezt a kezdeményezést? Milyen értékeket hordoz vagy támogat a kezdeményezésed? Hogyan szolgálja az új világ építését? Miről szól a kezdeményezés, mi az elképzelésed, megvalósítási terved?</div>
+			<textarea name="body" class="form-control" required="required" rows="6">@if(isset($project)){{$project->body}}@else{{old('body')}}@endif</textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="my_undertake">Te kezdeményezőként mit tudsz beletenni a megvalósításba?*</label>
+			<textarea class="form-control" required="required" rows="6" name="my_undertake">@if(isset($project)){{$project->my_undertake}}@else{{old('my_undertake')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="looking_for">Kiket vársz társakként a kezdeményezésedhez?</label>
-			<textarea class="form-control" required="required" rows="6" name="looking_for">@if(isset($project)) {{$project->looking_for}} @else {{old('looking_for')}}  @endif</textarea>
+			<a href="#looking_for_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+			<div id="looking_for_info" class="collapse info">Ennek a résznek a kitöltése nem szükséges, amennyiben már működő kezdeményezést mutatsz be, amelyhez nem keresel társakat a portálon.</div>
+			<textarea class="form-control" rows="6" name="looking_for">@if(isset($project)){{$project->looking_for}}@else {{old('looking_for')}}@endif</textarea>
 		</div>
 
 		<div class="form-group">

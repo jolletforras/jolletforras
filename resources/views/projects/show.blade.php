@@ -21,7 +21,7 @@
 			<p style="text-align: center;"><img src="{{ url('/images/projects') }}/{{ $project->id}}.jpg?{{$project->photo_counter}}" style="max-width: 50%;"></p>
 		@endif
 			<p>{!! nl2br($project->body) !!}</p>
-
+			<p>{!! nl2br($project->my_undertake) !!}</p>
 			<p>{!! nl2br($project->looking_for) !!}</p>
 			<p><b>Felvette: </b><a href="{{ url('profil',$project->user->id) }}/{{$project->user->slug}}">{{ $project->user->name }}</a>, {{ $project->created_at }}</p>
 			@include('projects._admins')
