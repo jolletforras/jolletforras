@@ -70,14 +70,16 @@
 			</div>
 		</div>
 
+		@if(isset($project))
 		<div class="form-group">
 			<label>
-				<input name="inactive" type="checkbox" value="1" @if(isset($project) && $project->status=='inactive') checked @endif>
+				<input name="inactive" type="checkbox" value="1" @if($project->status=='inactive') checked @endif>
 				<span style="padding-top: 10px; font-size: 18px;">Inaktív</span>
 				<a href="#inactive_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 			</label>
-			<div id="inactive_info" class="collapse info">Ha inaktív a kezdeményezés, akkor nem látható kezdeményezések között.</div>
+			<div id="inactive_info" class="collapse info">Ha inaktív a kezdeményezés, akkor nem látható mások számára a kezdeményezések között.</div>
 		</div>
+		@endif
 
 		<div class="form-group">
 			<input name="public" id="public" type="checkbox" value="1" @if(isset($project) && $project->public)  checked @endif>
