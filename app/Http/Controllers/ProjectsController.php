@@ -74,8 +74,8 @@ class ProjectsController extends Controller
 	{
 		$project = Project::findOrFail($id);
 
-        //csak akkor jeleníti meg, ha aktív és engedélyezve van vagy bejelentkezés esetén ha saját kezdeményezés, annak kezelője vagy portál admin
-        if(!($project->isActive() && $project->approved || Auth::check() && ($project->isOwner() || $project->isAdmin() || Auth::user()->admin))) {
+        //csak akkor jeleníti meg, ha engedélyezve van vagy bejelentkezés esetén ha saját kezdeményezés, annak kezelője vagy portál admin
+        if(!($project->approved || Auth::check() && ($project->isOwner() || $project->isAdmin() || Auth::user()->admin))) {
             return redirect('/');
         }
 
