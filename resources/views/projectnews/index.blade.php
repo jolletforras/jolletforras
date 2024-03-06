@@ -8,7 +8,7 @@
 @section('content')
 	@include('projects._project_menu')
 	<div class="inner_box narrow-page" style="margin-top:6px;">
-		@if($project->isAdmin())
+		@if($project->isOwner() || $project->isAdmin())
 		<div class="row">
 			<div class="col-sm-9" style="padding-top:4px;"></div>
 			<div class="col-sm-3 text-right">
