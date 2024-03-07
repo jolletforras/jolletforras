@@ -40,7 +40,7 @@
                     Szem előtt tartjuk a küldetést és a célt.  Amikor kezdeményezünk valamit, akkor feltesszük magunknak a kérdést: hogyan szolgálja ez a társadalmi jóllétet? A jelen és korábbi rendszerekkel csak annyiban foglalkozunk, amennyiben információkat és tapasztalatot merítünk belőle, hogy mit szeretnénk másképp és milyen lehetőségek nyílnak ezek elérésére.</li>
 
                 <li><b>Önszerveződés</b><br>
-                    Az egyének és csoportok önállóan szerveződhetnek, kapcsolódhatnak. Bárki kezdeményezhet a Társadalmi Jóllét Portálon új csoportot, fórumot, eseményt, készíthet hírt, írást, megoszthatja az ügyét, amelyhez társakat keres.</li>
+                    Az egyének és csoportok önállóan szerveződhetnek, kapcsolódhatnak. Bárki kezdeményezhet a Társadalmi Jóllét Portálon új csoportot, beszélgetést, eseményt, készíthet hírt, írást, alkotást, megoszthatja az ügyét, amelyhez társakat keres.</li>
 
             </ul>
         </div>
