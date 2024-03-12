@@ -35,10 +35,11 @@ class CommentsController extends Controller
 
             $commentable = $commentable_class::findOrFail($commentable_id);
 
+            $comment = strip_tags($comment);
             $comment_length = strlen($comment);
 
             $c = new Comment();
-            $comment = htmlspecialchars($comment);
+
             //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
             //$comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
             $comment = $this->get_text_with_shorted_url($comment);
@@ -220,9 +221,8 @@ class CommentsController extends Controller
 
         if(!empty($comment)) {
             $c = Comment::findOrFail($comment_id);
-
+            $comment = strip_tags($comment);
             $comment_length = strlen($comment);
-            $comment = htmlspecialchars($comment);
             //$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
             //$comment = preg_replace($url, '<a href="$0" target="_blank">$0</a>', $comment);
             $comment = $this->get_text_with_shorted_url($comment);
