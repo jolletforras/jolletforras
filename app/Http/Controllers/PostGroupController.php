@@ -16,6 +16,8 @@ use Illuminate\Support\Str;
 
 class PostGroupController extends Controller
 {
+    private $connection_table = ['article'=>'article_group','commendation'=>'commendation_group','project'=>'group_project'];
+
     public function __construct() {
 		$this->middleware('auth');
 	}
@@ -63,7 +65,7 @@ class PostGroupController extends Controller
     {
         $group_id = $request->get('group_id');
         $post_type = $request->get('post_type');
-        DB::table('group_'.$post_type)->where($post_type.'_id',$post_id)->where('group_id',$group_id)->delete();
+        DB::table($this->connection_table[$post_type])->where($post_type.'_id',$post_id)->where('group_id',$group_id)->delete();
         return $this->get_group_admin_block($post_type, $post_id);
     }
 
@@ -71,7 +73,7 @@ class PostGroupController extends Controller
     {
         $group_id = $request->get('group_id');
         $post_type = $request->get('post_type');
-        DB::table('group_'.$post_type)->insert([$post_type.'_id' => $post_id, 'group_id' => $group_id, 'created_at' => date('Y-m-d H:i:s')]);
+        DB::table($this->connection_table[$post_type])->insert([$post_type.'_id' => $post_id, 'group_id' => $group_id, 'created_at' => date('Y-m-d H:i:s')]);
 
         return $this->get_group_admin_block($post_type, $post_id);
     }
