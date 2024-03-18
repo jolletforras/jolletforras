@@ -5,4 +5,4 @@ Ideiglenes jelszavad: {{$password}}<br/>
 <br/>
 Kérjük, miután beléptél, változtasd meg a jelszavadat és jegyezd meg azt.<br/>
 <br/>
-Köszönjük<br/>
+Köszönjük.<br/>
