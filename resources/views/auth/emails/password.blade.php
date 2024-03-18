@@ -1,4 +1,8 @@
-Szia {{$name}}, <br/>
-<br/>Erre az email címre azt jelezték, hogy elfelejtették a jelszót, ennek érdekében ideiglenes jelszót küldünk.
-<br/>Ideiglenes jelszavad: {{$password}}
-<br/>Kérlek miután beléptél változtasd meg a jelszavad.
+Kedves {{$name}}, <br/>
+<br/>
+üzenetet kaptunk, hogy a Társadalmi Jóllét Portálra belépésnél elfelejtetted a jelszavadat. Küldünk egy ideiglenes jelszót.<br/>
+Ideiglenes jelszavad: {{$password}}<br/>
+<br/>
+Kérjük, miután beléptél, változtasd meg a jelszavadat és jegyezd meg azt.<br/>
+<br/>
+Köszönjük<br/>
