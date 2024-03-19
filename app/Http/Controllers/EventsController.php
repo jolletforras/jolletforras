@@ -178,6 +178,8 @@ class EventsController extends Controller
             'group_id' => $request->get('group_id')
         ]);
 
+        $event->participants()->attach(Auth::user()->id);
+
         if($event->group_id==0) {
             return redirect('esemenyek')->with('message', 'Az új eseményt sikeresen felvetted!');
         }
