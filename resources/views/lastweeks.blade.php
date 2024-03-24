@@ -30,18 +30,18 @@
         <hr>
     @endif
     @if($articles->isNotEmpty())
-         <h3>Új írások</h3>
-         @foreach ($articles as $article)
-         <div class="col-12">
+        <h3>Új írások</h3>
+        @foreach ($articles as $article)
+        <div class="col-12">
              <h3><a href="{{ url('iras',$article->id) }}/{{$article->slug}}">{{ $article->title }}</a></h3>
              @if (Auth::check() && (Auth::user()->id==$article->user->id || Auth::user()->admin))
                  <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" class="edit">módosít</a><br>
              @endif
              <p style="text-align: center;"><img src="{{ url('/images/posts') }}/{{ $article->image}}" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;"></p>
              <p>{!! $article->short_description !!} <a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}">... tovább</a></p>
-         </div>
+        </div>
+        <hr>
         @endforeach
-         <hr>
     @endif
     @if($groupnewss->isNotEmpty())
         <h3>Új csoport hírek</h3>
