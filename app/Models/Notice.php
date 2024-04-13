@@ -38,7 +38,7 @@ class Notice extends Model
         $query->where('user_id',Auth::user()->id)->where('updated_at','>',$two_weeks_before)->orderBy('updated_at', 'DESC');
     }
 
-    public function setNullUpdatedAt($group_id,$user_id) {
+    static function setNullUpdatedAt($group_id,$user_id) {
         $query = "
           UPDATE notices 
           SET updated_at=NULL 
