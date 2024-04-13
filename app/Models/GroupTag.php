@@ -34,7 +34,7 @@ class GroupTag extends Model
         return $this->belongsToMany(Article::class)->withTimestamps();
     }
 
-    public function getUsed()
+    static function getUsed()
     {
         $result = DB::table('group_tags')
             ->select('group_tags.id','group_tags.name','group_tags.slug')
@@ -46,7 +46,7 @@ class GroupTag extends Model
         return $result;
     }
 
-    public function getGroupNewsUsed()
+    static function getGroupNewsUsed()
     {
         $result = DB::table('group_tags')
             ->select('group_tags.id','group_tags.name','group_tags.slug')
@@ -60,7 +60,7 @@ class GroupTag extends Model
         return $result;
    }
 
-    public function getProjectNewsUsed()
+    static function getProjectNewsUsed()
     {
         $result = DB::table('group_tags')
             ->select('group_tags.id','group_tags.name','group_tags.slug')
@@ -74,7 +74,7 @@ class GroupTag extends Model
         return $result;
     }
 
-    public function getCommendationUsed()
+    static function getCommendationUsed()
     {
         $result = DB::table('group_tags')
             ->select('group_tags.id','group_tags.name','group_tags.slug')
@@ -87,7 +87,7 @@ class GroupTag extends Model
         return $result;
     }
 
-    public function getProjectUsed()
+    static function getProjectUsed()
     {
         $result = DB::table('group_tags')
             ->select('group_tags.id','group_tags.name','group_tags.slug')
@@ -98,7 +98,7 @@ class GroupTag extends Model
         return $result;
     }
 
-    public function getLocalGroupTagList() {
+    static function getLocalGroupTagList() {
         $tags =  DB::table('group_tags')
                 ->join('group_group_tag', 'group_group_tag.group_tag_id', '=', 'group_tags.id')
                 ->join('groups', 'groups.id', '=', 'group_group_tag.group_id')
@@ -108,7 +108,7 @@ class GroupTag extends Model
         return $tags;
     }
 
-    public function getLocalProjectTagList() {
+    static function getLocalProjectTagList() {
         $tags =  DB::table('group_tags')
             ->join('group_tag_project', 'group_tag_project.group_tag_id', '=', 'group_tags.id')
             ->join('projects', 'projects.id', '=', 'group_tag_project.project_id')
