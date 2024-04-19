@@ -35,7 +35,7 @@
 				</ul>
 				Ha szeretnél frissiben értesülni az eseményekről és programokról, a levelezőcsoportunkra <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a> iratkozhatsz fel.<br>
 				<br>
-				A következő elérhetőségeken tudsz kapcsolatba lépni a program szervezőivel: tarsadalmi.jollet@gmail.com | +36302897830 (Pataki Andrea)<br>
+				A következő elérhetőségeken tudsz kapcsolatba lépni a program szervezőivel: tarsadalmi.jollet@gmail.com | +36302897830 (P. Horváth Andrea)<br>
 				<br>
 				Itt találod az egyes adásokat, alattuk a kapcsolódó tematikus beszélgetés eseményoldalával, ahol jelentkezni is tudsz a beszélgetésre.<br>
 		</div>
