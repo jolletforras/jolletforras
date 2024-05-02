@@ -11,22 +11,23 @@
 		</div>
 
 		<?php
+			$max_nr_image = 10;
 			$nr_creation_image=Auth()->user()->nr_creation_image;
 			$new_creation = !isset($creation);
 			$url_checked =  $new_creation || !empty($creation->url); //ha új alkotás, vagy van megadva hivatkozás
-			$no_more_image = $nr_creation_image>=5 && ($new_creation || $url_checked); //nem lehet képet feltölteni, ha már meg volt az 5-t és új alkotás, vagy hivatkozás volt korább
+			$no_more_image = $nr_creation_image>=$max_nr_image && ($new_creation || $url_checked); //nem lehet képet feltölteni, ha már meg volt a 10 és új alkotás, vagy hivatkozás volt korább
 		?>
         <div class="form-group" id="source_block">
   		@if(!$no_more_image)
 			<input type="radio" id="url" name="source" value="url" onchange="source_change('url')" @if($url_checked)checked @endif>
 			<label for="url">Alkotásomról hivatkozást adok meg</label><br>
 			<input type="radio" id="image" name="source" value="image" onchange="source_change('image')" @if(!$url_checked)checked @endif>
-			<label for="image">Képet töltök fel ({{$nr_creation_image}}/5)
+			<label for="image">Képet töltök fel ({{$nr_creation_image}}/{{$max_nr_image}})
 				<a href="#image_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label><br>
-			<div id="image_info" class="collapse info">Összesen 5 alkotás esetében van lehetőség kép feltöltésére</div>
+			<div id="image_info" class="collapse info">Összesen {{$max_nr_image}} alkotás esetében van lehetőség kép feltöltésére</div>
 		@else
 			<div class="alert alert-info">
-				Eddig 5 képes alkotásod van. Amennyiben képet szeretnél feltölteni és nem hivatkozást megadni, írj ez ügyben a tarsadalmi.jollet@gmail.com e-mail címre.
+				Eddig {{$max_nr_image}} képes alkotásod van. Amennyiben képet szeretnél feltölteni és nem hivatkozást megadni, írj ez ügyben a tarsadalmi.jollet@gmail.com e-mail címre.
 			</div>
 		@endif
         </div>
