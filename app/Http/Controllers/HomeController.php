@@ -67,7 +67,8 @@ class HomeController extends Controller
      */
     public function aboutsite()
     {
-        return view('about_site');
+        return redirect('tudnivalo/1/tudnivalok-a-tarsadalmi-jollet-portalrol');
+        //return view('about_site');
     }
 
     /**

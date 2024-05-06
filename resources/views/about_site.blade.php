@@ -3,7 +3,7 @@
 @section('url', 'https://tarsadalmijollet.hu/tudnivalok')
 @section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/tudnivalok" />
 @endsection
-
+<!--
 @section('content')
 	<div class="inner_box narrow-page">
 		<h2>Tudnivalók Társadalmi Jóllét Portálról</h2><br>
@@ -51,4 +51,4 @@
  	</div>
 @endsection
 
-
+-->
