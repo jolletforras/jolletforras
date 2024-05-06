@@ -15,14 +15,14 @@
             E-mail cím: tarsadalmi.jollet(kukac)gmail.com<br>
             <i>Adatkezelésért felelős személyek</i><br>
             Ludescher Ottó tel: +36 70 593 5072 email: ludescher.otto(kukac)gmail.com<br>
-            Pataki Andrea tel: +36 30 289 78 30 e-mail: pataki.andrea(kukac)kontaktia.hu<br>
+            P. Horváth Andrea tel: +36 30 289 78 30 e-mail: p.horvath.andrea(kukac)gmail.com<br>
             <i>A tárhely szolgáltató adatai és elérhetőségei</i><br>
-            Cégnév: Giganet Internet Kft.<br>
-            Székhely cím és postai cím :4400 Nyíregyháza Vasvári Pál utca 1. <br>
-            Telefon: +36 42 512 000<br>
-            Adószám: 12885316-2-15<br>
-            E-mail cím: info(kukac)giganet.hu<br>
-            Weboldal: giganet.hu<br>
+            Cégnév: Symbion Products Kft.<br>
+            Székhely cím és postai cím: 9086 Töltéstava, Petőfi utca 116. B. ép.<br>
+            Telefon: +36 20 203 3156<br>
+            Adószám: 23310795-2-08<br>
+            E-mail cím: szilard(kukac)symbion.hu<br>
+            Weboldal: products.symbion.hu<br>
             <br>
             <b>Az adatkezelés helye</b><br>
             A tarsadalmijollet.hu webhely.<br>
