@@ -15,6 +15,7 @@
 					editor.save();
 				});
 			},
+			language: 'hu_HU',
 			promotion: false,
 			plugins: 'link autolink image lists advlist emoticons',
 			toolbar: "insertfile undo redo | blocks | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | emoticons",

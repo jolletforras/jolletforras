@@ -12,6 +12,7 @@
 					editor.save();
 				});
 			},
+			language: 'hu_HU',
 			promotion: false,
 			plugins: 'link autolink',
 			toolbar: "undo redo | link",
