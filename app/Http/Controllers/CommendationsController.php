@@ -109,7 +109,7 @@ class CommendationsController extends Controller
     {
         $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\CommendationTag');
 
-        $title=$image=$description=NULL;
+        $title=$meta_image=$description=NULL;
         $extra_msg = '';
 
         if(!empty($request->get('url'))) {
@@ -118,7 +118,7 @@ class CommendationsController extends Controller
             $page_content = @file_get_contents($request->get('url'));
             if($page_content!==FALSE) {
                 $dom_obj->loadHTML($page_content);
-                $image = $title = $description = $site_name = null;
+                $meta_image = $title = $description = $site_name = null;
                 $xpath = new \DOMXPath($dom_obj);
                 $query = '//*/meta[starts-with(@property, \'og:\')]';
                 $metas = $xpath->query($query);
@@ -126,11 +126,13 @@ class CommendationsController extends Controller
                 foreach ($metas as $meta) {
                     $property = $meta->getAttribute('property');
                     $content = $meta->getAttribute('content');
-                    if($property=='og:image') $image = $content;
+                    if($property=='og:image') $meta_image = $content;
                     if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
                     if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
                     //if($property=='og:site_name') $site_name = $content;
                 }
+
+                if(empty($meta_image)) $extra_msg = " A megadott hivatkozásnál előkép nem tölthető be, ezért az ajánló módosításánál tölthetsz fel képet.";
             }
             else {
                 $extra_msg = $this->url_error_msg;
@@ -145,7 +147,7 @@ class CommendationsController extends Controller
             'public' => $request->has('public') ? 1 : 0,
             'active' => $request->has('active') ? 1 : 0,
             'meta_title' =>  $title,
-            'meta_image' =>  $image,
+            'meta_image' =>  $meta_image,
             'meta_description' =>  $description
         ]);
 
@@ -167,8 +169,10 @@ class CommendationsController extends Controller
                 'body' => $body
             ]);
 
-            $message = 'Az új ajánlót sikeresen felvetted, jóváhagyásra vár.'.$extra_msg;
+            $message = 'Az új ajánlót sikeresen felvetted, jóváhagyásra vár.';
         }
+
+        $message .= $extra_msg;
 
         $commendation->tags()->attach($tag_list);
 
