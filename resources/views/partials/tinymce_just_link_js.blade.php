@@ -1,5 +1,5 @@
-    <!-- <script type="text/javascript" src="{{ url('/') }}/js/tinymce/tinymce.min.js"></script> -->
-	<script src="https://cdn.tiny.cloud/1/4wpxi6263f6msfr9ig9wlijuaoxktuem219meicnzy4g11e3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript" src="{{ url('/') }}/js/tinymce/tinymce.min.js"></script>
+	<!-- <script src="https://cdn.tiny.cloud/1/4wpxi6263f6msfr9ig9wlijuaoxktuem219meicnzy4g11e3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 	<script>
 		tinymce.init({
 			entity_encoding : "raw",
@@ -12,11 +12,7 @@
 					editor.save();
 				});
 			},
-			plugins: [
-				"advlist autolink lists link charmap print preview anchor",
-				"code fullscreen",
-				"contextmenu paste"
-			],
+			plugins: 'link autolink',
 			toolbar: "undo redo | link",
 		});
 	</script>

@@ -1,5 +1,5 @@
-    <!-- <script type="text/javascript" src="{{ url('/') }}/js/tinymce/tinymce.min.js"></script> -->
-	<script src="https://cdn.tiny.cloud/1/4wpxi6263f6msfr9ig9wlijuaoxktuem219meicnzy4g11e3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript" src="{{ url('/') }}/js/tinymce/tinymce.min.js"></script>
+	<!-- <script src="https://cdn.tiny.cloud/1/4wpxi6263f6msfr9ig9wlijuaoxktuem219meicnzy4g11e3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 	<script>
 		tinymce.init({
 			entity_encoding : "raw",
@@ -15,12 +15,8 @@
 					editor.save();
 				});
 			},
-			plugins: [
-				"advlist autolink lists link image charmap print preview anchor",
-				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table contextmenu paste imagetools"
-			],
-			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ",
+			plugins: 'link autolink image lists advlist emoticons',
+			toolbar: "insertfile undo redo | blocks | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | emoticons",
 
 			images_upload_handler: function (blobInfo, success, failure) {
 				var image_size = Math.floor(blobInfo.blob().size / 1024);  // image size in kbytes
