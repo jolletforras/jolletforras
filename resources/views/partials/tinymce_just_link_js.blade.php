@@ -12,6 +12,7 @@
 					editor.save();
 				});
 			},
+			promotion: false,
 			plugins: 'link autolink',
 			toolbar: "undo redo | link",
 		});
