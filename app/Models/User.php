@@ -175,10 +175,14 @@ class User extends Authenticatable
 
     public function incompleteProfile() {
         return
-            strlen($this->name)<2 ||
+            strlen($this->name)<5 ||
+            strlen($this->location)=='' ||
             strlen($this->city)=='' ||
             strlen($this->introduction)<config('constants.LENGTH_INTRO') ||
-            $this->skill_tags->count()==0;
+            strlen($this->intention)<config('constants.LENGTH_INTENTION') ||
+            strlen($this->interest)<config('constants.LENGTH_INTEREST') ||
+            $this->skill_tags->count()==0 ||
+            $this->interest_tags->count()==0;
     }
 
     public function myProfile() {
