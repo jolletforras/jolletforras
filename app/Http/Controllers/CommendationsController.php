@@ -80,7 +80,12 @@ class CommendationsController extends Controller
             return redirect('/');
         }
 
-        return view('commendations.show', compact('commendation','comments'));
+        $image_url = $commendation->meta_image;
+        if($commendation->has_image) {
+            $image_url = url('/images/commendations')."/".$commendation->slug.".jpg?".$commendation->photo_counter;
+        }
+
+        return view('commendations.show', compact('commendation','image_url','comments'));
     }
 
 
@@ -200,7 +205,7 @@ class CommendationsController extends Controller
     {
         $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\CommendationTag');
 
-        $title=$image=$description=NULL;
+        $title=$meta_image=$image=$description=NULL;
         $extra_msg = '';
 
         if(!empty($request->get('url'))) {
@@ -209,7 +214,7 @@ class CommendationsController extends Controller
             $page_content = @file_get_contents($request->get('url'));
             if($page_content!==FALSE) {
                 $dom_obj->loadHTML($page_content);
-                $image = $title = $description = $site_name = null;
+                $meta_image = $title = $description = $site_name = null;
                 $xpath = new \DOMXPath($dom_obj);
                 $query = '//*/meta[starts-with(@property, \'og:\')]';
                 $metas = $xpath->query($query);
@@ -217,7 +222,7 @@ class CommendationsController extends Controller
                 foreach ($metas as $meta) {
                     $property = $meta->getAttribute('property');
                     $content = $meta->getAttribute('content');
-                    if($property=='og:image') $image = $content;
+                    if($property=='og:image') $meta_image = $content;
                     if($property=='og:title') $title = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
                     if($property=='og:description') $description = is_numeric(strpos($content,'Ã'))? utf8_decode($content) : $content;
                     //if($property=='og:site_name') $site_name = $content;
@@ -229,17 +234,50 @@ class CommendationsController extends Controller
         }
 
         $commendation = Commendation::findOrFail($id);
+        $prev_slug = $commendation->slug;
+        $prev_has_image = $commendation->has_image;
+
+
+        $slug = Str::slug($request->get('title'));
+
+        $image_file = $request->file('image');
+        $has_image = 0;
+
+        //ha most NEM tudja betölteni a képet a hivatkozásból, de adott meg képet, akkor azt elmenti
+        if(empty($meta_image) && !empty($image_file)) {
+            $imagename=$slug;
+            $base_path=base_path().'/public/images/commendations/';
+            $tmpimagename = 'tmp_'.$imagename.'.'.$image_file->getClientOriginalExtension();
+            $image_file->move($base_path,$tmpimagename);
+
+            $tmpfile=$base_path.$tmpimagename;
+            //a maximális magassága a képnek 600
+            generateImage($tmpfile, 600, 2, $base_path.$imagename.'.jpg');//1=>width; 2=>height
+            unlink($tmpfile);
+
+            $has_image = 1;
+
+            $commendation->photo_counter++;
+            $commendation->save();
+        }
+
+        //ha most be tudja tölteni a képet a hivatkozásból és korábban volt képe, akkor törli a korábbi képet
+        if($prev_has_image && !empty($meta_image)) {
+            $base_path=base_path().'/public/images/commendations/';
+            unlink($base_path.$prev_slug.'.jpg');
+        }
 
         $commendation->update([
             'title' => $request->get('title'),
             'body' =>  $request->get('body'),
             'url' =>  $request->get('url'),
-            'slug' => Str::slug($request->get('title')),
+            'slug' => $slug,
             'public' => $request->has('public') ? 1 : 0,
             'active' => $request->has('active') ? 1 : 0,
             'meta_title' =>  $title,
-            'meta_image' =>  $image,
-            'meta_description' =>  $description
+            'meta_image' =>  $meta_image,
+            'meta_description' =>  $description,
+            'has_image' =>  $has_image,
         ]);
 
         if(Auth::user()->admin) {

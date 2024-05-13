@@ -11,12 +11,22 @@
 		</div>
 
 		<div class="form-group">
-			<label for="url">Itt add meg, ha van hozzá hivatkozás:</label>
+			<label for="url">Itt add meg, ha van hozzá hivatkozás</label>
 			<input class="form-control" name="url" type="text" maxlength="255" value="@if(isset($commendation)){{old('url',$commendation->url)}}@else{{old('url')}}@endif" id="url">
 		</div>
 
+		@if(isset($commendation) && !empty($commendation->url) && empty($commendation->meta_image))
 		<div class="form-group">
-			<label for="tag_list">Címkék az ajánlóval kapcsolatban*:</label>
+			<label for="upload_image">Itt képet adhatsz meg a hivatkozáshoz</label>
+			<a href="#upload_image_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+			<div id="upload_image_info" class="collapse info">Mivel a hivatkozáshoz nem tud betölteni képet.</div>
+			<p>Fájlméret max. 2MB, megengedett formátum: .jpg, .png, .gif</p>
+			<input id="upload_image" class="form-control" name="image" type="file">
+		</div>
+		@endif
+
+		<div class="form-group">
+			<label for="tag_list">Címkék az ajánlóval kapcsolatban*</label>
 			<select id="tag_list" name="tag_list[]" class="form-control tag-list" multiple>
 				@foreach($tags as $key => $val)
 					<option value="{{ $key }}" @if(isset($selected_tags) && in_array($key,$selected_tags)) selected @endif>{{ $val }}</option>

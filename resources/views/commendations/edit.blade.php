@@ -9,7 +9,7 @@
 		</div>
 		<div class="panel-body">
 
-			<form method="POST" action="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit" accept-charset="UTF-8">
+			<form method="POST" action="{{url('ajanlo')}}/{{$commendation->id}}/{{$commendation->slug}}/modosit" accept-charset="UTF-8" enctype="multipart/form-data">
 				@include('commendations._form', ['submitButtonText'=>'Módosít'])
 			</form>
 		</div>
