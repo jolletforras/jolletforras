@@ -30,7 +30,7 @@
 			<p>Amennyiben a hivatkozás megadása mellett képet is feltöltesz, a hivatkozás előképe a kép lesz.</p>
             <p>Fájlméret max. 2MB, megengedett formátum: .jpg, .png, .gif</p>
             <input id="upload_image" class="form-control" name="image" type="file">
-			@if(isset($creation) && $creation->has_image)
+			@if(isset($creation) && !empty($creation->url) && $creation->has_image)
 				<p style="margin-top: 6px;">
 					<input name="delete_image" type="checkbox" value="1"> csak az aktuális kép törlése <img src="{{ url('/images/creations') }}/{{ $creation->slug}}.jpg?{{$creation->photo_counter}}" style="max-width: 10%;max-height: 50px;">
 				</p>
