@@ -15,7 +15,3 @@
 		</div>
 	</div>
 @stop
-
-@section('footer')
-	@include('creations._script')
-@endsection

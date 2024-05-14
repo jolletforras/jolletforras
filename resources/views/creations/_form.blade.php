@@ -1,7 +1,7 @@
         @csrf
 
 		<div class="form-group">
-			<label for="title">Cím*:</label>
+			<label for="title">Cím*</label>
 			<input class="form-control" required="required" name="title" type="text" maxlength="80" value="@if(isset($creation)){{old('title',$creation->title)}}@else{{old('title')}}@endif" id="title">
 		</div>
 
@@ -17,31 +17,30 @@
 			$url_checked =  $new_creation || !empty($creation->url); //ha új alkotás, vagy van megadva hivatkozás
 			$no_more_image = $nr_creation_image>=$max_nr_image && ($new_creation || $url_checked); //nem lehet képet feltölteni, ha már meg volt a 10 és új alkotás, vagy hivatkozás volt korább
 		?>
-        <div class="form-group" id="source_block">
-  		@if(!$no_more_image)
-			<input type="radio" id="url" name="source" value="url" onchange="source_change('url')" @if($url_checked)checked @endif>
-			<label for="url">Alkotásomról hivatkozást adok meg</label><br>
-			<input type="radio" id="image" name="source" value="image" onchange="source_change('image')" @if(!$url_checked)checked @endif>
-			<label for="image">Képet töltök fel ({{$nr_creation_image}}/{{$max_nr_image}})
-				<a href="#image_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label><br>
-			<div id="image_info" class="collapse info">Összesen {{$max_nr_image}} alkotás esetében van lehetőség kép feltöltésére</div>
-		@else
-			<div class="alert alert-info">
-				Eddig {{$max_nr_image}} képes alkotásod van. Amennyiben képet szeretnél feltölteni és nem hivatkozást megadni, írj ez ügyben a tarsadalmi.jollet@gmail.com e-mail címre.
-			</div>
-		@endif
-        </div>
-
-		<div class="form-group" id="url_block" style="display:<?=$url_checked?'block':'none'?>">
-			<label for="url">Itt add meg a hivatkozást, ahol elérhető az alkotásod*:</label>
+		<div class="form-group">
+			<label for="url">Itt add meg a hivatkozást, ha azon keresztül elérhető az alkotásod</label>
 			<input class="form-control" name="url" type="text" maxlength="255" value="@if(!empty($creation->url)){{old('url',$creation->url)}}@else{{old('url')}}@endif" id="url">
 		</div>
 
-        <div class="form-group" id="image_block" style="display:<?=$url_checked?'none':'block'?>">
-            <label for="url">Itt add meg a képet az alkotásodról*:</label>
+		@if(!$no_more_image)
+        <div class="form-group">
+            <label for="url">Itt add meg a képet az alkotásodról ({{$nr_creation_image}}/{{$max_nr_image}})
+				<a href="#image_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<p id="image_info" class="collapse info">Összesen {{$max_nr_image}} alkotás esetében van lehetőség kép feltöltésére.</p>
+			<p>Amennyiben a hivatkozás megadása mellett képet is feltöltesz, a hivatkozás előképe a kép lesz.</p>
             <p>Fájlméret max. 2MB, megengedett formátum: .jpg, .png, .gif</p>
             <input id="upload_image" class="form-control" name="image" type="file">
+			@if(isset($creation) && $creation->has_image)
+				<p style="margin-top: 6px;">
+					<input name="delete_image" type="checkbox" value="1"> csak az aktuális kép törlése <img src="{{ url('/images/creations') }}/{{ $creation->slug}}.jpg?{{$creation->photo_counter}}" style="max-width: 10%;max-height: 50px;">
+				</p>
+			@endif
         </div>
+		@else
+			<div class="alert alert-info">
+				Eddig {{$max_nr_image}} képes alkotásod van. Amennyiben képet szeretnél feltölteni és nem csak hivatkozást megadni, írj ez ügyben a tarsadalmi.jollet@gmail.com e-mail címre.
+			</div>
+		@endif
 
 		@if(isset($creation) && $creation->created_at<date("Y-m-d",strtotime("-2 week")))
 			<div class="form-group">

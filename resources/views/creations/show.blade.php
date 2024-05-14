@@ -14,15 +14,15 @@
 			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/alkotasok"> << Alkotásaim</a>
 		@endif
 		<br>
-		@if($creation->has_image)
+		@if($creation->has_image && empty($creation->url))
 			<p style="text-align: center;"><img src="{{ url('/images/creations') }}/{{ $creation->slug}}.jpg?{{$creation->photo_counter}}" style="max-width: 50%;max-height: 400px;"></p>
 		@endif
 		{!! nl2br($creation->body) !!}
 		@if(!empty($creation->url))
 			<div class="inner_box" style="background-color: #fbfbfb">
 				<p><a href="{{ $creation->url }}" target="_blank">@if(empty($creation->meta_title)){{ $creation->url}}@else{{ $creation->meta_title }}@endif</a></p>
-				@if(!empty($creation->meta_image))
-				<p><a href="{{ $creation->url }}" target="_blank"><img src="{{$creation->meta_image}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
+				@if(!empty($image_url))
+				<p><a href="{{ $creation->url }}" target="_blank"><img src="{{$image_url}}" style="max-height: 300px; max-width:100%; display: block; margin-left: auto; margin-right: auto;"></a></p>
 				@endif
 				@if(!empty($creation->meta_description))
 				<p>{{ $creation->meta_description }}</p>

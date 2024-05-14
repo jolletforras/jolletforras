@@ -59,7 +59,12 @@ class CreationsController extends Controller
             }
         }
 
-        return view('creations.show', compact('creation','comments'));
+        $image_url = $creation->meta_image;
+        if($creation->has_image) {
+            $image_url = url('/images/creations')."/".$creation->slug.".jpg?".$creation->photo_counter;
+        }
+
+        return view('creations.show', compact('creation','image_url','comments'));
     }
 
 
@@ -145,15 +150,16 @@ class CreationsController extends Controller
             rename($base_path.$prev_slug.'.jpg',$base_path.$slug.'.jpg');
         }
 
-        //ha korábban kép volt és hivatkozás most, akkor a képet törli és a számlálót csökkenti
-        if($prev_has_image && $request->source=='url') {
+        //ha korábban volt kép, most nincs, de törölni szeretné az előzőt
+        if($prev_has_image && empty($request->file('image')) && $request->has('delete_image')) {
             $base_path=base_path().'/public/images/creations/';
             unlink($base_path.$prev_slug.'.jpg');
+
             Auth::user()->nr_creation_image--;
             Auth::user()->save();
         }
 
-        //ha korábban hivatkozás volt és most kép lett a számlálót növeli
+        //ha korábban nem volt és most lett kép a számlálót növeli
         if(!$prev_has_image && $creation->has_image) {
             Auth::user()->nr_creation_image++;
             Auth::user()->save();
@@ -193,8 +199,8 @@ class CreationsController extends Controller
 
         $url = $request->get('url');
         $image_file = $request->file('image');
-        //akkor van képe, ha a kép kiválasztásánál van és most adott meg képet vagy módosítás és korábban adott meg képet
-        $has_image = $request->source=="image" && (!empty($image_file) || isset($creation) && $creation->has_image) ? 1 : 0;
+        //akkor van képe, ha most adott meg képet vagy módosítás és korábban adott meg képet, de most nem törölte
+        $has_image = (!empty($image_file) || isset($creation) && $creation->has_image && !$request->has('delete_image')) ? 1 : 0;
 
         //ha nincs hivatkozás és kép se lesz
         if(empty($url)&&!$has_image) {
