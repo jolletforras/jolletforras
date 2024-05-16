@@ -224,7 +224,7 @@ class User extends Authenticatable
         return $location;
     }
 
-    public function incNewPost($notifiable_id,$type,$commenter_id) {
+    static function incNewPost($notifiable_id,$type,$commenter_id) {
 
         $table = $type=='Forum' ? 'forums' : 'events';
         $two_weeks_before = date( 'Y-m-d', strtotime('-2 weeks'));
@@ -257,7 +257,7 @@ class User extends Authenticatable
     }
 
     //beállítja a new_post értéket aszerint hogy hány olyan csoport téma/esemény van, ahol még nem olvasta el a bejegyzést vagy a legújabb hozzászólásokat
-    public function adjustGroupNewPostAll() {
+    static function adjustGroupNewPostAll() {
         DB::table('users')->update(['new_post' => 0]);
 
         $query = "
@@ -273,7 +273,7 @@ class User extends Authenticatable
     }
 
     //beállítja a new_post értéket aszerint hogy hány olyan csoport téma/esemény van, ahol még nem olvasta el a bejegyzést vagy a legújabb hozzászólásokat
-    public function adjustGroupNewPost($user_id) {
+    static function adjustGroupNewPost($user_id) {
         DB::table('users')->where('id',$user_id)->update(['new_post' => 0]);
 
         $query = "
@@ -290,7 +290,7 @@ class User extends Authenticatable
 
 
     //beállítja a user_new_post értéket aszerint hogy hány olyan írás, alkotás van, ahol még nem olvasta el a bejegyzést és nem a sajátja
-    public function adjustUserNewPostAll($num_new_posts,$two_weeks_before) {
+    static function adjustUserNewPostAll($num_new_posts,$two_weeks_before) {
         $query = "
             UPDATE users AS u
             LEFT JOIN (
