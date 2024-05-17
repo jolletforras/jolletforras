@@ -31,8 +31,8 @@
 				<br>
 				<div id="participants" style="display:<?=$participate!=1?'block':'none'?>;"><?=$participants?'Ott lesznek: '.$participants:''?></div>
 				<div id="participants-with-me" style="display:<?=$participate==1?'block':'none'?>;">Ott lesznek: {!! $participants_with_me !!}</div>
-				<div id="no-participants" style="display:<?=$participate!=0?'block':'none'?>;"><?=$no_participants?'Nem lesznek ott: '.$no_participants:''?></div>
-				<div id="no-participants-with-me" style="display:<?=$participate==0?'block':'none'?>;">Nem lesznek ott: {!! $no_participants_with_me !!}</div>
+				<div id="no-participants" style="display:<?=$participate!=0?'block':'none'?>;"><?=$no_participants?'Jelezték, hogy nem lesznek ott: '.$no_participants:''?></div>
+				<div id="no-participants-with-me" style="display:<?=$participate==0?'block':'none'?>;">Jelezték, hogy nem lesznek ott: {!! $no_participants_with_me !!}</div>
 				<br>
 			@endif
 			@if (Auth::check() && $event->isGroupEvent() && $event->visibility!='group')
