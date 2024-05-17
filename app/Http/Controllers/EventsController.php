@@ -115,8 +115,9 @@ class EventsController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->orderBy('lev1_comment_id', 'ASC')->orderBy('created_at', 'ASC')->get();
 
-        $participants = '';
-        $participants_with_me = '';
+        $participate = -1;
+        $participants = $participants_with_me = '';
+        $no_participants = $no_participants_with_me = '';
         if(Auth::check()) {
             $participants_r = $no_participants_r = array();
             foreach($event->participants as $user) {
