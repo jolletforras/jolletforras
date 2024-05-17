@@ -29,7 +29,7 @@ class Event extends Model
 
     public function participants()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot(['participate'])->withTimestamps();
     }
 
     public function getCreatedAtAttribute($date)

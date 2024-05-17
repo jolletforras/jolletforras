@@ -22,10 +22,17 @@
 			{!! $event->body !!}
 			@include('partials.author', ['author'=>'Eseményt felvette: ','obj'=>$event])
 			@if($event->isGroupEvent() && Auth::check() && $event->group->isMember())
-				<input name="participate" id="participate" type="checkbox" onchange="check()"  value="1" @if($participate) checked @endif>
-				Részt veszek<br>
-				<div id="participants-with-me" style="display:<?=$participate?'block':'none'?>;">Ott lesznek: {!! $participants_with_me !!}</div>
-				<div id="participants" style="display:<?=$participate?'none':'block'?>;"><?=$participants?'Ott lesznek: '.$participants:''?></div>
+				Részt veszek:
+				<select name="participate" id="participate" class="form-control" style="width:90px;display: inline-block;" onchange="change()">
+					<option value="-1" @if($participate==-1) selected @endif>válassz</option>
+					<option value="1" @if($participate==1) selected @endif>igen</option>
+					<option value="0" @if($participate==0) selected @endif>nem</option>
+				</select>
+				<br>
+				<div id="participants" style="display:<?=$participate!=1?'block':'none'?>;"><?=$participants?'Ott lesznek: '.$participants:''?></div>
+				<div id="participants-with-me" style="display:<?=$participate==1?'block':'none'?>;">Ott lesznek: {!! $participants_with_me !!}</div>
+				<div id="no-participants" style="display:<?=$participate!=0?'block':'none'?>;"><?=$no_participants?'Nem lesznek ott: '.$no_participants:''?></div>
+				<div id="no-participants-with-me" style="display:<?=$participate==0?'block':'none'?>;">Nem lesznek ott: {!! $no_participants_with_me !!}</div>
 				<br>
 			@endif
 			@if (Auth::check() && $event->isGroupEvent() && $event->visibility!='group')
@@ -108,17 +115,31 @@
 			}
 		}
 
-		function check(){
-			var participate = 0;
-			if($("#participate").is(':checked')) participate=1;
+		function change(){
+			var participate = $( "#participate" ).val();
 
-			if(participate) {
-				$("#participants-with-me").show();
-				$("#participants").hide();
-			}
-			else {
-				$("#participants-with-me").hide();
+			//nem válaszoltam
+			if(participate==-1) {
 				$("#participants").show();
+				$("#participants-with-me").hide();
+				$("#no-participants").show();
+				$("#no-participants-with-me").hide();
+			}
+
+			//nem veszek rész
+			if(participate==0) {
+				$("#participants").show();
+				$("#participants-with-me").hide();
+				$("#no-participants").hide();
+				$("#no-participants-with-me").show();
+			}
+
+			//részt veszek
+			if(participate==1) {
+				$("#participants").hide();
+				$("#participants-with-me").show();
+				$("#no-participants").show();
+				$("#no-participants-with-me").hide();
 			}
 
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

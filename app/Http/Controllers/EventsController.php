@@ -115,25 +115,33 @@ class EventsController extends Controller
 
         $comments = Comment::where('commentable_type', 'App\Models\Event')->where('commentable_id', $id)->orderBy('lev1_comment_id', 'ASC')->orderBy('created_at', 'ASC')->get();
 
-        $participate = false;
         $participants = '';
         $participants_with_me = '';
         if(Auth::check()) {
-            $participants_r = array();
+            $participants_r = $no_participants_r = array();
             foreach($event->participants as $user) {
+                $participate = -1;
                 if($user->id==Auth::user()->id) {
-                    $participate = true;
+                    $participate = $user->pivot->participate ? 1 : 0;
                 }
                 else {
-                    $participants_r[] = '<a href="'.url('profil').'/'.$user->id.'/'.$user->slug.'">'.$user->name.'</a>';
+                    $u = '<a href="'.url('profil').'/'.$user->id.'/'.$user->slug.'">'.$user->name.'</a>';
+                    if($user->pivot->participate)
+                        $participants_r[] = $u;
+                    else
+                        $no_participants_r[] = $u;
                 }
             }
             $participants = implode(", ",$participants_r);
-            $participants_r[] = '<a href="'.url('profil').'/'.Auth::user()->id.'/'.Auth::user()->slug.'">'.Auth::user()->name.'</a>';
+            $no_participants = implode(", ",$no_participants_r);
+            $my_name = '<a href="'.url('profil').'/'.Auth::user()->id.'/'.Auth::user()->slug.'">'.Auth::user()->name.'</a>';
+            $participants_r[] = $my_name;
             $participants_with_me = implode(", ",$participants_r);
+            $no_participants_r[] = $my_name;
+            $no_participants_with_me = implode(", ",$no_participants_r);
         }
 
-        return view('events.show', compact('event','has_access', 'comments', 'users_read_it','participate','participants','participants_with_me'));
+        return view('events.show', compact('event','has_access', 'comments', 'users_read_it','participate','participants','no_participants','participants_with_me','no_participants_with_me'));
     }
 
 
@@ -335,11 +343,10 @@ class EventsController extends Controller
         $user_id = Auth::user()->id;
         $participate = $request->get('participate');
 
-        if($participate) {
-            $event->participants()->attach($user_id);
-        }
-        else {
-            $event->participants()->detach($user_id);
+        $event->participants()->detach($user_id);
+
+        if($participate>=0) {
+            $event->participants()->attach($user_id, ['participate'=>$participate]);
         }
 
         $response = array('status' => 'success');
