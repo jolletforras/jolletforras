@@ -121,7 +121,6 @@ class EventsController extends Controller
         if(Auth::check()) {
             $participants_r = $no_participants_r = array();
             foreach($event->participants as $user) {
-                $participate = -1;
                 if($user->id==Auth::user()->id) {
                     $participate = $user->pivot->participate ? 1 : 0;
                 }
