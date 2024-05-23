@@ -19,7 +19,7 @@ function getfirstimage($description)
     $start = strpos($description,'<img');
     if(is_numeric($start)) {
         $text = substr($description,$start);
-        $end = strpos($text,'/>');
+        $end = strpos($text,'>');
         $text = substr($text,0,$end);
         $start = strrpos($text,'/');
         $text = substr($text,$start+1);
