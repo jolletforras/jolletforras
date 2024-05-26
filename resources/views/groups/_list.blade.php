@@ -8,7 +8,7 @@
         </h3>
         <p style="text-align: center;">
             @if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
-                <img src="{{ url('/images/groups') }}/{{$group->id}}.jpg" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;" class="img-responsive">
+                <img src="{{ url('/images/groups') }}/{{$group->id}}.jpg?{{$group->photo_counter}}" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;" class="img-responsive">
             @else
                 <img src="{{ url('/images') }}/tarsadalmijollet.png" style="display: block; margin-left: auto; margin-right: auto; max-height: 300px;" class="img-responsive">
             @endif
