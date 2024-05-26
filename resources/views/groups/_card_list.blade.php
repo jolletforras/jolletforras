@@ -13,8 +13,8 @@
                 </h3>
             </div>
             <div class="image-box">
-                @if(file_exists(public_path('images/groups/'.$group->id.'.jpg?'.$group->photo_counter)))
-                <div class="image" style="background-image:url('{{url('images')}}/groups/{{$group->id}}.jpg');"></div>
+                @if(file_exists(public_path('images/groups/'.$group->id.'.jpg')))
+                <div class="image" style="background-image:url('{{url('images')}}/groups/{{$group->id}}.jpg?{{$group->photo_counter}}');"></div>
                 @else
                 <div class="image" style="background-image:url('{{url('images')}}/tarsadalmijollet.png');"></div>
                 @endif
