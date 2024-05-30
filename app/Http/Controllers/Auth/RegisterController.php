@@ -96,14 +96,14 @@ class RegisterController extends Controller
         //--------------------------------------------------------------------------------------------------------------
         Mail::send('auth.emails.confirm', $data, function($message) use ($data)
         {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->from('jolletforras@gmail.com', "jolletforras.hu");
             $message->subject("email cím megerősítése");
             $message->to($data['email']);
         });
 
         $body = view('auth.emails.new_user',$data)->render();
         Sendemail::create([
-            'to_email' => "tarsadalmi.jollet@gmail.com",
+            'to_email' => "jolletforras@gmail.com",
             'subject' => "új regisztráló",
             'body' => $body
         ]);
@@ -137,7 +137,7 @@ class RegisterController extends Controller
             $body = view('auth.emails.welcome',$data)->render();
             Sendemail::create([
                 'to_email' => $data['email'],
-                'subject' => "Köszöntünk a Portálon! A következő lépés",
+                'subject' => "Köszöntünk a Jóllét Forrás oldalon! A következő lépés",
                 'body' => $body
             ]);
 

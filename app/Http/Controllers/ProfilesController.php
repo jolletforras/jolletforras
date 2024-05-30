@@ -83,7 +83,7 @@ class ProfilesController extends Controller
 
 			Mail::send('auth.emails.approve', $data, function($message) use ($data)
 			{
-				$message->from('nevalaszolj@tarsadalmijollet.hu', "tarsadalmijollet.hu");
+				$message->from('nevalaszolj@jolletforras.hu', "jolletforras.hu");
 				$message->subject("jelentkezésed jóváhagytuk");
 				$message->to($data['email']);
 			});
@@ -105,7 +105,7 @@ class ProfilesController extends Controller
 
 			Mail::send('auth.emails.decline', $data, function($message) use ($data)
 			{
-				$message->from('nevalaszolj@tarsadalmijollet.hu', "tarsadalmijollet.hu");
+				$message->from('nevalaszolj@jolletforras.hu', "jolletforras.hu");
 				$message->subject("jóváhagyásod függőben van");
 				$message->to($data['email']);
 			});
@@ -318,14 +318,14 @@ class ProfilesController extends Controller
 	private function sendApproveRequestEmail($user) {
 
 		$data['name'] = $user->name;
-		$data['profil_url']='http://tarsadalmijollet.hu/profil/'.$user->id.'/'.$user->slug;
+		$data['profil_url']='http://jolletforras.hu/profil/'.$user->id.'/'.$user->slug;
 
 		$admins = User::admins()->get();
 		foreach($admins as $admin) {
 			$data['email']=$admin->email;
 			Mail::send('auth.emails.approve_request', $data, function($message) use ($data)
 			{
-				$message->from('nevalaszolj@tarsadalmijollet.hu', "tarsadalmijollet.hu");
+				$message->from('nevalaszolj@jolletforras.hu', "jolletforras.hu");
 				$message->subject("új jóváhagyásra váró");
 				$message->to($data['email']);
 			});
@@ -333,9 +333,9 @@ class ProfilesController extends Controller
 
 		/*Mail::send('auth.emails.approve_request', $data, function($message) use ($data)
 		{
-			$message->from('nevalaszolj@tarsadalmijollet.hu', "tarsadalmijollet.hu");
+			$message->from('nevalaszolj@jolletforras.hu', "jolletforras.hu");
 			$message->subject("új jóváhagyásra váró");
-			$message->to('tarsadalmijollet@gmail.com');
+			$message->to('jolletforras@gmail.com');
 		});*/
 	}
 
@@ -556,7 +556,7 @@ class ProfilesController extends Controller
                         $data['user_name'] = $user->name;
                         $body = view('profiles.emails.deactivation',$data)->render();
                         Sendemail::create([
-                            'to_email' => 'tarsadalmi.jollet@gmail.com',
+                            'to_email' => 'jolletforras@gmail.com',
                             'subject' => "Deaktiválta magát egy felhasználó",
                             'body' => $body
                         ]);

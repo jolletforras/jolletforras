@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('description', 'Társak a Társadalmi Jóllét Portálon. Nyilvános bemutatkozások. A további bemutatkozásokat belépés vagy regisztráció után éred el. Csatlakozz hozzánk, várunk!')
+@section('description', 'Társak a Jóllét Forrás oldalon. Nyilvános bemutatkozások. A további bemutatkozásokat belépés vagy regisztráció után éred el. Csatlakozz hozzánk, várunk!')
 @section('url'){{url('profil')}}/{{$user->id}}/{{$user->slug}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('profil')}}/{{$user->id}}/{{$user->slug}}" />
 @endsection
@@ -33,7 +33,7 @@
 			<h4><b>Bemutatkozás:</b></h4>
 			{!! $user->introduction !!}
 			@if($user->intention!='')
-				<h4><b>Amiért itt vagyok a portálon:</b></h4>
+				<h4><b>Amiért itt vagyok a Jóllét Forrás oldalon:</b></h4>
 				{!! $user->intention !!}
 			@endif
 			@if($user->interest!='')

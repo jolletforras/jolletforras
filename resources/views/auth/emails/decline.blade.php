@@ -4,4 +4,4 @@
 
 <p>Köszönjük a megértésed.</p>
 
-<p>http://tarsadalmijollet.hu</p>
+<p>http://jolletforras.hu</p>

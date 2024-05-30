@@ -36,7 +36,7 @@ class SendStoredEmails extends Command
             $data = $email->toArray();
 
             Mail::send([], $data, function ($message) use ($data) {
-                $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+                $message->from('jolletforras@gmail.com', "jolletforras.hu");
                 $message->subject($data['subject']);
                 $message->setBody($data['body'],'text/html');
                 $message->to($data['to_email']);

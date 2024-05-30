@@ -4,22 +4,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	@yield('robots','')
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="@yield('description','A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
+	<meta name="description" content="@yield('description','A Jóllét Forrás oldal találkozási tér mindazok számára, akik részt vesznek a közös jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	@yield('canonical','')
 
 	<meta property="og:locale" content="hu_HU" />
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="@yield('title','Társadalmi Jóllét Portál')">
-	<meta property="og:description" content="@yield('description','A Társadalmi Jóllét Portál találkozási tér mindazok számára, akik részt vesznek a társadalmi jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
-	<meta property="og:url" content="@yield('url','https://tarsadalmijollet.hu/')">
-	<meta property="og:site_name" content="Társadalmi Jóllét Portál">
-	<meta property="og:image" content="@yield('image','https://tarsadalmijollet.hu/images/tarsadalmijollet.png')">
+	<meta property="og:title" content="@yield('title','Jóllét Forrás')">
+	<meta property="og:description" content="@yield('description','A Jóllét Forrás oldal találkozási tér mindazok számára, akik részt vesznek a közös jóllétet megvalósító, emberközpontú új világ megteremtésében.')">
+	<meta property="og:url" content="@yield('url','https://jolletforras.hu/')">
+	<meta property="og:site_name" content="Jóllét Forrás">
+	<meta property="og:image" content="@yield('image','https://jolletforras.hu/images/jolletforras.png')">
 
     <link rel="shortcut icon" href="{{ url('/') }}/favicon.png?2">
     
 
-    <title>Társadalmi Jóllét Portál</title>
+    <title>Jóllét Forrás</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -43,7 +43,8 @@
 <body id="app-layout">
 	<div class="base">
 		<div class="oldal_nev">
-	 		<h1><a href="{{ url('/') }}">Társadalmi Jóllét Portál</a></h1>
+			<a href="{{ url('/') }}"><h1>Jóllét Forrás</h1> <span>találkozási tér</span></a>
+			<!--<a href="{{ url('/') }}"><h1><span id="jollet">Jóllét</span> <span id="forras">Forrás</span></h1> <span id="talalkozasi-ter">találkozási tér</span></a>-->
 		</div>
 		@if( Auth::check())
 			<div class="notice group" data-toggle="modal" data-target="#notice-group-modal" id="notice-group">
@@ -58,7 +59,7 @@
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
-					<h2><img src="{{ url('/') }}/logo.png" alt="Társadalmi Jóllét"></h2>
+					<h2><img src="{{ url('/') }}/logo.png" alt="Jóllét Forrás"></h2>
                 					<!-- Collapsed Hamburger -->
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
 						<span class="sr-only">Toggle Navigation</span>
@@ -78,7 +79,7 @@
 									<li><a href="{{ url('tortenesek') }}">Elmúlt 1 hónapban</a></li>
 									<li><a href="{{ url('esemenyek') }}">Események</a></li>
 								@guest
-									<li><a href="{{ url('hirlevelek') }}">Portál Hírlevél</a></li>
+									<li><a href="{{ url('hirlevelek') }}">Jóllét Forrás hírlevél</a></li>
 								@endif
 									<li><a href="{{ url('csoport') }}/hirek">Csoport hírek</a></li>
 									<li><a href="{{ url('kezdemenyezes') }}/hirek">Kezdeményezés hírek</a></li>
@@ -170,7 +171,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Az elmúlt 2 hét történései a portál tagjainál</h4>
+							<h4 class="modal-title">Az elmúlt 2 hét történései a Jóllét Forrás oldal tagjainál</h4>
 						</div>
 						<div class="modal-body" id="notice-user-content"> ... hamarosan megjelenik</div>
 						<div class="modal-footer"><input type="hidden" name="notice-user-loaded" id="notice-user-loaded" value="0"></div>
@@ -206,7 +207,7 @@
 				<a href="{{ url('/tudnivalok') }}">Tudnivalók</a> -
 				<a href="{{ url('/kapcsolat') }}">Kapcsolat</a>
 			</div>
-			<div class="right">© 2023 Társadalmi Jóllét Portál</div>
+			<div class="right">© 2024 Jóllét Forrás</div>
 		</footer>
 	</div>
 

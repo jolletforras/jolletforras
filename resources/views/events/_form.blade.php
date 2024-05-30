@@ -36,7 +36,7 @@
 			@if($group_id==0)
 				<div id="public_info" class="collapse info">Ha nyilvános az esemény, akkor a nem regisztráltak számára is elérhető.</div>
 			@else
-				<div id="public_info" class="collapse info">Ha a láthatóság "csoport", akkor csak a csoport számára elérhető az esemény; ha "portál" akkor minden regisztrált számára; ha "nyilvános" akkor a nem regisztráltak számára is látható.</div>
+				<div id="public_info" class="collapse info">Ha a láthatóság "csoport", akkor csak a csoport számára elérhető az esemény; ha "az oldalon" akkor minden regisztrált számára; ha "nyilvános" akkor a nem regisztráltak számára is látható.</div>
 			@endif
 		</div>
 

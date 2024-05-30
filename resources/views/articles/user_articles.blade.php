@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description'){{$user->name}} írásai a Társadalmi Jóllét Portálon. Milyen legyen az új világunk? Olvasd el a Portál tagjainak írásait, csatlakozz hozzánk és írj Te is saját cikket! Várunk!@endsection
-@section('url')https://tarsadalmijollet.hu/profil/{{$user->id}}/{{$user->slug}}/irasok @endsection
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/profil/{{$user->id}}/{{$user->slug}}/irasok" />
+@section('description'){{$user->name}} írásai a Jóllét Forrás oldalon. Milyen legyen az új világunk? Olvasd el a Jóllét Forrás oldal tagjainak írásait, csatlakozz hozzánk és írj Te is saját cikket! Várunk!@endsection
+@section('url')https://jolletforras.hu/profil/{{$user->id}}/{{$user->slug}}/irasok @endsection
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/profil/{{$user->id}}/{{$user->slug}}/irasok" />
 @endsection
 
 @section('content')

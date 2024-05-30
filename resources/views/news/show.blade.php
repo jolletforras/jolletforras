@@ -3,7 +3,7 @@
 @section('description'){{ $news->meta_description }}@endsection
 @section('url'){{url('hir')}}/{{$news->id}}/{{$news->slug}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('hir')}}/{{$news->id}}/{{$news->slug}}" />@endsection
-@section('image')@if(!empty($news->image)){{url('/')}}/images/posts/{{$news->image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
+@section('image')@if(!empty($news->image)){{url('/')}}/images/posts/{{$news->image}}@else{{url('/images/jolletforras.png')}}@endif
 @endsection
 
 @section('content')

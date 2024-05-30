@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Események a Társadalmi Jóllét Portálon. Programok, fórumok, lehetőségek, amelyek a társadalmi jóllét megvalósítását segítik. Nézz szét, regisztrálj, kapcsolódj!')
-@section('url', 'https://tarsadalmijollet.hu/esemenyek')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/esemenyek" />
+@section('description', 'Események a Jóllét Forrás oldalon. Programok, fórumok, lehetőségek, amelyek a közös jóllét megvalósítását segítik. Nézz szét, regisztrálj, kapcsolódj!')
+@section('url', 'https://jolletforras.hu/esemenyek')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/esemenyek" />
 @endsection
 
 @section('content')
@@ -20,11 +20,11 @@
 	</div>
 	@guest
 	<div class="inner_box narrow-page">
-		A Társadalmi Jóllét Portálon létrehozhatod és kommunikálhatod az eseményedet, magánszemélyként vagy egy csoport eseményeként.<br>
+		A Jóllét Forrás oldalon létrehozhatod és kommunikálhatod az eseményedet, magánszemélyként vagy egy csoport eseményeként.<br>
 		<a href="{{url('tudnivalo')}}/10/esemenyek">ITT</a> találsz erről részletes leírást.<br>
 		<br>
 		Szeretnél értesülni új eseményekről?<br>
-		- Ha van kedved, regisztrálj a Portálon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
+		- Ha van kedved, regisztrálj a Jóllét Forrás oldalon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
 		- Ha még csak távolabbról ismerkednél, iratkozz fel a hírlevelünkre <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a>.<br>
 	</div>
 	@endguest

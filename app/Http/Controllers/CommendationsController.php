@@ -164,7 +164,7 @@ class CommendationsController extends Controller
             $body = view('commendations.email',$data)->render();
 
             Sendemail::create([
-                'to_email' => 'tarsadalmi.jollet@gmail.com',
+                'to_email' => 'jolletforras@gmail.com',
                 'subject' => "Új ajánló",
                 'body' => $body
             ]);

@@ -38,7 +38,7 @@
         </div>
 		@else
 			<div class="alert alert-info">
-				Eddig {{$max_nr_image}} képes alkotásod van. Amennyiben képet szeretnél feltölteni és nem csak hivatkozást megadni, írj ez ügyben a tarsadalmi.jollet@gmail.com e-mail címre.
+				Eddig {{$max_nr_image}} képes alkotásod van. Amennyiben képet szeretnél feltölteni és nem csak hivatkozást megadni, írj ez ügyben a jolletforras@gmail.com e-mail címre.
 			</div>
 		@endif
 
@@ -49,7 +49,7 @@
 					<span style="padding-top: 10px; font-size: 18px;">Inaktív</span>
 					<a href="#inactive_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 				</label>
-				<div id="inactive_info" class="collapse info">A két hétnél régebbi írások inaktívba rakhatóak. Ilyenkor nem jelenik meg az írás a portálon, csak a hivatkozás ismeretében érhető el.</div>
+				<div id="inactive_info" class="collapse info">A két hétnél régebbi írások inaktívba rakhatóak. Ilyenkor nem jelenik meg az írás a Jóllét Forrás oldalon, csak a hivatkozás ismeretében érhető el.</div>
 			</div>
 		@endif
 

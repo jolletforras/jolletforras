@@ -1,2 +1,2 @@
-<a href="https://tarsadalmijollet.hu/profil/{{ $user_id }}">{{$user_name}}</a> deaktiválta magát<br>
+<a href="https://jolletforras.hu/profil/{{ $user_id }}">{{$user_name}}</a> deaktiválta magát<br>
 

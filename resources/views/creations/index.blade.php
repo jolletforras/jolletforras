@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description'){{$user->name}} alkotásai a Társadalmi Jóllét Portálon. Nézd meg a Portál tagjainak alkotásait, csatlakozz hozzánk és vedd fel a saját alkotásod! Várunk!@endsection
-@section('url')https://tarsadalmijollet.hu/profil/{{$user->id}}/{{$user->slug}}/alkotasok @endsection
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/profil/{{$user->id}}/{{$user->slug}}/alkotasok" />
+@section('description'){{$user->name}} alkotásai a Jóllét Forrás oldalon. Nézd meg a Jóllét Forrás oldal tagjainak alkotásait, csatlakozz hozzánk és vedd fel a saját alkotásod! Várunk!@endsection
+@section('url')https://jolletforras.hu/profil/{{$user->id}}/{{$user->slug}}/alkotasok @endsection
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/profil/{{$user->id}}/{{$user->slug}}/alkotasok" />
 @endsection
 
 @section('content')

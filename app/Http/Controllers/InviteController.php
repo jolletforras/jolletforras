@@ -43,8 +43,8 @@ class InviteController extends Controller
 
         Mail::send('invite.email', $data, function($message) use ($data)
         {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
-            $message->subject("Ismerősöd meghívott a tarsadalmijollet.hu oldalra");
+            $message->from('jolletforras@gmail.com', "jolletforras.hu");
+            $message->subject("Ismerősöd meghívott a jolletforras.hu oldalra");
             if(count($data['email'])==1)
                 $message->to($data['email']);
             else

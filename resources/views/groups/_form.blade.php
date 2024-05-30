@@ -49,7 +49,7 @@
 		<div class="form-group">
 			<label for="webpage_name">Weboldalad neve:</label>
 			<a href="#webpage_name_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-			<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a portálon regisztráltaknak, írd ide. Ha több oldalad is van, azt az egyet írd ide, amit leginkább ide kapcsolódónak gondolsz.</div>
+			<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a Jóllét Forrás oldalon regisztráltaknak, írd ide. Ha több oldalad is van, azt az egyet írd ide, amit leginkább ide kapcsolódónak gondolsz.</div>
 			<input class="form-control" name="webpage_name" type="text" value="@if(isset($group)){{old('webpage_name',$group->webpage_name)}}@else{{old('webpage_name')}}@endif" id="webpage_name">
 		</div>
 
@@ -123,7 +123,7 @@
 				@endforeach
 			</select>
 			<a href="#user_visibility" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
-			<div id="user_visibility" class="collapse info">Ha a láthatóság "csoport", akkor csak a csoport tagok látják, hogy kik a tagjai a csoportnak; ha "portál" akkor minden regisztrált látja; ha "nyilvános" akkor a nem regisztráltak számára is látható, de csak azok a tagok akiknek nyilvános az adatlapja.</div>
+			<div id="user_visibility" class="collapse info">Ha a láthatóság "csoport", akkor csak a csoport tagok látják, hogy kik a tagjai a csoportnak; ha "az oldalon" akkor minden regisztrált látja; ha "nyilvános" akkor a nem regisztráltak számára is látható, de csak azok a tagok akiknek nyilvános az adatlapja.</div>
 		</div>
 
 		<div class="form-group">

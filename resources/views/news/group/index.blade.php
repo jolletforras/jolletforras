@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Csoportok hírei a Társadalmi Jóllét Portálon. Építő közösségek híreit, információit olvashatod. Csatlakozz hozzánk és adj hírt Te is a saját közösségedről! Várunk!')
-@section('url', 'https://tarsadalmijollet.hu/csoport/hirek')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/csoport/hirek" />
+@section('description', 'Csoportok hírei a Jóllét Forrás oldalon. Építő közösségek híreit, információit olvashatod. Csatlakozz hozzánk és adj hírt Te is a saját közösségedről! Várunk!')
+@section('url', 'https://jolletforras.hu/csoport/hirek')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/csoport/hirek" />
 @endsection
 
 @section('content')

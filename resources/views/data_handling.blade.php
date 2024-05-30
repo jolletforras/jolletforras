@@ -1,18 +1,18 @@
 @extends('layouts.app')
-@section('description', 'Adatkezelés. Így kezeljük a Társadalmi Jóllét Portálra regisztrált társak és közösségek adatait, hogy biztonságos és fenntartható teret nyújthassunk számukra.')
-@section('url', 'https://tarsadalmijollet.hu/adatkezeles')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/adatkezeles" />
+@section('description', 'Adatkezelés. Így kezeljük a Jóllét Forrás oldalra regisztrált társak és közösségek adatait, hogy biztonságos és fenntartható teret nyújthassunk számukra.')
+@section('url', 'https://jolletforras.hu/adatkezeles')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/adatkezeles" />
 @endsection
 @section('content')
    		<div class="inner_box narrow-page">
             <h2>Adatkezelés</h2><br>
             <br>
-            <b>A tarsadalmijollet.hu webhely adatai</b><br>
+            <b>A jolletforras.hu webhely adatai</b><br>
             <i>A honlap (domain) használó és elérhetőségei</i><br>
             Név: Ludescher Ottó magánszemély<br>
             Cím: 4400 Nyíregyháza Zászlós utca 4. 2/33.<br>
             Telefon: +36 70 593 5072<br>
-            E-mail cím: tarsadalmi.jollet(kukac)gmail.com<br>
+            E-mail cím: jollet.forras(kukac)gmail.com<br>
             <i>Adatkezelésért felelős személyek</i><br>
             Ludescher Ottó tel: +36 70 593 5072 email: ludescher.otto(kukac)gmail.com<br>
             P. Horváth Andrea tel: +36 30 289 78 30 e-mail: p.horvath.andrea(kukac)gmail.com<br>
@@ -25,7 +25,7 @@
             Weboldal: products.symbion.hu<br>
             <br>
             <b>Az adatkezelés helye</b><br>
-            A tarsadalmijollet.hu webhely.<br>
+            A jolletforras.hu webhely.<br>
             <br>
             <b>Adatkezelő adatkezelési céljai</b><br>
             Adatkezelő személyes adatot kizárólag a webhelyen megjelölt célokhoz kapcsolódóan kezel. Ezek a célok:<br>

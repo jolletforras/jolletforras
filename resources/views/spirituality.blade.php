@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Ami átfogóan kapcsolódik a Társadalmi Jóllét Portál által is képviselt szellemiséghez, az helyet kap itt.')
-@section('url', 'https://tarsadalmijollet.hu/szellemiseg')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/szellemiseg" /> @endsection
+@section('description', 'Ami átfogóan kapcsolódik a Jóllét Forrás oldal által is képviselt szellemiséghez, az helyet kap itt.')
+@section('url', 'https://jolletforras.hu/szellemiseg')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/szellemiseg" /> @endsection
 @section('image'){{ url('/images/szellemiseg.jpeg')}}@endsection
 
 @section('content')
@@ -9,12 +9,12 @@
         <h2>Szellemiség</h2>
     </div>
     <div class="inner_box narrow-page">
-        Ez az oldal azt szolgálja, hogy ami átfogóan kapcsolódik a Társadalmi Jóllét Portál által is képviselt szellemiséghez, az helyet kaphasson itt.<br>
+        Ez az oldal azt szolgálja, hogy ami átfogóan kapcsolódik a Jóllét Forrás oldal által is képviselt szellemiséghez, az helyet kaphasson itt.<br>
         <br>
         Itt találod <a href="{{ url('/az-uj-vilag-hangjai') }}">Az új világ hangjai</a> programot, az <a href="{{ url('/irasok') }}">Írásokat</a> és az <a href="{{ url('/ajanlo') }}">Ajánlót</a>.<br>
         <br>
         <h3>Milyen is ez a szellemiség?</h3>
-        A Portál <a href="{{ url('/') }}" target="_blank">nyitó oldalán</a> írunk erről, valamint ezen értékek és ideák alapján készítettük el a <a href="{{ url('/kozossegimegallapodas') }}" target="_blank">közösségi megállapodást</a>.
+        A Jóllét Forrás oldal <a href="{{ url('/') }}" target="_blank">nyitó oldalán</a> írunk erről, valamint ezen értékek és ideák alapján készítettük el a <a href="{{ url('/kozossegimegallapodas') }}" target="_blank">közösségi megállapodást</a>.
     </div>
     <br>
     <div class="row  narrow-page">
@@ -30,7 +30,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <p>Az új világ hangjai program célja, hogy megmutassuk azoknak az embereknek a jövőképét, akik a társadalmi jóllétért tevékenykednek.</p>
+                    <p>Az új világ hangjai program célja, hogy megmutassuk azoknak az embereknek a jövőképét, akik a közös jóllétért tevékenykednek.</p>
                     <a href="{{ url('/az-uj-vilag-hangjai') }}"> Részletek</a>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <p>A Portál tagjainak írásait találod itt. Egy írás a tartalma szerint lehet vélemény, meglátás kifejtése vagy saját kutatás bemutatása. Olvashatod mások írásait, hozzászólhatsz vagy regisztrációt követően elkészítheted és közzéteheted a saját írásodat.</p>
+                    <p>A Jóllét Forrás oldal tagjainak írásait találod itt. Egy írás a tartalma szerint lehet vélemény, meglátás kifejtése vagy saját kutatás bemutatása. Olvashatod mások írásait, hozzászólhatsz vagy regisztrációt követően elkészítheted és közzéteheted a saját írásodat.</p>
                     <a href="{{ url('/irasok') }}"> Részletek</a>
                 </div>
             </div>

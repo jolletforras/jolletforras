@@ -30,7 +30,7 @@
 							@endif
 
 							@if(strlen($user->intention)<config('constants.LENGTH_INTENTION'))
-								<li>Miért jöttél a portálra? (minimum {{config('constants.LENGTH_INTENTION')}} karakter  - most ennyi van: {{strlen($user->intention)}})</li>
+								<li>Miért jöttél a Jóllét Forrás oldalra? (minimum {{config('constants.LENGTH_INTENTION')}} karakter  - most ennyi van: {{strlen($user->intention)}})</li>
 							@endif
 
 							@if(strlen($user->interest)<config('constants.LENGTH_INTEREST'))
@@ -48,7 +48,7 @@
 						@endif
 
 						@if(!$user->incompleteProfile() && $user->has_photo==0)
-								Minden szükséges adatot megadtál. Már csak egy kép feltöltése szükséges ahhoz, hogy a regisztrációdat befejezd és használhasd a portál lehetőségeit.<br>
+								Minden szükséges adatot megadtál. Már csak egy kép feltöltése szükséges ahhoz, hogy a regisztrációdat befejezd és használhasd a Jóllét Forrás oldal lehetőségeit.<br>
 								A legegyszerűbb, ha máshol már használt profilképet töltesz fel ide is. <br><br>
 							<a href="{{ url('/profilom/feltolt_profilkep') }}" class="btn btn-primary">Kép feltöltése</a>
 						@endif
@@ -99,7 +99,7 @@
                         <div class="form-group">
 							<label for="webpage_name">Weboldalad neve</label>
 							<a href="#webpage_name_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-							<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a portálon regisztráltaknak, írd ide. Ha több oldalad is van, akkor egymástól vesszővel elválasztva add meg.</div>
+							<div id="webpage_name_info" class="collapse info">Ha van saját weboldalad, amit szívesen megmutatnál a Jóllét Forrás oldalon regisztráltaknak, írd ide. Ha több oldalad is van, akkor egymástól vesszővel elválasztva add meg.</div>
 							<input class="form-control" maxlength="200" name="webpage_name" type="text" value="{{old('webpage_name',$user->webpage_name)}}" id="webpage_name">
                         </div>
 
@@ -114,13 +114,13 @@
 							<b>Bemutatkozás*</b>
 							<a href="#intro_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 							<div id="intro_info" class="collapse info">
-								Mi mindent csináltál eddig és mivel foglalkozol most? Írj bátran mindarról, amit erre a portálra tartozónak gondolsz.
+								Mi mindent csináltál eddig és mivel foglalkozol most? Írj bátran mindarról, amit erre a Jóllét Forrás oldalra tartozónak gondolsz.
 							</div>
 							<textarea class="form-control" rows="5" name="introduction" cols="50">{{old('introduction',$user->introduction)}}</textarea>
 						</div>
 
 						<div class="form-group">
-							<b>Miért jöttél a portálra?*</b>
+							<b>Miért jöttél a Jóllét Forrás oldalra?*</b>
 							<a href="#intention_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 							<div id="intention_info" class="collapse info">
 								Mit szeretnél itt csinálni, milyen reményeid vannak az oldallal kapcsolatban?
@@ -131,7 +131,7 @@
 						<div class="form-group">
 							<b>Mi lelkesít, amivel a következő hónapokban foglalkozni szeretnél?*</b>
 							<a href="#interest_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-							<div id="interest_info" class="collapse info">Itt írhatsz konkrét kezdeményezéseidről, terveidről, amelyekkel a társadalmi jólléthez szeretnél hozzájárulni.</div>
+							<div id="interest_info" class="collapse info">Itt írhatsz konkrét kezdeményezéseidről, terveidről, amelyekkel a közös jólléthez szeretnél hozzájárulni.</div>
 							<textarea class="form-control" rows="5" name="interest" cols="50">{{old('interest',$user->interest)}}</textarea>
 						</div>
 

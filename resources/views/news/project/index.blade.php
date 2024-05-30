@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Kezdeményezések hírei a Társadalmi Jóllét Portálon.')
-@section('url', 'https://tarsadalmijollet.hu/kezdemenyezes/hirek')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/kezdemenyezes/hirek" />
+@section('description', 'Kezdeményezések hírei a Jóllét Forrás oldalon.')
+@section('url', 'https://jolletforras.hu/kezdemenyezes/hirek')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/kezdemenyezes/hirek" />
 @endsection
 
 @section('content')

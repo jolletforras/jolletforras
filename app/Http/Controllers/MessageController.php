@@ -43,14 +43,14 @@ class MessageController extends Controller
 
         Mail::send('profiles.emails.receiver', $data, function($message) use ($data)
         {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->from('jolletforras@gmail.com', "jolletforras.hu");
             $message->subject($data['sender_name']." írt neked");
             $message->to($data['email']);
         });
 
         Mail::send('profiles.emails.sender', $data, function($message) use ($data)
         {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->from('jolletforras@gmail.com', "jolletforras.hu");
             $message->subject($data['name']." üzenetet kapott tőled");
             $message->to($data['sender_email']);
         });

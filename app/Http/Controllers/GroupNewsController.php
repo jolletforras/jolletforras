@@ -20,7 +20,7 @@ class GroupNewsController extends Controller
 
     public function __construct() {
 		$this->middleware('auth', ['except'=>['index','show']]);
-        $this->visibility_options = ['portal'=>'portál','public'=>'nyilvános'];
+        $this->visibility_options = ['portal'=>'az oldalon','public'=>'nyilvános'];
 	}
 
 	public function index($id)

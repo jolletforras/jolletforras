@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('description', 'Az elmúlt 1 hónap történései')
-@section('url', 'https://tarsadalmijollet.hu/tortenesek')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/tortenesek" />
+@section('url', 'https://jolletforras.hu/tortenesek')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/tortenesek" />
 @endsection
 
 @section('content')

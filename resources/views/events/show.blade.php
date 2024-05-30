@@ -3,7 +3,7 @@
 @section('description'){{ $event->meta_description }}@endsection
 @section('url'){{url('esemeny')}}/{{$event->id}}/{{$event->slug}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('esemeny')}}/{{$event->id}}/{{$event->slug}}" /> @endsection
-@section('image')@if(!empty($event->image)){{url('/')}}/images/posts/{{$event->image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
+@section('image')@if(!empty($event->image)){{url('/')}}/images/posts/{{$event->image}}@else{{url('/images/jolletforras.png')}}@endif
 @endsection
 
 @section('content')

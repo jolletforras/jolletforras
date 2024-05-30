@@ -153,7 +153,7 @@ class EventsController extends Controller
 	 */
 	public function create()
 	{
-        $visibility = ['portal'=>'portál','public'=>'nyilvános'];
+        $visibility = ['portal'=>'az oldalon','public'=>'nyilvános'];
 
 		return view('events.create', compact('visibility'));
 	}
@@ -230,13 +230,13 @@ class EventsController extends Controller
 		if($event->group_id==0) {
             if(!($event->isEditor() || Auth::user()->admin)) return redirect('/');
 
-		    $visibility = ['portal'=>'portál','public'=>'nyilvános'];
+		    $visibility = ['portal'=>'az oldalon','public'=>'nyilvános'];
         } else {
             $group = Group::findOrFail($event->group_id);
 
             if (!($event->isEditor() || $group->isAdmin())) return redirect('/');
 
-            $visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
+            $visibility = ['group'=>'csoport','portal'=>'az oldalon','public'=>'nyilvános'];
         }
 
 		return view('events.edit', compact('event','visibility'));

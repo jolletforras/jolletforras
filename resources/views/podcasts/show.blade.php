@@ -2,7 +2,7 @@
 @section('title'){{ $podcast->title }}@endsection
 @section('description'){{ $podcast->meta_description }}@endsection
 @section('url'){{url('az-uj-vilag-hangjai')}}/{{$podcast->id}}/{{$podcast->slug}}@endsection
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/az-uj-vilag-hangjai" />
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/az-uj-vilag-hangjai" />
 @endsection
 
 @section('content')

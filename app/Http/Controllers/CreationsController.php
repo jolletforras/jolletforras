@@ -17,7 +17,7 @@ use Mail;
 
 class CreationsController extends Controller
 {
-    private $url_error_msg = 'A megadott hivatkozás nem megfelelő! Ha nem boldogulsz, küld el a hivatkozásod a tarsadalmi.jollet@gmail.com címre és mi ellenőrizzük.';
+    private $url_error_msg = 'A megadott hivatkozás nem megfelelő! Ha nem boldogulsz, küld el a hivatkozásod a jolletforras@gmail.com címre és mi ellenőrizzük.';
     private $source_error_msg = 'Hivatkozást vagy képet szükséges megadnod az alkotásodról.';
 
     public function __construct() {
@@ -98,7 +98,7 @@ class CreationsController extends Controller
         $body = view('creations.email',$data)->render();
 
         Sendemail::create([
-            'to_email' => 'tarsadalmi.jollet@gmail.com',
+            'to_email' => 'jolletforras@gmail.com',
             'subject' => "Új alkotás",
             'body' => $body
         ]);

@@ -2,7 +2,7 @@
                 <div class="col-sm-12">
                     <div class="inner_box collapse" id="create_events_info" style="font-size: 18px">
                         Ha eseményt szeretnél közzétenni, az legyen saját esemény, tehát ne más, külső eseményeket ajánlj.
-                        Mielőtt egy eseményt meghirdetsz, kérlek, gondold végig, hogy az esemény hogyan szolgálja a társadalmi jóllétet, valamint hogy az esemény programja és jellemzői összhangban legyenek a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodásban</a> foglaltakkal.
+                        Mielőtt egy eseményt meghirdetsz, kérlek, gondold végig, hogy az esemény hogyan szolgálja a közös jóllétet, valamint hogy az esemény programja és jellemzői összhangban legyenek a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodásban</a> foglaltakkal.
                         Az esemény leírásánál szerepeljenek a következők:
                         <ul>
                             <li>az esemény címe</li>

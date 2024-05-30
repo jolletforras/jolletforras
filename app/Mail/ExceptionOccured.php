@@ -28,6 +28,6 @@ class ExceptionOccured extends Mailable
      */
     public function build()
     {
-        return $this->view('errors.email')->with('content', $this->content)->subject('Hiba a TJ portálon');
+        return $this->view('errors.email')->with('content', $this->content)->subject('Hiba a Jóllét Forrás oldalon');
     }
 }

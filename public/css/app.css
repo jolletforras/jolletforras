@@ -52,17 +52,53 @@ body {
 }
 
 .oldal_nev {
-    text-shadow: 0 1px #000; 
     margin-bottom: 0px;
     padding-top: 10px;
     padding-bottom: 10px;
 	display: inline-block;
 }
 
-.oldal_nev a { 	
- 	color : #daa520;
+.oldal_nev a {
     text-decoration: none;
 }
+
+*
+.oldal_nev H1, .oldal_nev span {
+	display: inline-block;
+}
+
+.oldal_nev H1 {
+	text-shadow: 0 1px #000;
+	color : #daa520;
+	font-family: Garamond, serif;
+}
+
+.oldal_nev span {
+	color: #03989e;
+	//color: black;
+	//font-family: Garamond, serif;
+}
+
+/*
+.oldal_nev H1, .oldal_nev #talalkozasi-ter {
+	display: inline-block;
+}
+
+.oldal_nev H1 {
+	text-shadow: 0 1px #000;
+}
+
+.oldal_nev #jollet {
+	color: #03989e;
+}
+
+.oldal_nev #forras {
+	color : #daa520;
+}
+
+.oldal_nev #talalkozasi-ter {
+	color : black;
+}*/
 
 .notice {
 	float: right;

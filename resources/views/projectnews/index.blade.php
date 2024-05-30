@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="inner_box collapse" id="create_news_info" style="font-size: 18px">
-					A kezdeményezés kezelőjeként lehetőséged van a kezdeményezés aktuális történéseit, eseményeit egy-egy hírbejegyzésben összefoglalni. A láthatóságnál beállíthatod, hogy azok is értesülhessenek a közösséged legújabb híreiről, akik nem tagjai a portálnak.
+					A kezdeményezés kezelőjeként lehetőséged van a kezdeményezés aktuális történéseit, eseményeit egy-egy hírbejegyzésben összefoglalni. A láthatóságnál beállíthatod, hogy azok is értesülhessenek a közösséged legújabb híreiről, akik nem tagjai a Jóllét Forrás oldalnak.
 				</div>
 			</div>
 		</div>

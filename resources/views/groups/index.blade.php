@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Csoportok a Társadalmi Jóllét Portálon. Nyilvánosan elérhető bemutatkozások. Csatlakozz csoporthoz vagy hozd létre itt közösséged online csoportját! Várunk!')
-@section('url', 'https://tarsadalmijollet.hu/csoportok')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/csoportok" />@endsection
+@section('description', 'Csoportok a Jóllét Forrás oldalon. Nyilvánosan elérhető bemutatkozások. Csatlakozz csoporthoz vagy hozd létre itt közösséged online csoportját! Várunk!')
+@section('url', 'https://jolletforras.hu/csoportok')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/csoportok" />@endsection
 @section('image'){{ url('/images/csoportok.jpg')}}@endsection
 
 @section('content')
@@ -60,12 +60,12 @@
 				Fontos, hogy kommunikációd legyen erőszakmentes, értően és alaposan olvasd el a témát, a hozzászólásokat, kérdezz vissza, ha nem érthető bármi, és törekedj a lényegre törő fogalmazásra. Törekedj arra is, hogy ha a témát összetettnek látod, akkor vigyétek ki ezt az írásos online térből és személyesen beszéljétek meg.<br>
 				<br>
 				<!-- <b>Mire figyelj, ha szeretnél meghívni valakit a csoportba?</b><br>
-                A meghíváshoz készítettünk egy meghívó email szöveget. Ebben szerepel az, hogy Te hívod meg, valamint a csoport leírása is. Valamint arra is kitér a meghívó, ha a meghívott még nem regisztrált a portálon, azt hogyan teheti meg.<br>
+                A meghíváshoz készítettünk egy meghívó email szöveget. Ebben szerepel az, hogy Te hívod meg, valamint a csoport leírása is. Valamint arra is kitér a meghívó, ha a meghívott még nem regisztrált a Jóllét Forrás oldalon, azt hogyan teheti meg.<br>
                 Ami azonban a Te egyéni feladatod, hogy előzetesen megbeszéljétek, miért ajánlod neki a csoportot és hogy szeretne-e a ennek alapján csatlakozni.<br>--
                 <br>-->
 				<b>Mi a teendő, ha már nem szeretnél a csoport tagja lenni?</b><br>
 				Minden csoportra igaz kell legyen, hogy szabadon csatlakozhatsz hozzá -ha elfogadod a csoport megállapodást- és szabadon el is hagyhatod.<br>
-				A csoport főoldalán találsz egy “Kilépek a csoportból” gombot. Erre kattintva tudod elhagyni a csoportot. A portál közösségi megállapodását szem előtt tartva kérjük, ne felejtsd el a csoport tagjait kilépés előtt tájékoztatni, hogy miért hagyod el a csoportot. Ha konfliktus helyzet miatt jutottál erre a döntésre, javasoljuk, hogy kilépés előtt kérj tisztázó beszélgetést, szükség szerint mediálást.<br>
+				A csoport főoldalán találsz egy “Kilépek a csoportból” gombot. Erre kattintva tudod elhagyni a csoportot. A Jóllét Forrás oldal közösségi megállapodását szem előtt tartva kérjük, ne felejtsd el a csoport tagjait kilépés előtt tájékoztatni, hogy miért hagyod el a csoportot. Ha konfliktus helyzet miatt jutottál erre a döntésre, javasoljuk, hogy kilépés előtt kérj tisztázó beszélgetést, szükség szerint mediálást.<br>
 			</div>
 		</div>
 	</div>
@@ -75,14 +75,14 @@
 				<b>Mire figyelj, amikor egy új csoportot hozol létre?</b><br>
 				A csoport létrehozásakor érthetően és lényegre törően fogalmazd meg a csoport leírását, hogy mi a csoportnak a témája, célja.<br>
 				Szintén meg kell fogalmaznod a csoport megállapodást, hogy hogyan vagytok együtt a csoportban és milyen vállalásokat tesznek a csoport tagjai.<br>
-				A csoport megállapodás nem lehet ellentétes a portál <a href="<?php echo e(url('/')); ?>/kozossegimegallapodas " target="_blank">közösségi megállapodásában</a> foglaltakkal, ám mélyítheti, bővítheti azt, valamint konkrét vállalásokat, egyedi jellemzőket tartalmazhat.<br>
-				<!-- Fontosság, hogy a csoportod leírása a portálon regisztráció nélkül is elérhető. Azonban ha valaki még nem regisztrált a portálon, akkor tud csak csatlakozni a csoporthoz, ha előbb regisztrál, majd pedig a csoportba kéri a felvételét, elfogadva a csoport megállapodást.<br> -->
+				A csoport megállapodás nem lehet ellentétes a Jóllét Forrás oldal <a href="<?php echo e(url('/')); ?>/kozossegimegallapodas " target="_blank">közösségi megállapodásában</a> foglaltakkal, ám mélyítheti, bővítheti azt, valamint konkrét vállalásokat, egyedi jellemzőket tartalmazhat.<br>
+				<!-- Fontosság, hogy a csoportod leírása a Jóllét Forrás oldalon regisztráció nélkül is elérhető. Azonban ha valaki még nem regisztrált a Jóllét Forrás oldalon, akkor tud csak csatlakozni a csoporthoz, ha előbb regisztrál, majd pedig a csoportba kéri a felvételét, elfogadva a csoport megállapodást.<br> -->
 				Ezért is van jelentősége annak, hogy a csoport leírását jól fogalmazd meg, hogy azt az is érthesse, aki most találkozik a csoporttal először.<br>
 				Szerencsés, ha nem egyedül hozod létre a csoportot, így egy kis maggal már közösen tudjátok megfogalmazni mindezeket.<br>
 				Ha a csoport a való világban már létezik, akkor annak alapján tudod itt a felületen is létrehozni a csoportot. Ebben az esetben a már meglévő bemutatkozást be tudod ide emelni. Ha esetleg még nincs csoport megállapodásotok, akkor ez jó alkalom, hogy közösen megfogalmazzátok.<br>
 				A csoporthoz címkéket tudsz rendelni, így a közösséget kereső tagok, valamint más, kapcsolatot kereső közösségek számára is könnyebben megtalálhatóak lesztek.<br>
-				<!-- Aki a csoportot létrehozza a portálon, az tudja adminisztratív módon kezelni is: módosítani a leírást, törölni a csoportot, valamint szükség esetén kizárni csoporttagot. Arra is érdemes gondolnod, hogy ha csak egyedül leszel ilyen kezelő, az akadályoztatásod a csoport működését okozhatja, ezért érdemes még egy csoporttagot kezelőnek felkérned.<br>-->
-				Ha bármiben bizonytalan vagy, kérj segítséget a <a href="{{ url('/') }}/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Magtól</a>!
+				<!-- Aki a csoportot létrehozza a Jóllét Forrás oldalon, az tudja adminisztratív módon kezelni is: módosítani a leírást, törölni a csoportot, valamint szükség esetén kizárni csoporttagot. Arra is érdemes gondolnod, hogy ha csak egyedül leszel ilyen kezelő, az akadályoztatásod a csoport működését okozhatja, ezért érdemes még egy csoporttagot kezelőnek felkérned.<br>-->
+				Ha bármiben bizonytalan vagy, kérj segítséget a <a href="{{ url('/') }}/csoport/1/jollet-forras-mag" target="_blank">Jóllét Forrás Magtól</a>!
 			</div>
 		</div>
 	</div>

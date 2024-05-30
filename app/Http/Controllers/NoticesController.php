@@ -89,7 +89,7 @@ class NoticesController extends Controller
         }
 
         if(empty($content_html)) {
-            $content_html = "Az elmúlt két hétben a portál tagjai nem vettek fel új írást vagy alkotást.";
+            $content_html = "Az elmúlt két hétben a Jóllét Forrás oldal tagjai nem vettek fel új írást vagy alkotást.";
         }
 
         $response = array(

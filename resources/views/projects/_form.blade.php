@@ -18,7 +18,7 @@
 		<div class="form-group">
 			<label for="looking_for">Kiket vársz társakként a kezdeményezésedhez?</label>
 			<a href="#looking_for_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-			<div id="looking_for_info" class="collapse info">Ennek a résznek a kitöltése nem szükséges, amennyiben már működő kezdeményezést mutatsz be, amelyhez nem keresel társakat a portálon.</div>
+			<div id="looking_for_info" class="collapse info">Ennek a résznek a kitöltése nem szükséges, amennyiben már működő kezdeményezést mutatsz be, amelyhez nem keresel társakat a Jóllét Forrás oldalon.</div>
 			<textarea class="form-control" rows="6" name="looking_for">@if(isset($project)){{$project->looking_for}}@else {{old('looking_for')}}@endif</textarea>
 		</div>
 

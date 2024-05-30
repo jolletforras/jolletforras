@@ -8,14 +8,14 @@
 			<div class="inner_box" style="font-size: 18px">
 				A csoport létrehozásakor érthetően és lényegre törően fogalmazd meg a csoport leírását, hogy mi a csoportnak a témája, célja.<br>
 				Szintén meg kell fogalmaznod a csoport megállapodást, hogy hogyan vagytok együtt a csoportban és milyen vállalásokat tesznek a csoport tagjai.<br>
-				A csoport megállapodás nem lehet ellentétes a portál <a href="<?php echo e(url('/')); ?>/kozossegimegallapodas " target="_blank">közösségi megállapodásában</a> foglaltakkal, ám mélyítheti, bővítheti azt, valamint konkrét vállalásokat, egyedi jellemzőket tartalmazhat.<br>
-				<!-- Fontosság, hogy a csoportod leírása a portálon regisztráció nélkül is elérhető. Azonban ha valaki még nem regisztrált a portálon, akkor tud csak csatlakozni a csoporthoz, ha előbb regisztrál, majd pedig a csoportba kéri a felvételét, elfogadva a csoport megállapodást.<br> -->
+				A csoport megállapodás nem lehet ellentétes a Jóllét Forrás oldal <a href="<?php echo e(url('/')); ?>/kozossegimegallapodas " target="_blank">közösségi megállapodásában</a> foglaltakkal, ám mélyítheti, bővítheti azt, valamint konkrét vállalásokat, egyedi jellemzőket tartalmazhat.<br>
+				<!-- Fontosság, hogy a csoportod leírása a Jóllét Forrás oldalon regisztráció nélkül is elérhető. Azonban ha valaki még nem regisztrált a Jóllét Forrás oldalon, akkor tud csak csatlakozni a csoporthoz, ha előbb regisztrál, majd pedig a csoportba kéri a felvételét, elfogadva a csoport megállapodást.<br> -->
 				Ezért is van jelentősége annak, hogy a csoport leírását jól fogalmazd meg, hogy azt az is érthesse, aki most találkozik a csoporttal először.<br>
 				Szerencsés, ha nem egyedül hozod létre a csoportot, így egy kis maggal már közösen tudjátok megfogalmazni mindezeket.<br>
 				Ha a csoport a való világban már létezik, akkor annak alapján tudod itt a felületen is létrehozni a csoportot. Ebben az esetben a már meglévő bemutatkozást be tudod ide emelni. Ha esetleg még nincs csoport megállapodásotok, akkor ez jó alkalom, hogy közösen megfogalmazzátok.<br>
 				A csoporthoz címkéket tudsz rendelni, így a közösséget kereső tagok, valamint más, kapcsolatot kereső közösségek számára is könnyebben megtalálhatóak lesztek.<br>
-				<!-- Aki a csoportot létrehozza a portálon, az tudja adminisztratív módon kezelni is: módosítani a leírást, törölni a csoportot, valamint szükség esetén kizárni csoporttagot. Arra is érdemes gondolnod, hogy ha csak egyedül leszel ilyen kezelő, az akadályoztatásod a csoport működését okozhatja, ezért érdemes még egy csoporttagot kezelőnek felkérned.<br>-->
-				Ha bármiben bizonytalan vagy, kérj segítséget a <a href="{{ url('/') }}/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Magtól</a>!
+				<!-- Aki a csoportot létrehozza a Jóllét Forrás oldalon, az tudja adminisztratív módon kezelni is: módosítani a leírást, törölni a csoportot, valamint szükség esetén kizárni csoporttagot. Arra is érdemes gondolnod, hogy ha csak egyedül leszel ilyen kezelő, az akadályoztatásod a csoport működését okozhatja, ezért érdemes még egy csoporttagot kezelőnek felkérned.<br>-->
+				Ha bármiben bizonytalan vagy, kérj segítséget a <a href="{{ url('/') }}/csoport/1/jollet-forras-mag" target="_blank">Jóllét Forrás Magtól</a>!
 			</div>
 		</div>
 	</div>

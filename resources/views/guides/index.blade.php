@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Minden, amit tudni érdemes és szükséges a Társadalmi Jóllét Portál működéséről és lehetőségeiről.')
-@section('url', 'https://tarsadalmijollet.hu/tudnivalok')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/tudnivalok" />@endsection
+@section('description', 'Minden, amit tudni érdemes és szükséges a Jóllét Forrás oldal működéséről és lehetőségeiről.')
+@section('url', 'https://jolletforras.hu/tudnivalok')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/tudnivalok" />@endsection
 
 @section('content')
 	<div class="row">

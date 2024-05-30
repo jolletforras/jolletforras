@@ -46,7 +46,7 @@ class ForgotPasswordController extends Controller
 
         Mail::send('auth.emails.password', $data, function($message) use ($data)
         {
-            $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+            $message->from('jolletforras@gmail.com', "jolletforras.hu");
             $message->subject("Ideiglenes jelszó");
             $message->to($data['email']);
         });

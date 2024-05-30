@@ -3,7 +3,7 @@
 @section('description'){{ $newsletter->meta_description }}@endsection
 @section('url'){{url('hirlevel')}}/{{$newsletter->id}}/{{$newsletter->slug}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('hirlevel')}}/{{$newsletter->id}}/{{$newsletter->slug}}" />@endsection
-@section('image')@if(!empty($newsletter->image)){{url('/')}}/images/posts/{{$newsletter->image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
+@section('image')@if(!empty($newsletter->image)){{url('/')}}/images/posts/{{$newsletter->image}}@else{{url('/images/jolletforras.png')}}@endif
 @endsection
 
 @section('content')

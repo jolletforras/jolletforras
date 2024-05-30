@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('description', 'Ajánlók a Társadalmi Jóllét Portálon. Olvasni, nézni, hallgatni valókat találsz itt, egy felvezető ajánlással.')
-@section('url', 'https://tarsadalmijollet.hu/ajanlo')
-@section('canonical')<link rel="canonical" href="https://tarsadalmijollet.hu/ajanlo" /> @endsection
+@section('description', 'Ajánlók a Jóllét Forrás oldalon. Olvasni, nézni, hallgatni valókat találsz itt, egy felvezető ajánlással.')
+@section('url', 'https://jolletforras.hu/ajanlo')
+@section('canonical')<link rel="canonical" href="https://jolletforras.hu/ajanlo" /> @endsection
 @section('image'){{ url('/images/ajanlo.jpeg')}}@endsection
 
 @section('content')
@@ -26,16 +26,16 @@
 	</div>
 	<div class="inner_box narrow-page collapse" id="commendation_info" style="font-size: 18px">
 		Itt lehetőséged mások figyelmébe ajánlani valamit.<br>
-		Mielőtt megnyitsz egy új ajánlót, tedd fel magadnak a kérdést: Hogyan kapcsolódik ez a Portál céljához és alapértékeihez? Ha nem vagy biztos a dolgodban, inkább olvasd el újra a <a href="{{ url('/') }} " target="_blank">Nyitólapot</a> és
-		a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodást</a>, vagy kérj segítséget a <a href="{{ url('/') }}/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Mag</a> csoporttól.<br>
+		Mielőtt megnyitsz egy új ajánlót, tedd fel magadnak a kérdést: Hogyan kapcsolódik ez a Jóllét Forrás oldal céljához és alapértékeihez? Ha nem vagy biztos a dolgodban, inkább olvasd el újra a <a href="{{ url('/') }} " target="_blank">Nyitólapot</a> és
+		a <a href="{{ url('/') }}/kozossegimegallapodas " target="_blank">Közösségi megállapodást</a>, vagy kérj segítséget a <a href="{{ url('/') }}/csoport/1/jollet-forras-mag" target="_blank">Jóllét Forrás Mag</a> csoporttól.<br>
 	</div>
 	@guest
 	<div class="inner_box narrow-page">
-		Az ajánló egy olyan lehetőség, ahol a Portál tagjai olyasmit tudnak megmutatni, ami szerintük érték az új világ építői számára. Lehet ez olvasni, nézni, hallgatni való tartalom.
+		Az ajánló egy olyan lehetőség, ahol a Jóllét Forrás oldal tagjai olyasmit tudnak megmutatni, ami szerintük érték az új világ építői számára. Lehet ez olvasni, nézni, hallgatni való tartalom.
 		Arról, hogyan hozhatsz létre új ajánlót, <a href="{{url('tudnivalo')}}/8/ajanlo">ITT</a> találsz erről részletes tudnivalókat.<br>
 		<br>
 		Szeretnél értesülni új ajánlókról?<br>
-		- Ha van kedved, regisztrálj a Portálon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
+		- Ha van kedved, regisztrálj a Jóllét Forrás oldalon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
 		- Ha még csak távolabbról ismerkednél, iratkozz fel a hírlevelünkre <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a>.<br>
 	</div>
 	@endguest

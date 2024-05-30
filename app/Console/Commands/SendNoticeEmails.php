@@ -109,7 +109,7 @@ class SendNoticeEmails extends Command
             }
 
             Mail::send($email_template, $data, function ($message) use ($data) {
-                $message->from('tarsadalmi.jollet@gmail.com', "tarsadalmijollet.hu");
+                $message->from('jolletforras@gmail.com', "jolletforras.hu");
                 $message->subject($data['subject']);
                 $message->to($data['email']);
             });
@@ -123,7 +123,7 @@ class SendNoticeEmails extends Command
     private function get_shorter($post,$post_url, $length) {
         if(strlen(strip_tags($post))>$length) {
             $post = justbr($post,$length);
-            $post .= '<i> ... <a href="https://tarsadalmijollet.hu/'.$post_url.'" style="text-decoration: none;">tovább</a></i>';
+            $post .= '<i> ... <a href="https://jolletforras.hu/'.$post_url.'" style="text-decoration: none;">tovább</a></i>';
         }
         return $post;
     }

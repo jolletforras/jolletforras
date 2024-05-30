@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Társadalmi Jóllét portál'),
+    'name' => env('APP_NAME', 'Jóllét Forrás oldal'),
 
     /*
     |--------------------------------------------------------------------------

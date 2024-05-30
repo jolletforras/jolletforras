@@ -2,7 +2,7 @@
 @section('description'){{$creation->user->name}} alkotása: {{ $creation->title }}@endsection
 @section('url'){{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}@endsection
 @section('canonical')<link rel="canonical" href="{{url('alkotas')}}/{{$creation->id}}/{{$creation->slug}}" />@endsection
-@section('image')@if($creation->has_image){{url('images')}}/creations/{{$creation->slug}}.jpg?{{$creation->photo_counter}}@elseif(!empty($creation->meta_image)){{$creation->meta_image}}@else{{url('/images/tarsadalmijollet.png')}}@endif
+@section('image')@if($creation->has_image){{url('images')}}/creations/{{$creation->slug}}.jpg?{{$creation->photo_counter}}@elseif(!empty($creation->meta_image)){{$creation->meta_image}}@else{{url('/images/jolletforras.png')}}@endif
 @endsection
 
 @section('content')

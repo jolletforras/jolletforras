@@ -156,7 +156,7 @@ class ProjectsController extends Controller
             $body = view('projects.emails.new_project_email',$data)->render();
 
             Sendemail::create([
-                'to_email' => 'tarsadalmi.jollet@gmail.com',
+                'to_email' => 'jolletforras@gmail.com',
                 'subject' => "Új kezdeményezés",
                 'body' => $body
             ]);

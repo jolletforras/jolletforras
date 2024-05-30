@@ -14,8 +14,8 @@
 					<li>Te kezdeményezőként mit tudsz beletenni a megvalósításba?</li>
 				</ul>
 				<b>További tudnivalók</b><br>
-					A kezdeményezés a <a href="{{ url('/') }}/csoport/1/tarsadalmi-jollet-mag" target="_blank">Társadalmi Jóllét Mag</a> jóváhagyása után kerül fel.
-					A jóváhagyás szempontjai: a portál <a href="<?php echo e(url('/')); ?>/kozossegimegallapodas " target="_blank">közösségi megállapodásában</a> megfogalmazott küldetéssel és értékrenddel összhangban van-e,
+					A kezdeményezés a <a href="{{ url('/') }}/csoport/1/jollet-forras-mag" target="_blank">Jóllét Forrás Mag</a> jóváhagyása után kerül fel.
+					A jóváhagyás szempontjai: a Jóllét Forrás oldal <a href="<?php echo e(url('/')); ?>/kozossegimegallapodas " target="_blank">közösségi megállapodásában</a> megfogalmazott küldetéssel és értékrenddel összhangban van-e,
 					valamint a feltett kérdésekre választ ad-e. Ha az értékrenddel és küldetéssel nincs összhangban, elutasítjuk a megjelenést.
 					Ha a feltett kérdésekre nem ad választ, hiányos, akkor a kiegészítést követően jóváhagyjuk.<br>
 				<br>

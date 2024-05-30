@@ -110,7 +110,7 @@ class GroupsController extends Controller
 
         $members = User::members()->orderBy('name', 'ASC')->pluck('name','id');
 
-        $user_visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
+        $user_visibility = ['group'=>'csoport','portal'=>'az oldalon','public'=>'nyilvános'];
 
         return view('groups.create', compact('members','tags','user_visibility'));
     }
@@ -180,7 +180,7 @@ class GroupsController extends Controller
         $tags = GroupTag::pluck('name', 'id');
         $selected_tags = $group->tags->pluck('id')->toArray();
 
-        $user_visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
+        $user_visibility = ['group'=>'csoport','portal'=>'az oldalon','public'=>'nyilvános'];
 
         //dd($group);
 
@@ -380,7 +380,7 @@ class GroupsController extends Controller
         $isMember = $group->isMember();
 
 
-        //ha nem regisztrált, de nem nyilvánosak a tagok, vagy ha regisztált akkor nem látható portál szinten a tagok és nem csoport tag
+        //ha nem regisztrált, de nem nyilvánosak a tagok, vagy ha regisztált akkor nem látható Jóllét Forrás szinten a tagok és nem csoport tag
         if(!(Auth::guest() && $group->user_visibility=='public' || Auth::check() && $group->user_visibility!='group' || $isMember)) {
             return  redirect('csoport/'.$group->id.'/'.$group->slug);
         }
@@ -430,7 +430,7 @@ class GroupsController extends Controller
 
         $group = Group::findOrFail($id);
 
-        $visibility = ['group'=>'csoport','portal'=>'portál','public'=>'nyilvános'];
+        $visibility = ['group'=>'csoport','portal'=>'az oldalon','public'=>'nyilvános'];
 
         return view('events.create', compact('visibility','group'));
     }

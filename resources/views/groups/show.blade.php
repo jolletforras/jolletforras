@@ -118,7 +118,7 @@
 		</form>
 		@endif
 		@if($group->id==1)
-			<p>Amennyiben szeretnél a Társadalmi Jóllét Mag csoporthoz csatlakozni, vedd fel a kapcsolatot velünk: tarsadalmi.jollet@gmail.com</p>
+			<p>Amennyiben szeretnél a Jóllét Forrás Mag csoporthoz csatlakozni, vedd fel a kapcsolatot velünk: jolletforras@gmail.com</p>
 		@endif
 	</div>
 	@endif
