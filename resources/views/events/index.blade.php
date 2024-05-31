@@ -25,7 +25,7 @@
 		<br>
 		Szeretnél értesülni új eseményekről?<br>
 		- Ha van kedved, regisztrálj a Jóllét Forrás oldalon és lépj be ebbe a térbe. Kezdd <a href="{{url('register')}}">ITT</a>.<br>
-		- Ha még csak távolabbról ismerkednél, iratkozz fel a hírlevelünkre <a href="https://forms.gle/S18g4L3TAPC9ZMe99">ITT</a>.<br>
+		- Ha még csak távolabbról ismerkednél, iratkozz fel a hírlevelünkre <a href="https://forms.gle/S18g4L3TAPC9ZMe99" target="_blank">ITT</a>.<br>
 	</div>
 	@endguest
 	@include('events._create_events_info')
