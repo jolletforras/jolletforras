@@ -16,7 +16,7 @@
 	<meta property="og:site_name" content="Jóllét Forrás">
 	<meta property="og:image" content="@yield('image','https://jolletforras.hu/images/jolletforras.png')">
 
-    <link rel="shortcut icon" href="{{ url('/') }}/favicon.png?2">
+    <link rel="shortcut icon" href="{{ url('/') }}/favicon.png?3">
     
 
     <title>Jóllét Forrás</title>
