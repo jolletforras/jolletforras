@@ -110,8 +110,8 @@ class SendNoticeEmails extends Command
 
             Mail::send($email_template, $data, function ($message) use ($data) {
                 $message->from('jolletforras@gmail.com', "jolletforras.hu");
-                $message->subject($data['subject']);
-                $message->to($data['email']);
+                $message->subject($data['subject']??'');
+                $message->to($data['email']??'');
             });
 
             sleep(3);
