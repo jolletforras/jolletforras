@@ -17,7 +17,7 @@
 				<div class="form-group">
 					<label for="meta_description">Meta leírás:</label>
 					<a href="#meta_description_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
-					<div id="meta_description_info" class="collapse info">Az itt megadott szöveg íródik ki ha egy másik oldalon (pl. facebook) megosztásra kerül az írás.</div>
+					<div id="meta_description_info" class="collapse info">Az itt megadott szöveg íródik ki ha egy másik oldalon (pl. facebook) megosztásra kerül a hírlevél.</div>
 					<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="{{$newsletter->meta_description}}" id="meta_description">
 				</div>
 

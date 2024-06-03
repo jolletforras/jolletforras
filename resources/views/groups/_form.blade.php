@@ -8,7 +8,7 @@
 		<div class="form-group">
 			<label for="meta_description">Meta leírás:</label>
             <a href="#meta_description_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
-            <div id="meta_description_info" class="collapse info">Az itt megadott szöveg íródik ki ha egy másik oldalon (pl. facebook) megosztásra kerül az írás.</div>
+            <div id="meta_description_info" class="collapse info">Az itt megadott szöveg íródik ki ha egy másik oldalon (pl. facebook) megosztásra kerül a csoport. Ennek akkor van jelentősége, ha nyilvános a csoport, vagyis nem regisztráltak számára is elérhető.</div>
 			<input class="form-control" required="required" name="meta_description" type="text" maxlength="160" value="@if(isset($group)) {{old('meta_description',$group->meta_description)}}@else{{old('meta_description')}} @endif" id="meta_description">
 		</div>
 
