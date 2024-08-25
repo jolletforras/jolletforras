@@ -6,11 +6,16 @@
 @section('image')@if(!empty($event->image)){{url('/')}}/images/posts/{{$event->image}}@else{{url('/images/jolletforras.png')}}@endif
 @endsection
 
+<?php
+	$isGroupEvent = $event->isGroupEvent();
+	$isPortalEvent = !$isGroupEvent;
+?>
+
 @section('content')
 	<div class="panel panel-default narrow-page">
 		<div class="panel-heading">
 			<h2>{{ $event->title }}</h2>
-			@if($event->isGroupEvent())&nbsp;&nbsp;&nbsp;&nbsp;
+			@if($isGroupEvent)&nbsp;&nbsp;&nbsp;&nbsp;
 				@if( Auth::check())	 <a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}/esemenyek"> << {{$event->group->name}} - események</a>
 				@else 	<a href="{{url('csoport')}}/{{$event->group->id}}/{{$event->group->slug}}"> << {{$event->group->name}}</a>@endif
 			@endif
@@ -21,21 +26,25 @@
 			@endif
 			{!! $event->body !!}
 			@include('partials.author', ['author'=>'Eseményt felvette: ','obj'=>$event])
-			@if($event->isGroupEvent() && Auth::check() && $event->group->isMember())
+			@if(Auth::check() && ($isPortalEvent || ($isGroupEvent && ( $event->visibility!='group' || $event->group->isMember()))))
 				Részt veszek:
 				<select name="participate" id="participate" class="form-control" style="width:90px;display: inline-block;" onchange="change()">
 					<option value="-1" @if($participate==-1) selected @endif>válassz</option>
 					<option value="1" @if($participate==1) selected @endif>igen</option>
+					@if($isGroupEvent && $event->group->isMember())
 					<option value="0" @if($participate==0) selected @endif>nem</option>
+					@endif
 				</select>
 				<br>
 				<div id="participants" style="display:<?=$participate!=1?'block':'none'?>;"><?=$participants?'Ott lesznek: '.$participants:''?></div>
 				<div id="participants-with-me" style="display:<?=$participate==1?'block':'none'?>;">Ott lesznek: {!! $participants_with_me !!}</div>
+				@if($isGroupEvent && $event->group->isMember())
 				<div id="no-participants" style="display:<?=$participate!=0?'block':'none'?>;"><?=$no_participants?'Jelezték, hogy nem lesznek ott: '.$no_participants:''?></div>
 				<div id="no-participants-with-me" style="display:<?=$participate==0?'block':'none'?>;">Jelezték, hogy nem lesznek ott: {!! $no_participants_with_me !!}</div>
+				@endif
 				<br>
 			@endif
-			@if (Auth::check() && $event->isGroupEvent() && $event->visibility!='group')
+			@if (Auth::check() && $isGroupEvent && $event->visibility!='group')
 				<div class="flash-message alert alert-info" style="display:none;"></div>
 				<label for="invited_user">Személyek meghívása az eseményre, akik nem tagjai a csoportnak</label>
 				<div class="row">
@@ -52,13 +61,13 @@
 					</div>
 				</div>
 			@endif
-			@if ($event->isGroupEvent() && $users_read_it && $event->group->isAdmin())
+			@if ($isGroupEvent && $users_read_it && $event->group->isAdmin())
 				Látta: {!! $users_read_it !!}
 			@endif
 		</div>
 	</div>
 	@if(Auth::check())
-		@include('comments._show', ['comments' => $comments, 'can_comment'=>!$event->isGroupEvent() || $event->group->isActive()] )
+		@include('comments._show', ['comments' => $comments, 'can_comment'=>!$isGroupEvent || $event->group->isActive()] )
 	@endif
 @endsection
 
@@ -118,29 +127,47 @@
 		function change(){
 			var participate = $( "#participate" ).val();
 
+			// ------------ részt vesz rész -----------------
+
 			//nem válaszoltam
 			if(participate==-1) {
 				$("#participants").show();
 				$("#participants-with-me").hide();
-				$("#no-participants").show();
-				$("#no-participants-with-me").hide();
 			}
 
 			//nem veszek rész
 			if(participate==0) {
 				$("#participants").show();
 				$("#participants-with-me").hide();
-				$("#no-participants").hide();
-				$("#no-participants-with-me").show();
 			}
 
 			//részt veszek
 			if(participate==1) {
 				$("#participants").hide();
 				$("#participants-with-me").show();
-				$("#no-participants").show();
-				$("#no-participants-with-me").hide();
 			}
+
+			@if($isGroupEvent && $event->group->isMember())
+				// ------------ nem vesz részt rész -----------------
+
+				//nem válaszoltam
+				if(participate==-1) {
+					$("#no-participants").show();
+					$("#no-participants-with-me").hide();
+				}
+
+				//nem veszek rész
+				if(participate==0) {
+					$("#no-participants").hide();
+					$("#no-participants-with-me").show();
+				}
+
+				//részt veszek
+				if(participate==1) {
+					$("#no-participants").show();
+					$("#no-participants-with-me").hide();
+				}
+			@endif
 
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
