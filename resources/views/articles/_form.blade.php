@@ -26,6 +26,20 @@
 				</div>
 
 				<div class="form-group">
+					<label for="category_list">Csoport megadása az írással kapcsolatban:</label>
+					<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+					<select name="category">
+						<option value="0">nincs megadva</option>
+						@foreach($categories as $key => $val)
+							<option value="{{ $key }}" @if(isset($article) && $key == $article->category_id) selected @endif>{{ $val }}</option>
+						@endforeach
+					</select>
+					<div id="category_info" class="collapse info">
+						Ha szeretnéd, akkor írásodat valamelyik korábban létrehozott írás csoportodba sorolhatod. Amennyiben még nincs létrehozva a csoport, az írásod elmentése után létrehozhatod, majd az írásod módosításánál már beállíthatod a felvett új csoportot.
+					</div>
+				</div>
+
+				<div class="form-group">
 					<label for="show">Hol jelenjen meg?</label>
 					<select name="show">
 						@foreach($show_options as $key => $val)

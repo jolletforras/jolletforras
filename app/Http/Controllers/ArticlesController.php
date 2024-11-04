@@ -85,8 +85,10 @@ class ArticlesController extends Controller
         $show_options = $this->show_options;
 
         $tags = GroupTag::get()->pluck('name', 'id');
+        $categories =  Auth::user()->categories()->pluck('title');
+            //["Gyertyános", "Társadalmi"];
 
-		return view('articles.create',compact('show_options','tags'));
+		return view('articles.create',compact('show_options','tags','categories'));
 	}
 	
 	public function store(Request $request)
@@ -136,13 +138,15 @@ class ArticlesController extends Controller
 
         $show_options = $this->show_options;
 
+        $categories =  Auth::user()->categories()->pluck('title','id');
+
         $tags = GroupTag::get()->pluck('name', 'id');
 
         $selected_tags = null;
         if(isset($article->tags))
             $selected_tags = $article->tags->pluck('id')->toArray();
 
-		return view('articles.edit', compact('article','show_options','tags','selected_tags'));
+		return view('articles.edit', compact('article','show_options','tags','selected_tags','categories'));
 	}
 
 	/**
@@ -165,7 +169,8 @@ class ArticlesController extends Controller
             'image' => getfirstimage($description),
             'slug' => Str::slug($request->get('title')),
             'show' => $request->get('show'),
-            'status' => $request->has('inactive') ? 'inactive' : 'active'
+            'status' => $request->has('inactive') ? 'inactive' : 'active',
+            'category_id' => $request->get('category')
         ]);
 
         $tag_list=$this->getTagList($request->input('tag_list'), 'App\Models\ArticleTag');

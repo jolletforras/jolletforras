@@ -10,12 +10,17 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','meta_description','body','short_description','image','slug','show','status'];
+    protected $fillable = ['title','meta_description','body','short_description','image','slug','show','status','category_id'];
 
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function editor()
