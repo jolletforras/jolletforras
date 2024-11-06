@@ -18,10 +18,10 @@
 
 					<div class="col-sm-3 text-right">
 						@if($myProfile && $articlesTab)
-							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras')}}/uj" type="submit" class="btn btn-default">Írás csoportok</a>
+							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras')}}/csoportok" type="submit" class="btn btn-default">Írás csoportok</a>
 						@endif
 						@if($myProfile && $creationsTab)
-							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('alkotas')}}/uj" type="submit" class="btn btn-default">Alkotás csoportok</a>
+							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('alkotas')}}/csoportok" type="submit" class="btn btn-default">Alkotás csoportok</a>
 						@endif
 					</div>
 

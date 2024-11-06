@@ -181,6 +181,9 @@ Route::get('/iras/{id}/{title}/torol', 'ArticlesController@delete');
 Route::get('/csoport/{group_id}/{slug}/irasok', 'ArticlesController@show_group_articles');
 Route::get('/iras/cimke/{id}/{tag}', 'TagsController@article_show');
 
+Route::get('/iras/csoportok', 'CategoriesController@index');
+
+
 Route::post('/getPostGroupAdminBlock/{type}/{id}', 'PostGroupController@get_group_admin_block');
 Route::post('/deletePostFromGroup/{id}', 'PostGroupController@delete_post_from_group');
 Route::post('/addPostToGroup/{id}', 'PostGroupController@add_post_to_group');
