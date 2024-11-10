@@ -18,10 +18,10 @@
 
 					<div class="col-sm-3 text-right">
 						@if($myProfile && $articlesTab)
-							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras')}}/csoportok" type="submit" class="btn btn-default">Írás csoportok</a>
+							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras-temakor')}}/uj" type="submit" class="btn btn-default">Témakör felvétele</a>
 						@endif
 						@if($myProfile && $creationsTab)
-							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('alkotas')}}/csoportok" type="submit" class="btn btn-default">Alkotás csoportok</a>
+							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('alkotas-temakor')}}/uj" type="submit" class="btn btn-default">Témakör felvétele</a>
 						@endif
 					</div>
 
@@ -34,12 +34,19 @@
 						@endif
 					</div>
 
+					@if($myProfile && ($articlesTab || $creationsTab))
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="inner_box collapse" id="category_info" style="font-size: 18px">
-								Írásaidat, alkotásaidat csoportokba sorolhatod. A gombra kattintva megnézheted milyen csoportok vannak. Azokat módosíthatod, újat fehetsz fel.
+								@if($articlesTab)
+								Ha szeretnéd, akkor írásodat valamelyik korábban létrehozott témakörbe sorolhatod. Amennyiben még nincs létrehozva témakör, az írásod elmentése után létrehozhatod, majd az írásod módosításánál már beállíthatod a felvett új témakört.
+								@endif
+								@if($articlesTab)
+								Ha szeretnéd, akkor alkotásodat valamelyik korábban létrehozott témakörbe sorolhatod. Amennyiben még nincs létrehozva témakör, az alkotásod elmentése után létrehozhatod, majd az alkotásod módosításánál már beállíthatod a felvett új témakört.
+								@endif
 							</div>
 						</div>
 					</div>
+					@endif
 				</div>
 			</div>

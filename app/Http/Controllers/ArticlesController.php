@@ -46,9 +46,10 @@ class ArticlesController extends Controller
     {
         $user = User::findOrFail($user_id);
         $articles = $user->articles()->where('status', 'active')->latest()->get();
+        $categories = $user->categories()->get();
         $tab = "articles";
 
-        return view('articles.user_articles', compact('user','articles','tab'));
+        return view('articles.user_articles', compact('user','articles','categories','tab'));
     }
 
 

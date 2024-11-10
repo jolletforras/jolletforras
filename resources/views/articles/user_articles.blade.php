@@ -10,6 +10,13 @@
 		@include('articles._new_article_info', ['collapse'=>' collapse'])
 	@endif
 
+	@if($categories->isNotEmpty())
+	<div class="row" style="margin-top: 6px;">
+		@include('categories._list')
+	</div>
+	<hr>
+	@endif
+
 	<div class="row" style="margin-top: 6px;">
 		@include('articles._list')
 	</div>
