@@ -1,6 +1,6 @@
 	<div class="row narrow-page">
 		<div class="col-sm-9">
-			<button class="btn btn-default" id="categories_btn" onclick="toogle()" style="display: inline;">Témakör szerint <i class="fa fa-angle-double-down" aria-hidden="true"></i></button>
+			<button class="btn btn-default" id="categories_btn" onclick="toogle()" style="display: inline;"><i class="fa fa-angle-double-down" aria-hidden="true"></i> Témakör szerint</button>
 		</div>
 	</div>
 	<div class="row" id="categories">

@@ -181,12 +181,17 @@ Route::get('/iras/{id}/{title}/torol', 'ArticlesController@delete');
 Route::get('/csoport/{group_id}/{slug}/irasok', 'ArticlesController@show_group_articles');
 Route::get('/iras/cimke/{id}/{tag}', 'TagsController@article_show');
 
-Route::get('/iras-temakor/{id}/{title}', 'CategoriesController@show_for_article');
-Route::get('/irasok/{url}', 'CategoriesController@show_by_url');
-Route::get('/iras-temakor/tema/uj', 'CategoriesController@new_for_article');
+Route::get('/irasok/{id}/{title}', 'ArticleCategoriesController@show');
+Route::get('/iras-temakor/uj', 'ArticleCategoriesController@create');
+Route::post('iras-temakor/uj', 'ArticleCategoriesController@store');
+Route::get('/iras-temakor/{id}/{title}/modosit', 'ArticleCategoriesController@edit');
+Route::post('/iras-temakor/{id}/{title}/modosit', 'ArticleCategoriesController@update');
 
-Route::get('/alkotasok/{id}/{title}', 'CategoriesController@show_for_creation');
-Route::get('/alkotas-temakor/uj', 'CategoriesController@new_for_creation');
+Route::get('/alkotasok/{id}/{title}', 'CreationCategoriesController@show');
+Route::get('/alkotas-temakor/uj', 'CreationCategoriesController@create');
+
+Route::get('/temakor/{id}/{title}/kepfeltoltes', 'CategoriesController@uploadimage');
+Route::post('/temakor/{id}/{title}/kepfeltoltes', 'CategoriesController@saveimage');
 
 Route::post('/getPostGroupAdminBlock/{type}/{id}', 'PostGroupController@get_group_admin_block');
 Route::post('/deletePostFromGroup/{id}', 'PostGroupController@delete_post_from_group');

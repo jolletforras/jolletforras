@@ -20,7 +20,7 @@
 						@if($myProfile && $articlesTab)
 							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras-temakor')}}/uj" type="submit" class="btn btn-default">Témakör felvétele</a>
 						@endif
-						@if($myProfile && $creationsTab)
+						@if(false && $myProfile && $creationsTab)
 							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('alkotas-temakor')}}/uj" type="submit" class="btn btn-default">Témakör felvétele</a>
 						@endif
 					</div>
@@ -41,7 +41,7 @@
 								@if($articlesTab)
 								Ha szeretnéd, akkor írásodat valamelyik korábban létrehozott témakörbe sorolhatod. Amennyiben még nincs létrehozva témakör, az írásod elmentése után létrehozhatod, majd az írásod módosításánál már beállíthatod a felvett új témakört.
 								@endif
-								@if($articlesTab)
+								@if($creationsTab)
 								Ha szeretnéd, akkor alkotásodat valamelyik korábban létrehozott témakörbe sorolhatod. Amennyiben még nincs létrehozva témakör, az alkotásod elmentése után létrehozhatod, majd az alkotásod módosításánál már beállíthatod a felvett új témakört.
 								@endif
 							</div>

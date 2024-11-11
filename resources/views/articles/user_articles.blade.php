@@ -12,7 +12,7 @@
 
 	@if($categories->isNotEmpty())
 	<div class="row" style="margin-top: 6px;">
-		@include('categories._list')
+		@include('articlecategories._list')
 	</div>
 	<hr>
 	@endif
