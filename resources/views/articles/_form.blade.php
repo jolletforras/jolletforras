@@ -26,7 +26,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="category_list">Csoport megadása az írással kapcsolatban:</label>
+					<label for="category_list">Témakör megadása az írással kapcsolatban:</label>
 					<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
 					<select name="category">
 						<option value="0">nincs megadva</option>
@@ -35,7 +35,7 @@
 						@endforeach
 					</select>
 					<div id="category_info" class="collapse info">
-						Ha szeretnéd, akkor írásodat valamelyik korábban létrehozott írás csoportodba sorolhatod. Amennyiben még nincs létrehozva a csoport, az írásod elmentése után létrehozhatod, majd az írásod módosításánál már beállíthatod a felvett új csoportot.
+						Ha szeretnéd, akkor írásodat valamelyik korábban létrehozott témakörbe sorolhatod. Amennyiben még nincs létrehozva témakör, az írásod elmentése után létrehozhatod, majd az írásod módosításánál már beállíthatod a felvett új témakört.
 					</div>
 				</div>
 
