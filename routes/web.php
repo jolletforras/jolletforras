@@ -189,6 +189,9 @@ Route::post('/iras-temakor/{id}/{title}/modosit', 'ArticleCategoriesController@u
 
 Route::get('/alkotasok/{id}/{title}', 'CreationCategoriesController@show');
 Route::get('/alkotas-temakor/uj', 'CreationCategoriesController@create');
+Route::post('alkotas-temakor/uj', 'CreationCategoriesController@store');
+Route::get('/alkotas-temakor/{id}/{title}/modosit', 'CreationCategoriesController@edit');
+Route::post('/alkotas-temakor/{id}/{title}/modosit', 'CreationCategoriesController@update');
 
 Route::get('/temakor/{id}/{title}/kepfeltoltes', 'CategoriesController@uploadimage');
 Route::post('/temakor/{id}/{title}/kepfeltoltes', 'CategoriesController@saveimage');

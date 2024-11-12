@@ -46,7 +46,7 @@ class ArticlesController extends Controller
     {
         $user = User::findOrFail($user_id);
         $articles = $user->articles()->where('status', 'active')->latest()->get();
-        $categories = $user->categories()->get();
+        $categories = $user->categories()->where('type','article')->get();
         $tab = "articles";
 
         return view('articles.user_articles', compact('user','articles','categories','tab'));
@@ -86,8 +86,7 @@ class ArticlesController extends Controller
         $show_options = $this->show_options;
 
         $tags = GroupTag::get()->pluck('name', 'id');
-        $categories =  Auth::user()->categories()->pluck('title');
-            //["Gyertyános", "Társadalmi"];
+        $categories =  Auth::user()->categories()->where('type','article')->pluck('title','id');;
 
 		return view('articles.create',compact('show_options','tags','categories'));
 	}
@@ -139,7 +138,7 @@ class ArticlesController extends Controller
 
         $show_options = $this->show_options;
 
-        $categories =  Auth::user()->categories()->pluck('title','id');
+        $categories =  Auth::user()->categories()->where('type','article')->pluck('title','id');
 
         $tags = GroupTag::get()->pluck('name', 'id');
 

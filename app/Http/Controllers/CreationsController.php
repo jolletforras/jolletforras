@@ -29,10 +29,10 @@ class CreationsController extends Controller
         $user = User::findOrFail($user_id);
 
         $creations = $user->creations()->latest()->get();
-
+        $categories = $user->categories()->where('type','creation')->get();
         $tab = "creations";
 
-		return view('creations.index', compact('user','creations','tab'));
+		return view('creations.index', compact('user','creations','categories','tab'));
 	}
 
     /**
@@ -70,7 +70,9 @@ class CreationsController extends Controller
 
 	public function create(Request $request) 
 	{
-    	return view('creations.create');
+        $categories =  Auth::user()->categories()->where('type','creation')->pluck('title','id');
+
+	    return view('creations.create',compact('categories'));
 	}
 	
 	public function store(CreationRequest $request)
@@ -121,7 +123,9 @@ class CreationsController extends Controller
 			return redirect('/');
 		}
 
-		return view('creations.edit', compact('creation'));
+        $categories =  Auth::user()->categories()->where('type','creation')->pluck('title','id');
+
+		return view('creations.edit', compact('creation','categories'));
 	}
 
 	/**
@@ -267,7 +271,8 @@ class CreationsController extends Controller
             'active' => $request->has('inactive') ? 0 : 1,
             'meta_title' =>  $title,
             'meta_image' =>  $meta_image,
-            'meta_description' =>  $description
+            'meta_description' =>  $description,
+            'category_id' => $request->get('category')
         ];
 
         return $data;

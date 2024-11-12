@@ -10,6 +10,13 @@
         @include('creations._new_creation_info', ['collapse'=>' collapse'])
     @endif
 
+    @if($categories->isNotEmpty())
+        <div class="row" style="margin-top: 6px;">
+            @include('creationcategories._list')
+        </div>
+        <hr>
+    @endif
+
     <div class="inner_box narrow-page" style="margin-top: 6px;">
         @include('creations._list')
     </div>

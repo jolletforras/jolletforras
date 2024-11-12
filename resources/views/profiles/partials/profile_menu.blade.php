@@ -20,7 +20,7 @@
 						@if($myProfile && $articlesTab)
 							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('iras-temakor')}}/uj" type="submit" class="btn btn-default">Témakör felvétele</a>
 						@endif
-						@if(false && $myProfile && $creationsTab)
+						@if($myProfile && $creationsTab)
 							<a href="#category_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i></a><a href="{{url('alkotas-temakor')}}/uj" type="submit" class="btn btn-default">Témakör felvétele</a>
 						@endif
 					</div>
