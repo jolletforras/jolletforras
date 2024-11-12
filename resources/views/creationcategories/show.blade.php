@@ -2,7 +2,7 @@
 @section('title'){{ $category->title }}@endsection
 @section('description'){{ $category->meta_description }}@endsection
 @section('url'){{url('alkotasok')}}/{{$category->id}}/{{$category->slug}}@endsection
-@section('canonical')<link rel="canonical" href="{{url('irasok')}}/{{$category->id}}/{{$category->slug}}"  />@endsection
+@section('canonical')<link rel="canonical" href="{{url('alkotasok')}}/{{$category->id}}/{{$category->slug}}"  />@endsection
 @section('image'){{ url('/images/categories') }}/{{ $category->id.'.jpg?'.$category->photo_counter}}@endsection
 
 @section('content')
