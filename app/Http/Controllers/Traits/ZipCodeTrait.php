@@ -16,7 +16,7 @@ trait ZipCodeTrait {
             return false;
         }
 
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode("HU, ".$zip_code).'&key=AIzaSyCwZ0F7yoo2iTLg6I4N8M0As-5-Rk2VZHA';
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode("HU, ".$zip_code).'&key='.env('GOOGLE_GEOCODE_API_KEY');
         $results = json_decode(file_get_contents($url),true);
 
         foreach($results['results'] as $rs) {
