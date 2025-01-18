@@ -15,7 +15,7 @@
 			<button class="btn btn-default" type="button" onclick="delete_article()">Töröl</button>
 			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/irasok"><< Írásaim</a>
 		@else
-			<a href="{{ url('profil',$article->user->id) }}/{{$article->user->slug}}/irasok"><< {{$article->user->name}} írásai</a>
+			<span style="padding-left: 10px; display: inline-block"><a href="{{ url('profil',$article->user->id) }}/{{$article->user->slug}}/irasok">   << {{$article->user->name}} írásai</a></span>
 		@endif
 		{!! $article->body !!}
 		@include('partials.author', ['author'=>'','obj'=>$article])
