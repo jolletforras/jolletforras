@@ -14,6 +14,8 @@
 			<a href="{{url('iras')}}/{{$article->id}}/{{$article->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 			<button class="btn btn-default" type="button" onclick="delete_article()">Töröl</button>
 			<a href="{{ url('profil',Auth::user()->id) }}/{{Auth::user()->slug}}/irasok"><< Írásaim</a>
+		@else
+			<a href="{{ url('profil',$article->user->id) }}/{{$article->user->slug}}/irasok"><< {{$article->user->name}} írásai</a>
 		@endif
 		{!! $article->body !!}
 		@include('partials.author', ['author'=>'','obj'=>$article])
