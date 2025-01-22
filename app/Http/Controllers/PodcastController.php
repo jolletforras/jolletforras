@@ -56,14 +56,19 @@ class PodcastController extends Controller
         $event_id = is_numeric($request->get('event_id')) ? $request->get('event_id') : NULL;
         $group_id = is_numeric($request->get('group_id')) ? $request->get('group_id') : NULL;
 
-        Podcast::create([
+        $podcast = Podcast::create([
             'title' => $request->get('title'),
+            'body' => $request->get('body'),
             'meta_description' => $request->get('meta_description'),
             'url' =>  $request->get('url'),
             'event_id' =>  $event_id,
             'group_id' =>  $group_id,
             'slug' => Str::slug($request->get('title')),
         ]);
+
+
+        $this->upload_image($podcast->id,$request->file('image'));
+        //$this->upload_audio($podcast->id.'.mp3',$request->file('audio'));
 
         return redirect('az-uj-vilag-hangjai')->with('message', 'Az podcastot sikeresen felvetted!');
     }
@@ -100,6 +105,7 @@ class PodcastController extends Controller
 
         $podcast->update([
             'title' => $request->get('title'),
+            'body' => $request->get('body'),
             'meta_description' => $request->get('meta_description'),
             'url' =>  $request->get('url'),
             'event_id' =>  $event_id,
@@ -107,6 +113,31 @@ class PodcastController extends Controller
             'slug' => Str::slug($request->get('title')),
         ]);
 
+        $this->upload_image($podcast->id,$request->file('image'));
+        //$this->upload_audio($podcast->id.'.mp3',$request->file('audio'));
+
         return redirect('az-uj-vilag-hangjai')->with('message', 'Az podcastot sikeresen felvetted!');
+    }
+
+    private function upload_image($imagename,$image_file)
+    {
+        if(!empty($image_file)) {
+            $base_path=base_path().'/public/images/podcasts/';
+            $tmpimagename = 'tmp_'.$imagename.'.'.$image_file->getClientOriginalExtension();
+            $image_file->move($base_path,$tmpimagename);
+
+            $tmpfile=$base_path.$tmpimagename;
+            //a maximális magassága a képnek 600
+            generateImage($tmpfile, 600, 2, $base_path.$imagename.'.jpg');//1=>width; 2=>height
+            unlink($tmpfile);
+        }
+    }
+
+    private function upload_audio($file_name,$audio_file)
+    {
+        if(!empty($audio_file)) {
+            $base_path=base_path().'/public/audio/podcasts/';
+            $audio_file->move($base_path,$file_name);
+        }
     }
 }

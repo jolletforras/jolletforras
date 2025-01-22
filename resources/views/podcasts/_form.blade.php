@@ -6,6 +6,11 @@
 		</div>
 
 		<div class="form-group">
+			<label for="body">Miről szól a podcast?*</label>
+			<textarea class="form-control" required="required" rows="10" name="body" cols="50">@if(isset($podcast)){{$podcast->body}} @endif</textarea>
+		</div>
+
+		<div class="form-group">
 			<label for="meta_description">Meta leírás:</label>
             <a href="#meta_description_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
             <div id="meta_description_info" class="collapse info">Az itt megadott szöveg íródik ki ha egy másik oldalon (pl. facebook) megosztásra kerül ez az oldal. Ennek akkor van jelentősége, ha nyilvános ez a podcast, vagyis nem regisztráltak számára is elérhető.</div>
@@ -13,9 +18,16 @@
 		</div>
 
 		<div class="form-group">
-			<label for="url">Podcast url:</label>
-			<input class="form-control"  required="required" name="url" type="text" maxlength="255" value="@if(isset($podcast)) {{$podcast->url}} @endif">
+			<label for="upload_image">Kép megadása</label>
+			<p>Fájlméret max. 2MB, megengedett formátum: .jpg, .png, .gif</p>
+			<input id="upload_image" class="form-control" name="image" type="file">
 		</div>
+
+		<!--<div class="form-group">
+			<label for="upload_audio">Hangfájl megadása</label>
+			<p>Megengedett formátum: .mp3</p>
+			<input id="upload_audio" class="form-control" name="audio" type="file">
+		</div> -->
 
 		<div class="form-group">
 			<label for="url">Esemény azonosító:</label>

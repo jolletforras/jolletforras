@@ -11,7 +11,12 @@
 		@if (Auth::check() && Auth::user()->admin)
 			<a href="{{url('podcast')}}/{{$podcast->id}}/{{$podcast->slug}}/modosit" type="submit" class="btn btn-default">Módosít</a>
 		@endif
-		<iframe class="podcast-iframe" src="{{$podcast->url}}" style="height:100%;width:100%;" frameborder="0" scrolling="no"></iframe>
+		<p style="text-align: center;"><img src="{{ url('/images/podcasts') }}/{{ $podcast->id}}.jpg" style="max-width: 50%;max-height: 400px;"></p>
+		<p>{{ $podcast->body }}</p>
+		<audio controls>
+			<source src="{{url('/audio/podcasts')}}/{{$podcast->url}}" type="audio/mpeg">
+		</audio>
+		<br>
 		<?php
 			$event = $podcast->event;
 			$group = $podcast->group;

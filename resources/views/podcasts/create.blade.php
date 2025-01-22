@@ -4,7 +4,7 @@
 	<h2>Új podcast</h2>
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form method="POST" action="{{url('podcast')}}/uj" accept-charset="UTF-8">
+			<form method="POST" action="{{url('podcast')}}/uj" accept-charset="UTF-8" enctype="multipart/form-data">
 				@include('podcasts._form', ['submitButtonText'=>'Mentés'])
 			</form>
 		</div>
