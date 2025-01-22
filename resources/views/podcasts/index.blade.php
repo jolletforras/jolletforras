@@ -17,7 +17,9 @@
 	</div>
 	<div class="inner_box narrow-page">
 		<div class="body">
-			<iframe class="podcast-iframe" src="https://podcasters.spotify.com/pod/show/az-uj-vilag-hangjai/embed/episodes/Nyit-ads-e28r9q3" style="height:100%;width:100%;" frameborder="0" scrolling="no"></iframe>
+			<audio controls>
+				<source src="{{url('/audio/podcasts')}}/nyito_adas.m4a" type="audio/mpeg">
+			</audio>
 		</div>
 	</div>
 
