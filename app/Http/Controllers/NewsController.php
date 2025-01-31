@@ -18,7 +18,7 @@ class NewsController extends Controller
     use TagTrait;
 
     public function __construct() {
-		$this->middleware('auth', ['except'=>['groupnews','projectnews','show']]);
+		$this->middleware('auth', ['except'=>['groupnews','projectnews','show','groupshow','projectshow']]);
 	}
 //
 	public function groupnews()
@@ -65,6 +65,9 @@ class NewsController extends Controller
     {
         $news = Groupnews::findOrFail($id);
 
+        //ha nincs belépve és nem publikus a hír
+        if(!Auth::check() && $news->visibility!='public') return redirect()->guest('login');
+
         return view('news.show', compact('news'));
     }
 
@@ -78,6 +81,9 @@ class NewsController extends Controller
     public function projectshow($id)
     {
         $news = Projectnews::findOrFail($id);
+
+        //ha nincs belépve és nem publikus a hír
+        if(!Auth::check() && $news->visibility!='public') return redirect()->guest('login');
 
         return view('news.show', compact('news'));
     }
