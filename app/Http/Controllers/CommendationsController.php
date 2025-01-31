@@ -291,6 +291,6 @@ class CommendationsController extends Controller
 
         $commendation->tags()->sync($tag_list);
 
-        return redirect('ajanlo')->with('message', 'Az ajánlót sikeresen módosítottad!'.$extra_msg);
+        return redirect('ajanlo/'.$id.'/'.$commendation->slug)->with('message', 'Az ajánlót sikeresen módosítottad!'.$extra_msg);
     }
 }
