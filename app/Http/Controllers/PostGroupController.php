@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 
 class PostGroupController extends Controller
 {
-    private $connection_table = ['article'=>'article_group','commendation'=>'commendation_group','project'=>'group_project'];
+    private $connection_table = ['article'=>'article_group','creation'=>'creation_group','commendation'=>'commendation_group','project'=>'group_project'];
 
     public function __construct() {
 		$this->middleware('auth');
@@ -24,12 +24,12 @@ class PostGroupController extends Controller
 
     public function get_group_admin_block($post_type, $post_id)
     {
-        $classes = ['article'=>'Article', 'commendation'=>'Commendation', 'project'=>'Project'];
+        $classes = ['article'=>'Article', 'creation'=>'Creation', 'commendation'=>'Commendation', 'project'=>'Project'];
         $class = "\\App\Models\\".$classes[$post_type];
 
         $post = $class::findOrFail($post_id);
 
-        //ezekben a csoportokban van a bejegyzés (írás, ajánló, kezdeményezés)
+        //ezekben a csoportokban van a bejegyzés (írás, alkotás, ajánló, kezdeményezés)
         $post_groups = $post->groups()->where('status','active')->get();
         $post_group_ids =  $post_groups->pluck('id')->toArray();
 

@@ -1,4 +1,4 @@
-<?php $text = ['article'=>'az írás','commendation'=>'az ajánló', 'project'=>'a kezdeményezés'] ?>
+<?php $text = ['article'=>'az írás','creation'=>'az alkotás','commendation'=>'az ajánló', 'project'=>'a kezdeményezés'] ?>
 <p>
 @if(count($group_where_admin_have_post_url)>0)
     Ez {{$text[$post_type]}} ezekben csoportokban szerepel, ahol csoportkezelő vagy: {!! implode(', ',$group_where_admin_have_post_url) !!}

@@ -19,6 +19,11 @@ class Creation extends Model
     	return $this->belongsTo(User::class);
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class)->withTimestamps();
+    }
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');

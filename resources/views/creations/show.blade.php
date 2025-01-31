@@ -32,6 +32,11 @@
 		@include('partials.author', ['author'=>'','obj'=>$creation])
     </div>
 	@if(Auth::check())
+		@if(Auth::user()->isGroupAdmin())
+			<p class="narrow-page"><button class="btn btn-default" type="button" onclick="get_group_admin_block()" id="btn_group_admin_block"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Csoporthoz való hozzáadás/törlés</button></p>
+			<div class="inner_box narrow-page" id="group_admin_block" style="display: none;">... hamarosan betölt</div>
+		@endif
+
 		@include('comments._show', ['comments' => $comments] )
 	@endif
 @endsection
@@ -44,6 +49,11 @@
 			'commentable_id'	=>$creation->id,
 			'name'				=>$creation->user->name,
 			'email'				=>$creation->user->email
+		] )
+
+		@include('partials.post_group_script', [
+			'post_type'	=>'creation',
+			'post_id'	=>$creation->id,
 		] )
 
 		<script type="text/javascript">
