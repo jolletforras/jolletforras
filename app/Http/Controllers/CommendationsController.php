@@ -245,7 +245,7 @@ class CommendationsController extends Controller
         $slug = Str::slug($request->get('title'));
 
         $image_file = $request->file('image');
-        $has_image = 0;
+        $has_image = $commendation->has_image;
 
         //ha most NEM tudja betölteni a képet a hivatkozásból, de adott meg képet, akkor azt elmenti
         if(empty($meta_image) && !empty($image_file)) {
