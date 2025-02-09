@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Usernotice;
+use App\Models\Group;
 use App\Models\Comment;
 use App\Models\Sendemail;
 use App\Http\Requests\CreationRequest;
@@ -32,8 +33,17 @@ class CreationsController extends Controller
         $categories = $user->categories()->where('type','creation')->get();
         $tab = "creations";
 
-		return view('creations.index', compact('user','creations','categories','tab'));
+		return view('creations.user_creations', compact('user','creations','categories','tab'));
 	}
+
+    public function show_group_creations($group_id)
+    {
+        $group = Group::findOrFail($group_id);
+        $creations = $group->creations()->where('active', 1)->latest()->get();
+
+        return view('creations.group_creations', compact('creations','group'));
+    }
+
 
     /**
      * Displays a specific creation
@@ -198,6 +208,7 @@ class CreationsController extends Controller
 
         return redirect('/');
     }
+
 
     private function getData($request,$creation=null) {
 

@@ -169,6 +169,7 @@ Route::post('alkotas/uj', 'CreationsController@store');
 Route::get('/alkotas/{id}/{title}/modosit', 'CreationsController@edit');
 Route::post('/alkotas/{id}/{title}/modosit', 'CreationsController@update');
 Route::get('/alkotas/{id}/{title}/torol', 'CreationsController@delete');
+Route::get('/csoport/{group_id}/{slug}/alkotasok', 'CreationsController@show_group_creations');
 
 Route::get('/irasok', 'ArticlesController@index');
 Route::get('/profil/{user_id}/{slug}/irasok', 'ArticlesController@show_user_articles');

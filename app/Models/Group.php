@@ -36,6 +36,13 @@ class Group extends Model
         return $this->belongsToMany(Article::class)->withTimestamps();
     }
 
+
+    public function creations()
+    {
+        return $this->belongsToMany(Creation::class)->withTimestamps();
+    }
+
+
     public function commendations()
     {
         return $this->belongsToMany(Commendation::class)->withTimestamps();
