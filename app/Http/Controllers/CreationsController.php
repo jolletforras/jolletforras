@@ -22,14 +22,20 @@ class CreationsController extends Controller
     private $source_error_msg = 'Hivatkozást vagy képet szükséges megadnod az alkotásodról.';
 
     public function __construct() {
-		$this->middleware('auth', ['except'=>['index','show']]);
+		$this->middleware('auth', ['except'=>['show_user_creations','show']]);
 	}
 
-	public function index($user_id)
+	public function show_user_creations($user_id)
 	{
         $user = User::findOrFail($user_id);
 
-        $creations = $user->creations()->latest()->get();
+        $creations = $user->creations()->where('active', 1)->latest();
+        if(Auth::guest())
+        {
+            $creations = $creations->where('public','=', 1);
+        }
+        $creations = $creations->get();
+
         $categories = $user->categories()->where('type','creation')->get();
         $tab = "creations";
 
