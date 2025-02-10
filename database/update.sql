@@ -14,3 +14,6 @@ CREATE TABLE IF NOT EXISTS `creation_group` (
   KEY `creation_id` (`creation_id`),
   KEY `group_id` (`group_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+ALTER TABLE `creations`
+	ADD COLUMN `iframe_code` TEXT NULL DEFAULT NULL AFTER `active`;

@@ -10,7 +10,7 @@ class Creation extends Model
 {
     use HasFactory;
 
-    protected $fillable = [	'title','body','url','has_image','slug','public','active','meta_title','meta_image','meta_description','category_id'];
+    protected $fillable = [	'title','body','url','has_image','slug','public','active','iframe_code','meta_title','meta_image','meta_description','category_id'];
     
     protected $dates=['updated_at']; //így használhatóak a carbon függvényel, pl. $recommand->updated_at->format('Y-m-d');
     

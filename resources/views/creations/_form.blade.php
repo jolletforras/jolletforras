@@ -18,13 +18,16 @@
 			$no_more_image = $nr_creation_image>=$max_nr_image && ($new_creation || $url_checked); //nem lehet képet feltölteni, ha már meg volt a 10 és új alkotás, vagy hivatkozás volt korább
 		?>
 		<div class="form-group">
-			<label for="url">Itt add meg a hivatkozást, ha azon keresztül elérhető az alkotásod</label>
+			<label for="url">Ha az alkotásod elérhető egy weboldalon, akkor itt adhatod meg annak hivatkozását
+				<a href="#url_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<p id="url_info" class="collapse info">Ha a weboldalon az alkotásodnál kép is van, akkor azt nagy valószínűséggel itt is megfogja jeleníteni, de olyan esetekben mint pl. a facebook nem jeleníti meg a képet. Amennyiben nem jeleníti meg, akkor alább képet tudsz feltöltenni. </p>
+
 			<input class="form-control" name="url" type="text" maxlength="255" value="@if(!empty($creation->url)){{old('url',$creation->url)}}@else{{old('url')}}@endif" id="url">
 		</div>
 
 		@if(!$no_more_image)
         <div class="form-group">
-            <label for="url">Itt add meg a képet az alkotásodról ({{$nr_creation_image}}/{{$max_nr_image}})
+            <label for="url">Itt adhatsz meg képet az alkotásodról ({{$nr_creation_image}}/{{$max_nr_image}})
 				<a href="#image_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
 			<p id="image_info" class="collapse info">Összesen {{$max_nr_image}} alkotás esetében van lehetőség kép feltöltésére.</p>
 			<p>Amennyiben a hivatkozás megadása mellett képet is feltöltesz, a hivatkozás előképe a kép lesz.</p>
@@ -41,6 +44,20 @@
 				Eddig {{$max_nr_image}} képes alkotásod van. Amennyiben képet szeretnél feltölteni és nem csak hivatkozást megadni, írj ez ügyben a jolletforras@gmail.com e-mail címre.
 			</div>
 		@endif
+
+		<div class="form-group">
+			<label for="iframe_code">Amennyiben fel van töltve valahol az alkotásod hang/videó formában (pl. facebook, google drive), akkor annak a beágyazás kódját itt adhatod meg
+				<a href="#iframe_code_info" data-toggle="collapse"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<div id="iframe_code_info" class="collapse info">
+				Az adott helyen, ahova a feltöltötted a hangot/videót általában van egy beágyazás menüpont. Arra kattintva lesz elérhető az iframe beágyazás kódja, azt másold be ide.
+				<ul>
+					<li>Facebook esetén a videó megnyitása után a 3 pöttyös gombra kattintva találod meg az "Beágyazás" menüpontot. </li>
+					<li>Google drive esetén külön oldalon kell megnyitnod a hang/videó fájlt, majd a 3 pöttyös gombra kattintva találod meg az "Elem beágyazása ..." menüpontot.</li>
+				</ul>
+			</div>
+
+			<textarea class="form-control" rows="4" name="iframe_code" cols="50">@if(!empty($creation->iframe_code)){{old('url',$creation->iframe_code)}}@else{{old('iframe_code')}}@endif</textarea>
+		</div>
 
 		<div class="form-group">
 			<label for="category_list">Témakör megadása az alkotással kapcsolatban:</label>

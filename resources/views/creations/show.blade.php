@@ -29,6 +29,9 @@
 				@endif
 			</div>
 		@endif
+		@if(!empty($creation->iframe_code))
+			<div style="text-align: center;">{!!  $creation->iframe_code !!}</div>
+		@endif
 		@include('partials.author', ['author'=>'','obj'=>$creation])
     </div>
 	@if(Auth::check())

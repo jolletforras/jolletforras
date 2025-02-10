@@ -286,6 +286,7 @@ class CreationsController extends Controller
             'slug' => $slug,
             'public' => $request->has('public') ? 1 : 0,
             'active' => $request->has('inactive') ? 0 : 1,
+            'iframe_code' =>  $request->get('iframe_code'),
             'meta_title' =>  $title,
             'meta_image' =>  $meta_image,
             'meta_description' =>  $description,
